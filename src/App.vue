@@ -1,12 +1,11 @@
 <script setup>
+import { RouterView } from 'vue-router';
 import SideBar from './components/SideBar.vue'
 </script>
 
 <template>
   <div>
     <SideBar />
-    <h1 class="text-3xl font-bold underline text-center">
-      Welcome!
-    </h1>
+    <RouterView />
   </div>
 </template>

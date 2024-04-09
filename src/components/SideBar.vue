@@ -1,6 +1,7 @@
 <script setup>
-  import { mdiHome, mdiCodeTags, mdiTable, mdiCartOutline, mdiFileDocumentMultipleOutline } from '@mdi/js';
+  import { mdiHome, mdiRhombusSplit, mdiTable, mdiCartOutline, mdiFileDocumentMultipleOutline, mdiArrowCollapseHorizontal } from '@mdi/js';
   import Menu from './Menu.vue'
+  import Button from './Button.vue'
 
   const items = [
     {
@@ -12,7 +13,7 @@
     {
       label: 'Components',
       route: 'javascript:void(0)',
-      iconPath: mdiCodeTags,
+      iconPath: mdiRhombusSplit,
       active: false,
     },
     {
@@ -36,15 +37,15 @@
   ]
 </script>
 <template>
-  <div class="fixed flex flex-col items-center inset-y-0 left-0 w-1/6 text-theme-light-blue bg-theme-dark-blue h-dvh">
-    <div class="top-0 flex w-full border-b border-theme-light-blue px-6 py-4">
-      <h2>Header</h2>
+  <div class="fixed flex flex-col items-center inset-y-0 left-0 w-1/6 text-theme-100 bg-theme-900 h-dvh">
+    <div class="top-0 flex justify-center items-center w-full border-b border-theme-100 px-6 py-4">
+      <img class="h-12" src="/logo.png" />
     </div>
     <div class="flex-1 w-full h-full">
       <Menu :items="items" />
     </div>
-    <div class="bottom-0 flex w-full border-t border-theme-light-blue px-6 py-4">
-      <h2>Footer</h2>
+    <div class="bottom-0 flex justify-center items-center w-full border-t border-theme-100 px-6 py-4">
+      <Button color="theme-light" :icon-path="mdiArrowCollapseHorizontal" rounded />
     </div>
   </div>
 </template>

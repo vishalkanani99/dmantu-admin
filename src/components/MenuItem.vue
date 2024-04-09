@@ -13,8 +13,8 @@
     <a 
       :class="[
         'flex items-center px-4 py-2',
-        isActive ? 'bg-theme-light-blue text-theme-dark-blue' 
-          : 'hover:bg-theme-light-blue hover:text-theme-dark-blue',
+        isActive ? 'bg-theme-100 text-theme-900' 
+          : 'hover:bg-theme-100 hover:text-theme-900',
       ]" 
       :href="route">
       <Icon v-if="iconPath" :path="iconPath" />
