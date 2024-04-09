@@ -6,31 +6,31 @@
   const items = [
     {
       label: 'Dashboard',
-      route: 'javascript:void(0)',
+      to: '/',
       iconPath: mdiHome,
       active: true,
     },
     {
       label: 'Components',
-      route: 'javascript:void(0)',
+      to: '/',
       iconPath: mdiRhombusSplit,
       active: false,
     },
     {
       label: 'eCommerce',
-      route: 'javascript:void(0)',
+      to: '/',
       iconPath: mdiCartOutline,
       active: false,
     },
     {
       label: 'Tables',
-      route: 'javascript:void(0)',
+      to: '/',
       iconPath: mdiTable,
       active: false,
     },
     {
       label: 'Pages',
-      route: 'javascript:void(0)',
+      to: '/',
       iconPath: mdiFileDocumentMultipleOutline,
       active: false,
     }

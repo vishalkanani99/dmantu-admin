@@ -19,7 +19,7 @@
       :key="key" 
       :label="item.label" 
       :iconPath="item.iconPath" 
-      :route="item.route" 
+      :to="item.to" 
       :isActive="item.active" />
   </ul>
 </template>
