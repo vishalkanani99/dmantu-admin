@@ -17,11 +17,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <svg
-    :viewBox="viewbox"
-    :width="size"
-    :height="size"
-  >
-    <path fill="currentColor" :d="path" />
-  </svg>
+  <span>
+    <svg
+      :viewBox="viewbox"
+      :width="size"
+      :height="size" >
+      <path fill="currentColor" :d="path" />
+    </svg>
+  </span>
 </template>

@@ -51,7 +51,9 @@ import { getButtonColor } from '../color.js';
     :to="to"
     :href="href"
     :class="defaultClass">
-    <Icon v-if="iconPath" :path="iconPath" />
-    <span v-if="label" :class="{'pl-1': iconPath}">{{ label }}</span>
+    <slot>
+      <Icon v-if="iconPath" :path="iconPath" />
+      <span v-if="label" :class="{'pl-4': iconPath}">{{ label }}</span>
+    </slot>
   </component>
 </template>
