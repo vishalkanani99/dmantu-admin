@@ -16,6 +16,7 @@
         'flex items-center px-4 py-2 select-none cursor-pointer',
         isActive ? 'bg-theme-100 text-theme-900' 
           : 'hover:bg-theme-100 hover:text-theme-900',
+        { 'justify-center' : !label }
       ]" 
       :to="to"
       :iconPath="iconPath"
