@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router'
 import Icon from './Icon.vue';
-import { getButtonColor } from '../color.js';
+import { getButtonStyle } from '../color.js';
 
   const props = defineProps({
     label: String,
@@ -39,7 +39,7 @@ import { getButtonColor } from '../color.js';
       'select-none',
       props.label ? 'px-4 py-2' : 'p-2',
       props.rounded ? 'rounded-full' : 'rounded-md',
-      getButtonColor(props.color, props.outline),
+      getButtonStyle(props.color, props.outline),
     ];
     
     return style;
