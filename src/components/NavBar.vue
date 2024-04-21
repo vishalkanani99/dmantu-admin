@@ -16,8 +16,7 @@ const search = ref();
   <div class="fixed flex justify-between items-center top-0 left-0 right-0 bg-theme-600 min-h-[80px] px-6 py-4">
     <Button v-if="hasMenuBtn" class="order-first" color="theme-light" :iconPath="mdiMenu" @click="$emit('toggleMenu')" />
     <FieldGroup>
-      <Field color="theme-light" type="static" :iconPath="mdiMagnify" rounded left/>
-      <Field color="theme-light" v-model="search" rounded right />
+      <Field color="theme-light" v-model="search" :inputLeftIcon="mdiMagnify" rounded />
     </FieldGroup>
     <div class="flex order-last items-center space-x-2">
       <Button color="theme-light" :iconPath="mdiBellOutline" />

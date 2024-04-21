@@ -79,8 +79,7 @@ const text = {
   }
 }
 
-const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'border', ringWidth ='focus:ring-1') => {
-
+const getDefaultTextStyle = (color = 'theme') => {
   let textColor = text['white'];
   let textColorOnHover = text.hover['white'];
   
@@ -98,6 +97,16 @@ const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'borde
     textColor = text['theme-light'];
     textColorOnHover = text.hover['theme-light'];
   }
+
+  return {
+    textColor,
+    textColorOnHover,
+  }
+}
+
+const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'border', ringWidth ='focus:ring-1') => {
+  
+  let defaultTextStyle = getDefaultTextStyle(color);
   
   let style = [
     borderWidth,
@@ -105,12 +114,19 @@ const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'borde
     ringWidth,
     ring.focus[color],
     isOutline ? 'bg-transparent' : background[color], 
-    isOutline ? text[color] : textColor,
+    isOutline ? text[color] : defaultTextStyle.textColor,
     isOutline ? background.hover(color) : background.hover(color, true),
-    isOutline ? textColorOnHover : '',
+    isOutline ? defaultTextStyle.textColorOnHover : '',
   ];
   
   return style;
 }
 
-export { background, border, ring, text, getButtonStyle };
+export { 
+  background, 
+  border, 
+  ring, 
+  text,
+  getDefaultTextStyle, 
+  getButtonStyle 
+};
