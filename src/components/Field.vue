@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { 
   border, 
   ring, 
@@ -37,6 +37,8 @@ import Icon from './Icon.vue';
 
   const emit = defineEmits(['update:modelValue', 'buttonClick', 'leftIconClick', 'rightIconClick']);
 
+  const color = ref(props.color ?? 'theme');
+
   const modelValue = computed({
     get: () => props.modelValue,
     set: (value) => {
@@ -72,12 +74,14 @@ import Icon from './Icon.vue';
     ];
   })
 
+  const textStyle = computed(() => {
+    const defaultTextStyle = getDefaultTextStyle(color.value);
+    return text[props.textColor] ?? defaultTextStyle.textColor;
+  })
+
   const defaultStyle = computed(() => {
-    const color = props.color ?? 'theme';
     const ringcolor = props.ringColor ?? 'info';
-    const defaultTextStyle = getDefaultTextStyle(color);
-    const btnStyle = getButtonStyle(color, props.outline);
-    const textColor = text[props.textColor] ?? defaultTextStyle.textColor;
+    const btnStyle = getButtonStyle(color.value, props.outline);
 
     let padding = ['pl-3 pr-3 py-2'];
 
@@ -100,8 +104,8 @@ import Icon from './Icon.vue';
 
     let colors = [ 
       ring.focus[ringcolor], 
-      backgroundColor[color],
-      textColor,
+      backgroundColor[color.value],
+      textStyle.value,
     ];
     
     return [
@@ -112,7 +116,9 @@ import Icon from './Icon.vue';
     ];
   })
 
-  const inputIconStyle = computed(() => ['absolute inline-flex justify-center items-center w-10 h-10']);
+  const getInputIconStyle = (position) => {
+    return ['absolute inline-flex justify-center items-center w-10 h-10', position, textStyle.value];
+  }
 </script>
 <template>
   <div :class="outerStyle">
@@ -143,28 +149,20 @@ import Icon from './Icon.vue';
       <slot></slot>
     </Button>
     <template v-else>
-      <span 
+      <Icon 
         v-if="inputLeftIcon"
-        :class="[
-          inputIconStyle,
-          'left-0',
-        ]"
-        @click="$emit('leftIconClick')" >
-        <Icon :path="inputLeftIcon" />
-      </span>
+        :class="getInputIconStyle('left-0')"
+        :path="inputLeftIcon"
+        @click="$emit('leftIconClick')" />
       <input 
         :type="type" 
         v-model="modelValue" 
         :class="defaultStyle" />
-      <span 
+      <Icon  
         v-if="inputRightIcon"
-        :class="[
-          inputIconStyle,
-          'right-0',
-        ]"
-        @click="$emit('rightIconClick')" >
-        <Icon :path="inputRightIcon" />
-      </span>
+        :class="getInputIconStyle('right-0')"
+        :path="inputRightIcon"
+        @click="$emit('rightIconClick')" />
     </template>
   </div>
 </template>
