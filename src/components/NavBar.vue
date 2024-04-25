@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-import { mdiMenu, mdiMagnify, mdiBellOutline, mdiEmailOutline } from '@mdi/js';
+import { ref, computed } from 'vue';
+import { mdiMenu, mdiMagnify, mdiBellOutline, mdiEmailOutline, mdiCog, mdiPencil } from '@mdi/js';
 import Field from './Field.vue';
 import FieldGroup from './FieldGroup.vue';
 import Button from './Button.vue';
+import Dropdown from './Dropdown.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,
@@ -11,6 +12,22 @@ const props = defineProps({
 
 const emit = defineEmits(['toggleMenu']);
 const search = ref();
+
+const items = computed(() => {
+  const menu = [
+    {
+      label: 'Edit Profile',
+      to: '/',
+      iconPath: mdiPencil,
+    },
+    {
+      label: 'Settings',
+      to: '/',
+      iconPath: mdiCog,
+    },
+  ];
+  return menu;
+});
 </script>
 <template>
   <div class="fixed flex justify-between items-center top-0 left-0 right-0 bg-theme-600 min-h-[80px] px-6 py-4">
@@ -21,6 +38,8 @@ const search = ref();
     <div class="flex order-last items-center space-x-2">
       <Button color="theme-light" :iconPath="mdiBellOutline" />
       <Button color="theme-light" :iconPath="mdiEmailOutline" />
+      <Dropdown color="theme-light" label="Dropdown" :items="items">
+      </Dropdown>
     </div>
   </div>
 </template>
