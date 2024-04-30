@@ -1,10 +1,11 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted } from 'vue';
-import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
+import { mdiMenuDown, mdiMenuUp, mdiTriangle } from '@mdi/js';
 import { throttle } from 'lodash';
 import Icon from './Icon.vue';
 import Menu from './Menu.vue';
 import Button from './Button.vue';
+import { background, getDefaultTextStyle, text } from '../color';
 
 const props = defineProps({
   label: String,
@@ -12,7 +13,18 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  color: String,
+  btnColor: {
+    type: String,
+    default: 'theme-light',
+  },
+  bgColor: {
+    type: String,
+    default: 'theme-light',
+  },
+  ItemColor: {
+    type: String,
+    default: 'theme',
+  },
 });
 
 
@@ -35,32 +47,18 @@ const trackClickEvent = (el) => {
 
 const btnIcon = computed(() => showList.value ? mdiMenuUp : mdiMenuDown );
 
-const beforeDropdownStyle = computed(() => {
-  let style = [
-    'before:content["*"]',
-    'before:absolute',
-    'before:mr-2',
-    'before:right-0',
-    'before:top-[-16px]',
-    'before:w-0 before:h-0',
-    'before:z-10',
-    'before:border-x-[8px] before:border-b-[16px]',
-    'before:border-l-transparent before:border-r-transparent before:border-b-theme-600',
-  ];
-  return style;
-});
-const dropdownStyle = computed(() => {
+const dropdownContainerStyle = computed(() => {
+  let textStyle = getDefaultTextStyle(props.bgColor);
   let style = [
     'absolute',
     'right-0',
     'min-w-max',
-    'bg-theme-600',
     'z-10',
     'shadow-md',
     'rounded-md',
     'mt-4',
-    'text-theme-100',
-    beforeDropdownStyle.value,
+    background[props.bgColor],
+    textStyle.textColor,
   ];
   return style;
 });
@@ -73,9 +71,9 @@ onMounted(() => {
   <div class="relative select-none">
     <div ref="selectorRef" @click="toggle()">
       <slot name="selector" :btnIcon="btnIcon">
-        <Button :color="color">
+        <Button :color="btnColor">
           <span v-if="label" class="pl-1">{{ label }}</span>
-          <Icon :path="btnIcon" class="pl-3" :size="16" />
+          <Icon :path="btnIcon" class="pl-3" />
         </Button>
       </slot>
     </div>
@@ -83,9 +81,15 @@ onMounted(() => {
       <div
         v-if="showList"
         ref="dropdownRef"
-        :class="dropdownStyle">
+        :class="dropdownContainerStyle">
+        <Icon
+          :class="[
+            'absolute right-0 top-[-18px] mr-2', 
+            text[bgColor],
+          ]" 
+          :path="mdiTriangle" />
         <slot>
-          <Menu :items="items" />
+          <Menu :items="items" :color="ItemColor" />
         </slot>
       </div>
     </Transition>

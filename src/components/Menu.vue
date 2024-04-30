@@ -9,14 +9,19 @@
     items: {
       type: Array,
       default: () => [],
-    }
+    },
+    color: {
+      type: String,
+      default: 'theme-light',
+    },
   });
 </script>
 <template>
   <ul>
     <MenuItem 
       v-for="(item, key ) in items" 
-      :key="key" 
+      :key="key"
+      :color="color" 
       :label="item.label" 
       :iconPath="item.iconPath" 
       :to="item.to" 
