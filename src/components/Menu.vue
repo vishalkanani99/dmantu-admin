@@ -1,5 +1,5 @@
 <script setup>
-  import MenuItem from './MenuItem.vue'
+  import MenuList from './MenuList.vue'
 
   const props = defineProps({
     vertical: {
@@ -18,13 +18,17 @@
 </script>
 <template>
   <ul>
-    <MenuItem 
-      v-for="(item, key ) in items" 
+    <MenuList 
+      v-for="(item, key) in items"
+      class="m-2" 
       :key="key"
-      :color="color" 
-      :label="item.label" 
-      :iconPath="item.iconPath" 
-      :to="item.to" 
-      :isActive="item.active" />
+      :item="item" 
+      :color="color"
+      :isActive="item.active">
+
+      <template #item="{ item }">
+        <slot :item="item"></slot>
+      </template>
+    </MenuList>
   </ul>
 </template>

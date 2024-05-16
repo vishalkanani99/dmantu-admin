@@ -12,6 +12,7 @@ import { useScreen } from '../composables/useScreen';
 import Button from '../components/Button.vue';
 import Menu from '../components/Menu.vue';
 import SideBar from '../components/SideBar.vue';
+import CollapsibleMenu from './CollapsibleMenu.vue';
 
 const props = defineProps({
   modelValue: Boolean,
@@ -66,6 +67,46 @@ const items = computed(() => {
       to: '/',
       iconPath: mdiFileDocumentMultipleOutline,
       active: false,
+      items: [
+        {
+          label: isCompact.value ? '' : 'Dashboard',
+          to: '/',
+          iconPath: mdiHome,
+          active: true,
+        },
+        {
+          label: isCompact.value ? '' : 'Components',
+          to: '/',
+          iconPath: mdiRhombusSplit,
+          active: false,
+          items: [
+          {
+            label: isCompact.value ? '' : 'eCommerce',
+            to: '/',
+            iconPath: mdiCartOutline,
+            active: true,
+          },
+          {
+            label: isCompact.value ? '' : 'Pages',
+            to: '/',
+            iconPath: mdiTable,
+            active: false,
+          },
+          {
+            label: isCompact.value ? '' : 'eCommerce',
+            to: '/',
+            iconPath: mdiCartOutline,
+            active: false,
+          },
+          ]
+        },
+        {
+          label: isCompact.value ? '' : 'eCommerce',
+          to: '/',
+          iconPath: mdiCartOutline,
+          active: false,
+        },
+      ]
     }
   ];
   return menu;
@@ -101,6 +142,10 @@ function close() {
           rounded  
           @click="isCompact = !isCompact" />
       </template>
-      <Menu :items="items" />
+      <Menu :items="items">
+        <template #default="{ item }">
+          <CollapsibleMenu v-if="item.items" :item="item" />
+        </template>
+      </Menu>
   </SideBar>
 </template>
