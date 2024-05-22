@@ -22,8 +22,7 @@ const props = defineProps({
         :color="color" 
         :label="item.label" 
         :iconPath="item.iconPath"
-        :to="item.to"  
-        :isActive="expand"
+        :to="item.to"
         :isOpen="expand"
         hasMenu />
     </template>

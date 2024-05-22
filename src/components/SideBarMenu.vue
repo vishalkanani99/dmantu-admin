@@ -2,24 +2,22 @@
 import { shallowRef, ref, computed } from 'vue';
 import { 
   mdiArrowCollapseHorizontal,
-  mdiHome, 
-  mdiRhombusSplit, 
-  mdiTable, 
-  mdiCartOutline, 
-  mdiFileDocumentMultipleOutline, 
 } from '@mdi/js';
 import { useScreen } from '../composables/useScreen';
 import Button from '../components/Button.vue';
 import Menu from '../components/Menu.vue';
 import SideBar from '../components/SideBar.vue';
 import CollapsibleMenu from './CollapsibleMenu.vue';
+import MenuListItem from './MenuListItem.vue';
 
 const props = defineProps({
+  items: Array,
   modelValue: Boolean,
+  isClosable: Boolean,
   isCompact: Boolean,
 });
 
-const emit = defineEmits(['update:modelValue', 'update:isCompact', 'close']);
+const emit = defineEmits(['update:modelValue', 'update:isCompact', 'close', 'dropdownClick']);
 const { isSmallScreen, isExtraSmallScreen } = useScreen();
 
 const isCompact = computed({
@@ -36,83 +34,7 @@ const showSideBar = computed({
   }
 });
 
-const items = computed(() => {
-  const menu = [
-    {
-      label: isCompact.value ? '' : 'Dashboard',
-      to: '/',
-      iconPath: mdiHome,
-      active: true,
-    },
-    {
-      label: isCompact.value ? '' : 'Components',
-      to: '/',
-      iconPath: mdiRhombusSplit,
-      active: false,
-    },
-    {
-      label: isCompact.value ? '' : 'eCommerce',
-      to: '/',
-      iconPath: mdiCartOutline,
-      active: false,
-    },
-    {
-      label: isCompact.value ? '' : 'Tables',
-      to: '/',
-      iconPath: mdiTable,
-      active: false,
-    },
-    {
-      label: isCompact.value ? '' : 'Pages',
-      to: '/',
-      iconPath: mdiFileDocumentMultipleOutline,
-      active: false,
-      items: [
-        {
-          label: isCompact.value ? '' : 'Dashboard',
-          to: '/',
-          iconPath: mdiHome,
-          active: true,
-        },
-        {
-          label: isCompact.value ? '' : 'Components',
-          to: '/',
-          iconPath: mdiRhombusSplit,
-          active: false,
-          items: [
-          {
-            label: isCompact.value ? '' : 'eCommerce',
-            to: '/',
-            iconPath: mdiCartOutline,
-            active: true,
-          },
-          {
-            label: isCompact.value ? '' : 'Pages',
-            to: '/',
-            iconPath: mdiTable,
-            active: false,
-          },
-          {
-            label: isCompact.value ? '' : 'eCommerce',
-            to: '/',
-            iconPath: mdiCartOutline,
-            active: false,
-          },
-          ]
-        },
-        {
-          label: isCompact.value ? '' : 'eCommerce',
-          to: '/',
-          iconPath: mdiCartOutline,
-          active: false,
-        },
-      ]
-    }
-  ];
-  return menu;
-});
-
-const isClosable = computed(() => isSmallScreen.value || isExtraSmallScreen.value);
+const isClosable = computed(() => props.isClosable || isSmallScreen.value || isExtraSmallScreen.value);
 const defaultStyle = computed(() => {
   const style = [
     'z-50',
@@ -133,7 +55,9 @@ function close() {
     :isClosable="isClosable"
     @close="close">
       <template #header>
-        <img class="h-12" src="/logo.png" />
+        <slot name="header">
+          <img class="h-12" src="/logo.png" />
+        </slot>
       </template>
       <template v-if="!isClosable" #footer>
         <Button 
@@ -142,9 +66,24 @@ function close() {
           rounded  
           @click="isCompact = !isCompact" />
       </template>
-      <Menu :items="items">
+      <Menu 
+        :items="items" 
+        :isCompact="isCompact"
+      >
         <template #default="{ item }">
-          <CollapsibleMenu v-if="item.items" :item="item" />
+          <CollapsibleMenu 
+            v-if="!isCompact && item.items" 
+            :item="item"
+          />
+          <MenuListItem
+            v-if="isCompact && item.items"
+            :color="color" 
+            :label="item.label" 
+            :iconPath="item.iconPath"
+            :to="item.to"
+            isCompact
+            @click="$emit('dropdownClick', item)"
+          />
         </template>
       </Menu>
   </SideBar>

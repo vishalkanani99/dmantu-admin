@@ -1,11 +1,29 @@
-import { createWebHistory, createRouter } from 'vue-router'
 import Dashboard from './pages/dashboard.vue'
 
-const routes = [
-  { path: '/dashboard', component: Dashboard },
-]
-
-export const router = createRouter({
-  history: createWebHistory(),
-  routes,
-})
+export const routes = [
+  {
+    name: 'Dashboard',
+    path: '/',
+    component: Dashboard,
+  },
+  {
+    name: 'Components',
+    path: '/components',
+    component: Dashboard,
+  },
+  {
+    name: 'eCommerce',
+    path: '/ecommerce',
+    component: Dashboard,
+  },
+  {
+    name: 'Tables',
+    path: '/tables',
+    component: Dashboard,
+  },
+  {
+    name: 'Pages',
+    path: '/pages',
+    component: Dashboard,
+  },
+];

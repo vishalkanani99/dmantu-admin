@@ -14,6 +14,7 @@
       type: String,
       default: 'theme-light',
     },
+    isCompact: Boolean,
   });
 </script>
 <template>
@@ -24,7 +25,7 @@
       :key="key"
       :item="item" 
       :color="color"
-      :isActive="item.active">
+      :isCompact="isCompact">
 
       <template #item="{ item }">
         <slot :item="item"></slot>

@@ -6,6 +6,7 @@ import { getButtonStyle } from '../color.js';
 
   const props = defineProps({
     label: String,
+    type: String,
     color: String,
     iconPath: String,
     to: String,
@@ -15,7 +16,7 @@ import { getButtonStyle } from '../color.js';
     isPlain: Boolean,
   })
 
-  const type = computed(() => {
+  const typeOfComponent = computed(() => {
     if( props.to ) {
       return RouterLink;
     }
@@ -44,13 +45,27 @@ import { getButtonStyle } from '../color.js';
     
     return style;
   })
+
+const bindProps = computed(() => {
+  const componentProps = {};
+  if( props.to ) {
+    componentProps.to = props.to;
+  }
+  if( props.href ) {
+    componentProps.href = props.href;
+  }
+  if( props.type ) {
+    componentProps.type = props.type;
+  }
+  return componentProps;
+}) 
 </script>
 <template>
   <component
-    :is="type"
-    :to="to"
-    :href="href"
-    :class="defaultClass">
+    :is="typeOfComponent"
+    :class="defaultClass"
+    v-bind="bindProps"
+  >
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
       <span v-if="label" :class="{'pl-4': iconPath}">{{ label }}</span>

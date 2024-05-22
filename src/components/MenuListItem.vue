@@ -1,16 +1,18 @@
 <script setup>
   import { mdiChevronDown } from '@mdi/js';
   import { computed } from 'vue';
+  import { RouterLink, useLink } from 'vue-router'
   import Button from './Button.vue';
   import { background, getDefaultTextStyle } from '../color';
   import Icon from './Icon.vue';
 
   const props = defineProps({
+    ...RouterLink.props.isExactActive,
     iconPath: String,
     actionIconPath: String,
     label: String,
     to: String,
-    isActive: Boolean,
+    isCompact: Boolean,
     isOpen: Boolean,
     hasMenu: Boolean,
     color: {
@@ -19,15 +21,18 @@
     },
   });
 
+  const { isExactActive } = useLink(props)
+
   const defaultStyle = computed(() => {
     const textStyle = getDefaultTextStyle(props.color);
     const style = [
       {'relative' : props.hasMenu},
       'flex items-center px-4 py-2 select-none cursor-pointer',
-      props.isActive 
+      isExactActive.value && props.to
         ? [background[props.color], textStyle.textColor] 
           : [background.hover(props.color), textStyle.textColorOnHover],
-      {'justify-center' : !props.label},
+      {'justify-center' : props.isCompact},
+      { 'w-full' : !props.to }
     ];
     return style;
   })
@@ -36,12 +41,13 @@
   <Button 
     :class="defaultStyle" 
     :to="to"
+    :type="!to ? 'button' : ''"
     :iconPath="iconPath"
     :label="label"
     isPlain>
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
-      <span v-if="label" :class="{'pl-4': iconPath}">{{ label }}</span>
+      <span v-if="label" :class="{'pl-4': iconPath, 'hidden': isCompact}">{{ label }}</span>
       <Icon 
         v-if="hasMenu" 
         :class="['absolute right-0 mr-2 rotate-0 transition-[transform]', {'!-rotate-180':isOpen}]" 

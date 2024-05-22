@@ -10,7 +10,7 @@
       type: String,
       default: 'theme-light',
     },
-    isActive: Boolean,
+    isCompact: Boolean,
   });
 </script>
 <template>
@@ -20,8 +20,8 @@
         :color="color" 
         :label="item.label" 
         :iconPath="item.iconPath"
-        :to="item.to"  
-        :isActive="isActive" />
+        :to="item.to"
+        :isCompact="isCompact" />
     </slot>
   </li>
 </template>
