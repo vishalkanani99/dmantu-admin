@@ -1,4 +1,5 @@
 import Dashboard from './pages/dashboard.vue'
+import Tables from './pages/tables.vue'
 
 export const routes = [
   {
@@ -19,7 +20,7 @@ export const routes = [
   {
     name: 'Tables',
     path: '/tables',
-    component: Dashboard,
+    component: Tables,
   },
   {
     name: 'Pages',

@@ -106,7 +106,16 @@ const toggleDropdownSideBar = (item) => {
         <h2>{{ dropdownItem.label }}</h2>
       </template>
     </SideBarMenu>  
-    <RouterView />
+    <div
+      :class="[
+        isCompactSidebar ? 'md:ml-24' : 'md:ml-64',
+        'mt-20',
+        'transition-all',
+        'overflow-y-auto',
+      ]"
+    >
+      <RouterView />
+    </div>
     <OverLayer v-model="showOverLayer" @close="showSideBar = false" />
   </div>
 </template>
