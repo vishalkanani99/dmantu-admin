@@ -6,7 +6,7 @@ const props = defineProps({
   },
   size: {
     type: [String, Number],
-    default: 24,
+    default: 20,
   },
   viewbox: {
     type: String,
@@ -17,7 +17,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <span>
+  <span class="inline-flex justify-center items-center">
     <svg
       :viewBox="viewbox"
       :width="size"

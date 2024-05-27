@@ -38,7 +38,7 @@ import { getButtonStyle } from '../color.js';
       'flex items-center',
       'focus:outline-none',
       'select-none',
-      props.label ? 'px-4 py-2' : 'p-2',
+      'p-1',
       props.rounded ? 'rounded-full' : 'rounded-md',
       getButtonStyle(props.color, props.outline),
     ];

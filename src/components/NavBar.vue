@@ -30,7 +30,7 @@ const items = computed(() => {
 });
 </script>
 <template>
-  <div class="fixed flex justify-between items-center top-0 left-0 right-0 bg-theme-600 h-20 px-6 py-4 overflow-hidden">
+  <div class="fixed flex justify-between items-center top-0 left-0 right-0 bg-theme-600 h-20 px-6 py-4">
     <Button v-if="hasMenuBtn" class="order-first" color="theme-light" :iconPath="mdiMenu" @click="$emit('toggleMenu')" />
     <FieldGroup>
       <Field color="theme-light" v-model="search" :inputLeftIcon="mdiMagnify" rounded />

@@ -11,16 +11,16 @@ const background = {
   'danger': 'bg-red-600',
   hover: function(color, isLight = false) {
     let bg =  {
-      'theme-dark': isLight ? 'hover:bg-theme-600' : 'hover:bg-theme-900',
-      'theme': isLight ? 'hover:bg-theme-300' : 'hover:bg-theme-600',
-      'theme-light': isLight ? 'hover:bg-theme-300' : 'hover:bg-theme-100',
-      'white': isLight ? 'hover:bg-slate-100' : 'hover:bg-white',
-      'black': isLight ? 'hover:bg-slate-500' : 'hover:bg-black',
-      'gray': isLight ? 'hover:bg-gray-500' : 'hover:bg-gray-600',
-      'info': isLight ? 'hover:bg-blue-500' :'hover:bg-blue-600',
-      'success': isLight ? 'hover:bg-green-500' : 'hover:bg-green-600',
-      'warning': isLight ? 'hover:bg-yellow-500' : 'hover:bg-yellow-600',
-      'danger': isLight ? 'hover:bg-red-500' : 'hover:bg-red-600',
+      'theme-dark': isLight ? 'hover:bg-theme-900/[0.9]' : 'hover:bg-theme-900',
+      'theme': isLight ? 'hover:bg-theme-600/[0.9]' : 'hover:bg-theme-600',
+      'theme-light': isLight ? 'hover:bg-theme-100/[0.9]' : 'hover:bg-theme-100',
+      'white': isLight ? 'hover:bg-white/[0.9]' : 'hover:bg-white',
+      'black': isLight ? 'hover:bg-black/[0.9]' : 'hover:bg-black',
+      'gray': isLight ? 'hover:bg-gray-600/[0.9]' : 'hover:bg-gray-600',
+      'info': isLight ? 'hover:bg-blue-600/[0.9]' :'hover:bg-blue-600',
+      'success': isLight ? 'hover:bg-green-600/[0.9]' : 'hover:bg-green-600',
+      'warning': isLight ? 'hover:bg-yellow-600/[0.9]' : 'hover:bg-yellow-600',
+      'danger': isLight ? 'hover:bg-red-600/[0.9]' : 'hover:bg-red-600',
     }
     return bg[color];
   }
