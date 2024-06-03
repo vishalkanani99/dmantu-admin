@@ -1,15 +1,97 @@
 <script setup>
-import { mdiTable } from '@mdi/js';
+import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
 import SectionTitle from '../components/SectionTitle.vue';
+import Button from '../components/Button.vue';
 
 </script>
 <template>
-  <div>
+  <div class="space-y-4">
     <SectionTitle 
       title="Basic Table" 
       :iconPath="mdiTable" 
-      :btnIconPath="mdiTable" 
-      btnColor="theme-light" 
+      :btnIconPath="mdiCog" 
+      btnColor="theme-dark" 
     />
+    <table>
+      <thead>
+        <tr>
+          <td></td>
+          <td>Image</td>
+          <td>Name</td>
+          <td>Email</td>
+          <td>City</td>
+          <td>Status</td>
+          <td>Created On</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td data-label="Image"></td>
+          <td data-label="Name">John Doe</td>
+          <td data-label="Email">john@test.com</td>
+          <td data-label="City">New York</td>
+          <td data-label="Status">Active</td>
+          <td data-label="Created On">19, Dec 2024</td>
+          <td class="action">
+            <Button :iconPath="mdiPencil" color="info" ></Button>
+            <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-label="Image"></td>
+          <td data-label="Name">John Doe</td>
+          <td data-label="Email">john@test.com</td>
+          <td data-label="City">New York</td>
+          <td data-label="Status">Active</td>
+          <td data-label="Created On">19, Dec 2024</td>
+          <td class="action">
+            <Button :iconPath="mdiPencil" color="info" ></Button>
+            <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-label="Image"></td>
+          <td data-label="Name">John Doe</td>
+          <td data-label="Email">john@test.com</td>
+          <td data-label="City">New York</td>
+          <td data-label="Status">Active</td>
+          <td data-label="Created On">19, Dec 2024</td>
+          <td class="action">
+            <Button :iconPath="mdiPencil" color="info" ></Button>
+            <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-label="Image"></td>
+          <td data-label="Name">John Doe</td>
+          <td data-label="Email">john@test.com</td>
+          <td data-label="City">New York</td>
+          <td data-label="Status">Active</td>
+          <td data-label="Created On">19, Dec 2024</td>
+          <td class="action">
+            <Button :iconPath="mdiPencil" color="info" ></Button>
+            <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td data-label="Image"></td>
+          <td data-label="Name">John Doe</td>
+          <td data-label="Email">john@test.com</td>
+          <td data-label="City">New York</td>
+          <td data-label="Status">Active</td>
+          <td data-label="Created On">19, Dec 2024</td>
+          <td class="action">
+            <Button :iconPath="mdiPencil" color="info" ></Button>
+            <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
