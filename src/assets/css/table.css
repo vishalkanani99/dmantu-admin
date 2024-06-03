@@ -6,7 +6,7 @@
   }
 
   thead {
-    @apply hidden lg:table-header-group;
+    @apply hidden lg:table-header-group bg-theme-900 text-theme-100;
   }
 
   tr {
@@ -48,7 +48,7 @@
     @apply font-semibold pr-3 text-left lg:hidden;
   }
 
-  td.action {
+  td.center {
     @apply flex justify-center items-center space-x-2;
   }
 }
