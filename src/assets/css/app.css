@@ -8,17 +8,12 @@
       src: url('@/assets/fonts/Exo-2.ttf');
   }
 
-  @font-face {
-    font-family: CrimsonPro;
-    src: url('@/assets/fonts/CrimsonPro.ttf');
-  }
-
   * {
     @apply font-[Exo-2];
   }
 
   h1,h2,h3,h4,h5,h6{
-      @apply font-[CrimsonPro] font-medium;
+      @apply font-semibold;
   }
 
   h1 {
