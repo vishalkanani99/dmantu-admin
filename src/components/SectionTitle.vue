@@ -16,7 +16,7 @@ const emit = defineEmits(['btnClick']);
 <template>
   <section class="flex justify-between items-center text-theme-900">
     <div class="flex justify-start items-center">
-      <Icon v-if="iconPath" :path="iconPath" :size="24" />
+      <Icon v-if="iconPath" class="rounded-full w-12 h-12 p-2 bg-theme-600 text-theme-100" :path="iconPath" :size="28" />
       <h2 v-if="title" :class="{'pl-2': iconPath}">{{ title }}</h2>
     </div>
     <Button 

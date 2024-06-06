@@ -6,12 +6,12 @@ import FieldOption from '../components/FieldOption.vue';
 
 </script>
 <template>
-  <div class="space-y-4">
+  <div class="space-y-6">
     <SectionTitle 
       title="Basic Table" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme-dark" 
+      btnColor="theme" 
     />
     <table>
       <thead>
