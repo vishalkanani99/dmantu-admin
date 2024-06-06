@@ -3,6 +3,7 @@ import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
 import SectionTitle from '../components/SectionTitle.vue';
 import Button from '../components/Button.vue';
 import FieldOption from '../components/FieldOption.vue';
+import Avatar from '../components/Avatar.vue';
 
 </script>
 <template>
@@ -33,7 +34,9 @@ import FieldOption from '../components/FieldOption.vue';
           <td class="center">
             <FieldOption />
           </td>
-          <td data-label="Image"></td>
+          <td data-label="Image">
+            <Avatar class="w-12 h-12" username="John Doe" />
+          </td>
           <td data-label="Name">John Doe</td>
           <td data-label="Email">john@test.com</td>
           <td data-label="City">New York</td>
@@ -48,7 +51,9 @@ import FieldOption from '../components/FieldOption.vue';
           <td class="center">
             <FieldOption />
           </td>
-          <td data-label="Image"></td>
+          <td data-label="Image">
+            <Avatar class="w-12 h-12" username="John Doe" />
+          </td>
           <td data-label="Name">John Doe</td>
           <td data-label="Email">john@test.com</td>
           <td data-label="City">New York</td>
@@ -63,7 +68,9 @@ import FieldOption from '../components/FieldOption.vue';
           <td class="center">
             <FieldOption />
           </td>
-          <td data-label="Image"></td>
+          <td data-label="Image">
+            <Avatar class="w-12 h-12" username="John Doe" />
+          </td>
           <td data-label="Name">John Doe</td>
           <td data-label="Email">john@test.com</td>
           <td data-label="City">New York</td>
@@ -78,7 +85,9 @@ import FieldOption from '../components/FieldOption.vue';
           <td class="center">
             <FieldOption />
           </td>
-          <td data-label="Image"></td>
+          <td data-label="Image">
+            <Avatar class="w-12 h-12" username="John Doe" />
+          </td>
           <td data-label="Name">John Doe</td>
           <td data-label="Email">john@test.com</td>
           <td data-label="City">New York</td>
@@ -93,7 +102,9 @@ import FieldOption from '../components/FieldOption.vue';
           <td class="center">
             <FieldOption />
           </td>
-          <td data-label="Image"></td>
+          <td data-label="Image">
+            <Avatar class="w-12 h-12" username="John Doe" />
+          </td>
           <td data-label="Name">John Doe</td>
           <td data-label="Email">john@test.com</td>
           <td data-label="City">New York</td>
