@@ -84,7 +84,7 @@ const toggleDropdownSideBar = (item) => {
     <NavBar 
       :class="[
         isCompactSidebar ? 'md:ml-24' : 'md:ml-64',
-        'transition-all',
+        'transition-all z-10',
       ]"
       :hasMenuBtn="isClosableSidebar" 
       @toggleMenu="toggleMenu" />
