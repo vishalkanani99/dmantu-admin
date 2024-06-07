@@ -1,10 +1,13 @@
 <script setup>
+import { ref } from 'vue';
 import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
 import SectionTitle from '../components/SectionTitle.vue';
 import Button from '../components/Button.vue';
 import FieldOption from '../components/FieldOption.vue';
 import Avatar from '../components/Avatar.vue';
+import Pagination from '../components/Pagination.vue';
 
+const activePage = ref(5);
 </script>
 <template>
   <div class="space-y-6">
@@ -117,5 +120,6 @@ import Avatar from '../components/Avatar.vue';
         </tr>
       </tbody>
     </table>
+    <Pagination v-model="activePage" :recordsTotal="50"/>
   </div>
 </template>
