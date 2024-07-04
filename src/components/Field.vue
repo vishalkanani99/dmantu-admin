@@ -17,7 +17,7 @@ import Icon from './Icon.vue';
       default: 'text',
     },
     modelValue: {
-      type: [String, Array],
+      type: [String, Number, Array, null],
       required: true,
     },
     middle: Boolean,

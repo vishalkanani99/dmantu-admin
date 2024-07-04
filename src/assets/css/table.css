@@ -44,11 +44,24 @@
   }
 
   td:before {
-    content: attr(data-label);
-    @apply font-semibold pr-3 text-left md:hidden text-theme-900;
+    @apply content-[attr(data-label)] font-semibold pr-3 text-left md:hidden text-theme-900;
   }
 
-  td.center {
+  th .center, td .center {
     @apply flex justify-center items-center space-x-2;
+  }
+
+  th.sortable::before{
+    @apply content-['▴'] absolute h-0 w-0 right-4 top-[20%] text-theme-100;
+  }
+  
+  th.sortable::after{
+    @apply content-['▾'] absolute h-0 w-0 right-4 bottom-[65%] text-theme-100;
+  }
+  th.asc::after{
+    @apply text-theme-300;
+  }
+  th.desc::before{
+    @apply text-theme-300;
   }
 }

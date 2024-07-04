@@ -24,7 +24,7 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
-const computedValue = computed({
+const modelValue = computed({
   get: () => props.modelValue,
   set: (value) => {
     emit("update:modelValue", value);
@@ -39,10 +39,11 @@ const inputType = computed(() =>
 <template>
   <label :class="type">
     <input
-      v-model="computedValue"
+      v-model="modelValue"
+      v-bind="$attrs"
       :type="inputType"
     />
     <span class="check" />
-    <span class="pl-2">{{ label }}</span>
+    <span :class="{ 'pl-2': label }">{{ label }}</span>
   </label>
 </template>
