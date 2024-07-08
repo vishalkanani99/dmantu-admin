@@ -1,4 +1,5 @@
 import Dashboard from './pages/dashboard.vue'
+import Forms from './pages/forms.vue'
 import Tables from './pages/tables.vue'
 
 export const routes = [
@@ -16,6 +17,11 @@ export const routes = [
     name: 'eCommerce',
     path: '/ecommerce',
     component: Dashboard,
+  },
+  {
+    name: 'Forms',
+    path: '/forms',
+    component: Forms,
   },
   {
     name: 'Tables',

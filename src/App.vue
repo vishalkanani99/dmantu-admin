@@ -1,19 +1,14 @@
 <script setup>
 import { shallowRef, ref, computed } from 'vue';
 import { RouterView } from 'vue-router';
-import {
-  mdiHome, 
-  mdiRhombusSplit, 
-  mdiTable, 
-  mdiCartOutline, 
-  mdiFileDocumentMultipleOutline, 
-} from '@mdi/js';
+
 import { useScreen } from './composables/useScreen';
 import Field from './components/Field.vue';
 import FieldGroup from './components/FieldGroup.vue';
 import NavBar from './components/NavBar.vue';
 import SideBarMenu from './components/SideBarMenu.vue';
 import OverLayer from './components/OverLayer.vue';
+import { menu } from './menu';
 
 const { isSmallScreen, isExtraSmallScreen } = useScreen();
 const isClosableSidebar = computed(() => isSmallScreen.value || isExtraSmallScreen.value);
@@ -23,49 +18,6 @@ const showOverLayer = shallowRef(false);
 const showSideBarDropdown = shallowRef(false);
 const dropdownItem = ref({});
 const searchField = ref();
-
-const items = computed(() => {
-  const menu = [
-    {
-      label: 'Dashboard',
-      to: '/',
-      iconPath: mdiHome,
-    },
-    {
-      label: 'Components',
-      to: '/components',
-      iconPath: mdiRhombusSplit,
-    },
-    {
-      label: 'eCommerce',
-      to: '/ecommerce',
-      iconPath: mdiCartOutline,
-    },
-    {
-      label: 'Tables',
-      to: '/tables',
-      iconPath: mdiTable,
-    },
-    {
-      label: 'Pages',
-      to: '',
-      iconPath: mdiFileDocumentMultipleOutline,
-      items: [
-        {
-          label: 'Dashboard',
-          to: '/',
-          iconPath: mdiHome,
-        },
-        {
-          label: 'Components',
-          to: '/components',
-          iconPath: mdiRhombusSplit,
-        },
-      ]
-    }
-  ];
-  return menu;
-});
 
 const toggleMenu = () => {
   showSideBar.value = !showSideBar.value;
@@ -91,7 +43,7 @@ const toggleDropdownSideBar = (item) => {
     <SideBarMenu 
       v-model="showSideBar" 
       v-model:isCompact="isCompactSidebar" 
-      :items="items"
+      :items="menu"
       @close="showOverLayer = false" 
       @update:isCompact="toggleDropdownSideBar"
       @dropdownClick="toggleDropdownSideBar"
