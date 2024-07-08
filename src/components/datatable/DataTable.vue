@@ -22,6 +22,7 @@ const props = defineProps({
     type: Array,
     default: []
   },
+  totalRecords: Number,
   limitOptions: {
     type: Array,
     default: [5, 10, 20, 30, 50],
@@ -33,6 +34,7 @@ const props = defineProps({
   isCheckable: Boolean,
   isCollapsible: Boolean,
   isEditable: Boolean,
+  isLoading: Boolean,
   isSsr: Boolean,
 });
 
@@ -40,8 +42,7 @@ const emit = defineEmits(["update:modelValue", "update", "edit", "delete"]);
 
 
 const sortField = ref('');
-const rows = ref(props.data);
-const activePageRows = ref(props.data);
+const rows = ref([]);
 const isSsr = ref(props.isSsr);
 const checkedAll = ref(false);
 
@@ -56,6 +57,14 @@ const config = reactive({
   sortBy: [],
 });
 
+const activePageRows = computed(() => {
+  if( props.isSsr ) {
+    return props.data;
+  }
+  return rows.value;
+});
+
+const totalRecords = computed( () => props.totalRecords ?? props.data.length );
 const modelValue = computed({
   get: () => props.modelValue,
   set: (value) => {
@@ -104,14 +113,11 @@ const updatePage = debounce(async () => {
 
 const update = debounce(async () => {
   emit('update', config);
+  if(isSsr.value) { return; }
   rows.value = props.data;
-  if(isSsr.value){
-    activePageRows.value = rows.value;
-    return;
-  }
   rows.value = await searchData(rows.value, config.search, config.searchBy, props.recursiveKey);
   rows.value = await sortColumn(rows.value, config.sortBy, props.recursiveKey);
-  activePageRows.value = await paginate();
+  rows.value = await paginate();
   updateCheckedRows();
 })
 
@@ -242,7 +248,10 @@ onMounted(() => {
         <th v-if="isEditable"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody :class="{'relative': isLoading}">
+      <div v-if="isLoading" class="absolute inset-0 flex bg-theme-300 z-10 opacity-50">
+        <img class="w-8 h-8 m-auto" src="/loader.gif">
+      </div>
       <DataTableRows
         v-model="modelValue"
         :rows="activePageRows"
@@ -270,10 +279,10 @@ onMounted(() => {
     </tbody>
   </table>
   <Pagination 
-    v-if="rows.length > 0"
+    v-if="activePageRows.length > 0"
     v-model="config.page"
     :limit="config.limit"
-    :recordsTotal="rows.length"
+    :recordsTotal="totalRecords"
     @update:modelValue="update"
   >
   </Pagination>

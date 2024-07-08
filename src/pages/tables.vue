@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
 import SectionTitle from '../components/SectionTitle.vue';
 import Button from '../components/Button.vue';
@@ -11,6 +11,7 @@ import DataTable from '../components/datatable/DataTable.vue';
 const activePage = ref(5);
 
 const checkedRows = ref([]);
+const isLoading = shallowRef(false);
 
 const columns = ref([
   { key: 'src', label: 'Image', imageable: true, },
@@ -121,6 +122,86 @@ const tableRows = ref([
   },
 ]);
 
+const ssrTableRows = ref([]);
+const getData = (config) => {
+  isLoading.value = true;
+  setTimeout(() => {
+  ssrTableRows.value = [
+    {
+      id:1,
+      name: 'John Doe',
+      city: 'New York',
+      status: 1,
+      created_at: '19, Dec 2024'
+    },
+    {
+      id:13,
+      name: 'John Doe',
+      city: 'Mosvil',
+      status: 1,
+      created_at: '18, Dec 2024'
+    },
+    {
+      id:4,
+      name: 'Chloe Doe',
+      city: 'Vruddon',
+      status: 1,
+      created_at: '19, Dec 2024'
+    },
+    {
+      id:14,
+      name: 'John Doe',
+      city: 'New York',
+      status: 1,
+      created_at: '21, Dec 2024'
+    },
+    {
+      id:5,
+      name: 'Deirdre Doe',
+      city: 'Teupus',
+      status: 1,
+      created_at: '11, Dec 2024',
+      children: [{
+        id:7,
+        name: 'Maria Madeleine',
+        city: 'Qimont',
+        status: 1,
+        created_at: '12, Dec 2024'
+      },
+      {
+        id:8,
+        name: 'Kimberly Lillian',
+        city: 'Khuprough',
+        status: 1,
+        created_at: '14, Dec 2024',
+        children: [{
+          id:11,
+          name: 'Kylie Lauren',
+          city: 'Vlopolis',
+          status: 1,
+          created_at: '22, Dec 2024'
+        },
+        {
+          id:12,
+          name: 'Molly Michelle',
+          city: 'Ring',
+          status: 1,
+          created_at: '26, Dec 2024'
+        }]
+      }]
+    },
+    {
+      id:6,
+      name: 'Hannah Doe',
+      city: 'Kans',
+      status: 1,
+      created_at: '19, Dec 2024',
+    },
+  ]
+  isLoading.value = false;
+  }, 5000)
+  console.log(config)
+}
 </script>
 <template>
   <div class="space-y-6">
@@ -280,6 +361,25 @@ const tableRows = ref([
       isCheckable
       isCollapsible
       isEditable
+    >
+    </DataTable>
+
+    <SectionTitle 
+      title="Data Table (SSR)" 
+      :iconPath="mdiTable" 
+      :btnIconPath="mdiCog" 
+      btnColor="theme" 
+    />
+    <DataTable
+      v-model="checkedRows" 
+      :columns="columns" 
+      :data="ssrTableRows"
+      isSsr
+      isCheckable
+      isCollapsible
+      isEditable
+      :isLoading="isLoading"
+      @update="getData"
     >
 
     </DataTable>
