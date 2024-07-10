@@ -1,15 +1,19 @@
 <script setup>
-import { computed, ref } from 'vue';
-import { 
-  border, 
-  ring, 
-  text, 
-  background as backgroundColor,
-  getDefaultTextStyle,
-  getButtonStyle, 
-} from '../color';
-import Button from './Button.vue';
-import Icon from './Icon.vue';
+  import { computed, ref } from 'vue';
+  import { 
+    border, 
+    ring, 
+    text, 
+    background as backgroundColor,
+    getDefaultTextStyle,
+    getButtonStyle, 
+  } from '../color';
+  import Button from './Button.vue';
+  import Icon from './Icon.vue';
+
+  defineOptions({
+    inheritAttrs: false,
+  });
 
   const props = defineProps({
     type: {
@@ -45,7 +49,7 @@ import Icon from './Icon.vue';
       emit('update:modelValue', value);
     }
   })
-  
+
   const borderRadius = computed(() => {
     return [
       { 'rounded-r-none rounded-l-none' : props.middle },
@@ -86,7 +90,7 @@ import Icon from './Icon.vue';
     let padding = ['pl-3 pr-3 py-2'];
 
     let style = [
-      'flex items-center text-xs focus:outline-none',
+      'flex items-center text-xs focus:outline-none focus:z-10',
       props.type === 'textarea' ? 'h-24' : 'h-10',
       borderRadius.value,
     ];
@@ -109,7 +113,7 @@ import Icon from './Icon.vue';
     ];
     
     return [
-      'border-0 focus:ring-2',
+      'w-full border-0 focus:ring-2',
       style,
       padding, 
       ...colors,
@@ -117,7 +121,7 @@ import Icon from './Icon.vue';
   })
 
   const getInputIconStyle = (position) => {
-    return ['absolute inline-flex justify-center items-center w-10 h-10', position, textStyle.value];
+    return ['absolute inline-flex justify-center items-center w-10 h-10 z-20', position, textStyle.value];
   }
 </script>
 <template>
@@ -125,21 +129,25 @@ import Icon from './Icon.vue';
     <textarea 
       v-if="type === 'textarea'"
       v-model="modelValue"
+      v-bind="$attrs"
       :class="defaultStyle">
     </textarea>
     <select 
       v-else-if="type === 'select'" 
       v-model="modelValue"
+      v-bind="$attrs"
       :class="defaultStyle">
       <slot></slot>
     </select>
     <div 
       v-else-if="type === 'static'"
+      v-bind="$attrs"
       :class="defaultStyle">
       <slot></slot>
     </div>
     <Button 
       v-else-if="type === 'button'"
+      v-bind="$attrs"
       :label="label"
       :class="defaultStyle"
       :iconPath="buttonIcon"
@@ -155,7 +163,8 @@ import Icon from './Icon.vue';
         :path="inputLeftIcon"
         @click="$emit('leftIconClick')" />
       <input 
-        :type="type" 
+        :type="type"
+        v-bind="$attrs" 
         v-model="modelValue" 
         :class="defaultStyle" />
       <Icon  

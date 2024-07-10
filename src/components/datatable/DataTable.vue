@@ -164,7 +164,7 @@ onMounted(() => {
       >
         <option v-for="value in limitOptions" :key="value" :value="value">{{ value }}</option>
       </Field>
-      <FieldGroup>
+      <FieldGroup multiFields>
         <Field
           v-model="config.search"
           type="text" 
@@ -186,7 +186,7 @@ onMounted(() => {
           <option v-for="(col, index) in searchableColumns" :key="index" :value="col.key">{{ col.label }}</option>
         </Field>
       </FieldGroup>
-      <FieldGroup class="md:hidden">
+      <FieldGroup multiFields class="md:hidden">
         <Field 
           v-if="sortField" 
           :left="sortField ? true : false" 
