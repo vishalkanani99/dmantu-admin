@@ -38,7 +38,7 @@ import { getButtonStyle } from '../color.js';
       'flex items-center',
       'focus:outline-none',
       'select-none',
-      'p-1',
+      'p-2',
       props.rounded ? 'rounded-full' : 'rounded-md',
       getButtonStyle(props.color, props.outline),
     ];
@@ -68,7 +68,7 @@ const bindProps = computed(() => {
   >
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
-      <span v-if="label" :class="{'pl-4': iconPath}">{{ label }}</span>
+      <span v-if="label" class="px-2">{{ label }}</span>
     </slot>
   </component>
 </template>

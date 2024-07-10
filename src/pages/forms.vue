@@ -4,6 +4,7 @@ import { mdiFormSelect, mdiCog } from '@mdi/js';
 import SectionTitle from '../components/SectionTitle.vue';
 import FieldGroup from '../components/FieldGroup.vue';
 import Field from '../components/Field.vue';
+import Card from '../components/card/Card.vue';
 
 </script>
 <template>
@@ -19,5 +20,12 @@ import Field from '../components/Field.vue';
         <Field id="name" />
       </FieldGroup>
     </form>
+    <Card
+      title="First card"
+      subTitle="Sub Title"
+      closable
+    >
+      <p>lorem ipsum sit amet</p>
+    </Card>
   </div>
 </template>
