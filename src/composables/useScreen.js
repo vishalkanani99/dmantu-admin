@@ -12,9 +12,9 @@ export function useScreen(){
       isExtraLargeScreen.value = true;
     } else if(screen.width >= 1024 && screen.width < 1280){
       isLargeScreen.value = true;
-    } else if(screen.width >= 786 && screen.width < 1024){
+    } else if(screen.width >= 768 && screen.width < 1024){
       isMediumScreen.value = true;
-    } else if(screen.width >= 360 && screen.width < 786){
+    } else if(screen.width >= 360 && screen.width < 768){
       isSmallScreen.value = true;
     } else if(screen.width < 360){
       isExtraSmallScreen.value = true;

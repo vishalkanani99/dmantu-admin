@@ -3,7 +3,6 @@ import { shallowRef, ref, computed } from 'vue';
 import { 
   mdiArrowCollapseHorizontal,
 } from '@mdi/js';
-import { useScreen } from '../composables/useScreen';
 import Button from '../components/Button.vue';
 import Menu from '../components/Menu.vue';
 import SideBar from '../components/SideBar.vue';
@@ -18,7 +17,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue', 'update:isCompact', 'close', 'dropdownClick']);
-const { isSmallScreen, isExtraSmallScreen } = useScreen();
 
 const isCompact = computed({
   get: () => props.isCompact,
@@ -34,7 +32,7 @@ const showSideBar = computed({
   }
 });
 
-const isClosable = computed(() => props.isClosable || isSmallScreen.value || isExtraSmallScreen.value);
+const isClosable = computed(() => props.isClosable);
 const defaultStyle = computed(() => {
   const style = [
     'z-50',

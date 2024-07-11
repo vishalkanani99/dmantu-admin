@@ -1,5 +1,8 @@
 <script setup>
+import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 </script>
 <template>
-  <h2 class="text-center">Dashboard</h2>
+  <LayoutAuthenticated>
+    <h2> Welcome to dashboard! </h2>
+  </LayoutAuthenticated>
 </template>

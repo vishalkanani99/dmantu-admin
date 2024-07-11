@@ -1,7 +1,8 @@
 <script setup>
 import { ref, shallowRef } from 'vue';
 import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
-import SectionTitle from '../components/SectionTitle.vue';
+import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
+import Section from '../components/section/Section.vue';
 import Button from '../components/Button.vue';
 import FieldOption from '../components/FieldOption.vue';
 import Avatar from '../components/Avatar.vue';
@@ -168,184 +169,184 @@ const getData = (config) => {
 }
 </script>
 <template>
-  <div class="space-y-6">
-    <SectionTitle 
+  <LayoutAuthenticated>
+    <Section
       title="Basic Table" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme" 
-    />
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </th>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>City</th>
-          <th>Status</th>
-          <th>Created On</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </td>
-          <td data-label="Image">
-            <div class="center">
-              <Avatar class="w-12 h-12" username="John Doe" />
-            </div>
-          </td>
-          <td data-label="Name">John Doe</td>
-          <td data-label="Email">john@test.com</td>
-          <td data-label="City">New York</td>
-          <td data-label="Status">Active</td>
-          <td data-label="Created On">19, Dec 2024</td>
-          <td>
-            <div class="center">
-              <Button :iconPath="mdiPencil" color="info" ></Button>
-              <Button :iconPath="mdiTrashCan" color="danger" ></Button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </td>
-          <td data-label="Image">
-            <div class="center">
-              <Avatar class="w-12 h-12" username="John Doe" />
-            </div>
-          </td>
-          <td data-label="Name">John Doe</td>
-          <td data-label="Email">john@test.com</td>
-          <td data-label="City">New York</td>
-          <td data-label="Status">Active</td>
-          <td data-label="Created On">19, Dec 2024</td>
-          <td>
-            <div class="center">
-              <Button :iconPath="mdiPencil" color="info" ></Button>
-              <Button :iconPath="mdiTrashCan" color="danger" ></Button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </td>
-          <td data-label="Image">
-            <div class="center">
-              <Avatar class="w-12 h-12" username="John Doe" />
-            </div>
-          </td>
-          <td data-label="Name">John Doe</td>
-          <td data-label="Email">john@test.com</td>
-          <td data-label="City">New York</td>
-          <td data-label="Status">Active</td>
-          <td data-label="Created On">19, Dec 2024</td>
-          <td>
-            <div class="center">
-              <Button :iconPath="mdiPencil" color="info" ></Button>
-              <Button :iconPath="mdiTrashCan" color="danger" ></Button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </td>
-          <td data-label="Image">
-            <div class="center">
-              <Avatar class="w-12 h-12" username="John Doe" />
-            </div>
-          </td>
-          <td data-label="Name">John Doe</td>
-          <td data-label="Email">john@test.com</td>
-          <td data-label="City">New York</td>
-          <td data-label="Status">Active</td>
-          <td data-label="Created On">19, Dec 2024</td>
-          <td>
-            <div class="center">
-              <Button :iconPath="mdiPencil" color="info" ></Button>
-              <Button :iconPath="mdiTrashCan" color="danger" ></Button>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <span class="center">
-              <FieldOption />
-            </span>
-          </td>
-          <td data-label="Image">
-            <div class="center">
-              <Avatar class="w-12 h-12" username="John Doe" />
-            </div>
-          </td>
-          <td data-label="Name">John Doe</td>
-          <td data-label="Email">john@test.com</td>
-          <td data-label="City">New York</td>
-          <td data-label="Status">Active</td>
-          <td data-label="Created On">19, Dec 2024</td>
-          <td>
-            <div class="center">
-              <Button :iconPath="mdiPencil" color="info" ></Button>
-              <Button :iconPath="mdiTrashCan" color="danger" ></Button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <Pagination v-model="activePage" :recordsTotal="50"/>
-
-    <SectionTitle 
+      btnColor="theme"
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>City</th>
+            <th>Status</th>
+            <th>Created On</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </td>
+            <td data-label="Image">
+              <div class="center">
+                <Avatar class="w-12 h-12" username="John Doe" />
+              </div>
+            </td>
+            <td data-label="Name">John Doe</td>
+            <td data-label="Email">john@test.com</td>
+            <td data-label="City">New York</td>
+            <td data-label="Status">Active</td>
+            <td data-label="Created On">19, Dec 2024</td>
+            <td>
+              <div class="center">
+                <Button :iconPath="mdiPencil" color="info" ></Button>
+                <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </td>
+            <td data-label="Image">
+              <div class="center">
+                <Avatar class="w-12 h-12" username="John Doe" />
+              </div>
+            </td>
+            <td data-label="Name">John Doe</td>
+            <td data-label="Email">john@test.com</td>
+            <td data-label="City">New York</td>
+            <td data-label="Status">Active</td>
+            <td data-label="Created On">19, Dec 2024</td>
+            <td>
+              <div class="center">
+                <Button :iconPath="mdiPencil" color="info" ></Button>
+                <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </td>
+            <td data-label="Image">
+              <div class="center">
+                <Avatar class="w-12 h-12" username="John Doe" />
+              </div>
+            </td>
+            <td data-label="Name">John Doe</td>
+            <td data-label="Email">john@test.com</td>
+            <td data-label="City">New York</td>
+            <td data-label="Status">Active</td>
+            <td data-label="Created On">19, Dec 2024</td>
+            <td>
+              <div class="center">
+                <Button :iconPath="mdiPencil" color="info" ></Button>
+                <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </td>
+            <td data-label="Image">
+              <div class="center">
+                <Avatar class="w-12 h-12" username="John Doe" />
+              </div>
+            </td>
+            <td data-label="Name">John Doe</td>
+            <td data-label="Email">john@test.com</td>
+            <td data-label="City">New York</td>
+            <td data-label="Status">Active</td>
+            <td data-label="Created On">19, Dec 2024</td>
+            <td>
+              <div class="center">
+                <Button :iconPath="mdiPencil" color="info" ></Button>
+                <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span class="center">
+                <FieldOption />
+              </span>
+            </td>
+            <td data-label="Image">
+              <div class="center">
+                <Avatar class="w-12 h-12" username="John Doe" />
+              </div>
+            </td>
+            <td data-label="Name">John Doe</td>
+            <td data-label="Email">john@test.com</td>
+            <td data-label="City">New York</td>
+            <td data-label="Status">Active</td>
+            <td data-label="Created On">19, Dec 2024</td>
+            <td>
+              <div class="center">
+                <Button :iconPath="mdiPencil" color="info" ></Button>
+                <Button :iconPath="mdiTrashCan" color="danger" ></Button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Pagination v-model="activePage" :recordsTotal="50"/>
+    </Section>
+    <Section
       title="Data Table" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme" 
-    />
-    <DataTable
-      v-model="checkedRows" 
-      :columns="columns" 
-      :data="tableRows"
-      isCheckable
-      isCollapsible
-      isEditable
+      btnColor="theme"
     >
-    </DataTable>
-
-    <SectionTitle 
+      <DataTable
+        v-model="checkedRows" 
+        :columns="columns" 
+        :data="tableRows"
+        isCheckable
+        isCollapsible
+        isEditable
+      >
+      </DataTable>
+    </Section>
+    <Section
       title="Data Table (SSR)" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme" 
-    />
-    <DataTable
-      v-model="checkedRows" 
-      :columns="columns" 
-      :data="ssrTableRows"
-      isSsr
-      isCheckable
-      isCollapsible
-      isEditable
-      :isLoading="isLoading"
-      @update="getData"
+      btnColor="theme"
     >
-
-    </DataTable>
-  </div>
+      <DataTable
+        v-model="checkedRows" 
+        :columns="columns" 
+        :data="ssrTableRows"
+        isSsr
+        isCheckable
+        isCollapsible
+        isEditable
+        :isLoading="isLoading"
+        @update="getData"
+      >
+      </DataTable>
+    </Section>
+  </LayoutAuthenticated>
 </template>
