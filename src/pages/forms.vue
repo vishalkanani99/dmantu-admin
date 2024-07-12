@@ -3,8 +3,8 @@ import { ref, shallowRef } from 'vue';
 import { mdiFormSelect, mdiCog } from '@mdi/js';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
-import FieldGroup from '../components/FieldGroup.vue';
-import Field from '../components/Field.vue';
+import FieldGroup from '../components/form/FieldGroup.vue';
+import Field from '../components/form/Field.vue';
 import Card from '../components/card/Card.vue';
 
 </script>

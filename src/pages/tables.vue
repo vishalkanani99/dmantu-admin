@@ -4,7 +4,7 @@ import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Button from '../components/Button.vue';
-import FieldOption from '../components/FieldOption.vue';
+import FieldOption from '../components/form/FieldOption.vue';
 import Avatar from '../components/Avatar.vue';
 import Pagination from '../components/Pagination.vue';
 import DataTable from '../components/datatable/DataTable.vue';

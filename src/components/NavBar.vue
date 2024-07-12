@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { mdiMenu, mdiMagnify, mdiBellOutline, mdiEmailOutline, mdiCog, mdiPencil } from '@mdi/js';
-import Field from './Field.vue';
-import FieldGroup from './FieldGroup.vue';
+import Field from './form/Field.vue';
+import FieldGroup from './form/FieldGroup.vue';
 import Button from './Button.vue';
 import Dropdown from './Dropdown.vue';
 

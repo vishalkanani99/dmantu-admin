@@ -2,9 +2,9 @@
 import { ref, shallowRef, computed, onMounted, reactive } from "vue";
 import { debounce } from 'lodash';
 import { mdiArrowUpBold, mdiArrowDownBold, mdiFolderSearch } from '@mdi/js';
-import FieldOption from "../FieldOption.vue";
-import Field from "../Field.vue";
-import FieldGroup from "../FieldGroup.vue";
+import FieldOption from "../form/FieldOption.vue";
+import Field from "../form/Field.vue";
+import FieldGroup from "../form/FieldGroup.vue";
 import DataTableRows from "./DataTableRows.vue";
 import Pagination from '../Pagination.vue';
 import { search as searchData, sort as sortColumn} from '../../composables/useFilter.js';

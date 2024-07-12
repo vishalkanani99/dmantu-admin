@@ -2,7 +2,7 @@
 import { shallowRef, computed } from 'vue';
 import { mdiTrashCan, mdiPencil, mdiChevronRight } from '@mdi/js';
 import DataTableRows from './DataTableRows.vue';
-import FieldOption from "../FieldOption.vue";
+import FieldOption from "../form/FieldOption.vue";
 import Avatar from "../Avatar.vue";
 import Button from "../Button.vue";
 

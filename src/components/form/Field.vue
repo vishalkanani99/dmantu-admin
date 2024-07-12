@@ -7,9 +7,9 @@
     background as backgroundColor,
     getDefaultTextStyle,
     getButtonStyle, 
-  } from '../color';
-  import Button from './Button.vue';
-  import Icon from './Icon.vue';
+  } from '../../color';
+  import Button from '../Button.vue';
+  import Icon from '../Icon.vue';
 
   defineOptions({
     inheritAttrs: false,

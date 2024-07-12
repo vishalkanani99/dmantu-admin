@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { text as textColors } from '../color.js';
+import { text as textColors } from '../../color.js';
 
 const props = defineProps({
   text: {
