@@ -37,6 +37,7 @@
     inputLeftIcon: String,
     inputRightIcon: String,
     outline: Boolean,
+    expanded: Boolean,
   });
 
   const emit = defineEmits(['update:modelValue', 'buttonClick', 'leftIconClick', 'rightIconClick']);
@@ -64,6 +65,7 @@
       { 'border-t border-b' : props.middle },
       { 'border-t border-b border-l' : props.left },
       { 'border-t border-b border-r' : props.right },
+      { 'border' : !props.middle && !props.left && !props.right },
     ];
   })
 
@@ -72,6 +74,7 @@
     return [
       { 'relative' : props.inputLeftIcon || props.inputRightIcon },
       'flex items-center',
+      { 'grow' : props.expanded },
       borderPosition.value,
       border[borderColor],
       borderRadius.value,
@@ -126,14 +129,8 @@
 </script>
 <template>
   <div :class="outerStyle">
-    <textarea 
-      v-if="type === 'textarea'"
-      v-model="modelValue"
-      v-bind="$attrs"
-      :class="defaultStyle">
-    </textarea>
     <select 
-      v-else-if="type === 'select'" 
+      v-if="type === 'select'" 
       v-model="modelValue"
       v-bind="$attrs"
       :class="defaultStyle">
@@ -162,7 +159,14 @@
         :class="getInputIconStyle('left-0')"
         :path="inputLeftIcon"
         @click="$emit('leftIconClick')" />
-      <input 
+      <textarea 
+        v-if="type === 'textarea'"
+        v-bind="$attrs"
+        v-model="modelValue"
+        :class="defaultStyle">
+      </textarea>
+      <input
+        v-else
         :type="type"
         v-bind="$attrs" 
         v-model="modelValue" 

@@ -6,7 +6,10 @@ import { getButtonStyle } from '../color.js';
 
   const props = defineProps({
     label: String,
-    type: String,
+    type: {
+      type: String,
+      default: 'button',
+    },
     color: String,
     iconPath: String,
     to: String,
