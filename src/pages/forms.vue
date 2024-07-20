@@ -65,7 +65,7 @@ import Form from '../components/form/Form.vue';
             $
           </Field>
           <Field id="stflbi" color="theme-light" middle expanded />
-          <Field id="sf" type="select" color="theme-light" right >
+          <Field id="sf" type="select" color="theme-light" right outerStyle="w-1/5" >
             <option>Select Field</option>
             <option>Option 1</option>
             <option>Option 2</option>

@@ -24,6 +24,9 @@
       type: [String, Number, Array, null],
       required: true,
     },
+    outerStyle: {
+      type: [String, Array],
+    },
     middle: Boolean,
     right: Boolean,
     left: Boolean,
@@ -78,6 +81,7 @@
       borderPosition.value,
       border[borderColor],
       borderRadius.value,
+      props.outerStyle,
     ];
   })
 

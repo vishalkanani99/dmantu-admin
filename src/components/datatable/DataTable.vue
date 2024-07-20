@@ -160,6 +160,7 @@ onMounted(() => {
         v-model="config.limit" 
         type="select"
         color="white"
+        outerStyle="w-1/6"
         @input="updatePage"
       >
         <option v-for="value in limitOptions" :key="value" :value="value">{{ value }}</option>
@@ -180,6 +181,7 @@ onMounted(() => {
           type="select" 
           color="white"
           right
+          outerStyle="w-1/2"
           @input="updatePage"
         >
           <option value="">Select Column</option>
