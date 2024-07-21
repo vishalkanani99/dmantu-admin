@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { text } from '../../color';
 import FieldHelp from './FieldHelp.vue';
 
 const props = defineProps({
@@ -12,6 +13,17 @@ const props = defineProps({
   horizontal: Boolean,
   multiFields: Boolean,
 });
+
+const labelStyle = computed(() => {
+  const style = ['inline-block font-bold mb-2'];
+
+  if(props.error || props.errors || props.success) {
+    let color = props.error || props.errors ? 'danger' : 'success';
+    style.push(text[color]);
+  }
+
+  return style;
+});
 </script>
 <template>
   <div 
@@ -22,7 +34,7 @@ const props = defineProps({
     <label 
       v-if="label" 
       :for="labelFor" 
-      class="inline-block font-bold mb-2"
+      :class="labelStyle"
     >
       {{ label }}
     </label>
@@ -30,10 +42,11 @@ const props = defineProps({
       :class="[
         {'md:col-span-4': horizontal},
         {'md:col-start-2': horizontal && label},
-        {'flex items-center': multiFields},
       ]"
     >  
-      <slot></slot>
+      <div :class="{'flex items-center': multiFields}" >
+        <slot></slot>
+      </div>
       <FieldHelp :text="error" type="error" class="has-error"/>
       <FieldHelp v-for="(err, i) in errors" :key="i" :text="err" type="error" class="has-error"/>
       <FieldHelp :text="success" type="success" class="has-success"/>

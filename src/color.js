@@ -76,7 +76,19 @@ const text = {
     'success': 'hover:text-green-600',
     'warning': 'hover:text-yellow-600',
     'danger': 'hover:text-red-600',
-  }
+  },
+  placeholder: {
+    'theme-dark': 'placeholder:text-theme-900',
+    'theme': 'placeholder:text-theme-600',
+    'theme-light': 'placeholder:text-theme-100',
+    'white': 'placeholder:text-white',
+    'black': 'placeholder:text-black',
+    'gray': 'placeholder:text-gray-600',
+    'info': 'placeholder:text-blue-600',
+    'success': 'placeholder:text-green-600',
+    'warning': 'placeholder:text-yellow-600',
+    'danger': 'placeholder:text-red-600',
+  },
 }
 
 const getDefaultTextStyle = (color = 'theme') => {

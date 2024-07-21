@@ -22,7 +22,6 @@
     },
     modelValue: {
       type: [String, Number, Array, null],
-      required: true,
     },
     outerStyle: {
       type: [String, Array],
@@ -31,28 +30,32 @@
     right: Boolean,
     left: Boolean,
     rounded: Boolean,
-    color: String,
+    color: {
+      type: String,
+      default: 'theme',
+    },
     ringColor: String,
     borderColor: String,
     textColor: String,
+    placeholderColor: String,
     label: String,
     buttonIcon: String,
     inputLeftIcon: String,
     inputRightIcon: String,
     outline: Boolean,
     expanded: Boolean,
+    hasError: Boolean,
+    hasSuccess: Boolean,
   });
 
   const emit = defineEmits(['update:modelValue', 'buttonClick', 'leftIconClick', 'rightIconClick']);
-
-  const color = ref(props.color ?? 'theme');
 
   const modelValue = computed({
     get: () => props.modelValue,
     set: (value) => {
       emit('update:modelValue', value);
     }
-  })
+  });
 
   const borderRadius = computed(() => {
     return [
@@ -61,7 +64,7 @@
       { 'rounded-l-none' : props.right },
       props.rounded ? 'rounded-full' : 'rounded-md',
     ];
-  })
+  });
 
   const borderPosition = computed(() => {
     return [
@@ -70,34 +73,57 @@
       { 'border-t border-b border-r' : props.right },
       { 'border' : !props.middle && !props.left && !props.right },
     ];
-  })
+  });
 
+  const colors = computed(() => {
+    const colors = {
+      text: '',
+      inner: [],
+      outer: '',
+    };
+
+    if(props.hasError || props.hasSuccess) {
+      let color = props.hasError ? 'danger' : 'success';
+      let background = props.hasError ? 'bg-red-50' : 'bg-green-50';
+
+      colors.text = text[color];
+      colors.inner = [
+        ring.focus[color], 
+        background,
+        text.placeholder[color],
+      ];
+      colors.outer = border[color];
+      return colors;
+    }
+
+    colors.text = text[props.textColor] ?? getDefaultTextStyle(props.color).textColor;
+    colors.inner = [
+      ring.focus[props.ringColor ?? 'info'],
+      backgroundColor[props.color],
+      text.placeholder[props.placeholderColor],
+    ];
+    colors.outer = border[props.borderColor ?? 'theme'];
+    return colors;
+  });
+  
   const outerStyle = computed(() => {
-    const borderColor = props.borderColor ?? 'theme';
     return [
       { 'relative' : props.inputLeftIcon || props.inputRightIcon },
       'flex items-center',
       { 'grow' : props.expanded },
       borderPosition.value,
-      border[borderColor],
+      colors.value.outer,
       borderRadius.value,
       props.outerStyle,
     ];
-  })
-
-  const textStyle = computed(() => {
-    const defaultTextStyle = getDefaultTextStyle(color.value);
-    return text[props.textColor] ?? defaultTextStyle.textColor;
-  })
+  });
 
   const defaultStyle = computed(() => {
-    const ringcolor = props.ringColor ?? 'info';
-    const btnStyle = getButtonStyle(color.value, props.outline);
-
+    const btnStyle = getButtonStyle(props.color, props.outline);
     let padding = ['pl-3 pr-3 py-2'];
 
     let style = [
-      'flex items-center text-xs focus:outline-none focus:z-10',
+      'flex items-center text-xs focus:outline-none focus:z-[1]',
       props.type === 'textarea' ? 'h-24' : 'h-10',
       borderRadius.value,
     ];
@@ -112,24 +138,19 @@
     if(props.inputRightIcon) {
       padding.push('!pr-10');
     }
-
-    let colors = [ 
-      ring.focus[ringcolor], 
-      backgroundColor[color.value],
-      textStyle.value,
-    ];
     
     return [
       'w-full border-0 focus:ring-2',
       style,
-      padding, 
-      ...colors,
+      padding,
+      ...colors.value.inner,
+      colors.value.text,
     ];
-  })
+  });
 
   const getInputIconStyle = (position) => {
-    return ['absolute inline-flex justify-center items-center w-10 h-10 z-20', position, textStyle.value];
-  }
+    return ['absolute inline-flex justify-center items-center w-10 h-10 z-[2] cursor-pointer', position, colors.value.text];
+  };
 </script>
 <template>
   <div :class="outerStyle">

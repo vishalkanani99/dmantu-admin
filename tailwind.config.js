@@ -17,6 +17,16 @@ export default {
         'xs': '360px',
         ...defaultTheme.screens,
       },
+      keyframes: {
+        "shake": {
+          '0%, 100%': { transform: 'translateZ( 0 )' },
+          '10%, 30%, 50%, 70%, 90%': { transform: 'translate3d(-10px,0,0)' },
+          '20%, 40%, 60%, 80%': { transform: 'translate3d(10px,0,0)' },
+        }
+      },
+      animation: {  
+        'shake': 'shake .5s ease-in-out',
+      },
     },
   },
   plugins: [
