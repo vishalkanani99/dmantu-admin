@@ -12,13 +12,9 @@ const props = defineProps({
     default: "checkbox",
     validator: (value) => ["checkbox", "radio", "switch"].includes(value),
   },
-  label: {
-    type: String,
-    default: null,
-  },
+  label: String,
   modelValue: {
     type: [Array, String, Number, Boolean, Object],
-    default: null,
   },
 });
 
@@ -44,6 +40,6 @@ const inputType = computed(() =>
       :type="inputType"
     />
     <span class="check" />
-    <span :class="{ 'pl-2': label }">{{ label }}</span>
+    <span v-if="label" :class="{ 'label pl-2': label }">{{ label }}</span>
   </label>
 </template>

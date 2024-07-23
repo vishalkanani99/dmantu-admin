@@ -5,19 +5,27 @@
     @apply inline-flex items-center cursor-pointer relative;
   }
 
-  .checkbox input[type=checkbox], .radio input[type=radio], .switch input[type=checkbox] {
+  .checkbox input[type=checkbox], 
+  .radio input[type=radio], 
+  .switch input[type=checkbox] {
     @apply absolute left-0 opacity-0 -z-10;
   }
 
-  .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check, .switch input[type=checkbox]+.check {
+  .checkbox input[type=checkbox]+.check, 
+  .radio input[type=radio]+.check, 
+  .switch input[type=checkbox]+.check {
     @apply border-theme-900 border transition-colors duration-200 bg-theme-100;
   }
 
-  .checkbox input[type=checkbox]:focus+.check, .radio input[type=radio]:focus+.check, .switch input[type=checkbox]:focus+.check {
+  .checkbox input[type=checkbox]:focus+.check, 
+  .radio input[type=radio]:focus+.check, 
+  .switch input[type=checkbox]:focus+.check {
     @apply ring ring-theme-300;
   }
 
-  .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check {
+  .checkbox input[type=checkbox]+.check, 
+  .radio input[type=radio]+.check,
+  .switch input[type=checkbox]+.check:before {
     @apply block w-5 h-5;
   }
 
@@ -25,24 +33,24 @@
     @apply rounded;
   }
 
-  .switch input[type=checkbox]+.check {
-    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-theme-100;
-  }
-
-  .radio input[type=radio]+.check, .switch input[type=checkbox]+.check, .switch input[type=checkbox]+.check:before {
+  .radio input[type=radio]+.check, 
+  .switch input[type=checkbox]+.check, 
+  .switch input[type=checkbox]+.check:before {
     @apply rounded-full;
   }
 
-  .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
+  .checkbox input[type=checkbox]:checked+.check, 
+  .radio input[type=radio]:checked+.check {
     @apply bg-no-repeat bg-center border-4;
   }
 
-  .checkbox input[type=checkbox]:checked:disabled+.check, .radio input[type=radio]:checked:disabled+.check {
-    @apply opacity-70 cursor-not-allowed;
-  }
-
-  .checkbox input[type=checkbox]:disabled+.check, .radio input[type=radio]:disabled+.check {
-    @apply opacity-70 bg-theme-100 cursor-not-allowed;
+  .checkbox input[type=checkbox]:disabled+.check, 
+  .checkbox input[type=checkbox]:disabled+.check+.label, 
+  .switch input[type=checkbox]:disabled+.check, 
+  .switch input[type=checkbox]:disabled+.check+.label,
+  .radio input[type=radio]:disabled+.check, 
+  .radio input[type=radio]:disabled+.check+.label {
+    @apply opacity-30 cursor-not-allowed;
   }
 
   .checkbox input[type=checkbox]:checked+.check {
@@ -53,17 +61,18 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z' /%3E%3C/svg%3E");
   }
 
-  .switch input[type=checkbox]:checked+.check, .checkbox input[type=checkbox]:checked+.check, .radio input[type=radio]:checked+.check {
+  .switch input[type=checkbox]:checked+.check, 
+  .checkbox input[type=checkbox]:checked+.check, 
+  .radio input[type=radio]:checked+.check {
     @apply bg-theme-600 border-theme-600;
   }
 
-  .switch input[type=checkbox]+.check:before {
-    content: '';
-    @apply block w-5 h-5 bg-theme-100 border border-theme-900;
+  .switch input[type=checkbox]+.check {
+    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-theme-100 before:content-[''] before:bg-theme-100 before:border before:border-theme-900;
   }
 
   .switch input[type=checkbox]:checked+.check:before {
-    transform: translate3d(110%, 0 ,0);
-    @apply border-theme-600;
+    @apply translate-x-[110%] border-theme-600;
   }
+
 }

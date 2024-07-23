@@ -12,6 +12,8 @@ const props = defineProps({
   errors: Array,
   horizontal: Boolean,
   multiFields: Boolean,
+  optionsGroup: Boolean,
+  verticalLayout: Boolean,
 });
 
 const labelStyle = computed(() => {
@@ -44,7 +46,14 @@ const labelStyle = computed(() => {
         {'md:col-start-2': horizontal && label},
       ]"
     >  
-      <div :class="{'flex items-center': multiFields}" >
+      <div :class="[ 
+          { 'flex': multiFields || optionsGroup }, 
+          { 'items-center': multiFields || ( optionsGroup && !verticalLayout ) }, 
+          { 'space-x-4' : optionsGroup && !verticalLayout },
+          { 'space-y-4' : optionsGroup && verticalLayout },
+          { 'flex-col' : verticalLayout },  
+        ]" 
+      >
         <slot></slot>
       </div>
       <FieldHelp :text="error" type="error" class="has-error"/>

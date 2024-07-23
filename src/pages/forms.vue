@@ -16,6 +16,7 @@ import Section from '../components/section/Section.vue';
 import FieldGroup from '../components/form/FieldGroup.vue';
 import Field from '../components/form/Field.vue';
 import Form from '../components/form/Form.vue';
+import FieldOption from '../components/form/FieldOption.vue';
 
 const form = reactive({
   field1: '',
@@ -29,6 +30,9 @@ const form = reactive({
   field9: '',
   name: '',
   pwd: '',
+  checkbox: '2',
+  checkboxes: [ '2', '3' ],
+  file: '',
 });
 
 const showPassword = shallowRef(false);
@@ -185,7 +189,27 @@ const isFormValid = shallowRef(false);
           />
         </FieldGroup>
         <FieldGroup label="File Upload" help="Maximum file size must be 2mb" horizontal >
-          <Field v-model="form.field7" type="file" color="theme-light" />
+          <Field v-model="form.file" type="file" color="theme-light" />
+        </FieldGroup>
+        <FieldGroup label="Checkbox inputs" optionsGroup horizontal >
+          <FieldOption v-model="form.checkbox" label="Option 1" value="1" />
+          <FieldOption v-model="form.checkbox" label="Option 2" value="2" disabled />
+          <FieldOption v-model="form.checkbox" label="Option 2" value="3" />
+        </FieldGroup>
+        <FieldGroup label="Checkbox inputs" help="Vertical layout" optionsGroup verticalLayout horizontal >
+          <FieldOption v-model="form.checkboxes" label="Option 1" value="1" />
+          <FieldOption v-model="form.checkboxes" label="Option 2" value="2" />
+          <FieldOption v-model="form.checkboxes" label="Option 2" value="3" />
+        </FieldGroup>
+        <FieldGroup label="Radio inputs" optionsGroup horizontal >
+          <FieldOption v-model="form.checkbox" type="radio" name="radio" label="Radio 1" value="1" />
+          <FieldOption v-model="form.checkbox" type="radio" name="radio" label="Radio 2" value="2" />
+          <FieldOption v-model="form.checkbox" type="radio" name="radio" label="Radio 2" value="3" disabled />
+        </FieldGroup>
+        <FieldGroup label="Switch inputs" help="Vertical layout" optionsGroup verticalLayout horizontal >
+          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 1" value="1" disabled />
+          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 2" value="2" />
+          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 2" value="3" />
         </FieldGroup>
       </Form>
       <Form
