@@ -1,5 +1,7 @@
 <script setup>
   import { computed, ref } from 'vue';
+  import { mdiUpload } from '@mdi/js';
+
   import { 
     border, 
     ring, 
@@ -21,7 +23,7 @@
       default: 'text',
     },
     modelValue: {
-      type: [String, Number, Array, null],
+      type: [String, Number, Array, FileList, File, Object, null],
     },
     outerStyle: {
       type: [String, Array],
@@ -48,7 +50,9 @@
     hasSuccess: Boolean,
   });
 
-  const emit = defineEmits(['update:modelValue', 'buttonClick', 'leftIconClick', 'rightIconClick']);
+  const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick']);
+
+  const selectedFiles = ref();
 
   const modelValue = computed({
     get: () => props.modelValue,
@@ -107,15 +111,21 @@
   });
   
   const outerStyle = computed(() => {
+    let style = [ 'relative flex items-center' ];
+
+    if( props.type === 'file' ) {
+      return style;
+    }
+
     return [
-      { 'relative' : props.inputLeftIcon || props.inputRightIcon },
-      'flex items-center',
+      ...style,
       { 'grow' : props.expanded },
       borderPosition.value,
       colors.value.outer,
       borderRadius.value,
       props.outerStyle,
     ];
+
   });
 
   const defaultStyle = computed(() => {
@@ -128,8 +138,13 @@
       borderRadius.value,
     ];
 
-    if(props.type === 'button') {
-      return [style, padding, ...btnStyle];
+    if(props.type === 'button' || props.type === 'file') {
+      return [
+        style, 
+        padding, 
+        ...btnStyle, 
+        { 'cursor-pointer' : props.type === 'file' }
+      ];
     }
 
     if(props.inputLeftIcon) {
@@ -151,6 +166,16 @@
   const getInputIconStyle = (position) => {
     return ['absolute inline-flex justify-center items-center w-10 h-10 z-[2] cursor-pointer', position, colors.value.text];
   };
+
+  const fileInput = (event) => {
+    modelValue.value = event.target.files;
+
+    selectedFiles.value = '';
+    for( let file of  event.target.files ) {
+      selectedFiles.value = selectedFiles.value + file.name + ', ';
+    }
+    selectedFiles.value = selectedFiles.value.substring(0, selectedFiles.value.length - 2);
+  }
 </script>
 <template>
   <div :class="outerStyle">
@@ -168,16 +193,37 @@
       <slot></slot>
     </div>
     <Button 
-      v-else-if="type === 'button'"
+      v-else-if="type === 'button' || type === 'link'"
       v-bind="$attrs"
+      :type="type"
       :label="label"
       :class="defaultStyle"
       :iconPath="buttonIcon"
       :color="color"
-      isPlain
-      @click="$emit('buttonClick')" >
+      isPlain 
+    >
       <slot></slot>
     </Button>
+    <template v-else-if="type === 'file'">
+      <label>
+        <Field
+          type="link"
+          :label="label ?? 'Upload'"
+          :buttonIcon="buttonIcon ?? mdiUpload"
+          :color="color"
+          :left="Boolean(selectedFiles)"
+        />
+        <input 
+          v-bind="$attrs" 
+          type="file" 
+          class="absolute top-0 left-0 w-full h-full opacity-0 outline-none cursor-pointer -z-[1]"
+          @change="fileInput" 
+        />
+      </label>
+      <Field v-if="selectedFiles" type="static" right>
+        <span class="text-etext-ellipsis">{{ selectedFiles }}</span>
+      </Field>
+    </template>
     <template v-else>
       <Icon 
         v-if="inputLeftIcon"

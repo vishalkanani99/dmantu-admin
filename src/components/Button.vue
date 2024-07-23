@@ -24,7 +24,7 @@ import { getButtonStyle } from '../color.js';
       return RouterLink;
     }
 
-    if( props.href ) {
+    if( props.href || props.type === 'link' ) {
       return 'a';
     }
 
@@ -57,7 +57,7 @@ const bindProps = computed(() => {
   if( props.href ) {
     componentProps.href = props.href;
   }
-  if( props.type ) {
+  if( typeOfComponent.value === 'button' ) {
     componentProps.type = props.type;
   }
   return componentProps;

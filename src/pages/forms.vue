@@ -184,6 +184,9 @@ const isFormValid = shallowRef(false);
             hasError 
           />
         </FieldGroup>
+        <FieldGroup label="File Upload" help="Maximum file size must be 2mb" horizontal >
+          <Field v-model="form.field7" type="file" color="theme-light" />
+        </FieldGroup>
       </Form>
       <Form
         title="Login Form"
