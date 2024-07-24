@@ -102,7 +102,7 @@
 
     colors.text = text[props.textColor] ?? getDefaultTextStyle(props.color).textColor;
     colors.inner = [
-      ring.focus[props.ringColor ?? 'info'],
+      ring.focus[props.ringColor ?? 'theme'],
       backgroundColor[props.color],
       text.placeholder[props.placeholderColor],
     ];
