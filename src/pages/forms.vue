@@ -199,7 +199,7 @@ const isFormValid = shallowRef(false);
         <FieldGroup label="Checkbox inputs" help="Vertical layout" optionsGroup verticalLayout horizontal >
           <FieldOption v-model="form.checkboxes" label="Option 1" value="1" />
           <FieldOption v-model="form.checkboxes" label="Option 2" value="2" />
-          <FieldOption v-model="form.checkboxes" label="Option 2" value="3" />
+          <FieldOption v-model="form.checkboxes" color="success" label="Option 2" value="3" />
         </FieldGroup>
         <FieldGroup label="Radio inputs" optionsGroup horizontal >
           <FieldOption v-model="form.checkbox" type="radio" name="radio" label="Radio 1" value="1" />
@@ -207,9 +207,9 @@ const isFormValid = shallowRef(false);
           <FieldOption v-model="form.checkbox" type="radio" name="radio" label="Radio 2" value="3" disabled />
         </FieldGroup>
         <FieldGroup label="Switch inputs" help="Vertical layout" optionsGroup verticalLayout horizontal >
-          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 1" value="1" disabled />
-          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 2" value="2" />
-          <FieldOption v-model="form.checkboxes" type="switch" name="radio" label="Switch 2" value="3" />
+          <FieldOption v-model="form.checkboxes" type="switch" color="info" label="Switch 1" value="1" disabled />
+          <FieldOption v-model="form.checkboxes" type="switch" color="danger" label="Switch 2" value="2" />
+          <FieldOption v-model="form.checkboxes" type="switch" color="warning" label="Switch 2" value="3" />
         </FieldGroup>
       </Form>
       <Form

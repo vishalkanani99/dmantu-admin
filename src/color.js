@@ -1,3 +1,5 @@
+import { before } from "lodash";
+
 const background = {
   'theme-dark': 'bg-theme-900',
   'theme': 'bg-theme-600',
@@ -9,6 +11,30 @@ const background = {
   'success': 'bg-green-600',
   'warning': 'bg-yellow-600',
   'danger': 'bg-red-600',
+  'before': {
+    'theme-dark': 'before:bg-theme-900',
+    'theme': 'before:bg-theme-600',
+    'theme-light': 'before:bg-theme-100',
+    'white': 'before:bg-white',
+    'black': 'before:bg-black',
+    'gray': 'before:bg-gray-600',
+    'info': 'before:bg-blue-600',
+    'success': 'before:bg-green-600',
+    'warning': 'before:bg-yellow-600',
+    'danger': 'before:bg-red-600',
+  },
+  'peer-checked': {
+    'theme-dark': 'peer-checked:bg-theme-900',
+    'theme': 'peer-checked:bg-theme-600',
+    'theme-light': 'peer-checked:bg-theme-100',
+    'white': 'peer-checked:bg-white',
+    'black': 'peer-checked:bg-black',
+    'gray': 'peer-checked:bg-gray-600',
+    'info': 'peer-checked:bg-blue-600',
+    'success': 'peer-checked:bg-green-600',
+    'warning': 'peer-checked:bg-yellow-600',
+    'danger': 'peer-checked:bg-red-600',
+  },
   hover: function(color, isLight = false) {
     let bg =  {
       'theme-dark': isLight ? 'hover:bg-theme-900/[0.9]' : 'hover:bg-theme-900',
@@ -37,6 +63,42 @@ const border = {
   'success': 'border-green-600',
   'warning': 'border-yellow-600',
   'danger': 'border-red-600',
+  before: {
+    'theme-dark': 'before:border-theme-900',
+    'theme': 'before:border-theme-600',
+    'theme-light': 'before:border-theme-100',
+    'white': 'before:border-white',
+    'black': 'before:border-black',
+    'gray': 'before:border-gray-600',
+    'info': 'before:border-blue-600',
+    'success': 'before:border-green-600',
+    'warning': 'before:border-yellow-600',
+    'danger': 'before:border-red-600',
+  },
+  'peer-checked': {
+    'theme-dark': 'peer-checked:border-theme-900',
+    'theme': 'peer-checked:border-theme-600',
+    'theme-light': 'peer-checked:border-theme-100',
+    'white': 'peer-checked:border-white',
+    'black': 'peer-checked:border-black',
+    'gray': 'peer-checked:border-gray-600',
+    'info': 'peer-checked:border-blue-600',
+    'success': 'peer-checked:border-green-600',
+    'warning': 'peer-checked:border-yellow-600',
+    'danger': 'peer-checked:border-red-600',
+  },
+  'peer-checked:before': {
+    'theme-dark': 'peer-checked:before:border-theme-900',
+    'theme': 'peer-checked:before:border-theme-600',
+    'theme-light': 'peer-checked:before:border-theme-100',
+    'white': 'peer-checked:before:border-white',
+    'black': 'peer-checked:before:border-black',
+    'gray': 'peer-checked:before:border-gray-600',
+    'info': 'peer-checked:before:border-blue-600',
+    'success': 'peer-checked:before:border-green-600',
+    'warning': 'peer-checked:before:border-yellow-600',
+    'danger': 'peer-checked:before:border-red-600',
+  }
 }
 
 const ring = {
@@ -51,6 +113,18 @@ const ring = {
     'success': 'focus:ring-green-600',
     'warning': 'focus:ring-yellow-600',
     'danger': 'focus:ring-red-600',
+  },
+  'peer-focus': {
+    'theme-dark': 'peer-focus:ring-theme-900/[0.5]',
+    'theme': 'peer-focus:ring-theme-600/[0.5]',
+    'theme-light': 'peer-focus:ring-theme-100/[0.5]',
+    'white': 'peer-focus:ring-white/[0.5]',
+    'black': 'peer-focus:ring-black/[0.5]',
+    'gray': 'peer-focus:ring-gray-600/[0.5]',
+    'info': 'peer-focus:ring-blue-600/[0.5]',
+    'success': 'peer-focus:ring-green-600/[0.5]',
+    'warning': 'peer-focus:ring-yellow-600/[0.5]',
+    'danger': 'peer-focus:ring-red-600/[0.5]',
   }
 }
 
