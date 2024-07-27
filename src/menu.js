@@ -1,10 +1,9 @@
 import {
   mdiHome, 
   mdiRhombusSplit, 
-  mdiTable, 
-  mdiCartOutline, 
-  mdiFileDocumentMultipleOutline,
-  mdiFormSelect, 
+  mdiTable,
+  mdiFormSelect,
+  mdiButtonCursor, 
 } from '@mdi/js';
 
 const menu = [
@@ -12,16 +11,6 @@ const menu = [
     label: 'Dashboard',
     to: '/',
     iconPath: mdiHome,
-  },
-  {
-    label: 'Components',
-    to: '/components',
-    iconPath: mdiRhombusSplit,
-  },
-  {
-    label: 'eCommerce',
-    to: '/ecommerce',
-    iconPath: mdiCartOutline,
   },
   {
     label: 'Forms',
@@ -34,19 +23,14 @@ const menu = [
     iconPath: mdiTable,
   },
   {
-    label: 'Pages',
+    label: 'Components',
     to: '',
-    iconPath: mdiFileDocumentMultipleOutline,
+    iconPath: mdiRhombusSplit,
     items: [
       {
-        label: 'Dashboard',
-        to: '/',
-        iconPath: mdiHome,
-      },
-      {
-        label: 'Components',
-        to: '/components',
-        iconPath: mdiRhombusSplit,
+        label: 'Buttons',
+        to: '/buttons',
+        iconPath: mdiButtonCursor,
       },
     ]
   }

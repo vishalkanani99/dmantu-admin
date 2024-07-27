@@ -1,5 +1,3 @@
-import { before } from "lodash";
-
 const background = {
   'theme-dark': 'bg-theme-900',
   'theme': 'bg-theme-600',
@@ -37,16 +35,16 @@ const background = {
   },
   hover: function(color, isLight = false) {
     let bg =  {
-      'theme-dark': isLight ? 'hover:bg-theme-900/[0.9]' : 'hover:bg-theme-900',
-      'theme': isLight ? 'hover:bg-theme-600/[0.9]' : 'hover:bg-theme-600',
-      'theme-light': isLight ? 'hover:bg-theme-100/[0.9]' : 'hover:bg-theme-100',
-      'white': isLight ? 'hover:bg-white/[0.9]' : 'hover:bg-white',
-      'black': isLight ? 'hover:bg-black/[0.9]' : 'hover:bg-black',
-      'gray': isLight ? 'hover:bg-gray-600/[0.9]' : 'hover:bg-gray-600',
-      'info': isLight ? 'hover:bg-blue-600/[0.9]' :'hover:bg-blue-600',
-      'success': isLight ? 'hover:bg-green-600/[0.9]' : 'hover:bg-green-600',
-      'warning': isLight ? 'hover:bg-yellow-600/[0.9]' : 'hover:bg-yellow-600',
-      'danger': isLight ? 'hover:bg-red-600/[0.9]' : 'hover:bg-red-600',
+      'theme-dark': isLight ? 'hover:bg-theme-700' : 'hover:bg-theme-900',
+      'theme': isLight ? 'hover:bg-theme-500' : 'hover:bg-theme-600',
+      'theme-light': isLight ? 'hover:bg-theme-50' : 'hover:bg-theme-100',
+      'white': isLight ? 'hover:bg-gray-100' : 'hover:bg-white',
+      'black': isLight ? 'hover:bg-slate-700' : 'hover:bg-black',
+      'gray': isLight ? 'hover:bg-gray-500' : 'hover:bg-gray-600',
+      'info': isLight ? 'hover:bg-blue-500' :'hover:bg-blue-600',
+      'success': isLight ? 'hover:bg-green-500' : 'hover:bg-green-600',
+      'warning': isLight ? 'hover:bg-yellow-500' : 'hover:bg-yellow-600',
+      'danger': isLight ? 'hover:bg-red-500' : 'hover:bg-red-600',
     }
     return bg[color];
   }
@@ -103,29 +101,29 @@ const border = {
 
 const ring = {
   focus: {
-    'theme-dark': 'focus:ring-theme-900',
-    'theme': 'focus:ring-theme-600',
-    'theme-light': 'focus:ring-theme-100',
-    'white': 'focus:ring-white',
-    'black': 'focus:ring-black',
-    'gray': 'focus:ring-gray-600',
-    'info': 'focus:ring-blue-600',
-    'success': 'focus:ring-green-600',
-    'warning': 'focus:ring-yellow-600',
-    'danger': 'focus:ring-red-600',
+    'theme-dark': 'focus:ring-theme-500',
+    'theme': 'focus:ring-theme-300',
+    'theme-light': 'focus:ring-theme-200',
+    'white': 'focus:ring-gray-100',
+    'black': 'focus:ring-slate-400',
+    'gray': 'focus:ring-gray-300',
+    'info': 'focus:ring-blue-300',
+    'success': 'focus:ring-green-300',
+    'warning': 'focus:ring-yellow-300',
+    'danger': 'focus:ring-red-300',
   },
   'peer-focus': {
-    'theme-dark': 'peer-focus:ring-theme-900/[0.5]',
-    'theme': 'peer-focus:ring-theme-600/[0.5]',
-    'theme-light': 'peer-focus:ring-theme-100/[0.5]',
-    'white': 'peer-focus:ring-white/[0.5]',
-    'black': 'peer-focus:ring-black/[0.5]',
-    'gray': 'peer-focus:ring-gray-600/[0.5]',
-    'info': 'peer-focus:ring-blue-600/[0.5]',
-    'success': 'peer-focus:ring-green-600/[0.5]',
-    'warning': 'peer-focus:ring-yellow-600/[0.5]',
-    'danger': 'peer-focus:ring-red-600/[0.5]',
-  }
+    'theme-dark': 'peer-focus:ring-theme-500',
+    'theme': 'peer-focus:ring-theme-300',
+    'theme-light': 'peer-focus:ring-theme-200',
+    'white': 'peer-focus:ring-gray-100',
+    'black': 'peer-focus:ring-slate-400',
+    'gray': 'peer-focus:ring-gray-300',
+    'info': 'peer-focus:ring-blue-300',
+    'success': 'peer-focus:ring-green-300',
+    'warning': 'peer-focus:ring-yellow-300',
+    'danger': 'peer-focus:ring-red-300',
+  },
 }
 
 const text = {
@@ -190,7 +188,7 @@ const getDefaultTextStyle = (color = 'theme') => {
   }
 }
 
-const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'border', ringWidth ='focus:ring-1') => {
+const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'border', ringWidth ='focus:ring') => {
   
   let defaultTextStyle = getDefaultTextStyle(color);
   

@@ -155,7 +155,7 @@
     }
     
     return [
-      'w-full border-0 focus:ring-2',
+      'w-full border-0 focus:ring',
       style,
       padding,
       ...colors.value.inner,
