@@ -25,12 +25,16 @@
 
   const defaultStyle = computed(() => {
     const textStyle = getDefaultTextStyle(props.color);
+    const backgroundStyle = [
+      isExactActive.value && props.to
+        ? [ background.active[props.color], textStyle.color, 'font-bold' ]
+        : [ background[props.color], background.hover(props.color, true), textStyle.color ]
+    ]; 
+    console.log(props.color, textStyle)
     const style = [
       {'relative' : props.hasMenu},
       'flex items-center px-4 py-2 select-none cursor-pointer',
-      isExactActive.value && props.to
-        ? [background[props.color], textStyle.textColor] 
-          : [background.hover(props.color), textStyle.textColorOnHover],
+      ...backgroundStyle,
       {'justify-center' : props.isCompact},
       { 'w-full' : !props.to }
     ];

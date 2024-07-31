@@ -70,12 +70,13 @@ function close() {
       >
         <template #default="{ item }">
           <CollapsibleMenu 
-            v-if="!isCompact && item.items" 
+            v-if="!isCompact && item.items"
+            color="theme-dark" 
             :item="item"
           />
           <MenuListItem
             v-if="isCompact && item.items"
-            :color="color" 
+            color="theme-dark" 
             :label="item.label" 
             :iconPath="item.iconPath"
             :to="item.to"

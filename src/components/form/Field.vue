@@ -100,7 +100,7 @@
       return colors;
     }
 
-    colors.text = text[props.textColor] ?? getDefaultTextStyle(props.color).textColor;
+    colors.text = text[props.textColor] ?? getDefaultTextStyle(props.color).color;
     colors.inner = [
       ring.focus[props.ringColor ?? 'theme'],
       backgroundColor[props.color],

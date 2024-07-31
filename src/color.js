@@ -33,6 +33,18 @@ const background = {
     'warning': 'peer-checked:bg-yellow-600',
     'danger': 'peer-checked:bg-red-600',
   },
+  'active': {
+    'theme-dark': 'bg-theme-700',
+    'theme': 'bg-theme-500',
+    'theme-light': 'bg-theme-200',
+    'white': 'bg-slate-200',
+    'black': 'bg-slate-700',
+    'gray': 'bg-gray-400',
+    'info': 'bg-blue-400',
+    'success': 'bg-green-400',
+    'warning': 'bg-yellow-400',
+    'danger': 'bg-red-400',
+  }, 
   hover: function(color, isLight = false) {
     let bg =  {
       'theme-dark': isLight ? 'hover:bg-theme-700' : 'hover:bg-theme-900',
@@ -163,44 +175,41 @@ const text = {
   },
 }
 
-const getDefaultTextStyle = (color = 'theme') => {
-  let textColor = text['white'];
-  let textColorOnHover = text.hover['white'];
-  
-  if( color === 'white' ) {
-    textColor = text['black'];
-    textColorOnHover = text.hover['black'];
+const isLightColor = ( color ) => color === 'white' || color === 'theme-light';
+const isThemetColor = ( color ) => color === 'theme' || color === 'theme-dark' || color === 'theme-light';
+
+const getDefaultTextStyle = (color) => {
+  const isStyleDark = !isLightColor(color);
+  const isThemeColor = isThemetColor(color);
+
+  let style = {
+    color: isStyleDark ? text['white'] : text['black'],
+    colorOnHover: isStyleDark ? text.hover['black'] : text.hover['white'],
+    colorOnActive: isStyleDark ? text['black'] : text['white'],
   }
 
-  if( color === 'theme-light' ) {
-    textColor = text['theme-dark'];
-    textColorOnHover = text.hover['theme-dark'];
+  if( isThemeColor ) {
+    style.color = isStyleDark ? text['theme-light'] : text['theme-dark'];
+    style.colorOnHover = isStyleDark ? text.hover['theme-dark'] : text.hover['theme-light'];
+    style.colorOnActive = isStyleDark ? text['theme-dark'] : text['theme-light'];
   }
 
-  if( color === 'theme-dark' || color === 'theme' ) {
-    textColor = text['theme-light'];
-    textColorOnHover = text.hover['theme-light'];
-  }
-
-  return {
-    textColor,
-    textColorOnHover,
-  }
+  return style
 }
 
 const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'border', ringWidth ='focus:ring') => {
   
-  let defaultTextStyle = getDefaultTextStyle(color);
-  
+  let textStyle = getDefaultTextStyle(color);
+  let borderStyle = borderWidth ? [ borderWidth, border[color]] : [];
+  let ringStyle = ringWidth ? [ ringWidth, ringWidth ? ring.focus[color] : ''] : [];
+
   let style = [
-    borderWidth,
-    border[color],
-    ringWidth,
-    ring.focus[color],
+    ...borderStyle,
+    ...ringStyle,
     isOutline ? 'bg-transparent' : background[color], 
-    isOutline ? text[color] : defaultTextStyle.textColor,
+    isOutline ? text[color] : textStyle.color,
     isOutline ? background.hover(color) : background.hover(color, true),
-    isOutline ? defaultTextStyle.textColorOnHover : '',
+    isOutline ? text.hover[color] : '',
   ];
   
   return style;

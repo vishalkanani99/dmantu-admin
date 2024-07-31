@@ -23,7 +23,7 @@ const props = defineProps({
   },
   ItemColor: {
     type: String,
-    default: 'theme',
+    default: 'theme-light',
   },
 });
 
@@ -58,7 +58,7 @@ const dropdownContainerStyle = computed(() => {
     'rounded-md',
     'mt-4',
     background[props.bgColor],
-    textStyle.textColor,
+    textStyle.color,
   ];
   return style;
 });

@@ -12,7 +12,7 @@
     },
     color: {
       type: String,
-      default: 'theme-light',
+      default: 'theme-dark',
     },
     isCompact: Boolean,
   });
