@@ -3,7 +3,8 @@ import {
   mdiRhombusSplit, 
   mdiTable,
   mdiFormSelect,
-  mdiButtonCursor, 
+  mdiButtonCursor,
+  mdiPageLayoutBody, 
 } from '@mdi/js';
 
 const menu = [
@@ -31,6 +32,11 @@ const menu = [
         label: 'Buttons',
         to: '/buttons',
         iconPath: mdiButtonCursor,
+      },
+      {
+        label: 'Cards',
+        to: '/cards',
+        iconPath: mdiPageLayoutBody,
       },
     ]
   }
