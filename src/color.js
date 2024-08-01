@@ -184,13 +184,13 @@ const getDefaultTextStyle = (color) => {
 
   let style = {
     color: isStyleDark ? text['white'] : text['black'],
-    colorOnHover: isStyleDark ? text.hover['black'] : text.hover['white'],
+    colorOnHover: isStyleDark ? text.hover['white'] : text.hover['black'],
     colorOnActive: isStyleDark ? text['black'] : text['white'],
   }
 
   if( isThemeColor ) {
     style.color = isStyleDark ? text['theme-light'] : text['theme-dark'];
-    style.colorOnHover = isStyleDark ? text.hover['theme-dark'] : text.hover['theme-light'];
+    style.colorOnHover = isStyleDark ? text.hover['theme-light'] : text.hover['theme-dark'];
     style.colorOnActive = isStyleDark ? text['theme-dark'] : text['theme-light'];
   }
 
@@ -209,7 +209,7 @@ const getButtonStyle = (color = 'theme', isOutline = false, borderWidth = 'borde
     isOutline ? 'bg-transparent' : background[color], 
     isOutline ? text[color] : textStyle.color,
     isOutline ? background.hover(color) : background.hover(color, true),
-    isOutline ? text.hover[color] : '',
+    isOutline ? textStyle.colorOnHover : '',
   ];
   
   return style;
