@@ -17,6 +17,7 @@ import { getButtonStyle } from '../color.js';
     outline: Boolean,
     rounded: Boolean,
     isPlain: Boolean,
+    disabled: Boolean,
   })
 
   const typeOfComponent = computed(() => {
@@ -44,6 +45,7 @@ import { getButtonStyle } from '../color.js';
       props.label ? 'px-3 py-2' : 'p-2',
       props.rounded ? 'rounded-full' : 'rounded-md',
       getButtonStyle(props.color, props.outline),
+      { 'focus:ring-0 opacity-30 cursor-not-allowed' : props.disabled },
     ];
     
     return style;
