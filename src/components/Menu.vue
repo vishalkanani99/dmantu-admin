@@ -16,16 +16,19 @@
     },
     isCompact: Boolean,
   });
+
+  const emit = defineEmits(['menuClick']);
 </script>
 <template>
-  <ul>
+  <ul class="m-2">
     <MenuList 
       v-for="(item, key) in items"
-      class="m-2" 
       :key="key"
       :item="item" 
       :color="color"
-      :isCompact="isCompact">
+      :isCompact="isCompact"
+      @menuClick="(value) => $emit('menuClick', value)"
+    >
 
       <template #item="{ item }">
         <slot :item="item"></slot>

@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 import { mdiDotsVertical } from '@mdi/js';
 import Button from '../Button.vue';
+import Dropdown from '../Dropdown.vue';
 import Card from './Card.vue';
 import FieldOption from '../form/FieldOption.vue';
 import Icon from '../Icon.vue';
@@ -15,6 +16,10 @@ const props = defineProps({
     type: String,
     default: 'white',
   },
+  menuItems: {
+    type: Array,
+    default: () => [],
+  },
   saveBtnLabel: {
     type: String,
     default: 'Save',
@@ -26,10 +31,11 @@ const props = defineProps({
   menuBtnIconPath: String,
   saveBtnIconPath: String,
   cancelBtnIconPath: String,
+  selectable: Boolean,
   noFooter: Boolean,
 });
 
-const emit = defineEmits(['menuClick']);
+const emit = defineEmits(['update:modelValue', 'menuClick']);
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -50,17 +56,31 @@ const modelValue = computed({
         <div class="overflow-hidden rounded-t-md h-64">
           <img v-if="imageSrc" class="h-full w-full" :src="imageSrc" />
         </div>
-        <div v-if="modelValue" class="absolute m-2 top-0 left-0">
-          <FieldOption v-model="modelValue" />
+        <div class="absolute m-2 top-0 left-0">
+          <slot name="topLeft">
+            <FieldOption
+              v-if="selectable" 
+              v-model="modelValue" 
+            />
+          </slot>
         </div>
-        <Button 
-          class="absolute m-2 top-0 right-0 h-8 w-8" 
-          :color="menuBtnColor"
-          rounded 
-          @click="$emit('menuClick')"
-        >
-          <Icon :path="menuBtnIconPath ?? mdiDotsVertical" size="16" />
-        </Button>
+        <div class="absolute m-2 top-0 right-0 h-8 w-8">
+          <slot name="topRight">
+            <Dropdown
+              v-if="menuItems.length"
+              :items="menuItems"
+              :bgColor="menuBtnColor"
+              :ItemColor="menuBtnColor"
+              @menuClick="(value) => $emit('menuClick', value)"
+            >
+              <template #selector>
+                <Button :color="menuBtnColor" rounded >
+                  <Icon :path="menuBtnIconPath ?? mdiDotsVertical" size="14" />
+                </Button>
+              </template>
+            </Dropdown>
+          </slot>
+        </div>
       </div>
     </template>
     <slot name="content">
@@ -69,7 +89,7 @@ const modelValue = computed({
           <h2 v-if="title">{{ title }}</h2>
           <h4 v-if="subTitle">{{ subTitle }}</h4>
         </span>
-        <slot name="right"></slot>
+        <slot name="titleBarSectionRight"></slot>
       </div>
       <slot></slot>
     </slot>

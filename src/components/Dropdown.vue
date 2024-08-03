@@ -1,11 +1,11 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted } from 'vue';
-import { mdiMenuDown, mdiMenuUp, mdiTriangle } from '@mdi/js';
+import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
 import { throttle } from 'lodash';
 import Icon from './Icon.vue';
 import Menu from './Menu.vue';
 import Button from './Button.vue';
-import { background, getDefaultTextStyle, text } from '../color';
+import { background, getDefaultTextStyle } from '../color';
 
 const props = defineProps({
   label: String,
@@ -27,6 +27,7 @@ const props = defineProps({
   },
 });
 
+const emit = defineEmits(['menuClick']);
 
 const dropdownRef = ref(null);
 const selectorRef = ref(null);
@@ -56,7 +57,7 @@ const dropdownContainerStyle = computed(() => {
     'z-10',
     'shadow-md',
     'rounded-md',
-    'mt-4',
+    'mt-2',
     background[props.bgColor],
     textStyle.color,
   ];
@@ -82,14 +83,16 @@ onMounted(() => {
         v-if="showList"
         ref="dropdownRef"
         :class="dropdownContainerStyle">
-        <Icon
-          :class="[
-            'absolute right-0 top-[-18px] mr-2', 
-            text[bgColor],
-          ]" 
-          :path="mdiTriangle" />
         <slot>
-          <Menu :items="items" :color="ItemColor" />
+          <Menu 
+            :items="items" 
+            :color="ItemColor"
+            @menuClick="(value) => $emit('menuClick', value)"
+          >
+            <template #default="{ item }">
+              <slot name="item" :item="item"></slot>
+            </template>
+          </Menu>
         </slot>
       </div>
     </Transition>
