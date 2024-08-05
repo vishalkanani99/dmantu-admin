@@ -64,7 +64,7 @@ const modelValue = computed({
             />
           </slot>
         </div>
-        <div class="absolute m-2 top-0 right-0 h-8 w-8">
+        <div class="absolute m-2 top-0 right-0">
           <slot name="topRight">
             <Dropdown
               v-if="menuItems.length"

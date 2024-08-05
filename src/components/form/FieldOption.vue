@@ -4,7 +4,9 @@ import {
   background,
   border,
   ring,
+  text,
 } from '../../color' 
+import Icon from '../Icon.vue';
 
 defineOptions({
   inheritAttrs: false
@@ -14,9 +16,9 @@ const props = defineProps({
   type: {
     type: String,
     default: "checkbox",
-    validator: (value) => ["checkbox", "radio", "switch"].includes(value),
+    validator: (value) => ["checkbox", "radio", "switch", "icon"].includes(value),
   },
-  bgColor: {
+  bgOnUncheck: {
     type: String,
     default: "white",
   },
@@ -24,6 +26,7 @@ const props = defineProps({
     type: String,
     default: "theme",
   },
+  iconPath: String,
   borderColor: String,
   label: String,
   modelValue: {
@@ -84,8 +87,12 @@ const mixedStyle = computed(() => {
 
   let style = [
     'transition-colors duration-200',
-    { 'block w-5 h-5': props.type !== 'switch' },
+    { 'block w-6 h-6': props.type !== 'switch' },
   ];
+
+  if( props.type === 'icon' ) {
+    return style;
+  }
 
   if( props.type === 'switch' ) {
     style = [
@@ -100,13 +107,22 @@ const mixedStyle = computed(() => {
 
 const backgroundStyle = computed(() => {
   const style = [
-    background[props.bgColor],
+    background[props.bgOnUncheck],
     background['peer-checked'][props.color],
-    props.type === 'switch' ? background['before'][props.bgColor] : '',
+    props.type === 'switch' ? background['before'][props.bgOnUncheck] : '',
     { 'peer-checked:bg-[url("/done.svg")]' : props.type === 'checkbox' },
     { 'peer-checked:bg-[url("/dot.svg")]' : props.type === 'radio' },
     { 'peer-checked:bg-cover peer-checked:bg-no-repeat peer-checked:bg-center' : props.type !== 'switch' },
   ];
+
+  if( props.type === 'icon' ) {
+    return [
+      'bg-transparent',
+      text[props.bgOnUncheck], 
+      text['peer-checked'][props.color],
+    ];
+  }
+
   return style;
 });
 
@@ -120,14 +136,38 @@ const inputType = computed(() =>
 </script>
 
 <template>
-  <label class="inline-flex items-center cursor-pointer relative">
+  <label class="inline-flex items-center cursor-pointer">
     <input
       v-model="modelValue"
       v-bind="$attrs"
       :type="inputType"
-      class="absolute left-0 opacity-0 -z-10 peer"
+      class="hidden opacity-0 peer"
     />
-    <span :class="[borderStyle, mixedStyle, backgroundStyle, disabledStyle]" />
-    <span v-if="label" :class="['pl-2', disabledStyle]">{{ label }}</span>
+    <Icon 
+      v-if="type === 'icon'" 
+      :class="[
+        mixedStyle,
+        backgroundStyle, 
+        disabledStyle
+      ]" 
+      :path="iconPath" 
+      size="24" 
+      isPlain
+    />
+    <span 
+      v-else 
+      :class="[
+        borderStyle, 
+        mixedStyle, 
+        backgroundStyle, 
+        disabledStyle
+      ]" 
+    />
+    <span 
+      v-if="label" 
+      :class="['pl-2', disabledStyle]"
+    >
+      {{ label }}
+    </span>
   </label>
 </template>

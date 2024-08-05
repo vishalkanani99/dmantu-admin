@@ -149,6 +149,18 @@ const text = {
   'success': 'text-green-600',
   'warning': 'text-yellow-600',
   'danger': 'text-red-600',
+  'peer-checked': {
+    'theme-dark': 'peer-checked:text-theme-900',
+    'theme': 'peer-checked:text-theme-600',
+    'theme-light': 'peer-checked:text-theme-100',
+    'white': 'peer-checked:text-white',
+    'black': 'peer-checked:text-black',
+    'gray': 'peer-checked:text-gray-600',
+    'info': 'peer-checked:text-blue-600',
+    'success': 'peer-checked:text-green-600',
+    'warning': 'peer-checked:text-yellow-600',
+    'danger': 'peer-checked:text-red-600',
+  },
   hover: {
     'theme-dark': 'hover:text-theme-900',
     'theme': 'hover:text-theme-600',

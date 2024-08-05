@@ -4,13 +4,15 @@ import {
   mdiFormSelect, 
   mdiCog,
   mdiPencil,
-  mdiTrashCan  
+  mdiTrashCan,
+  mdiHeart,  
 } from '@mdi/js';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
 import PictureCard from '../components/card/PictureCard.vue';
 import Button from '../components/Button.vue';
+import FieldOption from '../components/form/FieldOption.vue';
 
 </script>
 <template>
@@ -88,6 +90,28 @@ import Button from '../components/Button.vue';
             {label: 'Delete', iconPath: mdiTrashCan},
           ]"
         >
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type 
+            specimen book.
+          </p>
+        </PictureCard>
+        <PictureCard
+          title="Picture Card"
+          imageSrc="/images/cart.jpg"
+          :menuItems="[
+            {label: 'Edit', iconPath: mdiPencil}, 
+            {label: 'Delete', iconPath: mdiTrashCan},
+          ]"
+        >
+          <template #topRight>
+            <FieldOption 
+              type="icon"
+              color="danger"
+              :iconPath="mdiHeart" 
+            />
+          </template>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
