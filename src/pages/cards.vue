@@ -89,6 +89,7 @@ import FieldOption from '../components/form/FieldOption.vue';
             {label: 'Edit', iconPath: mdiPencil}, 
             {label: 'Delete', iconPath: mdiTrashCan},
           ]"
+          selectable
         >
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -100,10 +101,6 @@ import FieldOption from '../components/form/FieldOption.vue';
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"
-          :menuItems="[
-            {label: 'Edit', iconPath: mdiPencil}, 
-            {label: 'Delete', iconPath: mdiTrashCan},
-          ]"
         >
           <template #topRight>
             <FieldOption 
