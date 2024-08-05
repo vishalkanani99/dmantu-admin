@@ -4,7 +4,8 @@ import {
   mdiTable,
   mdiFormSelect,
   mdiButtonCursor,
-  mdiPageLayoutBody, 
+  mdiPageLayoutBody,
+  mdiLabel, 
 } from '@mdi/js';
 
 const menu = [
@@ -32,6 +33,11 @@ const menu = [
         label: 'Buttons',
         to: '/buttons',
         iconPath: mdiButtonCursor,
+      },
+      {
+        label: 'Chips',
+        to: '/chips',
+        iconPath: mdiLabel,
       },
       {
         label: 'Cards',
