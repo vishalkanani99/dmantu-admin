@@ -5,7 +5,8 @@ import {
   mdiFormSelect,
   mdiButtonCursor,
   mdiPageLayoutBody,
-  mdiLabel, 
+  mdiLabel,
+  mdiArrowCollapseVertical, 
 } from '@mdi/js';
 
 const menu = [
@@ -43,6 +44,11 @@ const menu = [
         label: 'Cards',
         to: '/cards',
         iconPath: mdiPageLayoutBody,
+      },
+      {
+        label: 'Accordions',
+        to: '/accordions',
+        iconPath: mdiArrowCollapseVertical,
       },
     ]
   }

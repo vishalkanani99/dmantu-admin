@@ -6,7 +6,8 @@
     content: {
       type: Array,
       default: () => [],
-    }, 
+    },
+    color: String, 
   });
 
   const CollapseRefs = ref([]);
@@ -14,8 +15,7 @@
     CollapseRefs.value.forEach((e) => {
       if( !(e.containerRef === value) ){
         if(e.expand) {
-          e.setHeight(0);
-          e.expand = false;
+          e.toggle();
         }
       }
     })
@@ -26,7 +26,9 @@
     ref="CollapseRefs"
     v-for="(data, index) in content"
     :key="index"
+    :title="data?.title"
     :expanded="data?.expanded"
+    :color="color"
     @toggle="close" 
   >
     <template #title>

@@ -9,6 +9,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  color: String,
   plain: Boolean,
   title: String,
 });
@@ -22,15 +23,14 @@ const expanding = shallowRef(false);
 
 const containerStyle = computed(() => {
   let style = [
-    { 'border-2 shadow-md block' : !props.plain }
+    { 'border block' : !props.plain }
   ];
   return style;
 });
 
 const handlerStyle = computed(() => {
   let style = [
-    'flex flex-row flex-wrap justify-between items-center py-3 px-6 w-full',
-    { 'border-b-2' : !props.plain },
+    'relative flex-wrap justify-between !py-3 !px-6 w-full focus:z-[1] !rounded-none',
   ];
   return style;
 });
@@ -85,7 +85,7 @@ const afterTransitionEnd = () => {
 
 defineExpose({
   containerRef,
-  setHeight,
+  toggle,
   expand,
 })
 
@@ -104,7 +104,9 @@ onMounted(() => {
     <div @click="toggle()">
       <slot name="handler" :expand="expand">
         <Button 
-          :class="handlerStyle" isPlain>
+          :class="handlerStyle" 
+          :color="color"
+        >
           <span class="order-first">{{ title }}</span>
           <Icon class="order-last" :path="expand ? mdiMinus : mdiPlus" />
         </Button> 

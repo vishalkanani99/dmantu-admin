@@ -4,6 +4,7 @@ import Tables from './pages/tables.vue'
 import Buttons from './pages/buttons.vue'
 import Chips from './pages/chips.vue'
 import Cards from './pages/cards.vue'
+import Accordions from './pages/accordions.vue';
 
 export const routes = [
   {
@@ -35,5 +36,10 @@ export const routes = [
     name: 'Cards',
     path: '/cards',
     component: Cards,
+  },
+  {
+    name: 'Accordions',
+    path: '/accordions',
+    component: Accordions,
   },
 ];
