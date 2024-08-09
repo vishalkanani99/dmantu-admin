@@ -39,7 +39,7 @@ import { getButtonStyle } from '../color.js';
     }
 
     let style = [
-      'flex items-center',
+      'flex justify-center items-center',
       'focus:outline-none',
       'select-none',
       props.label ? 'px-3 py-2' : 'p-2',

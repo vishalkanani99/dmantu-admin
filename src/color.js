@@ -198,12 +198,14 @@ const getDefaultTextStyle = (color) => {
     color: isStyleDark ? text['white'] : text['black'],
     colorOnHover: isStyleDark ? text.hover['white'] : text.hover['black'],
     colorOnActive: isStyleDark ? text['black'] : text['white'],
+    type: isStyleDark ? 'white' : 'black',
   }
 
   if( isThemeColor ) {
     style.color = isStyleDark ? text['theme-light'] : text['theme-dark'];
     style.colorOnHover = isStyleDark ? text.hover['theme-light'] : text.hover['theme-dark'];
     style.colorOnActive = isStyleDark ? text['theme-dark'] : text['theme-light'];
+    style.type = isStyleDark ? 'theme-light' : 'theme-dark';
   }
 
   return style

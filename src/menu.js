@@ -6,7 +6,9 @@ import {
   mdiButtonCursor,
   mdiPageLayoutBody,
   mdiLabel,
-  mdiArrowCollapseVertical, 
+  mdiArrowCollapseVertical,
+  mdiFormatListBulleted,
+  mdiAlert, 
 } from '@mdi/js';
 
 const menu = [
@@ -49,6 +51,16 @@ const menu = [
         label: 'Accordions',
         to: '/accordions',
         iconPath: mdiArrowCollapseVertical,
+      },
+      {
+        label: 'Lists',
+        to: '/lists',
+        iconPath: mdiFormatListBulleted,
+      },
+      {
+        label: 'Alerts',
+        to: '/alerts',
+        iconPath: mdiAlert,
       },
     ]
   }
