@@ -8,7 +8,8 @@ import {
   mdiLabel,
   mdiArrowCollapseVertical,
   mdiFormatListBulleted,
-  mdiAlert, 
+  mdiAlert,
+  mdiForumOutline, 
 } from '@mdi/js';
 
 const menu = [
@@ -61,6 +62,11 @@ const menu = [
         label: 'Alerts',
         to: '/alerts',
         iconPath: mdiAlert,
+      },
+      {
+        label: 'Modals',
+        to: '/modals',
+        iconPath: mdiForumOutline,
       },
     ]
   }

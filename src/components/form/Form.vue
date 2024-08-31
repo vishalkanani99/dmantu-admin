@@ -17,6 +17,7 @@ const props = defineProps({
   closable: Boolean,
   noHeader: Boolean,
   noFooter: Boolean,
+  scrollable: Boolean,
   twoColumns: Boolean,
   threeColumns: Boolean,
 });
@@ -50,6 +51,7 @@ const emit = defineEmits(['close', 'save', 'cancel']);
               { 'space-y-4' : !twoColumns && !threeColumns },
               { 'grid grid-cols-1 md:grid-cols-2 gap-4' : twoColumns },
               { 'grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4' : threeColumns },
+              { 'max-h-[calc(100vh-224px)] overflow-y-auto': scrollable }
             ]"
           >
             <slot></slot>

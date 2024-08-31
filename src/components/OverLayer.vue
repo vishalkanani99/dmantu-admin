@@ -1,5 +1,5 @@
 <script setup>
-  import { computed } from 'vue';
+  import { computed, watchEffect } from 'vue';
 
   const props = defineProps({
     modelValue: Boolean,
@@ -17,23 +17,29 @@
 
   const defaultStyle = computed(() => {
     const style = [
-      'fixed inset-0 z-40 transition-all overflow-hidden',
-      showOverLayer.value ? 'translate-x-0' : '-translate-x-full',
+      'fixed inset-0 z-[100] transition-opacity duration-300 overflow-hidden',
+      !showOverLayer.value ? 'pointer-events-none opacity-0' : '',
     ];
     return style;
   })
 
   function close() {
-    if(props.imortal) {
-      return;
+    if(!props.imortal) {
+      showOverLayer.value = false;
     }
-    showOverLayer.value = false;
-    emit('close', false);
+    emit('close');
   }
+
+  watchEffect(() => {
+    document.body.classList.remove('overflow-hidden');
+    if(showOverLayer.value) {
+      document.body.classList.add('overflow-hidden');
+    }
+  })
 </script>
 <template>
   <div :class="defaultStyle">
-    <div class="fixed inset-0 bg-theme-100 opacity-80" @click="close"></div>
+    <div class="fixed inset-0 bg-theme-900 bg-opacity-60" @click="close"></div>
     <slot></slot>
   </div>
 </template>

@@ -35,7 +35,7 @@ const showSideBar = computed({
 const isClosable = computed(() => props.isClosable);
 const defaultStyle = computed(() => {
   const style = [
-    'z-50',
+    props.isClosable ? 'z-[101]' : 'z-50',
     { '!w-24' : isCompact.value },
   ];
   return style;
