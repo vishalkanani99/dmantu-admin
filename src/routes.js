@@ -7,7 +7,8 @@ import Cards from './pages/cards.vue'
 import Accordions from './pages/accordions.vue';
 import Lists from './pages/lists.vue';
 import Alerts from './pages/alerts.vue';
-import Modals from './pages/modals.vue'
+import Modals from './pages/modals.vue';
+import Snackbars from './pages/snackbars.vue';
 
 export const routes = [
   {
@@ -59,5 +60,10 @@ export const routes = [
     name: 'Modals',
     path: '/modals',
     component: Modals,
+  },
+  {
+    name: 'Snackbars',
+    path: '/snackbars',
+    component: Snackbars,
   },
 ];

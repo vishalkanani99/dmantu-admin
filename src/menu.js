@@ -9,7 +9,8 @@ import {
   mdiArrowCollapseVertical,
   mdiFormatListBulleted,
   mdiAlert,
-  mdiForumOutline, 
+  mdiForumOutline,
+  mdiFrequentlyAskedQuestions, 
 } from '@mdi/js';
 
 const menu = [
@@ -67,6 +68,11 @@ const menu = [
         label: 'Modals',
         to: '/modals',
         iconPath: mdiForumOutline,
+      },
+      {
+        label: 'Snackbars',
+        to: '/snackbars',
+        iconPath: mdiFrequentlyAskedQuestions,
       },
     ]
   }
