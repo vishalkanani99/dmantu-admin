@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 export default {
   content: [
     "./index.html",
@@ -37,6 +38,17 @@ export default {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    plugin(function ({ addUtilities }) {
+			addUtilities({
+				'.drag-none': {
+					'-webkit-user-drag': 'none',
+					'-khtml-user-drag': 'none',
+					'-moz-user-drag': 'none',
+					'-o-user-drag': 'none',
+					'user-drag': 'none'
+				}
+			});
+		})
   ],
 }
 

@@ -10,7 +10,8 @@ import {
   mdiFormatListBulleted,
   mdiAlert,
   mdiForumOutline,
-  mdiFrequentlyAskedQuestions, 
+  mdiFrequentlyAskedQuestions,
+  mdiViewCarouselOutline, 
 } from '@mdi/js';
 
 const menu = [
@@ -73,6 +74,11 @@ const menu = [
         label: 'Snackbars',
         to: '/snackbars',
         iconPath: mdiFrequentlyAskedQuestions,
+      },
+      {
+        label: 'Carousels',
+        to: '/carousels',
+        iconPath: mdiViewCarouselOutline,
       },
     ]
   }

@@ -54,7 +54,7 @@ const modelValue = computed({
     <template #header>
       <div class="relative">
         <div class="overflow-hidden rounded-t-md h-64">
-          <img v-if="imageSrc" class="h-full w-full" :src="imageSrc" />
+          <img v-if="imageSrc" class="h-full w-full select-none drag-none pointer-events-none" :src="imageSrc" />
         </div>
         <div class="absolute m-2 top-0 left-0">
           <slot name="topLeft">

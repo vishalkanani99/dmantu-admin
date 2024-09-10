@@ -9,6 +9,7 @@ import Lists from './pages/lists.vue';
 import Alerts from './pages/alerts.vue';
 import Modals from './pages/modals.vue';
 import Snackbars from './pages/snackbars.vue';
+import Carousels from './pages/carousels.vue';
 
 export const routes = [
   {
@@ -65,5 +66,10 @@ export const routes = [
     name: 'Snackbars',
     path: '/snackbars',
     component: Snackbars,
+  },
+  {
+    name: 'Carousels',
+    path: '/carousels',
+    component: Carousels,
   },
 ];
