@@ -11,7 +11,8 @@ import {
   mdiAlert,
   mdiForumOutline,
   mdiFrequentlyAskedQuestions,
-  mdiViewCarouselOutline, 
+  mdiViewCarouselOutline,
+  mdiTab, 
 } from '@mdi/js';
 
 const menu = [
@@ -79,6 +80,11 @@ const menu = [
         label: 'Carousels',
         to: '/carousels',
         iconPath: mdiViewCarouselOutline,
+      },
+      {
+        label: 'Tabs',
+        to: '/tabs',
+        iconPath: mdiTab,
       },
     ]
   }

@@ -10,6 +10,7 @@ import Alerts from './pages/alerts.vue';
 import Modals from './pages/modals.vue';
 import Snackbars from './pages/snackbars.vue';
 import Carousels from './pages/carousels.vue';
+import Tabs from './pages/tabs.vue';
 
 export const routes = [
   {
@@ -71,5 +72,10 @@ export const routes = [
     name: 'Carousels',
     path: '/carousels',
     component: Carousels,
+  },
+  {
+    name: 'Tabs',
+    path: '/tabs',
+    component: Tabs,
   },
 ];

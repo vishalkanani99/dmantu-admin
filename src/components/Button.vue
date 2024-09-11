@@ -67,9 +67,10 @@ const bindProps = computed(() => {
 </script>
 <template>
   <component
+    v-bind="bindProps"
     :is="typeOfComponent"
     :class="defaultClass"
-    v-bind="bindProps"
+    :disabled="disabled"
   >
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
