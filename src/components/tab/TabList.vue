@@ -22,8 +22,8 @@ const defaultClass = computed(() => {
   <div :class="defaultClass">
     <div 
       :class="[
-        'flex justify-start flex-nowrap items-center p-6 overflow-x-auto',
-        vertical ? 'flex-col space-y-2 border' : 'flex-row space-x-2 shadow-md',
+        'flex justify-start flex-nowrap items-center border p-6 overflow-x-auto',
+        vertical ? 'flex-col' : 'flex-row',
         vertical ? '' : '',
       ]">
       <slot></slot>

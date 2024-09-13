@@ -12,6 +12,8 @@ export default defineComponent({
       default: 1,
     },
     vertical: Boolean,
+    outline: Boolean,
+    color: String,
   },
   emits: ['update:modelValue'],
   setup(props, context) {
@@ -41,7 +43,13 @@ export default defineComponent({
       return slotTabs.value.map((tab, index) => {
         return h(
           tab,
-          { vertical: props.vertical, isActive: activeTab.value === (index + 1) ? true : false, onClick: () => changeTab(index + 1) },
+          { 
+            vertical: props.vertical,
+            outline: props.outline, 
+            color: props.color, 
+            isActive: activeTab.value === (index + 1) ? true : false, 
+            onClick: () => changeTab(index + 1) 
+          },
           () => '',  // empty default slot for Tab Component 
         );
       });

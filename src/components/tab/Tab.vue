@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, useSlots, onMounted, watch } from "vue";
-import { getDefaultTextStyle } from '../../color';
+import { background, text, border, getDefaultTextStyle } from '../../color';
 import Button from "../Button.vue";
 
 const props = defineProps({
@@ -18,20 +18,39 @@ const props = defineProps({
   },
   vertical: Boolean,
   isActive: Boolean,
-  disabled: Boolean
+  outline: Boolean,
+  disabled: Boolean,
 });
-const textStyle = computed(() => getDefaultTextStyle(props.color));
+
+const tabStyle= computed(() => {
+    const textStyle = getDefaultTextStyle(props.color);
+
+    let bgStyle = [
+      props.outline ? 'bg-transparent' : '',
+      props.outline ? text[props.color] : textStyle.color,
+      props.outline ? 'hover:font-bold hover:border-b-2 border-b' : background.hover(props.color, true),
+      props.outline ? border[props.color] : '',
+      props.isActive && props.outline ? 'font-bold border-b-4' : '',
+      props.isActive && !props.outline ? background.active[props.color] : background[props.color],
+    ];
+    
+    const style = [
+      'flex items-center px-3 py-2 select-none w-full transition-all delay-0',
+      ...bgStyle,
+      {'md:w-auto': !props.vertical},
+      props.disabled ? 'cursor-not-allowed opacity-30' : 'cursor-pointer'
+    ];
+
+    return style;
+  })
 </script>
 
 <template>
   <Button
-    :class="[
-      'w-full',
-      {'md:w-auto': !vertical}
-    ]"
-    :color="isActive ? textStyle.type : color"
+    :class="tabStyle"
     :label="label" 
     :iconPath="icon" 
-    :disabled="disabled" 
+    :disabled="disabled"
+    isPlain 
   />
 </template>
