@@ -11,6 +11,7 @@ import Modals from './pages/modals.vue';
 import Snackbars from './pages/snackbars.vue';
 import Carousels from './pages/carousels.vue';
 import Tabs from './pages/tabs.vue';
+import Steppers from './pages/steppers.vue';
 
 export const routes = [
   {
@@ -77,5 +78,10 @@ export const routes = [
     name: 'Tabs',
     path: '/tabs',
     component: Tabs,
+  },
+  {
+    name: 'Steppers',
+    path: '/steppers',
+    component: Steppers,
   },
 ];
