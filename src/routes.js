@@ -12,6 +12,7 @@ import Snackbars from './pages/snackbars.vue';
 import Carousels from './pages/carousels.vue';
 import Tabs from './pages/tabs.vue';
 import Steppers from './pages/steppers.vue';
+import Popovers from './pages/popovers.vue';
 
 export const routes = [
   {
@@ -83,5 +84,10 @@ export const routes = [
     name: 'Steppers',
     path: '/steppers',
     component: Steppers,
+  },
+  {
+    name: 'Popovers',
+    path: '/popovers',
+    component: Popovers,
   },
 ];
