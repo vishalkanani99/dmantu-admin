@@ -2,10 +2,10 @@
 import { ref, shallowRef, computed, onMounted } from 'vue';
 import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
 import { throttle } from 'lodash';
-import Icon from './Icon.vue';
-import Menu from './Menu.vue';
-import Button from './Button.vue';
-import { background, getDefaultTextStyle } from '../color';
+import Icon from '../Icon.vue';
+import Menu from '../menu/Menu.vue';
+import Button from '../Button.vue';
+import { background, getDefaultTextStyle } from '../../color';
 
 const props = defineProps({
   label: String,

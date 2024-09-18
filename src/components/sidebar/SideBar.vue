@@ -1,7 +1,7 @@
 <script setup>
   import { computed } from 'vue';
   import { mdiClose, } from '@mdi/js';
-  import Button from './Button.vue';
+  import Button from '../Button.vue';
 
   const props = defineProps({
     modelValue: Boolean,

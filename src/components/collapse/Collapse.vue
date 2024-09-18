@@ -1,8 +1,8 @@
 <script setup>
 import { ref, shallowRef, onMounted, computed } from 'vue';
 import { mdiPlus, mdiMinus } from '@mdi/js';
-import Button from './Button.vue';
-import Icon from './Icon.vue';
+import Button from '../Button.vue';
+import Icon from '../Icon.vue';
 
 const props = defineProps({
   expanded: {

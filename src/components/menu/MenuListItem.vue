@@ -2,9 +2,9 @@
   import { mdiChevronDown } from '@mdi/js';
   import { computed } from 'vue';
   import { RouterLink, useLink } from 'vue-router'
-  import Button from './Button.vue';
-  import { background, getDefaultTextStyle } from '../color';
-  import Icon from './Icon.vue';
+  import Button from '../Button.vue';
+  import { background, getDefaultTextStyle } from '../../color';
+  import Icon from '../Icon.vue';
 
   const props = defineProps({
     ...RouterLink.props.isExactActive,

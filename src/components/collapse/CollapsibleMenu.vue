@@ -1,7 +1,7 @@
 <script setup>
 import Collapse from './Collapse.vue';
-import Menu from './Menu.vue';
-import MenuListItem from './MenuListItem.vue';
+import Menu from '../menu/Menu.vue';
+import MenuListItem from '../menu/MenuListItem.vue';
 
 const props = defineProps({
   item: {

@@ -6,8 +6,8 @@ import {
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
-import CollapseGroup from '../components/CollapseGroup.vue';
-import Collapse from '../components/Collapse.vue';
+import CollapseGroup from '../components/collapse/CollapseGroup.vue';
+import Collapse from '../components/collapse/Collapse.vue';
 
 const content = [
   { 

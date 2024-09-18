@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { mdiDotsVertical } from '@mdi/js';
 import Button from '../Button.vue';
-import Dropdown from '../Dropdown.vue';
+import Dropdown from '../dropdown/Dropdown.vue';
 import Card from './Card.vue';
 import FieldOption from '../form/FieldOption.vue';
 import Icon from '../Icon.vue';

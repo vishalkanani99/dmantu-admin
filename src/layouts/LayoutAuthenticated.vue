@@ -3,7 +3,7 @@ import { shallowRef, ref, computed, onMounted } from 'vue';
 import { useScreen } from '../composables/useScreen';
 import SectionMain from '../components/section/SectionMain.vue';
 import NavBar from '../components/NavBar.vue';
-import SideBarMenu from '../components/SideBarMenu.vue';
+import SideBarMenu from '../components/sidebar/SideBarMenu.vue';
 import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 

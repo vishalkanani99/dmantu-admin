@@ -4,7 +4,7 @@ import { mdiMenu, mdiMagnify, mdiBellOutline, mdiEmailOutline, mdiCog, mdiPencil
 import Field from './form/Field.vue';
 import FieldGroup from './form/FieldGroup.vue';
 import Button from './Button.vue';
-import Dropdown from './Dropdown.vue';
+import Dropdown from './dropdown/Dropdown.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,

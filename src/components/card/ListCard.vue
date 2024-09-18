@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { mdiDotsVertical, mdiTrashCan, mdiPencil } from '@mdi/js';
 import { background, getDefaultTextStyle, border, text } from '../../color';
 import Avatar from '../Avatar.vue';
-import Dropdown from '../Dropdown.vue';
+import Dropdown from '../dropdown/Dropdown.vue';
 import Button from '../Button.vue';
 import Chip from '../Chip.vue';
 

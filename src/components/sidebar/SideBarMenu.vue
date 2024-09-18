@@ -3,11 +3,11 @@ import { shallowRef, ref, computed } from 'vue';
 import { 
   mdiArrowCollapseHorizontal,
 } from '@mdi/js';
-import Button from '../components/Button.vue';
-import Menu from '../components/Menu.vue';
-import SideBar from '../components/SideBar.vue';
-import CollapsibleMenu from './CollapsibleMenu.vue';
-import MenuListItem from './MenuListItem.vue';
+import Button from '../Button.vue';
+import Menu from '../menu/Menu.vue';
+import SideBar from '../sidebar/SideBar.vue';
+import CollapsibleMenu from '../collapse/CollapsibleMenu.vue';
+import MenuListItem from '../menu/MenuListItem.vue';
 
 const props = defineProps({
   items: Array,
