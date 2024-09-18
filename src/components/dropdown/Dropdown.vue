@@ -2,10 +2,10 @@
 import { ref, shallowRef, computed, onMounted } from 'vue';
 import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
 import { throttle } from 'lodash';
+import DropdownContainer from './DropdownContainer.vue';
 import Icon from '../Icon.vue';
 import Menu from '../menu/Menu.vue';
 import Button from '../Button.vue';
-import { background, getDefaultTextStyle } from '../../color';
 
 const props = defineProps({
   label: String,
@@ -38,8 +38,9 @@ const toggle = throttle(() => {
 })
 
 const trackClickEvent = (el) => {
+  const containerRef = dropdownRef.value && dropdownRef.value?.$refs?.containerRef;
   const isSelectorRefAsTargetEl = selectorRef.value && selectorRef.value.contains(el.target);
-  const isDropdownRefContainTargetEl = dropdownRef.value && dropdownRef.value.contains(el.target);
+  const isDropdownRefContainTargetEl = containerRef && containerRef.contains(el.target);
   if(isSelectorRefAsTargetEl || isDropdownRefContainTargetEl) {
     return;
   }
@@ -47,22 +48,6 @@ const trackClickEvent = (el) => {
 }
 
 const btnIcon = computed(() => showList.value ? mdiMenuUp : mdiMenuDown );
-
-const dropdownContainerStyle = computed(() => {
-  let textStyle = getDefaultTextStyle(props.bgColor);
-  let style = [
-    'absolute',
-    'right-0',
-    'min-w-max',
-    'z-10',
-    'shadow-md',
-    'rounded-md',
-    'mt-2',
-    background[props.bgColor],
-    textStyle.color,
-  ];
-  return style;
-});
 
 onMounted(() => {
   document.addEventListener('click', trackClickEvent);
@@ -78,34 +63,22 @@ onMounted(() => {
         </Button>
       </slot>
     </div>
-    <Transition name="fade" mode="out-in">
-      <div
-        v-if="showList"
-        ref="dropdownRef"
-        :class="dropdownContainerStyle">
-        <slot>
-          <Menu 
-            :items="items" 
-            :color="ItemColor"
-            @menuClick="(value) => $emit('menuClick', value)"
-          >
-            <template #default="{ item }">
-              <slot name="item" :item="item"></slot>
-            </template>
-          </Menu>
-        </slot>
-      </div>
-    </Transition>
+    <DropdownContainer
+      ref="dropdownRef"
+      v-model="showList"
+      :bgColor="bgColor" 
+    >
+      <slot>
+        <Menu 
+          :items="items" 
+          :color="ItemColor"
+          @menuClick="(value) => $emit('menuClick', value)"
+        >
+          <template #default="{ item }">
+            <slot name="item" :item="item"></slot>
+          </template>
+        </Menu>
+      </slot>
+    </DropdownContainer>
   </div>
 </template>
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
