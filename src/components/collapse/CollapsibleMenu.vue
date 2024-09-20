@@ -12,6 +12,7 @@ const props = defineProps({
     type: String,
     default: 'theme-light',
   },
+  isRouterMenu: Boolean,
 });
 </script>
 
@@ -29,12 +30,15 @@ const props = defineProps({
     <Menu 
       :items="item.items"
       :color="color"
+      :isRouterMenu="isRouterMenu"
     >
       <template #default="{ item }">
         <CollapsibleMenu
           v-if="item.items"
           :item="item"
-          :color="color" />
+          :color="color"
+          :isRouterMenu="isRouterMenu" 
+        />
       </template>
     </Menu>
   </Collapse>

@@ -67,19 +67,20 @@ function close() {
       <Menu 
         :items="items" 
         :isCompact="isCompact"
+        isRouterMenu
       >
         <template #default="{ item }">
           <CollapsibleMenu 
             v-if="!isCompact && item.items"
             color="theme-dark" 
             :item="item"
+            isRouterMenu
           />
           <MenuListItem
             v-if="isCompact && item.items"
             color="theme-dark" 
             :label="item.label" 
             :iconPath="item.iconPath"
-            :to="item.to"
             isCompact
             @click="$emit('dropdownClick', item)"
           />

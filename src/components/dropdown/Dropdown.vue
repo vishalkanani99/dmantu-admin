@@ -8,6 +8,7 @@ import Menu from '../menu/Menu.vue';
 import Button from '../Button.vue';
 
 const props = defineProps({
+  modelValue: Boolean,
   label: String,
   items: {
     type: Array,
@@ -25,13 +26,22 @@ const props = defineProps({
     type: String,
     default: 'theme-light',
   },
+  controllable: Boolean,
 });
 
-const emit = defineEmits(['menuClick']);
+const emit = defineEmits(['update:modelValue', 'menuClick']);
 
 const dropdownRef = ref(null);
 const selectorRef = ref(null);
-const showList = shallowRef(false);
+const modelValue = shallowRef(false);
+
+const showList = computed({
+  get: () => props.controllable ? props.modelValue : modelValue.value,
+  set: (value) => {
+    modelValue.value = value;
+    emit('update:modelValue', value);
+  }
+})
 
 const toggle = throttle(() => {
   showList.value = !showList.value;
@@ -49,13 +59,21 @@ const trackClickEvent = (el) => {
 
 const btnIcon = computed(() => showList.value ? mdiMenuUp : mdiMenuDown );
 
+const bindSelectorEvent = computed(() => {
+  const selectorEvents = {};
+  if( !props.controllable ) {
+    selectorEvents.onClick = () => toggle(); 
+  }
+  return selectorEvents;
+})
+
 onMounted(() => {
   document.addEventListener('click', trackClickEvent);
 })
 </script>
 <template>
   <div class="relative select-none">
-    <div ref="selectorRef" @click="toggle()">
+    <div ref="selectorRef" v-bind="bindSelectorEvent">
       <slot name="selector" :btnIcon="btnIcon">
         <Button :color="btnColor">
           <span v-if="label" class="pl-1">{{ label }}</span>
@@ -74,8 +92,8 @@ onMounted(() => {
           :color="ItemColor"
           @menuClick="(value) => $emit('menuClick', value)"
         >
-          <template #default="{ item }">
-            <slot name="item" :item="item"></slot>
+          <template #default="{ item, key }">
+            <slot name="item" :item="item" :key="key"></slot>
           </template>
         </Menu>
       </slot>

@@ -1,15 +1,12 @@
 <script setup>
   import { mdiChevronDown } from '@mdi/js';
   import { computed } from 'vue';
-  import { RouterLink, useLink } from 'vue-router'
   import Button from '../Button.vue';
   import { background, getDefaultTextStyle } from '../../color';
   import Icon from '../Icon.vue';
 
   const props = defineProps({
-    ...RouterLink.props.isExactActive,
     iconPath: String,
-    actionIconPath: String,
     label: String,
     to: String,
     isCompact: Boolean,
@@ -19,14 +16,13 @@
       type: String,
       default: 'theme-light',
     },
+    isActive: Boolean,
   });
-
-  const { isExactActive } = useLink(props)
 
   const defaultStyle = computed(() => {
     const textStyle = getDefaultTextStyle(props.color);
     const backgroundStyle = [
-      isExactActive.value && props.to
+      props.isActive
         ? [ background.active[props.color], textStyle.color, 'font-bold' ]
         : [ background[props.color], background.hover(props.color, true), textStyle.color ]
     ]; 
@@ -45,7 +41,6 @@
   <Button 
     :class="defaultStyle" 
     :to="to"
-    :type="!to ? 'button' : ''"
     :iconPath="iconPath"
     :label="label"
     isPlain>

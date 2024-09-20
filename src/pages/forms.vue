@@ -18,6 +18,7 @@ import FieldGroup from '../components/form/FieldGroup.vue';
 import Field from '../components/form/Field.vue';
 import Form from '../components/form/Form.vue';
 import FieldOption from '../components/form/FieldOption.vue';
+import ListBox from '../components/form/ListBox.vue';
 
 const form = reactive({
   field1: '',
@@ -269,6 +270,16 @@ const isFormValid = shallowRef(false);
             @rightIconClick="showPassword = !showPassword" 
           />
         </FieldGroup>
+        <ListBox 
+          v-model="form.name"
+          :options="[
+            'Option 1',
+            'Option 2',
+            'Option 3',
+            'Option 4',
+            'Option 5',
+          ]" 
+        />
       </Form>
     </Section>
   </LayoutAuthenticated>

@@ -1,9 +1,10 @@
 <script setup>
   import MenuListItem from './MenuListItem.vue';
+  import MenuListRouterItem from './MenuListRouterItem.vue';
 
   const props = defineProps({
     item: {
-      type: Object,
+      type: [String, Object],
       default: () => {},
     },
     color: {
@@ -11,6 +12,7 @@
       default: 'theme-dark',
     },
     isCompact: Boolean,
+    isRouterMenu: Boolean,
   });
 
   const emit = defineEmits(['menuClick']);
@@ -18,7 +20,17 @@
 <template>
   <li>
     <slot name="item" :item="item">
+      <MenuListRouterItem
+        v-if="isRouterMenu"
+        :color="color" 
+        :label="item?.label ?? ''" 
+        :iconPath="item?.iconPath ?? ''"
+        :to="item?.to ?? ''"
+        :isCompact="isCompact"
+        @click="$emit('menuClick', item)" 
+      />
       <MenuListItem
+        v-else
         :color="color" 
         :label="item?.label ?? ''" 
         :iconPath="item?.iconPath ?? ''"

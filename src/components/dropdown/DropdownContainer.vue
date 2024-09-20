@@ -34,7 +34,7 @@ const dropdownContainerStyle = computed(() => {
   let style = [
     'absolute', 
     'right-0',
-    'min-w-max',
+    'w-full min-w-max',
     'z-10',
     'shadow-md',
     'rounded-md',
@@ -49,7 +49,7 @@ const dropdownContainerStyle = computed(() => {
 
 </script>
 <template>
-  <Transition name="fade" mode="out-in">
+  <Transition name="dropdown">
     <div
       v-if="showList"
       ref="containerRef"
@@ -59,13 +59,12 @@ const dropdownContainerStyle = computed(() => {
   </Transition>
 </template>
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.dropdown-enter-active,
+.dropdown-leave-active {
+  @apply transition-[max-height] !overflow-hidden;
 }
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+.dropdown-enter-from,
+.dropdown-leave-to {
+  @apply !max-h-0 !overflow-hidden;
 }
 </style>

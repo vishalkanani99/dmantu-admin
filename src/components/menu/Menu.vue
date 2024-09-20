@@ -15,6 +15,7 @@
       default: 'theme-dark',
     },
     isCompact: Boolean,
+    isRouterMenu: Boolean,
   });
 
   const emit = defineEmits(['menuClick']);
@@ -27,11 +28,12 @@
       :item="item" 
       :color="color"
       :isCompact="isCompact"
+      :isRouterMenu="isRouterMenu"
       @menuClick="(value) => $emit('menuClick', value)"
     >
 
       <template #item="{ item }">
-        <slot :item="item"></slot>
+        <slot :item="item" :key="key"></slot>
       </template>
     </MenuList>
   </ul>
