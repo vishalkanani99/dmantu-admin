@@ -1,17 +1,17 @@
-// @param data Array
+// @param data Array ex. ['value'] or [{'key': 'value'}]
 // @param searchVal String
 // @param searchBy String or Array
 // @param recursiveKey String
 // @return results Array
 
-const search = async (data, searchVal, searchBy, recursiveKey = 'children') => {
+const search = async (data, searchVal, searchBy='', recursiveKey = 'children') => {
   if(!searchVal) return data;
   const promises = deepSearch(data, searchVal, searchBy, recursiveKey);
   const results = await Promise.all(promises);
   return results;
 }
 
-// @param data Array
+// @param data Array ex. ['value'] or [{'key': 'value'}]
 // @param searchVal String
 // @param searchBy String or Array
 // @param recursiveKey String
@@ -19,19 +19,34 @@ const search = async (data, searchVal, searchBy, recursiveKey = 'children') => {
 // @return found Array
 
 const deepSearch = (data, searchVal, searchBy, recursiveKey, searchedData = []) => {
-    let found = searchedData
+    let value, found = searchedData;
 
   for(let i in data){
-    //search in object keys
+    if(!data[i]) continue;
+
+    // Check if data array contain only values
+    if(typeof data[i] === 'string'  || typeof data[i] === 'number') {
+      let isValidValue = isValid(data[i], searchVal);
+      if(isValidValue){
+        found.push(data[i]);
+        continue;
+      }
+    }
+
+    //search values in object keys by searchBy or skip searchBy
+    let hasSearchByKeys = searchBy && searchBy.length > 0;
+
     for(let k in data[i]){
-      if(!data[i][k]) break;
-      
-      let r = typeof data[i][k] !== 'string' ? data[i][k].toString() : data[i][k];
-      if( (searchBy.length > 0 && searchBy.includes(k)) || searchBy.length === 0){
-        if(r.startsWith(searchVal)){
-          found.push(data[i]);
-          break;
-        }
+
+      if(typeof data[i] !== 'object') break;
+      if(!data[i][k]) continue;
+
+      if(hasSearchByKeys && !searchBy.includes(k)) continue;
+
+      let isValidValue = isValid(data[i][k], searchVal);
+      if(isValidValue){
+        found.push(data[i]);
+        break;
       }
     }
 
@@ -40,6 +55,12 @@ const deepSearch = (data, searchVal, searchBy, recursiveKey, searchedData = []) 
     }
   }
   return found;
+}
+
+const isValid = (testValue, searchVal) => {
+  // If test value is not string, convert it into string
+  testValue = typeof testValue !== 'string' ? testValue.toString() : testValue;
+  return testValue.startsWith(searchVal);
 }
 
 // @param data Array

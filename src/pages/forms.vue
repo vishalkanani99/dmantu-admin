@@ -19,6 +19,23 @@ import Field from '../components/form/Field.vue';
 import Form from '../components/form/Form.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import ListBox from '../components/form/ListBox.vue';
+import AutoComplete from '../components/form/AutoComplete.vue';
+
+const optionsArrStr = [
+  'Option 1',
+  'Option 2',
+  'Option 3',
+  'Option 4',
+  'Option 5',
+];
+
+const optionsArrObjs = [
+  { id: 1, name: 'Option 1'},
+  { id: 2, name: 'Option 2'},
+  { id: 3, name: 'Option 3'},
+  { id: 4, name: 'Option 4'},
+  { id: 5, name: 'Option 5'},
+];
 
 const form = reactive({
   field1: '',
@@ -35,6 +52,8 @@ const form = reactive({
   checkbox: '2',
   checkboxes: [ '2', '3' ],
   file: '',
+  listbox: 'Option 1',
+  autocomplete: 'Option 1',
 });
 
 const showPassword = shallowRef(false);
@@ -270,16 +289,19 @@ const isFormValid = shallowRef(false);
             @rightIconClick="showPassword = !showPassword" 
           />
         </FieldGroup>
-        <ListBox 
-          v-model="form.name"
-          :options="[
-            'Option 1',
-            'Option 2',
-            'Option 3',
-            'Option 4',
-            'Option 5',
-          ]" 
-        />
+        <FieldGroup label="List Box">
+          <ListBox 
+            v-model="form.listbox"
+            :options="optionsArrStr"
+          />
+        </FieldGroup>
+        <FieldGroup label="Auto Complete">
+          <AutoComplete
+            v-model="form.autocomplete"
+            :options="optionsArrObjs"
+            displayKey="name"
+          />
+        </FieldGroup>
       </Form>
     </Section>
   </LayoutAuthenticated>
