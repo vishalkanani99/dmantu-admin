@@ -20,8 +20,6 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const containerRef = ref();
-
 const showList = computed({
   get: () => props.modelValue,
   set: (value) => {
@@ -52,7 +50,6 @@ const dropdownContainerStyle = computed(() => {
   <Transition name="dropdown">
     <div
       v-if="showList"
-      ref="containerRef"
       :class="dropdownContainerStyle">
       <slot></slot>
     </div>

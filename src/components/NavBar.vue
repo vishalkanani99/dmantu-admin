@@ -38,7 +38,7 @@ const items = computed(() => {
     <div class="flex order-last items-center space-x-2">
       <Button color="theme-light" :iconPath="mdiBellOutline" />
       <Button color="theme-light" :iconPath="mdiEmailOutline" />
-      <Dropdown color="theme-light" label="Dropdown" :items="items">
+      <Dropdown bgColor="theme-light" label="Dropdown" :items="items">
       </Dropdown>
     </div>
   </div>

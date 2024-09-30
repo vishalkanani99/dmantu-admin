@@ -31,8 +31,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'menuClick']);
 
-const dropdownRef = ref(null);
-const selectorRef = ref(null);
+const containerRef = ref(null);
 const modelValue = shallowRef(false);
 
 const showList = computed({
@@ -48,12 +47,9 @@ const toggle = throttle(() => {
 })
 
 const trackClickEvent = (el) => {
-  const containerRef = dropdownRef.value && dropdownRef.value?.$refs?.containerRef;
-  const isSelectorRefAsTargetEl = selectorRef.value && selectorRef.value.contains(el.target);
-  const isDropdownRefContainTargetEl = containerRef && containerRef.contains(el.target);
-  if(isSelectorRefAsTargetEl || isDropdownRefContainTargetEl) {
-    return;
-  }
+  const isElementExist = document.body.contains(el.target);
+  if(!isElementExist || !containerRef.value) return;
+  if(containerRef.value.contains(el.target)) return;
   showList.value = false;
 }
 
@@ -72,8 +68,8 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="relative select-none">
-    <div ref="selectorRef" v-bind="bindSelectorEvent">
+  <div ref="containerRef" class="relative select-none">
+    <div v-bind="bindSelectorEvent">
       <slot name="selector" :btnIcon="btnIcon">
         <Button :color="btnColor">
           <span v-if="label" class="pl-1">{{ label }}</span>
@@ -82,7 +78,6 @@ onMounted(() => {
       </slot>
     </div>
     <DropdownContainer
-      ref="dropdownRef"
       v-model="showList"
       :bgColor="bgColor" 
     >
