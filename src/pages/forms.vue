@@ -20,6 +20,7 @@ import Form from '../components/form/Form.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import ListBox from '../components/form/ListBox.vue';
 import AutoComplete from '../components/form/AutoComplete.vue';
+import ComboBox from '../components/form/combobox/ComboBox.vue';
 
 const optionsArrStr = [
   'Option 1',
@@ -33,6 +34,14 @@ const optionsArrObjs = [
   { id: 1, name: 'Option 1'},
   { id: 2, name: 'Option 2'},
   { id: 3, name: 'Option 3'},
+  { id: 4, name: 'Option 4'},
+  { id: 5, name: 'Option 5'},
+];
+
+const optionsArrRecursiveObjs = [
+  { id: 1, name: 'Option 1', children: [{ id: 6, name: 'Option z' }]},
+  { id: 2, name: 'Option 2'},
+  { id: 3, name: 'Option 3', children: [{ id: 7, name: 'Option x', children: [{ id: 8, name: 'Option y' }] }]},
   { id: 4, name: 'Option 4'},
   { id: 5, name: 'Option 5'},
 ];
@@ -54,6 +63,7 @@ const form = reactive({
   file: '',
   listbox: 'Option 1',
   autocomplete: 'Option 1',
+  combobox: [],
 });
 
 const showPassword = shallowRef(false);
@@ -300,6 +310,14 @@ const isFormValid = shallowRef(false);
             v-model="form.autocomplete"
             :options="optionsArrObjs"
             displayKey="name"
+          />
+        </FieldGroup>
+        <FieldGroup label="ComboBox">
+          <ComboBox
+            v-model="form.combobox"
+            :options="optionsArrRecursiveObjs"
+            displayKey="name"
+            taggable 
           />
         </FieldGroup>
       </Form>

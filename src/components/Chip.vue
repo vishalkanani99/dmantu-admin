@@ -24,10 +24,10 @@
     let style = [
       'relative inline-flex items-center',
       'px-3',
-      props.closable ? 'py-2' : 'py-1.5',
+      props.closable ? 'py-1' : 'py-1.5',
       props.rounded ? 'rounded-full' : 'rounded-md',
       'leading-none whitespace-nowrap',
-      'text-xs capitalize',
+      'text-xs',
     ];
 
     if( props.outline ) {
