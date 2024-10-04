@@ -43,6 +43,7 @@ const emit = defineEmits(["update:modelValue", "update", "edit", "delete"]);
 
 const sortField = ref('');
 const rows = ref([]);
+const totalRows = ref(props.data.length);
 const isSsr = ref(props.isSsr);
 const checkedAll = ref(false);
 
@@ -64,11 +65,17 @@ const activePageRows = computed(() => {
   return rows.value;
 });
 
-const totalRecords = computed( () => props.totalRecords ?? props.data.length );
 const modelValue = computed({
   get: () => props.modelValue,
   set: (value) => {
     emit("update:modelValue", value);
+  },
+});
+
+const totalRecords = computed({
+  get: () => props.isSsr ? props.totalRecords : totalRows.value,
+  set: (value) => {
+    totalRows.value = value;
   },
 });
 
@@ -116,6 +123,7 @@ const update = debounce(async () => {
   if(isSsr.value) { return; }
   rows.value = props.data;
   rows.value = await searchData(rows.value, config.search, config.searchBy, props.recursiveKey);
+  totalRecords.value = rows.value.length;
   rows.value = await sortColumn(rows.value, config.sortBy, props.recursiveKey);
   rows.value = await paginate();
   updateCheckedRows();
