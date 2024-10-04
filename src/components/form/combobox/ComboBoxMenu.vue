@@ -37,6 +37,7 @@ const modelValue = computed({
 })
 
 const isMultiselect = computed(() => modelValue.value && modelValue.value.constructor === Array );
+const MenuListItemRootEl = computed(() => isMultiselect.value ? 'label' : null);
 
 const options = computed( () => props.options);
 
@@ -61,14 +62,13 @@ const isSelectedValue = (item) => {
     :items="options"
   >
     <template #default="{ item, key }">
-      <MenuListItem 
+      <MenuListItem
+        :type="MenuListItemRootEl" 
         :color="color"
         :isActive="isSelectedValue(item)"
         @click="selectValue(item, key)" 
       >
-        <span v-if="isMultiselect" class="inline-flex items-center pl-1">
-          <FieldOption v-model="modelValue" :value="item" />
-        </span>
+        <FieldOption v-if="isMultiselect" v-model="modelValue" :value="item" />
         <Icon v-for="(i, k) in optionTree" :key="k" :path="mdiCircleMedium" size="16" />
         <span :class="{'pl-1': optionTree > 0 || isMultiselect }">{{ getLabel(item) }}</span>
       </MenuListItem>

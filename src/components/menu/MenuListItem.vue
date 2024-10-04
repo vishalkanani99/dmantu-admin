@@ -6,6 +6,7 @@
   import Icon from '../Icon.vue';
 
   const props = defineProps({
+    type: String,
     iconPath: String,
     label: String,
     to: String,
@@ -17,6 +18,13 @@
       default: 'theme-light',
     },
     isActive: Boolean,
+  });
+
+  const rootEl = computed(() => {
+    if( props.type ) {
+      return props.type;
+    }
+    return Button;
   });
 
   const defaultStyle = computed(() => {
@@ -36,14 +44,24 @@
     ];
     return style;
   })
+
+  const bindProps = computed(() => {
+    const componentProps = {};
+    if( !props.type ) {
+      componentProps.to = props.to;
+      componentProps.iconPath = props.iconPath;
+      componentProps.label = props.label;
+      componentProps.isPlain = true;
+    }
+    return componentProps;
+  })
 </script>
 <template>
-  <Button 
+  <component
+    :is="rootEl" 
     :class="defaultStyle" 
-    :to="to"
-    :iconPath="iconPath"
-    :label="label"
-    isPlain>
+    v-bind="bindProps"
+  >
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
       <span v-if="label" :class="{'px-2': iconPath, 'hidden': isCompact}">{{ label }}</span>
@@ -53,5 +71,5 @@
         :path="mdiChevronDown" 
       />
     </slot>
-  </Button>
+  </component>
 </template>

@@ -133,10 +133,15 @@ const disabledStyle = computed(() => [
 const inputType = computed(() =>
   props.type === "radio" ? "radio" : "checkbox"
 );
+
+const rootEl = computed(() => props.label ? 'label' : 'span');
 </script>
 
 <template>
-  <label class="inline-flex items-center cursor-pointer">
+  <component
+    :is="rootEl" 
+    class="inline-flex items-center cursor-pointer"
+  >
     <input
       v-model="modelValue"
       v-bind="$attrs"
@@ -169,5 +174,5 @@ const inputType = computed(() =>
     >
       {{ label }}
     </span>
-  </label>
+  </component>
 </template>
