@@ -21,7 +21,7 @@
   const emit = defineEmits(['menuClick']);
 </script>
 <template>
-  <ul class="m-2">
+  <ul class="m-2 space-y-1">
     <MenuList 
       v-for="(item, key) in items"
       :key="key"
