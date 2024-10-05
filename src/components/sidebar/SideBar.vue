@@ -22,7 +22,7 @@
       'fixed flex flex-col items-center inset-y-0 left-0 text-theme-100 bg-theme-900 min-h-dvh overflow-hidden',
       'w-dvw xs:w-64',
       showSideBar.value ? 'translate-x-0' : '-translate-x-full',
-      'transition-all',
+      'transition-[translate]',
     ];
     return style;
   });
