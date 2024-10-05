@@ -68,7 +68,7 @@ const isSelectedValue = (item) => {
         :isActive="isSelectedValue(item)"
         @click="selectValue(item, key)" 
       >
-        <FieldOption v-if="isMultiselect" v-model="modelValue" :value="item" />
+        <FieldOption v-if="isMultiselect" v-model="modelValue" :value="item" rootEl="span" />
         <Icon v-for="(i, k) in optionTree" :key="k" :path="mdiCircleMedium" size="16" />
         <span :class="{'pl-1': optionTree > 0 || isMultiselect }">{{ getLabel(item) }}</span>
       </MenuListItem>

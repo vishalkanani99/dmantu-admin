@@ -29,6 +29,7 @@ const props = defineProps({
   iconPath: String,
   borderColor: String,
   label: String,
+  rootEl: String,
   modelValue: {
     type: [Array, String, Number, Boolean, Object],
   },
@@ -134,17 +135,26 @@ const inputType = computed(() =>
   props.type === "radio" ? "radio" : "checkbox"
 );
 
-const rootEl = computed(() => props.label ? 'label' : 'span');
+const rootEl = computed(() => props.rootEl ?? 'label' );
 </script>
 
 <template>
   <component
     :is="rootEl" 
     class="inline-flex items-center cursor-pointer"
+    v-bind="{
+      class: $attrs.class,
+      style: $attrs.style,
+    }"
   >
     <input
       v-model="modelValue"
-      v-bind="$attrs"
+      v-bind="{
+        value: $attrs.value,
+        onClick: $attrs.onClick, 
+        onChange: $attrs.onChange, 
+        onInput: $attrs.onInput, 
+      }"
       :type="inputType"
       class="hidden opacity-0 peer"
     />
