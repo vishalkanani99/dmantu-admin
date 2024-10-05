@@ -5,7 +5,9 @@ import {
   mdiCog,
   mdiPencil,
   mdiTrashCan,
-  mdiHeart,  
+  mdiHeart,
+  mdiStar,
+  mdiPlus,  
 } from '@mdi/js';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
@@ -13,6 +15,7 @@ import Card from '../components/card/Card.vue';
 import PictureCard from '../components/card/PictureCard.vue';
 import Button from '../components/Button.vue';
 import FieldOption from '../components/form/FieldOption.vue';
+import Chip from '../components/Chip.vue';
 
 </script>
 <template>
@@ -100,7 +103,11 @@ import FieldOption from '../components/form/FieldOption.vue';
         </PictureCard>
         <PictureCard
           title="Picture Card"
+          subTitle="$500"
           imageSrc="/images/cart.jpg"
+          saveBtnLabel="Buy now"
+          cancelBtnLabel="Add to cart"
+          :cancelBtnIconPath="mdiPlus"
         >
           <template #topRight>
             <FieldOption 
@@ -108,6 +115,41 @@ import FieldOption from '../components/form/FieldOption.vue';
               color="danger"
               :iconPath="mdiHeart" 
             />
+          </template>
+          <template #titleBarSectionRight>
+            <div class="flex items-center">
+              <FieldOption 
+                type="icon"
+                color="warning"
+                bgOnUncheck="gray"
+                :iconPath="mdiStar" 
+              />
+              <FieldOption 
+                type="icon"
+                color="warning"
+                bgOnUncheck="gray"
+                :iconPath="mdiStar" 
+              />
+              <FieldOption 
+                type="icon"
+                color="warning"
+                bgOnUncheck="gray"
+                :iconPath="mdiStar" 
+              />
+              <FieldOption 
+                type="icon"
+                color="warning"
+                bgOnUncheck="gray"
+                :iconPath="mdiStar" 
+              />
+              <FieldOption 
+                type="icon"
+                color="warning"
+                bgOnUncheck="gray"
+                :iconPath="mdiStar" 
+              />
+              <Chip class="ml-2" label="5.0" />
+            </div>
           </template>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
