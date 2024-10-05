@@ -35,7 +35,7 @@ const tabStyle= computed(() => {
     ];
     
     const style = [
-      'flex items-center px-3 py-2 select-none w-full transition-all delay-0',
+      'flex items-center px-3 py-2 select-none w-full',
       ...bgStyle,
       {'md:w-auto': !props.vertical},
       props.disabled ? 'cursor-not-allowed opacity-30' : 'cursor-pointer'
