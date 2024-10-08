@@ -21,6 +21,7 @@ import FieldOption from '../components/form/FieldOption.vue';
 import ListBox from '../components/form/ListBox.vue';
 import AutoComplete from '../components/form/AutoComplete.vue';
 import ComboBox from '../components/form/combobox/ComboBox.vue';
+import RangeSlider from '../components/slider/RangeSlider.vue';
 
 const optionsArrStr = [
   'Option 1',
@@ -64,6 +65,7 @@ const form = reactive({
   listbox: 'Option 1',
   autocomplete: 'Option 1',
   combobox: [],
+  range: 55, 
 });
 
 const showPassword = shallowRef(false);
@@ -319,6 +321,9 @@ const isFormValid = shallowRef(false);
             displayKey="name"
             taggable 
           />
+        </FieldGroup>
+        <FieldGroup label="RangeSlider">
+          <RangeSlider v-model="form.range" />
         </FieldGroup>
       </Form>
     </Section>
