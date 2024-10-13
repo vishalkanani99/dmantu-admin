@@ -15,6 +15,7 @@ export function useSwiper() {
     let pageX = e?.pageX || ( e?.touches?.length && e.touches[0]?.pageX);
     position.value = pageX;
     addEvents(e.type);
+    setStyle('grabbing');
   }
 
   const dragging = (e) => {
@@ -24,7 +25,6 @@ export function useSwiper() {
     }
 
     draggedPosition.value = pageX - position.value;
-    setStyle('grabbing');
     draggingFn(draggedPosition.value);
   }
 

@@ -323,7 +323,7 @@ const isFormValid = shallowRef(false);
           />
         </FieldGroup>
         <FieldGroup label="RangeSlider">
-          <RangeSlider v-model="form.range" />
+          <RangeSlider v-model="form.range" :min="-25" :max="175" :divider="6" />
         </FieldGroup>
       </Form>
     </Section>
