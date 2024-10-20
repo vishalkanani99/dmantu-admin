@@ -65,7 +65,7 @@ const form = reactive({
   listbox: 'Option 1',
   autocomplete: 'Option 1',
   combobox: [],
-  range: 55, 
+  range: [10, 20], 
 });
 
 const showPassword = shallowRef(false);
