@@ -320,6 +320,7 @@ onUnmounted(() =>{
             'rounded-md shadow-md'
           ]" 
           :style="{
+            'z-index': isDragging === index ? '100' : '10',
             left: `${position}%`,
           }"
         >
