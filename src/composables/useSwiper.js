@@ -5,7 +5,7 @@ export function useSwiper() {
   
   const { addEvent, romoveEvent } = useEvent();
   
-  let draggingFn, stopDraggingFn;
+  let startDraggingFn, draggingFn, stopDraggingFn;
 
   const targetRef = ref(null);
   const position = shallowRef(0);
@@ -16,6 +16,7 @@ export function useSwiper() {
     position.value = pageX;
     addEvents(e.type);
     setStyle('grabbing');
+    startDraggingFn(e);
   }
 
   const dragging = (e) => {
@@ -90,8 +91,9 @@ export function useSwiper() {
     }
   }
   
-  const initSwiper = ( target, draggingCB, stopDraggingCB) => {
+  const initSwiper = ( target, draggingCB, stopDraggingCB, startDraggingCB = null) => {
     targetRef.value = target;
+    startDraggingFn = startDraggingCB
     draggingFn = draggingCB;
     stopDraggingFn = stopDraggingCB;
     
