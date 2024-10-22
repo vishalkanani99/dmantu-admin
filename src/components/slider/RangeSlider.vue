@@ -317,10 +317,10 @@ onUnmounted(() =>{
             'absolute top-[50%] -translate-x-[50%] -translate-y-[50%]',
             'inline-flex flex-col items-center',
             background[handlerColor],
-            'rounded-md shadow-md'
+            'rounded-md shadow-md',
+            {'z-50': isDragging === index},
           ]" 
           :style="{
-            'z-index': isDragging === index ? '100' : '0',
             left: `${position}%`,
           }"
         >
