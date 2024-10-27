@@ -23,8 +23,10 @@ import AutoComplete from '../components/form/AutoComplete.vue';
 import ComboBox from '../components/form/combobox/ComboBox.vue';
 import RangeSlider from '../components/slider/RangeSlider.vue';
 import MaskInput from '../directives/masker/MaskInput.vue';
+import MoneyInput from '../directives/money/MoneyInput.vue';
 
 const vMask = MaskInput;
+const vMoney = MoneyInput;
 
 const optionsArrStr = [
   'Option 1',
@@ -69,12 +71,15 @@ const form = reactive({
   autocomplete: 'Option 1',
   combobox: [],
   range: [10, 20],
-  mask: '' 
+  mask: '', 
+  money: 456899, 
 });
 
 const showPassword = shallowRef(false);
 const isFormValid = shallowRef(false);
-
+const hello = (e) => {
+  console.log(e.target.value)
+}
 </script>
 <template>
   <LayoutAuthenticated>
@@ -311,6 +316,26 @@ const isFormValid = shallowRef(false);
             :hasError="isFormValid"
             right
             expanded
+          />
+        </FieldGroup>
+        <FieldGroup label="Money Input" :error="isFormValid ? 'Invalid Field' : ''" multiFields>
+          <Field 
+            type="static"
+            color="theme-light"
+            :hasError="isFormValid"
+            left
+          >
+            $
+          </Field>
+          <Field 
+            v-model="form.money"
+            v-money 
+            placeholder="Money Input" 
+            color="theme-light"
+            :hasError="isFormValid"
+            right
+            expanded
+            @input="hello"
           />
         </FieldGroup>
         <FieldGroup label="Password" :error="isFormValid ? 'Invalid Field' : ''">
