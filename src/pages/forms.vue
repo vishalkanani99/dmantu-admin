@@ -22,6 +22,9 @@ import ListBox from '../components/form/ListBox.vue';
 import AutoComplete from '../components/form/AutoComplete.vue';
 import ComboBox from '../components/form/combobox/ComboBox.vue';
 import RangeSlider from '../components/slider/RangeSlider.vue';
+import MaskInput from '../directives/masker/MaskInput.vue';
+
+const vMask = MaskInput;
 
 const optionsArrStr = [
   'Option 1',
@@ -65,7 +68,8 @@ const form = reactive({
   listbox: 'Option 1',
   autocomplete: 'Option 1',
   combobox: [],
-  range: [10, 20], 
+  range: [10, 20],
+  mask: '' 
 });
 
 const showPassword = shallowRef(false);
@@ -289,6 +293,25 @@ const isFormValid = shallowRef(false);
       >
         <FieldGroup label="Name" :error="isFormValid ? 'Invalid Field' : ''">
           <Field v-model="form.name" placeholder="Name" :inputLeftIcon="mdiAccount" color="theme-light" :hasError="isFormValid"/>
+        </FieldGroup>
+        <FieldGroup label="Mask Input" :error="isFormValid ? 'Invalid Field' : ''" multiFields>
+          <Field 
+            type="static"
+            color="theme-light"
+            :hasError="isFormValid"
+            left
+          >
+            (+1)
+          </Field>
+          <Field 
+            v-model="form.mask"
+            v-mask="'(###) ###-###'" 
+            placeholder="Mask Input" 
+            color="theme-light"
+            :hasError="isFormValid"
+            right
+            expanded
+          />
         </FieldGroup>
         <FieldGroup label="Password" :error="isFormValid ? 'Invalid Field' : ''">
           <Field 
