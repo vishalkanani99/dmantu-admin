@@ -24,6 +24,7 @@ import ComboBox from '../components/form/combobox/ComboBox.vue';
 import RangeSlider from '../components/slider/RangeSlider.vue';
 import MaskInput from '../directives/masker/MaskInput.vue';
 import MoneyInput from '../directives/money/MoneyInput.vue';
+import Calendar from '../components/datetimepicker/calendar/Calendar.vue';
 
 const vMask = MaskInput;
 const vMoney = MoneyInput;
@@ -372,6 +373,9 @@ const hello = (e) => {
         </FieldGroup>
         <FieldGroup label="RangeSlider">
           <RangeSlider v-model="form.range" :min="-25" :max="175" :divider="6" />
+        </FieldGroup>
+        <FieldGroup label="Calendar">
+          <Calendar />
         </FieldGroup>
       </Form>
     </Section>
