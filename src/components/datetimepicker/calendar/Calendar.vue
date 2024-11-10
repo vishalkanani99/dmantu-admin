@@ -3,7 +3,6 @@ import { computed, ref, shallowRef } from 'vue';
 import CalendarNav from './CalendarNav.vue';
 import CalendarMonths from './CalendarMonths.vue';
 import CalendarYears from './CalendarYears.vue';
-import CalendarWeekDays from './CalendarWeekDays.vue';
 import CalendarDays from './CalendarDays .vue';
 
 const props = defineProps({
@@ -18,6 +17,9 @@ const emit = defineEmits(['']);
 const currentView = shallowRef('days');
 const year = ref(new Date().getFullYear());
 const month = ref(new Date().getMonth());
+const day = ref(new Date().getDate());
+
+const selectedDate = ref([year.value, month.value, day.value]);
 
 const nextMonthYear = () => {
   let nextMonth = parseInt(month.value) + 1;
@@ -77,13 +79,12 @@ const toggleView = (view) => {
       v-model="year"
       @update:modelValue="toggleView('years')" 
     />
-    <template v-if="currentView === 'days'" >
-      <CalendarWeekDays :firstDayOfWeek="firstDayOfWeek" />
-      <CalendarDays 
-        :firstDayOfWeek="firstDayOfWeek" 
-        :year="year" 
-        :month="month"  
-      />
-    </template>
+    <CalendarDays
+      v-if="currentView === 'days'"
+      v-model="selectedDate" 
+      :firstDayOfWeek="firstDayOfWeek" 
+      :year="year" 
+      :month="month"  
+    />
   </div>
 </template>
