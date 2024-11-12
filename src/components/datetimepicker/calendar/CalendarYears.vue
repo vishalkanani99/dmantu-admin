@@ -1,9 +1,10 @@
 <script setup>
 import { computed } from 'vue';
+import { toStr } from '../utils';
 import Button from '../../Button.vue';
 
 const props = defineProps({
-  modelValue: Number,
+  modelValue: Date,
   prepend: {
     type: Number,
     default: 100,
@@ -24,7 +25,8 @@ const modelValue = computed({
 });
 
 const setYear = (yr) => {
-  modelValue.value = yr;
+  modelValue.value.setFullYear(yr);
+  modelValue.value = modelValue.value;
 }
 
 const currentYr = computed(() => new Date().getFullYear());
@@ -49,13 +51,13 @@ const appendYears = computed(() => {
       class="flex justify-center items-center" 
       v-for="(yr, index) in prependYears" :key="index"
     >
-      <Button class="w-full" :label="yr.toString()" outline @click="setYear(yr)" />
+      <Button class="w-full" :label="toStr(yr)" outline @click="setYear(yr)" />
     </div>
     <div 
       class="flex justify-center items-center" 
       v-for="(yr, index) in appendYears" :key="index"
     >
-      <Button class="w-full" :label="yr.toString()" outline @click="setYear(yr)" />
+      <Button class="w-full" :label="toStr(yr)" outline @click="setYear(yr)" />
     </div>
   </div>
 </template>

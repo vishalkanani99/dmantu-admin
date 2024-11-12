@@ -4,7 +4,7 @@ import { l10n } from '../utils';
 import Button from '../../Button.vue';
 
 const props = defineProps({
-  modelValue: Number,
+  modelValue: Date,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -17,7 +17,8 @@ const modelValue = computed({
 });
 
 const setMonth = (month) => {
-  modelValue.value = month;
+  modelValue.value.setMonth(month);
+  modelValue.value = modelValue.value;
 }
 
 </script>

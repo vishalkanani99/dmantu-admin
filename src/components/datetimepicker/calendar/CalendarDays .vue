@@ -1,10 +1,15 @@
 <script setup>
 import { computed } from 'vue';
-import { l10n, isEqualDates } from '../utils';
+import { l10n, isEqualDates, toStr } from '../utils';
 import Button from '../../Button.vue';
 
 const props = defineProps({
-  modelValue: Array,
+  modelValue: {
+    type: Date,
+    default: () => {
+      return new Date();
+    }
+  },
   firstDayOfWeek: {
     type: Number,
     default: 0,
@@ -30,12 +35,12 @@ const selectedDate = computed({
 
 const isActiveDate = (day) => {
   let date = new Date(props.year, props.month, day);
-  let currentDt = new Date(selectedDate.value[0], selectedDate.value[1], selectedDate.value[2]);
-  return isEqualDates(date, currentDt);
+  return isEqualDates(date, selectedDate.value);
 }
 
 const setDate = (day) => {
-  selectedDate.value = [props.year, props.month, day];
+  selectedDate.value.setDate(day);
+  selectedDate.value = selectedDate.value;
 }
 
 const firstOfMonth = computed(() => {
@@ -117,7 +122,7 @@ const getDaysinMonth = (givenMonth) => {
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in prependDays" :key="index"
     >
-      <Button class="w-full" :label="day.toString()" disabled outline rounded />
+      <Button class="w-full" :label="toStr(day)" disabled outline rounded />
     </div>
     <div 
       class="flex justify-center items-center w-10 h-10" 
@@ -125,7 +130,7 @@ const getDaysinMonth = (givenMonth) => {
     >
       <Button 
         class="w-full" 
-        :label="day.toString()" 
+        :label="toStr(day)" 
         :outline="!isActiveDate(day)" 
         rounded
         @click="setDate(day)" 
@@ -135,7 +140,7 @@ const getDaysinMonth = (givenMonth) => {
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in buildDays.appendDays" :key="index"
     >
-      <Button class="w-full" :label="day.toString()" disabled outline rounded />
+      <Button class="w-full" :label="toStr(day)" disabled outline rounded />
     </div>
   </div>
 </template>

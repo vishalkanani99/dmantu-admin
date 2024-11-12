@@ -1,25 +1,43 @@
 <script setup>
-import { computed, ref, shallowRef } from 'vue';
+import { computed, onMounted, ref, shallowRef } from 'vue';
 import CalendarNav from './CalendarNav.vue';
 import CalendarMonths from './CalendarMonths.vue';
 import CalendarYears from './CalendarYears.vue';
 import CalendarDays from './CalendarDays .vue';
 
 const props = defineProps({
+  modelValue: {
+    type: Date,
+    default: () => {
+      return new Date();
+    }
+  },
   firstDayOfWeek: {
     type: Number,
     default: 0,
+  },
+  prependYears: {
+    type: Number,
+    default: 100,
+  },
+  appendYears: {
+    type: Number,
+    default: 100,
   }
 });
 
-const emit = defineEmits(['']);
+const emit = defineEmits(['update:modelValue']);
+
+const dateObj = computed({
+  get: () => props.modelValue,
+  set: (value) => {
+    emit('update:modelValue', value);
+  }
+});
 
 const currentView = shallowRef('days');
 const year = ref(new Date().getFullYear());
 const month = ref(new Date().getMonth());
-const day = ref(new Date().getDate());
-
-const selectedDate = ref([year.value, month.value, day.value]);
 
 const nextMonthYear = () => {
   let nextMonth = parseInt(month.value) + 1;
@@ -57,6 +75,15 @@ const toggleView = (view) => {
   currentView.value = currentView.value === view ? 'days' : view;
 }
 
+const update = (view) => {
+  year.value = dateObj.value.getFullYear();
+  month.value = dateObj.value.getMonth();
+  toggleView(view);
+}
+
+onMounted(() => {
+  update('days');
+})
 </script>
 <template>
   <div>
@@ -71,17 +98,19 @@ const toggleView = (view) => {
     />
     <CalendarMonths 
       v-if="currentView === 'months'"
-      v-model="month"
-      @update:modelValue="toggleView('months')" 
+      v-model="dateObj"
+      @update:modelValue="update('months')" 
     />
     <CalendarYears 
       v-if="currentView === 'years'"
-      v-model="year"
-      @update:modelValue="toggleView('years')" 
+      v-model="dateObj"
+      :prepend="prependYears"
+      :append="appendYears"
+      @update:modelValue="update('years')" 
     />
     <CalendarDays
       v-if="currentView === 'days'"
-      v-model="selectedDate" 
+      v-model="dateObj" 
       :firstDayOfWeek="firstDayOfWeek" 
       :year="year" 
       :month="month"  

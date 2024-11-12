@@ -25,6 +25,7 @@ import RangeSlider from '../components/slider/RangeSlider.vue';
 import MaskInput from '../directives/masker/MaskInput.vue';
 import MoneyInput from '../directives/money/MoneyInput.vue';
 import Calendar from '../components/datetimepicker/calendar/Calendar.vue';
+import DatePicker from '../components/datetimepicker/DatePicker.vue';
 
 const vMask = MaskInput;
 const vMoney = MoneyInput;
@@ -73,7 +74,8 @@ const form = reactive({
   combobox: [],
   range: [10, 20],
   mask: '', 
-  money: 456899, 
+  money: 456899,
+  date: new Date('2022', '04', '05'), 
 });
 
 const showPassword = shallowRef(false);
@@ -376,6 +378,9 @@ const hello = (e) => {
         </FieldGroup>
         <FieldGroup label="Calendar">
           <Calendar />
+        </FieldGroup>
+        <FieldGroup label="Date Picker">
+          <DatePicker v-model="form.date" />
         </FieldGroup>
       </Form>
     </Section>
