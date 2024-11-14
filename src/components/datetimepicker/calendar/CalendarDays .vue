@@ -22,6 +22,7 @@ const props = defineProps({
     type: Number,
     default: new Date().getMonth(),
   },
+  btnColor: String,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -39,8 +40,7 @@ const isActiveDate = (day) => {
 }
 
 const setDate = (day) => {
-  selectedDate.value.setDate(day);
-  selectedDate.value = selectedDate.value;
+  selectedDate.value = new Date(props.year, props.month, day);
 }
 
 const firstOfMonth = computed(() => {
@@ -122,14 +122,15 @@ const getDaysinMonth = (givenMonth) => {
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in prependDays" :key="index"
     >
-      <Button class="w-full" :label="toStr(day)" disabled outline rounded />
+      <Button class="w-full" :color="btnColor" :label="toStr(day)" disabled outline rounded />
     </div>
     <div 
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in buildDays.days" :key="index"
     >
       <Button 
-        class="w-full" 
+        class="w-full"
+        :color="btnColor" 
         :label="toStr(day)" 
         :outline="!isActiveDate(day)" 
         rounded
@@ -140,7 +141,7 @@ const getDaysinMonth = (givenMonth) => {
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in buildDays.appendDays" :key="index"
     >
-      <Button class="w-full" :label="toStr(day)" disabled outline rounded />
+      <Button class="w-full" :color="btnColor" :label="toStr(day)" disabled outline rounded />
     </div>
   </div>
 </template>

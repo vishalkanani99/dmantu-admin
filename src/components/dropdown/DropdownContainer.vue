@@ -16,6 +16,7 @@ const props = defineProps({
       return ['top', 'bottom'].includes(value)
     },
   },
+  maxHeight: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -36,7 +37,7 @@ const dropdownContainerStyle = computed(() => {
     'z-10',
     'shadow-md',
     'rounded-md',
-    'max-h-64',
+    props.maxHeight ? 'max-h-screen' : 'max-h-64',
     'overflow-y-auto',
     props.position === 'bottom' ? 'mt-2 top-[100%]' :  'mb-2 bottom-[100%]',
     background[props.bgColor],

@@ -5,6 +5,7 @@ import Button from '../../Button.vue';
 
 const props = defineProps({
   modelValue: Date,
+  btnColor: String,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -21,6 +22,9 @@ const setMonth = (month) => {
   modelValue.value = modelValue.value;
 }
 
+const isActiveMonth = (month) => {
+  return l10n.months.longhand[modelValue.value.getMonth()] === month;
+}
 </script>
 <template>
   <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2">
@@ -28,7 +32,7 @@ const setMonth = (month) => {
       class="flex justify-center items-center" 
       v-for="(month, index) in l10n.months.longhand" :key="index"
     >
-      <Button class="w-full" :label="month" outline @click="setMonth(index)" />
+      <Button class="w-full" :color="btnColor" :label="month" :outline="!isActiveMonth(month)" @click="setMonth(index)" />
     </div>
   </div>
 </template>

@@ -23,7 +23,8 @@ const props = defineProps({
   appendYears: {
     type: Number,
     default: 100,
-  }
+  },
+  btnColor: String,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -90,7 +91,8 @@ onMounted(() => {
     <CalendarNav 
       class="mb-2" 
       :year="year" 
-      :month="month" 
+      :month="month"
+      :btnColor="btnColor" 
       @next="nextMonthYear"
       @prev="prevMonthYear"
       @toggleMonth="toggleView('months')"
@@ -99,6 +101,7 @@ onMounted(() => {
     <CalendarMonths 
       v-if="currentView === 'months'"
       v-model="dateObj"
+      :btnColor="btnColor"
       @update:modelValue="update('months')" 
     />
     <CalendarYears 
@@ -106,6 +109,7 @@ onMounted(() => {
       v-model="dateObj"
       :prepend="prependYears"
       :append="appendYears"
+      :btnColor="btnColor"
       @update:modelValue="update('years')" 
     />
     <CalendarDays
@@ -113,7 +117,8 @@ onMounted(() => {
       v-model="dateObj" 
       :firstDayOfWeek="firstDayOfWeek" 
       :year="year" 
-      :month="month"  
+      :month="month"
+      :btnColor="btnColor"  
     />
   </div>
 </template>

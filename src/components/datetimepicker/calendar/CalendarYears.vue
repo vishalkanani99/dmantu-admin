@@ -12,7 +12,8 @@ const props = defineProps({
   append: {
     type: Number,
     default: 100,
-  }
+  },
+  btnColor: String,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -44,6 +45,10 @@ const appendYears = computed(() => {
   }
   return years;
 });
+
+const isActiveYear = (year) => {
+  return modelValue.value.getFullYear() === year;
+}
 </script>
 <template>
   <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 max-h-72 overflow-y-auto">
@@ -51,13 +56,13 @@ const appendYears = computed(() => {
       class="flex justify-center items-center" 
       v-for="(yr, index) in prependYears" :key="index"
     >
-      <Button class="w-full" :label="toStr(yr)" outline @click="setYear(yr)" />
+      <Button class="w-full" :color="btnColor" :label="toStr(yr)" :outline="!isActiveYear(yr)" @click="setYear(yr)" />
     </div>
     <div 
       class="flex justify-center items-center" 
       v-for="(yr, index) in appendYears" :key="index"
     >
-      <Button class="w-full" :label="toStr(yr)" outline @click="setYear(yr)" />
+      <Button class="w-full" :color="btnColor" :label="toStr(yr)" :outline="!isActiveYear(yr)" @click="setYear(yr)" />
     </div>
   </div>
 </template>

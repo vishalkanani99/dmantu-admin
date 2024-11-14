@@ -27,6 +27,7 @@ const props = defineProps({
     default: 'theme-light',
   },
   controllable: Boolean,
+  maxHeight: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue', 'menuClick']);
@@ -79,7 +80,8 @@ onMounted(() => {
     </div>
     <DropdownContainer
       v-model="showList"
-      :bgColor="bgColor" 
+      :bgColor="bgColor"
+      :maxHeight="maxHeight" 
     >
       <slot>
         <Menu 

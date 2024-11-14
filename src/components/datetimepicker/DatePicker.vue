@@ -1,8 +1,10 @@
 <script setup>
 import { computed, ref, shallowRef } from 'vue';
+import { getDefaultTextStyle } from '../../color';
 import { formatDate } from './utils';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
+import Dropdown from '../dropdown/Dropdown.vue';
 
 const props = defineProps({
   modelValue: {
@@ -26,6 +28,14 @@ const props = defineProps({
   appendYears: {
     type: Number,
     default: 100,
+  },
+  inputColor: {
+    type: String,
+    default: 'theme-light',
+  },
+  calendarColor: {
+    type: String,
+    default: 'theme',
   }
 });
 
@@ -41,30 +51,40 @@ const dateObj = computed({
 const formattedDate = ref(formatDate(props.modelValue, props.format));
 
 const showCalendar = shallowRef(false);
+const btnColor = computed(() => getDefaultTextStyle(props.calendarColor).type);
 
-const open = (el) => {
+const toggle = (el) => {
   el.target.blur();
-  showCalendar.value = true;
+  showCalendar.value = !showCalendar.value;
 }
 
-const close = () => {
-  formattedDate.value = formatDate(dateObj.value, props.format);
+const close = (newDateObj) => {
+  formattedDate.value = formatDate(newDateObj, props.format);
   showCalendar.value = false;
 }
 </script>
 <template>
-  <div>
-    <Field 
-      v-model="formattedDate"  
-      @focus="open"
-    />
+  <Dropdown
+    v-model="showCalendar"
+    :bgColor="calendarColor"
+    controllable
+    maxHeight
+  >
+    <template #selector>
+      <Field 
+        v-model="formattedDate"
+        :color="inputColor"  
+        @focus="toggle"
+      />
+    </template>
     <Calendar 
-      v-if="showCalendar" 
+      class="p-2" 
       v-model="dateObj"
       :firstDayOfWeek="firstDayOfWeek"
       :prependYears="prependYears" 
       :appendYears="appendYears"
+      :btnColor="btnColor"
       @update:modelValue="close" 
     />
-  </div>
+  </Dropdown>
 </template>

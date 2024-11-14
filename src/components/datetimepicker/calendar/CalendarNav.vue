@@ -14,6 +14,7 @@ const props = defineProps({
     type: Number,
     default: new Date().getMonth(),
   },
+  btnColor: String,
 });
 
 const emit = defineEmits(['next', 'prev', 'toggleMonth', 'toggleYear']);
@@ -23,14 +24,14 @@ const yearStr = computed(() => props.year.toString());
 </script>
 <template>
   <div class="flex items-center justify-between">
-    <Button class="!p-1" rounded outline @click="$emit('prev')">
+    <Button class="!p-1" :color="btnColor" rounded outline @click="$emit('prev')">
       <Icon class="w-4 h-4" :path="mdiArrowLeft" />
     </Button>
     <div class="flex items-center gap-2">
-      <Button :label="monthStr" outline rounded @click="$emit('toggleMonth')" />
-      <Button :label="yearStr" outline rounded @click="$emit('toggleYear')" />
+      <Button :color="btnColor" :label="monthStr" outline rounded @click="$emit('toggleMonth')" />
+      <Button :color="btnColor" :label="yearStr" outline rounded @click="$emit('toggleYear')" />
     </div>
-    <Button class="!p-1" rounded outline @click="$emit('next')">
+    <Button class="!p-1" :color="btnColor" rounded outline @click="$emit('next')">
       <Icon class="w-4 h-4" :path="mdiArrowRight" />
     </Button>
   </div>
