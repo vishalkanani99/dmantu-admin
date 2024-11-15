@@ -36,6 +36,7 @@ const dateObj = computed({
   }
 });
 
+const transitionName = shallowRef('calendar');
 const currentView = shallowRef('days');
 const year = ref(new Date().getFullYear());
 const month = ref(new Date().getMonth());
@@ -53,6 +54,7 @@ const nextMonthYear = () => {
   }
 
   month.value = nextMonth;
+  transitionName.value = 'next-month';
   toggleView('days');
 }
 
@@ -69,10 +71,14 @@ const prevMonthYear = () => {
   }
 
   month.value = prevMonth;
+  transitionName.value = 'prev-month';
   toggleView('days');
 }
 
 const toggleView = (view) => {
+  if( view !== 'days' ) {
+    transitionName.value = 'calendar';
+  }
   currentView.value = currentView.value === view ? 'days' : view;
 }
 
@@ -87,7 +93,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div>
+  <div class="relative">
     <CalendarNav 
       class="mb-2" 
       :year="year" 
@@ -98,27 +104,70 @@ onMounted(() => {
       @toggleMonth="toggleView('months')"
       @toggleYear="toggleView('years')"
     />
-    <CalendarMonths 
-      v-if="currentView === 'months'"
-      v-model="dateObj"
-      :btnColor="btnColor"
-      @update:modelValue="update('months')" 
-    />
-    <CalendarYears 
-      v-if="currentView === 'years'"
-      v-model="dateObj"
-      :prepend="prependYears"
-      :append="appendYears"
-      :btnColor="btnColor"
-      @update:modelValue="update('years')" 
-    />
-    <CalendarDays
-      v-if="currentView === 'days'"
-      v-model="dateObj" 
-      :firstDayOfWeek="firstDayOfWeek" 
-      :year="year" 
-      :month="month"
-      :btnColor="btnColor"  
-    />
+    <TransitionGroup :name="transitionName">
+      <CalendarMonths 
+        v-if="currentView === 'months'"
+        v-model="dateObj"
+        :btnColor="btnColor"
+        @update:modelValue="update('months')" 
+      />
+      <CalendarYears 
+        v-if="currentView === 'years'"
+        v-model="dateObj"
+        :prepend="prependYears"
+        :append="appendYears"
+        :btnColor="btnColor"
+        @update:modelValue="update('years')" 
+      />
+      <CalendarDays
+        v-if="currentView === 'days'"
+        :key="month"
+        v-model="dateObj" 
+        :firstDayOfWeek="firstDayOfWeek" 
+        :year="year" 
+        :month="month"
+        :btnColor="btnColor"  
+      />
+    </TransitionGroup>
   </div>
 </template>
+<style>
+.calendar-move, /* apply transition to moving elements */
+.calendar-enter-active,
+.calendar-leave-active,
+.next-month-enter-active, 
+.prev-month-enter-active, 
+.next-month-leave-active, 
+.prev-month-leave-active {
+  @apply transition-all duration-150 ease-in-out;
+}
+
+.calendar-enter-from {
+  @apply opacity-0 -translate-y-8;
+}
+
+.prev-month-enter-from {
+  @apply opacity-0 translate-x-8;
+}
+
+.next-month-enter-from {
+  @apply opacity-0 -translate-x-8;
+}
+
+.calendar-leave-from, 
+.calendar-leave-to,
+.prev-month-leave-from, 
+.prev-month-leave-to,
+.next-month-leave-from, 
+.next-month-leave-to {
+  @apply hidden;
+}
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
+.calendar-leave-active 
+.next-month-leave-active 
+.prev-month-leave-active {
+  @apply w-full absolute;
+}
+</style>

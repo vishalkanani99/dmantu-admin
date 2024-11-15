@@ -23,7 +23,7 @@ const monthStr = computed(() => l10n.months.longhand[props.month].toString());
 const yearStr = computed(() => props.year.toString());
 </script>
 <template>
-  <div class="flex items-center justify-between">
+  <div class="flex items-center justify-between mt-2 mb-4">
     <Button class="!p-1" :color="btnColor" rounded outline @click="$emit('prev')">
       <Icon class="w-4 h-4" :path="mdiArrowLeft" />
     </Button>
