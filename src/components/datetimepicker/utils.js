@@ -67,7 +67,7 @@ const formatDate = (dateObj, dateFormat) => {
       return pad( formats.n() );
     },
     M: () =>  {
-      return toStr( formats.n() - 1, true );
+      return toStr( formats.n() - 1 );
     },
     n: () =>  {
       return dateObj.getMonth() + 1;

@@ -4,6 +4,8 @@ import CalendarNav from './CalendarNav.vue';
 import CalendarMonths from './CalendarMonths.vue';
 import CalendarYears from './CalendarYears.vue';
 import CalendarDays from './CalendarDays .vue';
+import Timer from '../timer/Timer.vue';
+import TimerView from '../timer/TimerView.vue';
 
 const props = defineProps({
   modelValue: {
@@ -25,6 +27,8 @@ const props = defineProps({
     default: 100,
   },
   btnColor: String,
+  hasTimer: Boolean,
+  isTwelveHrsView: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -128,7 +132,24 @@ onMounted(() => {
         :month="month"
         :btnColor="btnColor"  
       />
+      <TimerView
+        v-if="hasTimer && (currentView === 'hour' || currentView === 'minute')"
+        :key="currentView"
+        v-model="dateObj"
+        :isTwelveHrsView="isTwelveHrsView"
+        :btnColor="btnColor"
+        :isHoursView="currentView === 'hour'"
+        
+      />
     </TransitionGroup>
+    <Timer
+      v-if="hasTimer"
+      v-model="dateObj"
+      :color="btnColor"
+      :isTwelveHrsView="isTwelveHrsView"
+      @hour="toggleView('hour')"
+      @minute="toggleView('minute')" 
+    />
   </div>
 </template>
 <style>

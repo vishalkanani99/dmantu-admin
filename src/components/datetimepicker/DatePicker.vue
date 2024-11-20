@@ -15,7 +15,7 @@ const props = defineProps({
   },
   format: {
     type: String,
-    default: 'Y-m-d',
+    default: 'Y-m-d h:i K',
   },
   firstDayOfWeek: {
     type: Number,
@@ -36,7 +36,15 @@ const props = defineProps({
   calendarColor: {
     type: String,
     default: 'theme',
-  }
+  },
+  hasTimer: {
+    type: Boolean,
+    default: true,
+  },
+  isTwelveHrsView: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -58,9 +66,8 @@ const toggle = (el) => {
   showCalendar.value = !showCalendar.value;
 }
 
-const close = (newDateObj) => {
+const formatDateObj = (newDateObj) => {
   formattedDate.value = formatDate(newDateObj, props.format);
-  showCalendar.value = false;
 }
 </script>
 <template>
@@ -84,7 +91,9 @@ const close = (newDateObj) => {
       :prependYears="prependYears" 
       :appendYears="appendYears"
       :btnColor="btnColor"
-      @update:modelValue="close" 
+      :hasTimer="hasTimer"
+      :isTwelveHrsView="isTwelveHrsView"
+      @update:modelValue="formatDateObj" 
     />
   </Dropdown>
 </template>

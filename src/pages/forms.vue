@@ -380,7 +380,7 @@ const hello = (e) => {
           <Calendar />
         </FieldGroup>
         <FieldGroup label="Date Picker">
-          <DatePicker v-model="form.date" />
+          <DatePicker v-model="form.date"  />
         </FieldGroup>
       </Form>
     </Section>
