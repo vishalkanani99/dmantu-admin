@@ -51,7 +51,7 @@ const isActiveYear = (year) => {
 }
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 max-h-72 overflow-y-auto">
+  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around  w-full gap-2 max-h-72 overflow-y-auto">
     <div 
       class="flex justify-center items-center" 
       v-for="(yr, index) in prependYears" :key="index"

@@ -71,7 +71,7 @@ const getLabel = (num) => {
 
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 max-h-72 overflow-y-auto">
+  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 w-full max-h-72 overflow-y-auto">
     <div 
       class="flex justify-center items-center" 
       v-for="(num, index) in list" :key="index"

@@ -44,7 +44,7 @@ const minutesStr = computed(() => toStr(pad(modelValue.value.getMinutes())));
 
 </script>
 <template>
-  <div class="flex justify-center items-center my-4">
+  <div class="flex justify-center items-center w-full my-4">
     <Button
       :label="hourStr"
       :color="color"

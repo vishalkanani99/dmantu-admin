@@ -109,7 +109,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <div class="relative">
+  <div class="relative flex flex-col items-center">
     <CalendarNav 
       class="mb-2" 
       :year="year" 

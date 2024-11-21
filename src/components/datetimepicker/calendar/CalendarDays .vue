@@ -170,7 +170,7 @@ const getDaysinMonth = (givenMonth) => {
 }
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(7,_min-content)] justify-around gap-2">
+  <div class="grid grid-cols-[repeat(7,_min-content)] justify-around w-full gap-2">
     <div 
       class="flex justify-center items-center w-10 h-10" 
       v-for="(day, index) in buildWeekDays" :key="index"

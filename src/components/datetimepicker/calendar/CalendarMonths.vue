@@ -27,7 +27,7 @@ const isActiveMonth = (month) => {
 }
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2">
+  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around w-full gap-2">
     <div 
       class="flex justify-center items-center" 
       v-for="(month, index) in l10n.months.longhand" :key="index"
