@@ -15,6 +15,21 @@ const props = defineProps({
       return new Date();
     }
   },
+  minDate: {
+    type: Date,
+    validator(value, props) {
+      // The value must match one of these strings
+      return props.maxDate > value;
+    }
+  },
+  maxDate: {
+    type: Date,
+    validator(value, props) {
+      // The value must match one of these strings
+      return props.minDate < value;
+    }
+  },
+  disabled: Array,
   firstDayOfWeek: {
     type: Number,
     default: 0,
@@ -123,7 +138,10 @@ onMounted(() => {
       <CalendarDays
         v-if="currentView === 'days'"
         :key="month"
-        v-model="dateObj" 
+        v-model="dateObj"
+        :minDate="minDate"
+        :maxDate="maxDate"
+        :disabled="disabled" 
         :firstDayOfWeek="firstDayOfWeek" 
         :year="year" 
         :month="month"

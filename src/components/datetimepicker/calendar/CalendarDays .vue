@@ -10,6 +10,19 @@ const props = defineProps({
       return new Date();
     }
   },
+  minDate: {
+    type: Date,
+    validator(value, props) {
+      return props.maxDate > value;
+    }
+  },
+  maxDate: {
+    type: Date,
+    validator(value, props) {
+      return props.minDate < value;
+    }
+  }, 
+  disabled: Array, // eg. [{ 'from': new Date('2024', '11', '12'), 'to': new Date('2024', '11', '18') }, new Date('2025', '08', '12')],
   firstDayOfWeek: {
     type: Number,
     default: 0,
@@ -64,10 +77,56 @@ const prependDays = computed(() => {
   return days;
 });
 
+const isDisableDate = (day) => {
+
+  let currentDate = new Date(props.year, props.month, day);
+  
+  let isOutsideMinDate = props.minDate && props.minDate.constructor === Date && props.minDate > currentDate;
+  let isOutsideMaxDate = props.maxDate && props.maxDate.constructor === Date && props.maxDate < currentDate;
+
+  if( isOutsideMinDate || isOutsideMaxDate ) {
+    return true;
+  }
+
+  let isDisabled = false;
+
+  if( props.disabled ) {
+    for(let key in props.disabled ){
+
+      if(props.disabled[key].constructor === Date && isEqualDates(currentDate, props.disabled[key])) {
+        isDisabled = true;
+        break;
+      }
+
+      if(!props.disabled[key].constructor === Object) {
+        continue;
+      }
+
+      if(!props.disabled[key].hasOwnProperty('from') || !props.disabled[key]['from'].constructor === Date) {
+        continue;
+      }
+
+      if(!props.disabled[key].hasOwnProperty('to') || !props.disabled[key]['to'].constructor === Date) {
+        continue;
+      }
+
+      let fromDate = props.disabled[key]['from'];
+      let toDate = props.disabled[key]['to'];
+
+      if( fromDate < toDate && currentDate >= fromDate && currentDate <= toDate ){
+        isDisabled = true;
+        break;
+      }
+    }
+  }
+  
+  return isDisabled;
+}
+
 const buildDays = computed(() => {
   let dayNumber = 1;
   let numDays = getDaysinMonth();
-  let days = [];
+  let daysObj = [];
   let appendDays = [];
 
   while (dayNumber <= 42 - firstOfMonth.value) {
@@ -76,13 +135,13 @@ const buildDays = computed(() => {
       day = dayNumber % numDays;
       appendDays.push(day);
     } else {
-      days.push(day);
+      daysObj.push({ day, disabled: isDisableDate(day) });
     }
     dayNumber++;
   }
 
   return {
-    days,
+    daysObj,
     appendDays,
   };
 });
@@ -126,15 +185,16 @@ const getDaysinMonth = (givenMonth) => {
     </div>
     <div 
       class="flex justify-center items-center w-10 h-10" 
-      v-for="(day, index) in buildDays.days" :key="index"
+      v-for="(dayObj, index) in buildDays.daysObj" :key="index"
     >
       <Button 
         class="w-full"
         :color="btnColor" 
-        :label="toStr(day)" 
-        :outline="!isActiveDate(day)" 
+        :label="toStr(dayObj.day)" 
+        :outline="!isActiveDate(dayObj.day)"
+        :disabled="dayObj.disabled" 
         rounded
-        @click="setDate(day)" 
+        @click="setDate(dayObj.day)" 
       />
     </div>
     <div 

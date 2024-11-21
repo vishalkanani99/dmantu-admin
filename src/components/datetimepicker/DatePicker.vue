@@ -13,6 +13,21 @@ const props = defineProps({
       return new Date();
     }
   },
+  minDate: {
+    type: Date,
+    validator(value, props) {
+      // The value must match one of these strings
+      return props.maxDate > value;
+    }
+  },
+  maxDate: {
+    type: Date,
+    validator(value, props) {
+      // The value must match one of these strings
+      return props.minDate < value;
+    }
+  },
+  disabled: Array,
   format: {
     type: String,
     default: 'Y-m-d h:i K',
@@ -87,6 +102,9 @@ const formatDateObj = (newDateObj) => {
     <Calendar 
       class="p-2" 
       v-model="dateObj"
+      :minDate="minDate"
+      :maxDate="maxDate"
+      :disabled="disabled"
       :firstDayOfWeek="firstDayOfWeek"
       :prependYears="prependYears" 
       :appendYears="appendYears"
