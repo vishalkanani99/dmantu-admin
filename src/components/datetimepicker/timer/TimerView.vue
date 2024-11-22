@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { toStr, pad, formatDate } from '../utils';
 import Button from '../../Button.vue';
 
@@ -11,6 +11,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+
+const timerContainerRef = ref();
+const timerRef = ref();
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -41,16 +44,29 @@ const list = computed(() => {
   return nums;
 });
 
-const isActive = (value) => {
+const isActive = (value, index) => {
+  let isActive = false;
   if(!props.isHoursView) {
-    return modelValue.value.getMinutes() === value;
+    isActive = modelValue.value.getMinutes() === value;
+  } else {
+    let hrs = modelValue.value.getHours();
+    if(props.isTwelveHrsView) {
+      hrs = hrs % 12;
+      hrs = hrs === 0 ? 12 : hrs;
+    }
+    isActive = hrs === value;
   }
-  let hrs = modelValue.value.getHours();
-  if(props.isTwelveHrsView) {
-    hrs = hrs % 12;
-    hrs = hrs === 0 ? 12 : hrs;
+  
+  if(isActive){
+    scrollToActive(index);
   }
-  return hrs === value;
+  return isActive;
+}
+
+const scrollToActive = (elIndex) => {
+  if( timerRef.value && timerRef.value[elIndex] && timerRef.value[elIndex].$el ) {
+    timerContainerRef.value.scrollTop = timerRef.value[elIndex].$el.offsetTop - (timerRef.value[elIndex].$el.offsetHeight * 2 );
+  }
 }
 
 const getTwelveHrsFormat = (hours) => {
@@ -71,16 +87,17 @@ const getLabel = (num) => {
 
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 w-full max-h-72 overflow-y-auto">
+  <div ref="timerContainerRef" class="grid grid-cols-[repeat(3,_min-content)] justify-around gap-2 w-full max-h-72 overflow-y-auto">
     <div 
       class="flex justify-center items-center" 
       v-for="(num, index) in list" :key="index"
     >
-      <Button 
+      <Button
+        ref="timerRef"
         class="w-full" 
         :color="btnColor" 
         :label="getLabel(getTimeFormat(num, index))" 
-        :outline="!isActive(getTimeFormat(num, index))" 
+        :outline="!isActive(getTimeFormat(num, index), index)" 
         @click="setTime(getTimeFormat(num, index))" 
       />
     </div>
