@@ -31,7 +31,7 @@ const setTime = () => {
   hours = timePeriod.value === 'PM' ? hours + 12 : hours;
 
   modelValue.value.setHours(parseInt(hours));
-  modelValue.value = modelValue.value;
+  modelValue.value = new Date(modelValue.value);
 }
 
 const hourStr = computed(() => {

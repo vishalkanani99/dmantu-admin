@@ -33,7 +33,7 @@ const setTime = (time) => {
   }
 
   modelValue.value.setHours(hours, minutes);
-  modelValue.value = modelValue.value;
+  modelValue.value = new Date(modelValue.value);
 }
 
 const list = computed(() => {

@@ -19,7 +19,7 @@ const modelValue = computed({
 
 const setMonth = (month) => {
   modelValue.value.setMonth(month);
-  modelValue.value = modelValue.value;
+  modelValue.value = new Date(modelValue.value);
 }
 
 const isActiveMonth = (month) => {

@@ -30,7 +30,7 @@ const modelValue = computed({
 
 const setYear = (yr) => {
   modelValue.value.setFullYear(yr);
-  modelValue.value = modelValue.value;
+  modelValue.value = new Date(modelValue.value);
 }
 
 const currentYr = computed(() => new Date().getFullYear());
