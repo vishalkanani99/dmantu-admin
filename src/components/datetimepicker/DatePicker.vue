@@ -5,6 +5,7 @@ import { formatDate } from './utils';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
 import Dropdown from '../dropdown/Dropdown.vue';
+import Button from '../Button.vue';
 
 const props = defineProps({
   modelValue: {
@@ -84,6 +85,10 @@ const toggle = (el) => {
 const formatDateObj = (newDateObj) => {
   formattedDate.value = formatDate(newDateObj, props.format);
 }
+
+const close = () => {
+  showCalendar.value = false;
+}
 </script>
 <template>
   <Dropdown
@@ -99,19 +104,28 @@ const formatDateObj = (newDateObj) => {
         @focus="toggle"
       />
     </template>
-    <Calendar 
-      class="p-2" 
-      v-model="dateObj"
-      :minDate="minDate"
-      :maxDate="maxDate"
-      :disabled="disabled"
-      :firstDayOfWeek="firstDayOfWeek"
-      :prependYears="prependYears" 
-      :appendYears="appendYears"
-      :btnColor="btnColor"
-      :hasTimer="hasTimer"
-      :isTwelveHrsView="isTwelveHrsView"
-      @update:modelValue="formatDateObj" 
-    />
+    <div class="flex flex-col items-center">
+      <Calendar 
+        class="w-full p-2" 
+        v-model="dateObj"
+        :minDate="minDate"
+        :maxDate="maxDate"
+        :disabled="disabled"
+        :firstDayOfWeek="firstDayOfWeek"
+        :prependYears="prependYears" 
+        :appendYears="appendYears"
+        :btnColor="btnColor"
+        :hasTimer="hasTimer"
+        :isTwelveHrsView="isTwelveHrsView"
+        @update:modelValue="formatDateObj" 
+      />
+      <Button 
+        class="mb-4" 
+        label="Done" 
+        :color="btnColor"
+        rounded
+        @click="close" 
+      />
+    </div>
   </Dropdown>
 </template>
