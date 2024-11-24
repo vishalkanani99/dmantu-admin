@@ -104,28 +104,29 @@ const close = () => {
         @focus="toggle"
       />
     </template>
-    <div class="flex flex-col items-center">
-      <Calendar 
-        class="w-full p-2" 
-        v-model="dateObj"
-        :minDate="minDate"
-        :maxDate="maxDate"
-        :disabled="disabled"
-        :firstDayOfWeek="firstDayOfWeek"
-        :prependYears="prependYears" 
-        :appendYears="appendYears"
-        :btnColor="btnColor"
-        :hasTimer="hasTimer"
-        :isTwelveHrsView="isTwelveHrsView"
-        @update:modelValue="formatDateObj" 
-      />
-      <Button 
-        class="mb-4" 
-        label="Done" 
-        :color="btnColor"
-        rounded
-        @click="close" 
-      />
-    </div>
+    <Calendar 
+      class="w-full p-2" 
+      v-model="dateObj"
+      :minDate="minDate"
+      :maxDate="maxDate"
+      :disabled="disabled"
+      :firstDayOfWeek="firstDayOfWeek"
+      :prependYears="prependYears" 
+      :appendYears="appendYears"
+      :btnColor="btnColor"
+      :hasTimer="hasTimer"
+      :isTwelveHrsView="isTwelveHrsView"
+      @update:modelValue="formatDateObj" 
+    >
+      <template #footer>
+        <Button 
+          class="mb-2" 
+          label="Done" 
+          :color="btnColor"
+          rounded
+          @click="close" 
+        />
+      </template>
+    </Calendar>
   </Dropdown>
 </template>

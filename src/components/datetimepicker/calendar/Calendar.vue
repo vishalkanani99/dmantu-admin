@@ -165,5 +165,6 @@ onMounted(() => {
       @hour="toggleView('hours', 'slide-up')"
       @minute="toggleView('minutes', 'slide-up')" 
     />
+    <slot name="footer"></slot>
   </div>
 </template>
