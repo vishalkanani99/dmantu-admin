@@ -16,6 +16,7 @@ export default defineComponent({
     vertical: Boolean,
     outline: Boolean,
     color: String,
+    panelColor: String,
   },
   emits: ['update:modelValue'],
   setup(props, context) {
@@ -72,6 +73,7 @@ export default defineComponent({
           StepPanel,
             {
               isActive: activeStep.value === (index + 1) ? true : false,
+              color: props.panelColor,
               btnColor: props.color,
             },
             {

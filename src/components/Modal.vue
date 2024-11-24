@@ -24,6 +24,7 @@
         return ['full', 'large', 'medium', 'small'].includes(value)
       },
     },
+    color: String,
     title: String,
     subTitle: String,
     saveBtnLabel: String,
@@ -117,6 +118,7 @@
   const bindProps = computed(() => {
 
     const componentProps = {
+      color: props.color,
       title: props.title,
       subTitle: props.subTitle,
       saveBtnLabel: props.saveBtnLabel,

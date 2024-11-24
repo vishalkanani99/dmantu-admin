@@ -10,6 +10,7 @@ import Icon from '../Icon.vue';
 const props = defineProps({
   modelValue: [Array, String, Number, Boolean, Object],
   imageSrc: String,
+  color: String,
   title: String,
   subTitle: String,
   menuBtnColor: {
@@ -50,6 +51,7 @@ const modelValue = computed({
     :cancelBtnLabel="cancelBtnLabel"
     :saveBtnIconPath="saveBtnIconPath"
     :cancelBtnIconPath="cancelBtnIconPath"
+    :color="color"
   >
     <template #header>
       <div class="relative">

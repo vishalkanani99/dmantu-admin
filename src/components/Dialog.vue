@@ -7,6 +7,7 @@
 
   const props = defineProps({
     modelValue: Boolean,
+    color: String,
     title: String,
     iconPath: String,
     iconBgColor: {
@@ -51,6 +52,7 @@
 <template>
   <Modal
     v-model="showDialog"
+    :color=color
     size="small"
     origin="center"
     closable

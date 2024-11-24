@@ -2,6 +2,7 @@
 import Card from '../card/Card.vue';
 
 const props = defineProps({
+  color: String,
   title: String,
   subTitle: String,
   saveBtnLabel: {
@@ -27,6 +28,7 @@ const emit = defineEmits(['close', 'save', 'cancel']);
 <template>
   <form>
     <Card
+      :color="color"
       :title="title"
       :subTitle="subTitle"
       :saveBtnLabel="saveBtnLabel"
