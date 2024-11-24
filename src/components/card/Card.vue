@@ -1,5 +1,7 @@
 <script setup>
+import { computed } from 'vue';
 import { mdiClose } from '@mdi/js';
+import { background, getDefaultTextStyle, border } from '../../color';
 import Button from '../Button.vue';
 import Icon from '../Icon.vue';
 
@@ -14,6 +16,10 @@ const props = defineProps({
     type: String,
     default: 'Cancel',
   },
+  color: {
+    type: String,
+    default: 'white',
+  },
   saveBtnIconPath: String,
   cancelBtnIconPath: String,
   closable: Boolean,
@@ -23,13 +29,28 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close', 'save', 'cancel']);
+
+const textStyle = computed(() => getDefaultTextStyle(props.color));
+
+const defaultStyle = computed(() => {
+  let style = [
+    'relative flex flex-col border min-w-0 rounded-md shadow-md',
+    background[props.color],
+    border[props.color],
+    textStyle.value.color,
+  ];
+  return style;
+});
+
+const separatorColor = computed(() => border[textStyle.value.type]);
+
 </script>
 <template>
-  <div class="relative flex flex-col bg-white border min-w-0 rounded-md shadow-md">
+  <div :class="defaultStyle">
     <Button
       v-if="closable" 
       class="absolute top-0 right-0 m-2" 
-      color="theme-light"
+      :color="textStyle.type"
       rounded
       @click="$emit('close')" 
     >
@@ -37,7 +58,7 @@ const emit = defineEmits(['close', 'save', 'cancel']);
     </Button>
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <div class="flex justify-between items-center border-b rounded-t-md p-6">
+      <div :class="['flex justify-between items-center border-b rounded-t-md p-6', separatorColor]">
         <span>
           <h2 v-if="title">{{ title }}</h2>
           <h4 v-if="subTitle">{{ subTitle }}</h4>
@@ -61,10 +82,10 @@ const emit = defineEmits(['close', 'save', 'cancel']);
 
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
-      <div class="flex items-center space-x-2 border-t rounded-b-md p-6">
+      <div :class="['flex items-center space-x-2 border-t rounded-b-md p-6', separatorColor]">
         <slot name="buttons">
-          <Button :label="saveBtnLabel" :iconPath="saveBtnIconPath"  @click="$emit('save')" />
-          <Button :label="cancelBtnLabel" color="theme-light" :iconPath="cancelBtnIconPath" @click="$emit('cancel')" />
+          <Button :label="saveBtnLabel" :iconPath="saveBtnIconPath" :color="textStyle.type"  @click="$emit('save')" />
+          <Button :label="cancelBtnLabel" :iconPath="cancelBtnIconPath" :color="textStyle.type" outline  @click="$emit('cancel')" />
         </slot>
       </div>
     </slot>
