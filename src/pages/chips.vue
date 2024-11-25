@@ -26,7 +26,7 @@ import Chip from '../components/Chip.vue';
       btnColor="theme"
     >
       <Card title="Default" noFooter>
-        <div class="flex items-center flex-wrap space-x-4 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme-dark" label="Theme Dark"></Chip>
           <Chip color="theme" label="Theme"></Chip>
           <Chip color="theme-light" label="Theme Light"></Chip>
@@ -38,7 +38,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="warning" label="Warning"></Chip>
           <Chip color="danger" label="Danger"></Chip>
         </div>
-        <div class="flex items-center flex-wrap space-x-4">
+        <div class="flex items-center flex-wrap gap-2">
           <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount"></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail"></Chip>
           <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh"></Chip>
@@ -51,7 +51,7 @@ import Chip from '../components/Chip.vue';
         </div>
       </Card>
       <Card title="Outline" noFooter>
-        <div class="flex items-center flex-wrap space-x-4 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme-dark" label="Theme Dark" outline></Chip>
           <Chip color="theme" label="Theme" outline></Chip>
           <Chip color="black" label="Black" outline></Chip>
@@ -61,7 +61,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="warning" label="Warning" outline></Chip>
           <Chip color="danger" label="Danger" outline></Chip>
         </div>
-        <div class="flex items-center flex-wrap space-x-4">
+        <div class="flex items-center flex-wrap gap-2">
           <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" outline></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail" outline></Chip>
           <Chip color="black" label="Black" :iconPath="mdiAlertCircle" outline></Chip>
@@ -73,7 +73,7 @@ import Chip from '../components/Chip.vue';
         </div>
       </Card>
       <Card title="Rounded" noFooter>
-        <div class="flex items-center flex-wrap space-x-4 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme-dark" label="Theme Dark" rounded></Chip>
           <Chip color="theme" label="Theme" rounded></Chip>
           <Chip color="theme-light" label="Theme Light" rounded></Chip>
@@ -84,7 +84,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="warning" label="Warning" rounded></Chip>
           <Chip color="danger" label="Danger" rounded></Chip>
         </div>
-        <div class="flex items-center flex-wrap space-x-4">
+        <div class="flex items-center flex-wrap gap-2">
           <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail" rounded></Chip>
           <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh" rounded></Chip>
@@ -97,7 +97,7 @@ import Chip from '../components/Chip.vue';
         </div>
       </Card>
       <Card title="Closable" noFooter>
-        <div class="flex items-center flex-wrap space-x-4 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme-dark" label="Theme Dark" closable></Chip>
           <Chip color="theme" label="Theme" closable></Chip>
           <Chip color="theme-light" label="Theme Light" closable></Chip>
@@ -109,7 +109,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="warning" label="Warning" closable></Chip>
           <Chip color="danger" label="Danger" closable></Chip>
         </div>
-        <div class="flex items-center flex-wrap space-x-4 mb-6">
+        <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme-dark" label="Theme Dark" outline closable></Chip>
           <Chip color="theme" label="Theme" outline closable></Chip>
           <Chip color="black" label="Black" outline closable></Chip>
@@ -119,7 +119,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="warning" label="Warning" outline closable></Chip>
           <Chip color="danger" label="Danger" outline closable></Chip>
         </div>
-        <div class="flex items-center flex-wrap space-x-4">
+        <div class="flex items-center flex-wrap gap-2">
           <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded closable></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail" rounded closable></Chip>
           <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh" rounded closable></Chip>
