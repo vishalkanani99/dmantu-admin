@@ -110,6 +110,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="relative flex flex-col items-center">
+    <slot name="header"></slot>
     <CalendarNav 
       class="mb-2" 
       :year="year" 

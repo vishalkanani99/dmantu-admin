@@ -1,10 +1,11 @@
 <script setup>
-import { computed, ref, shallowRef } from 'vue';
+import { computed, onMounted, ref, shallowRef } from 'vue';
 import { getDefaultTextStyle } from '../../color';
 import { formatDate } from './utils';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
-import Dropdown from '../dropdown/Dropdown.vue';
+import DropdownContainer from '../dropdown/DropdownContainer.vue';
+import Modal from '../Modal.vue';
 import Button from '../Button.vue';
 
 const props = defineProps({
@@ -61,9 +62,12 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  hasModalView: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue']);
+
+const containerRef = ref();
 
 const dateObj = computed({
   get: () => props.modelValue,
@@ -77,6 +81,28 @@ const formattedDate = ref(formatDate(props.modelValue, props.format));
 const showCalendar = shallowRef(false);
 const btnColor = computed(() => getDefaultTextStyle(props.calendarColor).type);
 
+const typeOfComponent = computed(() => props.hasModalView ? Modal : DropdownContainer );
+const bindProps = computed(() => {
+  let componentProps = {
+    bgColor: props.calendarColor,
+    maxHeight: true,
+  };
+
+  if(props.hasModalView) {
+    componentProps = {
+      color: props.calendarColor,
+      size: 'large',
+      origin: 'center',
+      noHeader: true,
+      noFooter: true,
+      centered: true,
+      closable: false,
+    }
+  }
+
+  return componentProps;
+});
+
 const toggle = (el) => {
   el.target.blur();
   showCalendar.value = !showCalendar.value;
@@ -89,44 +115,57 @@ const formatDateObj = (newDateObj) => {
 const close = () => {
   showCalendar.value = false;
 }
+
+const trackClickEvent = (el) => {
+  const isElementExist = document.body.contains(el.target);
+  if(!isElementExist || !containerRef.value) return;
+  if(containerRef.value.contains(el.target)) return;
+  showCalendar.value = false;
+}
+
+onMounted(() => {
+  document.addEventListener('click', trackClickEvent);
+})
 </script>
 <template>
-  <Dropdown
-    v-model="showCalendar"
-    :bgColor="calendarColor"
-    controllable
-    maxHeight
-  >
-    <template #selector>
-      <Field 
-        v-model="formattedDate"
-        :color="inputColor"  
-        @focus="toggle"
-      />
-    </template>
-    <Calendar 
-      class="w-full p-2" 
-      v-model="dateObj"
-      :minDate="minDate"
-      :maxDate="maxDate"
-      :disabled="disabled"
-      :firstDayOfWeek="firstDayOfWeek"
-      :prependYears="prependYears" 
-      :appendYears="appendYears"
-      :btnColor="btnColor"
-      :hasTimer="hasTimer"
-      :isTwelveHrsView="isTwelveHrsView"
-      @update:modelValue="formatDateObj" 
+  <div ref="containerRef" class="relative select-none">
+    <Field 
+      v-model="formattedDate"
+      :color="inputColor"  
+      @focus="toggle"
+    />
+    <component
+      :is="typeOfComponent"
+      v-model="showCalendar"
+      v-bind="bindProps"
     >
-      <template #footer>
-        <Button 
-          class="mb-2" 
-          label="Done" 
-          :color="btnColor"
-          rounded
-          @click="close" 
-        />
-      </template>
-    </Calendar>
-  </Dropdown>
+      <Calendar 
+        class="w-full p-2" 
+        v-model="dateObj"
+        :minDate="minDate"
+        :maxDate="maxDate"
+        :disabled="disabled"
+        :firstDayOfWeek="firstDayOfWeek"
+        :prependYears="prependYears" 
+        :appendYears="appendYears"
+        :btnColor="btnColor"
+        :hasTimer="hasTimer"
+        :isTwelveHrsView="isTwelveHrsView"
+        @update:modelValue="formatDateObj" 
+      >
+        <template #header>
+          <span class="my-2 font-bold">{{ formattedDate }}</span>
+        </template>
+        <template #footer>
+          <Button 
+            class="mb-2" 
+            label="Done" 
+            :color="btnColor"
+            rounded
+            @click="close" 
+          />
+        </template>
+      </Calendar>
+    </component>
+  </div>
 </template>
