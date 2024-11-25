@@ -18,6 +18,14 @@ import { getButtonStyle } from '../color.js';
     rounded: Boolean,
     isPlain: Boolean,
     disabled: Boolean,
+    size: {
+      type: String,
+      default: 'medium',
+      validator(value, props) {
+        // The value must match one of these strings
+        return ['large', 'medium', 'small'].includes(value)
+      },
+    },
   })
 
   const typeOfComponent = computed(() => {
@@ -39,16 +47,32 @@ import { getButtonStyle } from '../color.js';
     }
 
     let style = [
-      'flex justify-center items-center',
+      'flex justify-center items-center text-center leading-normal',
       'focus:outline-none',
       'select-none',
-      props.label ? 'px-3 py-2' : 'p-2',
       props.rounded ? 'rounded-full' : 'rounded-md',
       getButtonStyle(props.color, props.outline),
       { 'focus:ring-0 opacity-30 cursor-not-allowed' : props.disabled },
     ];
     
-    return style;
+    let text = 'text-base';
+    let padding = props.iconPath && !props.label ? 'p-1.5' : 'px-3 py-1.5';
+
+    if(props.size === 'small'){
+      text = 'text-sm';
+      padding = props.iconPath && !props.label ? 'p-1' : 'px-2 py-1';
+    }
+
+    if(props.size === 'large'){
+      text = 'text-lg';
+      padding = props.iconPath && !props.label ? 'p-2' : 'px-4 py-2';
+    }
+
+    return [
+      ...style,
+      text,
+      padding,
+    ];
   })
 
 const bindProps = computed(() => {
@@ -63,7 +87,18 @@ const bindProps = computed(() => {
     componentProps.type = props.type;
   }
   return componentProps;
-}) 
+})
+
+const iconSize = computed(() => {
+  let size = 18;
+  if( props.size === 'small' ) {
+    size = 16;
+  }
+  if( props.size === 'large' ) {
+    size = 20;
+  }
+  return size;
+})
 </script>
 <template>
   <component
@@ -73,8 +108,8 @@ const bindProps = computed(() => {
     :disabled="disabled"
   >
     <slot>
-      <Icon v-if="iconPath" :path="iconPath" />
-      <span v-if="label" class="px-2">{{ label }}</span>
+      <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
+      <span v-if="label" :class="{ 'ml-1': iconPath }">{{ label }}</span>
     </slot>
   </component>
 </template>
