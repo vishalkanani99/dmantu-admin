@@ -7,7 +7,7 @@ import SideBarMenu from '../components/sidebar/SideBarMenu.vue';
 import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 
-const { isSmallScreen, isExtraSmallScreen } = useScreen();
+const { isSm, isXs } = useScreen();
 const showSideBar = shallowRef(false);
 const isCompactSidebar = shallowRef(false);
 const showOverLayer = shallowRef(false);
@@ -15,7 +15,7 @@ const showSideBarDropdown = shallowRef(false);
 const dropdownItem = ref({});
 const searchField = ref();
 
-const isClosableSidebar = computed(() => isSmallScreen.value || isExtraSmallScreen.value);
+const isClosableSidebar = computed(() => isSm.value || isXs.value);
 
 const toggleMenu = () => {
   showSideBar.value = !showSideBar.value;
