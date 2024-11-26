@@ -5,7 +5,6 @@ import Button from '../Button.vue';
 import Dropdown from '../dropdown/Dropdown.vue';
 import Card from './Card.vue';
 import FieldOption from '../form/FieldOption.vue';
-import Icon from '../Icon.vue';
 
 const props = defineProps({
   modelValue: [Array, String, Number, Boolean, Object],
@@ -76,9 +75,12 @@ const modelValue = computed({
               @menuClick="(value) => $emit('menuClick', value)"
             >
               <template #selector>
-                <Button :color="menuBtnColor" rounded >
-                  <Icon :path="menuBtnIconPath ?? mdiDotsVertical" size="14" />
-                </Button>
+                <Button 
+                  :color="menuBtnColor"
+                  :iconPath="menuBtnIconPath ?? mdiDotsVertical"
+                  size="small" 
+                  rounded 
+                />
               </template>
             </Dropdown>
           </slot>

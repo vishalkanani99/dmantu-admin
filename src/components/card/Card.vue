@@ -3,7 +3,6 @@ import { computed } from 'vue';
 import { mdiClose } from '@mdi/js';
 import { background, getDefaultTextStyle, border } from '../../color';
 import Button from '../Button.vue';
-import Icon from '../Icon.vue';
 
 const props = defineProps({
   title: String,
@@ -51,14 +50,14 @@ const separatorColor = computed(() => border[textStyle.value.type]);
       v-if="closable" 
       class="absolute top-0 right-0 m-2" 
       :color="textStyle.type"
+      size="small"
+      :iconPath="mdiClose"
       rounded
       @click="$emit('close')" 
-    >
-      <Icon :path="mdiClose" size="16" />
-    </Button>
+    />
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <div :class="['flex justify-between items-center border-b rounded-t-md p-6', separatorColor]">
+      <div :class="['flex justify-between items-center border-b rounded-t-md p-3 md:p-6', separatorColor]">
         <span>
           <h2 v-if="title">{{ title }}</h2>
           <h4 v-if="subTitle">{{ subTitle }}</h4>
@@ -71,7 +70,7 @@ const separatorColor = computed(() => border[textStyle.value.type]);
     <slot name="content">
         <div 
           :class="[ 
-            'flex-auto p-6',
+            'flex-auto p-3 md:p-6',
             scrollable ? 'max-h-[calc(100vh-224px)] overflow-y-auto' : 'overflow-hidden',
           ]"
         >
@@ -82,7 +81,7 @@ const separatorColor = computed(() => border[textStyle.value.type]);
 
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
-      <div :class="['flex items-center space-x-2 border-t rounded-b-md p-6', separatorColor]">
+      <div :class="['flex items-center space-x-2 border-t rounded-b-md p-3 md:p-6', separatorColor]">
         <slot name="buttons">
           <Button :label="saveBtnLabel" :iconPath="saveBtnIconPath" :color="textStyle.type"  @click="$emit('save')" />
           <Button :label="cancelBtnLabel" :iconPath="cancelBtnIconPath" :color="textStyle.type" outline  @click="$emit('cancel')" />

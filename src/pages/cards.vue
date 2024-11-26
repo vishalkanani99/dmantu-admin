@@ -26,7 +26,7 @@ import Chip from '../components/Chip.vue';
       :btnIconPath="mdiCog" 
       btnColor="theme"
     >
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card title="Default Card" subTitle="Sub Title">
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -53,7 +53,7 @@ import Chip from '../components/Chip.vue';
         </Card>
         <Card>
           <template #header>
-            <h2 class="p-4 text-center">Card with header and footer slots</h2>
+            <h2 class="p-2 md:p-4 text-center">Card with header and footer slots</h2>
           </template>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
@@ -62,17 +62,17 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
           <template #footer>
-            <div class="flex justify-center items-center p-4 space-x-2">
+            <div class="flex justify-center items-center p-2 md:p-4 gap-2">
               <Button color="info" label="Submit" />
               <Button color="danger" label="Cancel" outline />
             </div>
           </template>
         </Card>
-        <Card class="col-span-2" title="Icon" noHeader noFooter>
+        <Card class="md:col-span-2" title="Icon" noHeader noFooter>
           <p class="text-center">Card without header and footer</p>
         </Card>
       </div>
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"

@@ -108,9 +108,9 @@ const labelColor = computed(() => {
                 >
                   <template #selector>
                     <Button 
-                      class="text-xs w-8 h-8" 
                       :iconPath="mdiDotsVertical" 
-                      :color="outline ? color : textStyle.type" 
+                      :color="outline ? color : textStyle.type"
+                      size="small" 
                       :outline="outline" 
                       rounded 
                     />
