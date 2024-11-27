@@ -47,6 +47,8 @@ const selectedDate = computed({
   }
 });
 
+const buttonClass = computed(() => '!p-1 text-xs md:text-sm w-6 h-6 md:w-8 md:h-8');
+
 const isActiveDate = (day) => {
   let date = new Date(props.year, props.month, day);
   return isEqualDates(date, selectedDate.value);
@@ -170,25 +172,25 @@ const getDaysinMonth = (givenMonth) => {
 }
 </script>
 <template>
-  <div class="grid grid-cols-[repeat(7,_min-content)] justify-around w-full gap-2">
+  <div class="grid grid-cols-7 justify-around w-full gap-1">
     <div 
-      class="flex justify-center items-center w-10 h-10" 
+      class="flex justify-center items-center" 
       v-for="(day, index) in buildWeekDays" :key="index"
     >
       <span>{{ day }}</span>
     </div>
     <div 
-      class="flex justify-center items-center w-10 h-10" 
+      class="flex justify-center items-center" 
       v-for="(day, index) in prependDays" :key="index"
     >
-      <Button class="w-full" :color="btnColor" :label="toStr(day)" disabled outline rounded />
+      <Button :class="buttonClass" :color="btnColor" :label="toStr(day)" disabled outline rounded />
     </div>
     <div 
-      class="flex justify-center items-center w-10 h-10" 
+      class="flex justify-center items-center" 
       v-for="(dayObj, index) in buildDays.daysObj" :key="index"
     >
       <Button 
-        class="w-full"
+        :class="buttonClass"
         :color="btnColor" 
         :label="toStr(dayObj.day)" 
         :outline="!isActiveDate(dayObj.day)"
@@ -198,10 +200,10 @@ const getDaysinMonth = (givenMonth) => {
       />
     </div>
     <div 
-      class="flex justify-center items-center w-10 h-10" 
+      class="flex justify-center items-center" 
       v-for="(day, index) in buildDays.appendDays" :key="index"
     >
-      <Button class="w-full" :color="btnColor" :label="toStr(day)" disabled outline rounded />
+      <Button :class="buttonClass" size="small" :color="btnColor" :label="toStr(day)" disabled outline rounded />
     </div>
   </div>
 </template>

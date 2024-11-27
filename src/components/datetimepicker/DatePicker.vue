@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, shallowRef } from 'vue';
 import { getDefaultTextStyle } from '../../color';
 import { formatDate } from './utils';
+import { useScreen } from '../../composables/useScreen';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
 import DropdownContainer from '../dropdown/DropdownContainer.vue';
@@ -65,6 +66,8 @@ const props = defineProps({
   hasModalView: Boolean,
 });
 
+const { isSm, isXs } = useScreen();
+
 const emit = defineEmits(['update:modelValue']);
 
 const containerRef = ref();
@@ -91,8 +94,8 @@ const bindProps = computed(() => {
   if(props.hasModalView) {
     componentProps = {
       color: props.calendarColor,
-      size: 'large',
-      origin: 'center',
+      size: isSm.value || isXs.value ? 'large' : 'small',
+      origin: isSm.value || isXs.value ? 'bottom' : 'center',
       noHeader: true,
       noFooter: true,
       centered: true,

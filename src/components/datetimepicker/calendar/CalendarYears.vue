@@ -59,7 +59,7 @@ const isActiveYear = (year, elIndex) => {
 }
 </script>
 <template>
-  <div ref="yearContainerRef" class="grid grid-cols-[repeat(3,_min-content)] justify-around  w-full gap-2 max-h-72 overflow-y-auto">
+  <div ref="yearContainerRef" class="grid grid-cols-3 justify-around  w-full gap-2 max-h-72 overflow-y-auto">
     <div 
       class="flex justify-center items-center" 
       v-for="(yr, index) in totalYears" :key="index"
