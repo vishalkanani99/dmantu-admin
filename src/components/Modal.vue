@@ -37,6 +37,7 @@
     },
     noHeader: Boolean,
     noFooter: Boolean,
+    noPadding: Boolean,
     twoColumns: Boolean,
     threeColumns: Boolean,
     scrollable: Boolean,
@@ -128,6 +129,7 @@
       closable: props.closable,
       noHeader: props.noHeader,
       noFooter: props.noFooter,
+      noPadding: props.noPadding,
       scrollable: props.scrollable,
     };
 

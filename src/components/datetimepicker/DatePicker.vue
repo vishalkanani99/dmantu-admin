@@ -98,8 +98,10 @@ const bindProps = computed(() => {
       origin: isSm.value || isXs.value ? 'bottom' : 'center',
       noHeader: true,
       noFooter: true,
+      noPadding: true,
       centered: true,
       closable: false,
+      scrollable: true,
     }
   }
 

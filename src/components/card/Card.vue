@@ -24,6 +24,7 @@ const props = defineProps({
   closable: Boolean,
   noHeader: Boolean,
   noFooter: Boolean,
+  noPadding: Boolean,
   scrollable: Boolean,
 });
 
@@ -57,7 +58,12 @@ const separatorColor = computed(() => border[textStyle.value.type]);
     />
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <div :class="['flex justify-between items-center border-b rounded-t-md p-3 md:p-6', separatorColor]">
+      <div :class="[
+          'flex justify-between items-center border-b rounded-t-md',
+          { 'p-3 md:p-6': !noPadding }, 
+          separatorColor
+        ]"
+      >
         <span>
           <h2 v-if="title">{{ title }}</h2>
           <h4 v-if="subTitle">{{ subTitle }}</h4>
@@ -70,8 +76,9 @@ const separatorColor = computed(() => border[textStyle.value.type]);
     <slot name="content">
         <div 
           :class="[ 
-            'flex-auto p-3 md:p-6',
-            scrollable ? 'max-h-[calc(100vh-224px)] overflow-y-auto' : 'overflow-hidden',
+            'flex-auto',
+            { 'p-3 md:p-6': !noPadding },
+            scrollable ? 'overflow-y-auto' : 'overflow-hidden',
           ]"
         >
         <slot></slot>
@@ -81,7 +88,13 @@ const separatorColor = computed(() => border[textStyle.value.type]);
 
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
-      <div :class="['flex items-center space-x-2 border-t rounded-b-md p-3 md:p-6', separatorColor]">
+      <div 
+        :class="[
+          'flex items-center space-x-2 border-t rounded-b-md p-3 md:p-6',
+          { 'p-3 md:p-6': !noPadding }, 
+          separatorColor
+        ]"
+      >
         <slot name="buttons">
           <Button :label="saveBtnLabel" :iconPath="saveBtnIconPath" :color="textStyle.type"  @click="$emit('save')" />
           <Button :label="cancelBtnLabel" :iconPath="cancelBtnIconPath" :color="textStyle.type" outline  @click="$emit('cancel')" />
