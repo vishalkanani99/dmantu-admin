@@ -26,6 +26,8 @@ import MaskInput from '../directives/masker/MaskInput.vue';
 import MoneyInput from '../directives/money/MoneyInput.vue';
 import Calendar from '../components/datetimepicker/calendar/Calendar.vue';
 import DatePicker from '../components/datetimepicker/DatePicker.vue';
+import ProgressBar from '../components/progressbar/ProgressBar.vue';
+import Progress from '../components/progressbar/Progress.vue';
 
 const vMask = MaskInput;
 const vMoney = MoneyInput;
@@ -75,7 +77,8 @@ const form = reactive({
   range: [10, 20],
   mask: '', 
   money: 456899,
-  date: new Date('2022', '04', '05'), 
+  date: new Date('2022', '04', '05'),
+  progress: 1000, 
 });
 
 const showPassword = shallowRef(false);
@@ -385,6 +388,27 @@ const hello = (e) => {
         <FieldGroup label="Date Picker Modal">
           <DatePicker v-model="form.date" hasModalView />
         </FieldGroup>
+        <ProgressBar v-model="form.progress" :max="1000" />
+        <ProgressBar v-model="form.progress" :max="10000" >
+          <template #progress>
+            <Progress
+              :value="20"
+              color="info"
+              roundedL 
+            >
+            </Progress>
+            <Progress
+              :value="30"
+              color="danger" 
+            >
+            </Progress>
+            <Progress
+              :value="40"
+              color="warning"
+            >
+            </Progress> 
+          </template>
+        </ProgressBar>
       </Form>
     </Section>
   </LayoutAuthenticated>
