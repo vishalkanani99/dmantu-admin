@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 let slideInterval;
-const { initSwiper, clearSwiper } = useSwiper();
+const { initSwiper } = useSwiper();
 const textStyle = getDefaultTextStyle(props.indicatiorColor);
 
 const containerRef = ref();
@@ -56,7 +56,7 @@ const indicators = computed(() => maxScrollableBlocks.value + 1);
 
 const initSlider = () => {
   offsetWidth.value = containerRef.value.offsetWidth;
-
+  initSwiper(containerRef.value, dragging, stopDragging);
   if(props.hasAutoSlideShow) {
     autoSlideShow();
   }
@@ -129,12 +129,10 @@ const autoSlideShow = () => {
 
 onMounted(() => {
   initSlider();
-  initSwiper(containerRef.value, dragging, stopDragging);
 })
 
 onUnmounted(() =>{
   clearSlideInterval();
-  clearSwiper(containerRef.value);
 })
 </script>
 <template>

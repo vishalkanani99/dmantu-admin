@@ -1,116 +1,82 @@
-import { ref, shallowRef } from 'vue';
-import { useEvent } from './useEvent';
+import { useEventListener } from './useEventListener';
 
 export function useSwiper() {
   
-  const { addEvent, romoveEvent } = useEvent();
-  
-  let startDraggingFn, draggingFn, stopDraggingFn;
+  const initSwiperEvents = (target, startDraggingCb, draggingCb, stopDraggingCb) => {
+    let position, draggedPosition, registeredEvents = [], isDragging = false;
 
-  const targetRef = ref(null);
-  const position = shallowRef(0);
-  const draggedPosition = shallowRef(0);
+    const startDragging = (e) => {
+      let pageX = e?.pageX || ( e?.touches?.length && e.touches[0]?.pageX);
+      position = pageX;
+      setStyle('grabbing');
+      startDraggingCb(position, e);
+      isDragging = true;
+    }
   
-  const startDragging = (e) => {
-    let pageX = e?.pageX || ( e?.touches?.length && e.touches[0]?.pageX);
-    position.value = pageX;
-    addEvents(e.type);
-    setStyle('grabbing');
-    startDraggingFn(e);
-  }
+    const dragging = (e) => {
+      if(!isDragging) return;
+      let pageX = e?.pageX || ( e?.touches?.length && e.touches[0]?.pageX);
+      if(e.type === 'mousemove') {
+        e.preventDefault();
+      }
+      draggedPosition = pageX - position;
+      draggingCb(draggedPosition, e);
+    }
+  
+    const stopDragging = (e) => {
+      if(!isDragging) return;
+      setStyle();
+      stopDraggingCb(draggedPosition, e);
+      isDragging = false;
+    }
+  
+    const setStyle = (cursor = 'grab') => {
+      target.style['cursor'] = cursor;
+    }
+  
+    const registerSwiperEvents = () => {
+      let events = [];
 
-  const dragging = (e) => {
-    let pageX = e?.pageX || ( e?.touches?.length && e.touches[0]?.pageX);
-    if(e.type === 'mousemove') {
-      e.preventDefault();
+      if('ontouchstart' in target) {
+        events.push(
+          [target, "touchstart", startDragging, { 'passive': true }],
+          [target, "touchmove", dragging, { 'passive': true }],
+          [target, "touchend", stopDragging, { 'passive': true }],
+          [target, "touchcancel", stopDragging, { 'passive': true }],
+        );
+      } else {
+        events.push(
+          [target, "mousedown", startDragging],
+          [target, "mousemove", dragging],
+          [target, "mouseup", stopDragging],
+          [target, "mouseleave", stopDragging],
+        );
+      }
+      registeredEvents.push(useEventListener(events));
     }
 
-    draggedPosition.value = pageX - position.value;
-    draggingFn(draggedPosition.value);
-  }
-
-  const stopDragging = (e) => {
     setStyle();
-    stopDraggingFn(draggedPosition.value);
-    clearEvents(e.type);
-  }
-
-  const setStyle = (cursor = 'grab') => {
-    targetRef.value.style['cursor'] = cursor;
-  }
-
-  const addMouseEvents = (target) => {
-    addEvent(target, "mousemove", dragging);
-    addEvent(target, "mouseup", stopDragging);
-    addEvent(target, "mouseleave", stopDragging);
-  }
-
-  const removeMouseEvents = (target) => {
-    romoveEvent(target, "mousedown", dragging);
-    romoveEvent(target, "mousemove", dragging);
-    romoveEvent(target, "mouseup", stopDragging);
-    romoveEvent(target, "mouseleave", stopDragging);
-  }
-
-  const addTouchEvents = (target) => {
-    addEvent(target, "touchmove", dragging, { 'passive': true });
-    addEvent(target, "touchend", stopDragging, { 'passive': true });
-    addEvent(target, "touchcancel", stopDragging, { 'passive': true });
-  }
-
-  const removeTouchEvents = (target) => {
-    romoveEvent(target, "touchstart", dragging);
-    romoveEvent(target, "touchmove", dragging, { 'passive': true });
-    romoveEvent(target, "touchend", stopDragging, { 'passive': true });
-    romoveEvent(target, "touchcancel", stopDragging, { 'passive': true });
-  }
-
-  const addEvents = (type) => {
-    if(type === 'mousedown') {
-      addMouseEvents(targetRef.value);
-    }
-
-    if(type === 'touchstart') {
-      addTouchEvents(targetRef.value);
-    }
-  }
-
-  const clearEvents = (type) => {
-    if( !targetRef.value ) {
-      return;
-    }
-    const isMouseEv = type === 'mouseleave' || type === 'mouseup';
-    const isTouchEv = type === 'touchcancel' || type === 'touchend';
-
-    if(isMouseEv) {
-      removeMouseEvents(targetRef.value);
-    }
-
-    if(isTouchEv) {
-      removeTouchEvents(targetRef.value);
-    }
-  }
+    registerSwiperEvents();
+    return registeredEvents;
+  };
   
-  const initSwiper = ( target, draggingCB, stopDraggingCB, startDraggingCB = null) => {
-    targetRef.value = target;
-    startDraggingFn = startDraggingCB
-    draggingFn = draggingCB;
-    stopDraggingFn = stopDraggingCB;
-    
-    setStyle();
-
-    addEvent(target, "mousedown", startDragging);
-    addEvent(target, "touchstart", startDragging, { 'passive': true });
-    
+  const initSwiper = ( target, draggingCB, stopDraggingCB, startDraggingCB = () => {}) => {
+    return initSwiperEvents(target, startDraggingCB, draggingCB, stopDraggingCB);
   }
 
-  const clearSwiper = ( target ) => {
-    if( !target ) {
-      return;
-    }
-    removeMouseEvents(target);
-    removeTouchEvents(target);
+  const initMultipleSwiper = (...args) => {
+    let registeredSwipers = args[0];
+
+    registeredSwipers = registeredSwipers.filter((swiper) => {
+      return swiper[0] && typeof swiper[0] === 'object'
+        && swiper[1] && typeof swiper[1] === 'function'
+        && swiper[2] && typeof swiper[2] === 'function';
+    }).map((swiper) => {
+      return initSwiper(...swiper);
+    });
+
+    return registeredSwipers;
   }
 
-  return { initSwiper, clearSwiper };
+  return { initSwiper, initMultipleSwiper };
 }

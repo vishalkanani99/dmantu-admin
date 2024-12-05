@@ -58,6 +58,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:modelValue']);
+const { initMultipleSwiper } = useSwiper();
 
 const containerRef = ref();
 const offsetWidth = shallowRef(0);
@@ -88,6 +89,22 @@ const step = computed(() => {
 });
 
 const initSlider = () => {
+
+  let registerSwiper = [
+    [
+      handlerRef.value[0],
+      () => startDragging(0), 
+      (value) => dragging(value, 0), 
+      () => stopDragging(0),  
+    ],
+    [
+      handlerRef.value[1],
+      () => startDragging(1), 
+      (value) => dragging(value, 1), 
+      () => stopDragging(1),
+    ],
+  ];
+
   offsetWidth.value = containerRef.value.offsetWidth;
 
   // convert modelvalue into define range value
@@ -103,6 +120,7 @@ const initSlider = () => {
     newPosition.value[0] = position.value[0] = (modelValue.value * offsetWidth.value) / 100;
   }
   setHandlerPostion();
+  initMultipleSwiper(registerSwiper);
   if(!props.divider) return;
   setNearByTick();
 }
@@ -125,7 +143,7 @@ const validatePosition = (index) => {
   }
 }
 
-const startDragging = (value, index) => {
+const startDragging = (index) => {
   if(props.disabled) return;
   isDragging.value = index;
 }
@@ -137,7 +155,7 @@ const dragging = (value, index) => {
   setHandlerPostion();
 }
 
-const stopDragging = (value, index) => {
+const stopDragging = (index) => {
   if( isDragging.value < 0 ) return;
   isDragging.value = -1;
   position.value[index] = newPosition.value[index];
@@ -225,24 +243,8 @@ const getTickLabel = (tick) => {
 
 onMounted(() => {
   initSlider();
-  
-  for(let key in handlerRef.value) {
-    const { initSwiper } = useSwiper();
-    key = parseInt(key);
-    let draggingFn = (value) => dragging(value, key);
-    let stopDraggingFn = (value) => stopDragging(value, key);
-    let startDraggingFn = (el) => startDragging(el, key);
-
-    initSwiper(handlerRef.value[key], draggingFn, stopDraggingFn, startDraggingFn);
-  }
 })
 
-onUnmounted(() =>{
-  for(let handler in handlerRef.value) {
-    const { clearSwiper } = useSwiper();
-    clearSwiper(handlerRef.value[handler]);
-  }
-})
 </script>
 <template>
   <div 
