@@ -93,6 +93,7 @@ const dragging = (value) => {
 
 const stopDragging = (value) => {
   if(!isDragging.value || !value) return;
+  isDragging.value = false;
   let slides = Math.round(value / blockWidth.value);
   let scrollTo = getScrollTo(slides);
   position.value = position.value - (-scrollTo);
