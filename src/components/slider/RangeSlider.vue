@@ -93,15 +93,15 @@ const initSlider = () => {
   let registerSwiper = [
     [
       handlerRef.value[0],
-      () => startDragging(0), 
       (value) => dragging(value, 0), 
-      () => stopDragging(0),  
+      () => stopDragging(0),
+      () => startDragging(0),   
     ],
     [
-      handlerRef.value[1],
-      () => startDragging(1), 
+      handlerRef.value[1], 
       (value) => dragging(value, 1), 
       () => stopDragging(1),
+      () => startDragging(1),
     ],
   ];
 

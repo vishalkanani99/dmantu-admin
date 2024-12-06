@@ -144,6 +144,9 @@ const testimonials = [
       <Card title="Carousel" noFooter>
         <Carousel :slides="slides" />
       </Card>
+      <Card title="Carousel with thumbnail selector" noFooter>
+        <Carousel :defaultSlide="4" :slides="slides" hasThumbnailSelector />
+      </Card>
       <Card title="Cards Carousel" noFooter>
         <Slider :content="content" :slidesPerView="4" :spaceBetween="10" hasIndicator>
           <template v-slot="{ item, index }">

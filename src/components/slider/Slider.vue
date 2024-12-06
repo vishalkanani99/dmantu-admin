@@ -1,11 +1,15 @@
 <script setup>
-import { ref, shallowRef, computed, onMounted, onUnmounted } from 'vue';
+import { ref, shallowRef, computed, watch, onMounted, onUnmounted } from 'vue';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import { useSwiper } from '../../composables/useSwiper';
 import { background, text, getDefaultTextStyle } from '../../color';
 import Button from '../Button.vue';
 
 const props = defineProps({
+  defaultSlide: {
+    type: Number,
+    default: 0,
+  },
   content: {
     type: Array,
     default: () => [],
@@ -34,7 +38,10 @@ const props = defineProps({
     type: String,
     default: 'theme-light',
   },
+  noSwiper: Boolean,
 });
+
+const emit = defineEmits(['change']);
 
 let slideInterval;
 const { initSwiper } = useSwiper();
@@ -45,21 +52,21 @@ const position = shallowRef(0);
 const offsetWidth = shallowRef(0);
 const translateX = shallowRef(0);
 const transitionDuration = shallowRef(300);
+const isDragging = shallowRef(false);
 
 const maxScrollableBlocks = computed(() => props.content.length - props.slidesPerView );
 const blockWidth = computed(() => ((offsetWidth.value - (props.spaceBetween * (props.slidesPerView - 1))) / props.slidesPerView) );
 const maxTranslateX = computed(() => -((blockWidth.value * maxScrollableBlocks.value) + (props.spaceBetween * maxScrollableBlocks.value)) );
 const hasMaxScrolled = computed(() => Math.round(maxTranslateX.value) >= Math.round(position.value) );
 const hasMinScrolled = computed(() => position.value >= 0 );
-const activeSlide = computed(() => Math.abs(Math.round(position.value / ( blockWidth.value + props.spaceBetween ))) + 1 );
+const activeSlide = computed(() => Math.abs(Math.round(position.value / ( blockWidth.value + props.spaceBetween ))) );
 const indicators = computed(() => maxScrollableBlocks.value + 1);
 
 const initSlider = () => {
   offsetWidth.value = containerRef.value.offsetWidth;
+  setSlide(props.defaultSlide);
+  if( props.noSwiper ) return;
   initSwiper(containerRef.value, dragging, stopDragging);
-  if(props.hasAutoSlideShow) {
-    autoSlideShow();
-  }
 }
 
 const clearSlideInterval = () => {
@@ -78,12 +85,14 @@ const validatePosition = () => {
 }
 
 const dragging = (value) => {
+  isDragging.value = true;
   transitionDuration.value = 0;
   clearSlideInterval();
   translateX.value = position.value - (-value);
 }
 
 const stopDragging = (value) => {
+  if(!isDragging.value || !value) return;
   let slides = Math.round(value / blockWidth.value);
   let scrollTo = getScrollTo(slides);
   position.value = position.value - (-scrollTo);
@@ -115,7 +124,7 @@ const changeSlide = () => {
   clearSlideInterval();
   validatePosition();
   translateX.value = position.value;
-
+  emit('change', activeSlide.value);
   if(props.hasAutoSlideShow) {
     autoSlideShow();
   }
@@ -127,16 +136,24 @@ const autoSlideShow = () => {
   }, 4000);
 }
 
+const stopWatch = watch(
+  () => props.defaultSlide,
+  (newValue) => {
+    setSlide(newValue);
+  }
+);
+
 onMounted(() => {
   initSlider();
 })
 
 onUnmounted(() =>{
   clearSlideInterval();
+  stopWatch();
 })
 </script>
 <template>
-  <div class="relative flex items-center overflow-hidden select-none rounded-md shadow-md">
+  <div class="relative flex items-center overflow-hidden select-none">
     
     <!-- Next and previous buttons -->
     <Button 
@@ -184,12 +201,12 @@ onUnmounted(() =>{
     <!-- Indicators start -->
     <div v-if="hasIndicator" class="absolute flex right-0 left-0 bottom-3 list-none text-white justify-center items-center">
       <div
-        v-for="slide in indicators"
+        v-for="(slide, index) in indicators"
         :class="[
-          'w-2 h-2 rounded-full mr-1 last:mr-0 cursor-pointer',
-          activeSlide === slide ? background[textStyle.type] :  background[indicatiorColor],
+          'w-3 h-3 rounded-full mr-1 last:mr-0 cursor-pointer',
+          activeSlide === index ? background[textStyle.type] :  background[indicatiorColor],
         ]"
-        @click="setSlide(slide - 1)" 
+        @click="setSlide(index)" 
       >
       </div>
     </div>
