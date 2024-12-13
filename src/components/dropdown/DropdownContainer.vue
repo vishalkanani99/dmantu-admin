@@ -48,7 +48,7 @@ const dropdownContainerStyle = computed(() => {
 
 </script>
 <template>
-  <Transition name="dropdown">
+  <Transition :name="position">
     <div
       v-if="showList"
       :class="dropdownContainerStyle">
@@ -57,12 +57,20 @@ const dropdownContainerStyle = computed(() => {
   </Transition>
 </template>
 <style>
-.dropdown-enter-active,
-.dropdown-leave-active {
-  @apply transition-[max-height] !overflow-hidden;
+.top-enter-active,
+.top-leave-active,
+.bottom-enter-active,
+.bottom-leave-active {
+  @apply transition-transform !overflow-hidden;
 }
-.dropdown-enter-from,
-.dropdown-leave-to {
-  @apply !max-h-0 !overflow-hidden;
+
+.bottom-enter-from,
+.bottom-leave-to {
+  @apply -translate-y-2 !overflow-hidden;
+}
+
+.top-enter-from,
+.top-leave-to {
+  @apply translate-y-2 !overflow-hidden;
 }
 </style>

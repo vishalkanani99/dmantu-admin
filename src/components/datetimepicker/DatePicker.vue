@@ -3,6 +3,7 @@ import { computed, onMounted, ref, shallowRef } from 'vue';
 import { getDefaultTextStyle } from '../../color';
 import { formatDate } from './utils';
 import { useScreen } from '../../composables/useScreen';
+import { useScrollOver } from '../../composables/useScrollOver';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
 import DropdownContainer from '../dropdown/DropdownContainer.vue';
@@ -71,6 +72,8 @@ const { isSm, isXs } = useScreen();
 const emit = defineEmits(['update:modelValue']);
 
 const containerRef = ref();
+const dropdownContainerHeight = ref(0);
+const { visibleAtBottom } = useScrollOver(containerRef, dropdownContainerHeight);
 
 const dateObj = computed({
   get: () => props.modelValue,
@@ -103,6 +106,10 @@ const bindProps = computed(() => {
       closable: false,
       scrollable: true,
     }
+  } else {
+    componentProps.onEnter = dropdownContainerRef;
+    componentProps.onAfterLeave = dropdownContainerRef;
+    componentProps.position = visibleAtBottom.value ? 'bottom' : 'top';
   }
 
   return componentProps;
@@ -119,6 +126,10 @@ const formatDateObj = (newDateObj) => {
 
 const close = () => {
   showCalendar.value = false;
+}
+
+const dropdownContainerRef = (el) => {
+  dropdownContainerHeight.value = el ? el.clientHeight : 0;
 }
 
 const trackClickEvent = (el) => {

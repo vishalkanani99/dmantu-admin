@@ -2,6 +2,7 @@
 import { ref, shallowRef, computed, onMounted } from 'vue';
 import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
 import { throttle } from 'lodash';
+import { useScrollOver } from '../../composables/useScrollOver';
 import DropdownContainer from './DropdownContainer.vue';
 import Icon from '../Icon.vue';
 import Menu from '../menu/Menu.vue';
@@ -33,7 +34,10 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'menuClick']);
 
 const containerRef = ref(null);
+const dropdownContainerHeight = ref(0);
 const modelValue = shallowRef(false);
+
+const { visibleAtBottom } = useScrollOver(containerRef, dropdownContainerHeight);
 
 const showList = computed({
   get: () => props.controllable ? props.modelValue : modelValue.value,
@@ -64,6 +68,10 @@ const bindSelectorEvent = computed(() => {
   return selectorEvents;
 })
 
+const dropdownContainerRef = (el) => {
+  dropdownContainerHeight.value = el ? el.clientHeight : 0;
+}
+
 onMounted(() => {
   document.addEventListener('click', trackClickEvent);
 })
@@ -81,7 +89,10 @@ onMounted(() => {
     <DropdownContainer
       v-model="showList"
       :bgColor="bgColor"
-      :maxHeight="maxHeight" 
+      :maxHeight="maxHeight"
+      :position="visibleAtBottom ? 'bottom' : 'top'"
+      @enter="dropdownContainerRef"
+      @after-leave="dropdownContainerRef" 
     >
       <slot>
         <Menu 
