@@ -4,6 +4,7 @@ import { getDefaultTextStyle } from '../../color';
 import { formatDate } from './utils';
 import { useScreen } from '../../composables/useScreen';
 import { useScrollOver } from '../../composables/useScrollOver';
+import { useDocumentClick } from '../../composables/useDocumentClick';
 import Field from '../form/Field.vue';
 import Calendar from './calendar/Calendar.vue';
 import DropdownContainer from '../dropdown/DropdownContainer.vue';
@@ -132,15 +133,8 @@ const dropdownContainerRef = (el) => {
   dropdownContainerHeight.value = el ? el.clientHeight : 0;
 }
 
-const trackClickEvent = (el) => {
-  const isElementExist = document.body.contains(el.target);
-  if(!isElementExist || !containerRef.value) return;
-  if(containerRef.value.contains(el.target)) return;
-  showCalendar.value = false;
-}
-
 onMounted(() => {
-  document.addEventListener('click', trackClickEvent);
+  useDocumentClick(containerRef, close);
 })
 </script>
 <template>

@@ -3,6 +3,7 @@ import { ref, shallowRef, computed, onMounted } from 'vue';
 import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
 import { throttle } from 'lodash';
 import { useScrollOver } from '../../composables/useScrollOver';
+import { useDocumentClick } from '../../composables/useDocumentClick';
 import DropdownContainer from './DropdownContainer.vue';
 import Icon from '../Icon.vue';
 import Menu from '../menu/Menu.vue';
@@ -51,10 +52,7 @@ const toggle = throttle(() => {
   showList.value = !showList.value;
 })
 
-const trackClickEvent = (el) => {
-  const isElementExist = document.body.contains(el.target);
-  if(!isElementExist || !containerRef.value) return;
-  if(containerRef.value.contains(el.target)) return;
+const outsideTargetCb = () => {
   showList.value = false;
 }
 
@@ -73,7 +71,7 @@ const dropdownContainerRef = (el) => {
 }
 
 onMounted(() => {
-  document.addEventListener('click', trackClickEvent);
+  useDocumentClick(containerRef, outsideTargetCb);
 })
 </script>
 <template>
