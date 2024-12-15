@@ -1,6 +1,6 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted } from 'vue';
-import { debounce } from 'lodash';
+import { useDebounce } from '../../../composables/useDebounce';
 import { search } from '../../../composables/useFilter';
 import { getFlatArr } from '../../../composables/useHelper';
 import Dropdown from '../../dropdown/Dropdown.vue';
@@ -70,7 +70,7 @@ const open = () => {
   getOptions();
 }
 
-const getOptions = debounce(async() => {
+const getOptions = useDebounce(async() => {
   options.value = props.options;
   if(props.taggable) {
     // Flat an array If options are array of object and taggable prop is true
@@ -92,7 +92,7 @@ const clear = () => {
   getOptions();
 }
 
-const createTag = debounce((event) => {
+const createTag = useDebounce((event) => {
   if( event.keyCode === 13 || event.keyCode === 188 ) {
 
     let trimSearchStr = searchValue.value.trim();

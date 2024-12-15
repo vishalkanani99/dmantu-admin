@@ -1,7 +1,7 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted, reactive } from "vue";
-import { debounce } from 'lodash';
 import { mdiArrowUpBold, mdiArrowDownBold, mdiFolderSearch } from '@mdi/js';
+import { useDebounce } from "../../composables/useDebounce.js";
 import FieldOption from "../form/FieldOption.vue";
 import Field from "../form/Field.vue";
 import FieldGroup from "../form/FieldGroup.vue";
@@ -113,12 +113,12 @@ const updateCheckedAll = (value) => {
   checkedAll.value = value.length === rowsWithSeparateChild.value.length ?? 0;
 }
 
-const updatePage = debounce(async () => {
+const updatePage = useDebounce(async () => {
   config.page = 1;
   update();
 })
 
-const update = debounce(async () => {
+const update = useDebounce(async () => {
   emit('update', config);
   if(isSsr.value) { return; }
   rows.value = props.data;
