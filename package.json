@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
-    "lodash": "^4.17.21",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },

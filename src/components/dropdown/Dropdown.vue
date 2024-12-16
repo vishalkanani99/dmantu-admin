@@ -1,7 +1,7 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted } from 'vue';
 import { mdiMenuDown, mdiMenuUp } from '@mdi/js';
-import { throttle } from 'lodash';
+import { useThrottle } from "../../composables/useThrottle.js";
 import { useScrollOver } from '../../composables/useScrollOver';
 import { useDocumentClick } from '../../composables/useDocumentClick';
 import DropdownContainer from './DropdownContainer.vue';
@@ -48,7 +48,7 @@ const showList = computed({
   }
 })
 
-const toggle = throttle(() => {
+const toggle = useThrottle(() => {
   showList.value = !showList.value;
 })
 
