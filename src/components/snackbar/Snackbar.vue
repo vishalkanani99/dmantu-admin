@@ -68,7 +68,7 @@ const snackbarItems = computed({
 const defaultClass = computed(() => {
     let flexDirection = { top:'flex-col', bottom:'flex-col-reverse'};
     const defaultClass = [
-      "fixed inset-0 flex p-9 overflow-hidden z-[100] pointer-events-none",
+      "absolute inset-0 flex p-9 overflow-hidden z-[100] pointer-events-none",
       flexDirection[props.direction]
     ]
     return defaultClass;
@@ -81,23 +81,29 @@ const cancel = (timestamp) => {
 </script>
 
 <template>
-  <TransitionGroup tag="div" name="snackbar" :class="defaultClass">
-    <SnackbarItem
-      v-for="v in snackbarItems"
-      :class="origin" 
-      :key="v.timestamp"
-      :title="v?.title"
-      :subTitle="v?.subTitle"
-      :text="v?.text"
-      :color="color"
-      :position="position"
-      :icon="icon"
-      :closable="closable"
-      :timestamp="v.timestamp"
-      :lifetime="lifetime"
-      @cancel="cancel">
-    </SnackbarItem>
-  </TransitionGroup>
+  <Teleport to="body">
+    <TransitionGroup 
+      tag="div" 
+      name="snackbar" 
+      :class="defaultClass"
+    >
+      <SnackbarItem
+        v-for="v in snackbarItems"
+        :class="origin" 
+        :key="v.timestamp"
+        :title="v?.title"
+        :subTitle="v?.subTitle"
+        :text="v?.text"
+        :color="color"
+        :position="position"
+        :icon="icon"
+        :closable="closable"
+        :timestamp="v.timestamp"
+        :lifetime="lifetime"
+        @cancel="cancel">
+      </SnackbarItem>
+    </TransitionGroup>
+  </Teleport>
 </template>
 
 <style scoped>

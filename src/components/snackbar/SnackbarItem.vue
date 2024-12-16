@@ -97,8 +97,9 @@ const cancel = () => {
         <span v-if="subTitle" class="text-xs">{{ subTitle }}</span>
         <Button
           v-if="closable"
-          class="w-5 h-5 p-1 focus:!ring-2" 
+          class="w-6 h-6 focus:!ring-2" 
           :color="textStyle.type"
+          size="small"
           rounded
           @click="cancel" 
         >

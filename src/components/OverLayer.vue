@@ -1,45 +1,51 @@
 <script setup>
-  import { computed, watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 
-  const props = defineProps({
-    modelValue: Boolean,
-    imortal: Boolean,
-  });
+const props = defineProps({
+  modelValue: Boolean,
+  imortal: Boolean,
+});
 
-  const emit = defineEmits(['update:modelValue', 'close']);
+defineOptions({
+  inheritAttrs: false,
+});
 
-  const showOverLayer = computed({
-    get: () => props.modelValue,
-    set: (value) => {
-      emit('update:modelValue', value);
-    }
-  });
+const emit = defineEmits(['update:modelValue', 'close']);
 
-  const defaultStyle = computed(() => {
-    const style = [
-      'fixed inset-0 z-[100] transition-opacity duration-300 overflow-hidden',
-      !showOverLayer.value ? 'pointer-events-none opacity-0' : '',
-    ];
-    return style;
-  })
-
-  function close() {
-    if(!props.imortal) {
-      showOverLayer.value = false;
-    }
-    emit('close');
+const showOverLayer = computed({
+  get: () => props.modelValue,
+  set: (value) => {
+    emit('update:modelValue', value);
   }
+});
 
-  watchEffect(() => {
-    document.body.classList.remove('overflow-hidden');
-    if(showOverLayer.value) {
-      document.body.classList.add('overflow-hidden');
-    }
-  })
+const defaultStyle = computed(() => {
+  const style = [
+    'absolute inset-0 z-[100] transition-opacity duration-300 overflow-hidden',
+    !showOverLayer.value ? 'pointer-events-none opacity-0' : '',
+  ];
+  return style;
+})
+
+function close() {
+  if(!props.imortal) {
+    showOverLayer.value = false;
+  }
+  emit('close');
+}
+
+watchEffect(() => {
+  document.body.classList.remove('overflow-hidden');
+  if(showOverLayer.value) {
+    document.body.classList.add('overflow-hidden');
+  }
+})
 </script>
 <template>
-  <div :class="defaultStyle">
-    <div class="fixed inset-0 bg-theme-900 bg-opacity-60" @click="close"></div>
-    <slot></slot>
-  </div>
+  <Teleport to="body">
+    <div v-bind="$attrs" :class="defaultStyle">
+      <div class="absolute inset-0 bg-theme-900 bg-opacity-60" @click="close"></div>
+      <slot></slot>
+    </div>
+  </Teleport>
 </template>
