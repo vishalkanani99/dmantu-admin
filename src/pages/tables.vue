@@ -336,6 +336,23 @@ const getData = (config) => {
       </DataTable>
     </Section>
     <Section
+      title="Data Table (Nested Sort By Sort Order)" 
+      :iconPath="mdiTable" 
+      :btnIconPath="mdiCog" 
+      btnColor="theme"
+    >
+      <DataTable
+        v-model="checkedRows" 
+        :columns="columns" 
+        :data="tableRows"
+        isCheckable
+        isCollapsible
+        isEditable
+        isNestedSort
+      >
+      </DataTable>
+    </Section>
+    <Section
       title="Data Table (SSR)" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 

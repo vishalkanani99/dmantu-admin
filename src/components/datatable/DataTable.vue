@@ -43,6 +43,7 @@ const props = defineProps({
     default: 'theme-light'
   },
   isCheckable: Boolean,
+  isNestedSort: Boolean,
   isCollapsible: Boolean,
   isEditable: Boolean,
   isLoading: Boolean,
@@ -89,13 +90,30 @@ const totalRecords = computed({
   },
 });
 
-const sort = (field) => {
-  config.sortBy.map((arr) => {
-    if( field === arr[0] ) {
-      arr[1] = arr[1] === 'asc' ? 'desc' : 'asc';
+const sort = (field = '') => {
+
+  sortableColumns.value = sortableColumns.value.map((obj) => {
+    if( field === obj.key ) {
+      obj.orderBy = obj.orderBy === 'asc' ? 'desc' : 'asc';
     }
-    return arr;
-  })
+    return obj;
+  });
+
+  // Sortable columns with sort order
+  const sortableArr = 
+    props.isNestedSort 
+      ? sortableColumns.value 
+      : sortableColumns.value.filter((obj, index) => field ? field === obj.key : index === 0 );
+
+  const sortArr = [];
+
+  sortableArr.forEach((col, index) => {
+    const sortOrder = col.sortOrder ?? index;
+    sortArr[sortOrder] = [col.key, col.orderBy];
+  });
+
+  config.sortBy = sortArr.filter((val) => val);
+
   update();
 }
 
@@ -148,19 +166,11 @@ const paginate = async () => {
 const initFilter = () => {
   sortableColumns.value = props.columns.filter((c) => c.sortable);
   searchableColumns.value = props.columns.filter((c) => c.searchable);
-
-  // Sortable columns with sort order
-  const sortArr = [];
-  sortableColumns.value.forEach((col, index) => {
-    const sortOrder = col.sortOrder ?? index;
-    sortArr[sortOrder] = [col.key, col.orderBy];
-  });
-  config.sortBy = sortArr.filter((val) => val);
+  sort();
 }
 
 onMounted(() => {
   initFilter();
-  update();
 })
 </script>
 

@@ -84,9 +84,17 @@ const deepSort = (data, sortArr, recursiveKey) => {
 
     for(let sortBy of sortArr){
 
-      if(typeof a[sortBy[0]] === 'string') {
-        const fieldA = a[sortBy[0]].toUpperCase(); // ignore upper and lowercase
-        const fieldB = b[sortBy[0]].toUpperCase(); // ignore upper and lowercase
+      let fieldA = a[sortBy[0]];
+      let fieldB = b[sortBy[0]];
+      let isStrSort = typeof fieldA === 'string' && typeof fieldB === 'string';
+      let isDateSort = fieldA instanceof Date && fieldB instanceof Date;
+      let isNumSort = typeof fieldA === 'number' && typeof fieldB === 'number';
+
+      if(isStrSort || isDateSort) {
+        if( isStrSort ) {
+          fieldA = fieldA.toUpperCase(); // ignore upper and lowercase
+          fieldB = fieldB.toUpperCase(); // ignore upper and lowercase
+        }
         
         if(sortBy[1] === 'asc'){
           if (fieldA < fieldB) {
@@ -107,14 +115,14 @@ const deepSort = (data, sortArr, recursiveKey) => {
         }
       }
 
-      if(typeof a[sortBy[0]] === 'number') {
+      if(isNumSort) {
           
         if(sortBy[1] === 'asc'){
-          return a[sortBy[0]] - b[sortBy[0]];
+          return fieldA - fieldB;
         }
 
         if(sortBy[1] === 'desc'){
-          return b[sortBy[0]] - a[sortBy[0]];
+          return fieldB - fieldA;
         }
       }
 
