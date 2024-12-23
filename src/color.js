@@ -234,6 +234,7 @@ export {
   border, 
   ring, 
   text,
+  isLightColor,
   getDefaultTextStyle, 
   getButtonStyle 
 };

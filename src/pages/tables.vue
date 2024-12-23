@@ -7,6 +7,12 @@ import Button from '../components/Button.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import Avatar from '../components/Avatar.vue';
 import Pagination from '../components/Pagination.vue';
+import Table from '../components/table/Table.vue';
+import TableHeader from '../components/table/TableHeader.vue';
+import TableHeaderCell from '../components/table/TableHeaderCell.vue';
+import TableRow from '../components/table/TableRow.vue';
+import TableCell from '../components/table/TableCell.vue';
+import TableBody from '../components/table/TableBody.vue';
 import DataTable from '../components/datatable/DataTable.vue';
 
 const activePage = ref(5);
@@ -176,141 +182,141 @@ const getData = (config) => {
       :btnIconPath="mdiCog" 
       btnColor="theme"
     >
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <span class="center">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHeaderCell>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>City</th>
-            <th>Status</th>
-            <th>Created On</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <span class="center">
+            </TableHeaderCell>
+            <TableHeaderCell>Image</TableHeaderCell>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Email</TableHeaderCell>
+            <TableHeaderCell>City</TableHeaderCell>
+            <TableHeaderCell>Status</TableHeaderCell>
+            <TableHeaderCell>Created On</TableHeaderCell>
+            <TableHeaderCell></TableHeaderCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell noLabel>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </td>
-            <td data-label="Image">
-              <div class="center">
+            </TableCell>
+            <TableCell noLabel data-label="Image">
+              <div class="flex justify-center items-center">
                 <Avatar class="w-12 h-12" username="John Doe" />
               </div>
-            </td>
-            <td data-label="Name">John Doe</td>
-            <td data-label="Email">john@test.com</td>
-            <td data-label="City">New York</td>
-            <td data-label="Status">Active</td>
-            <td data-label="Created On">19, Dec 2024</td>
-            <td>
-              <div class="center">
+            </TableCell>
+            <TableCell data-label="Name">John Doe</TableCell>
+            <TableCell data-label="Email">john@test.com</TableCell>
+            <TableCell data-label="City">New York</TableCell>
+            <TableCell data-label="Status">Active</TableCell>
+            <TableCell data-label="Created On">19, Dec 2024</TableCell>
+            <TableCell noLabel>
+              <div class="flex justify-center items-center space-x-2">
                 <Button :iconPath="mdiPencil" color="info" ></Button>
                 <Button :iconPath="mdiTrashCan" color="danger" ></Button>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="center">
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell noLabel>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </td>
-            <td data-label="Image">
-              <div class="center">
+            </TableCell>
+            <TableCell noLabel data-label="Image">
+              <div class="flex justify-center items-center">
                 <Avatar class="w-12 h-12" username="John Doe" />
               </div>
-            </td>
-            <td data-label="Name">John Doe</td>
-            <td data-label="Email">john@test.com</td>
-            <td data-label="City">New York</td>
-            <td data-label="Status">Active</td>
-            <td data-label="Created On">19, Dec 2024</td>
-            <td>
-              <div class="center">
+            </TableCell>
+            <TableCell data-label="Name">John Doe</TableCell>
+            <TableCell data-label="Email">john@test.com</TableCell>
+            <TableCell data-label="City">New York</TableCell>
+            <TableCell data-label="Status">Active</TableCell>
+            <TableCell data-label="Created On">19, Dec 2024</TableCell>
+            <TableCell noLabel>
+              <div class="flex justify-center items-center space-x-2">
                 <Button :iconPath="mdiPencil" color="info" ></Button>
                 <Button :iconPath="mdiTrashCan" color="danger" ></Button>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="center">
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell noLabel>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </td>
-            <td data-label="Image">
-              <div class="center">
+            </TableCell>
+            <TableCell noLabel data-label="Image">
+              <div class="flex justify-center items-center">
                 <Avatar class="w-12 h-12" username="John Doe" />
               </div>
-            </td>
-            <td data-label="Name">John Doe</td>
-            <td data-label="Email">john@test.com</td>
-            <td data-label="City">New York</td>
-            <td data-label="Status">Active</td>
-            <td data-label="Created On">19, Dec 2024</td>
-            <td>
-              <div class="center">
+            </TableCell>
+            <TableCell data-label="Name">John Doe</TableCell>
+            <TableCell data-label="Email">john@test.com</TableCell>
+            <TableCell data-label="City">New York</TableCell>
+            <TableCell data-label="Status">Active</TableCell>
+            <TableCell data-label="Created On">19, Dec 2024</TableCell>
+            <TableCell noLabel>
+              <div class="flex justify-center items-center space-x-2">
                 <Button :iconPath="mdiPencil" color="info" ></Button>
                 <Button :iconPath="mdiTrashCan" color="danger" ></Button>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="center">
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell noLabel>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </td>
-            <td data-label="Image">
-              <div class="center">
+            </TableCell>
+            <TableCell noLabel data-label="Image">
+              <div class="flex justify-center items-center">
                 <Avatar class="w-12 h-12" username="John Doe" />
               </div>
-            </td>
-            <td data-label="Name">John Doe</td>
-            <td data-label="Email">john@test.com</td>
-            <td data-label="City">New York</td>
-            <td data-label="Status">Active</td>
-            <td data-label="Created On">19, Dec 2024</td>
-            <td>
-              <div class="center">
+            </TableCell>
+            <TableCell data-label="Name">John Doe</TableCell>
+            <TableCell data-label="Email">john@test.com</TableCell>
+            <TableCell data-label="City">New York</TableCell>
+            <TableCell data-label="Status">Active</TableCell>
+            <TableCell data-label="Created On">19, Dec 2024</TableCell>
+            <TableCell noLabel>
+              <div class="flex justify-center items-center space-x-2">
                 <Button :iconPath="mdiPencil" color="info" ></Button>
                 <Button :iconPath="mdiTrashCan" color="danger" ></Button>
               </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <span class="center">
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell noLabel>
+              <span class="flex justify-center items-center">
                 <FieldOption />
               </span>
-            </td>
-            <td data-label="Image">
-              <div class="center">
+            </TableCell>
+            <TableCell noLabel data-label="Image">
+              <div class="flex justify-center items-center">
                 <Avatar class="w-12 h-12" username="John Doe" />
               </div>
-            </td>
-            <td data-label="Name">John Doe</td>
-            <td data-label="Email">john@test.com</td>
-            <td data-label="City">New York</td>
-            <td data-label="Status">Active</td>
-            <td data-label="Created On">19, Dec 2024</td>
-            <td>
-              <div class="center">
+            </TableCell>
+            <TableCell data-label="Name">John Doe</TableCell>
+            <TableCell data-label="Email">john@test.com</TableCell>
+            <TableCell data-label="City">New York</TableCell>
+            <TableCell data-label="Status">Active</TableCell>
+            <TableCell data-label="Created On">19, Dec 2024</TableCell>
+            <TableCell noLabel>
+              <div class="flex justify-center items-center space-x-2">
                 <Button :iconPath="mdiPencil" color="info" ></Button>
                 <Button :iconPath="mdiTrashCan" color="danger" ></Button>
               </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
       <Pagination v-model="activePage" :recordsTotal="50"/>
     </Section>
     <Section

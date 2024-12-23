@@ -1,10 +1,12 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted, reactive } from "vue";
-import { mdiArrowUpBold, mdiArrowDownBold, mdiFolderSearch } from '@mdi/js';
 import { useDebounce } from "../../composables/useDebounce.js";
-import FieldOption from "../form/FieldOption.vue";
-import Field from "../form/Field.vue";
-import FieldGroup from "../form/FieldGroup.vue";
+import Loader from "../Loader.vue";
+import Table from "../table/Table.vue";
+import TableBody from "../table/TableBody.vue";
+import TableEmptyRow from "../table/TableEmptyRow.vue";
+import DataTableTools from "./DataTableTools.vue";
+import DataTableHeader from "./DataTableHeader.vue";
 import DataTableRows from "./DataTableRows.vue";
 import Pagination from '../Pagination.vue';
 import { search as searchData, sort as sortColumn} from '../../composables/useFilter.js';
@@ -31,6 +33,15 @@ const props = defineProps({
     type: String,
     default: 'children'
   },
+  bgColor: {
+    type: String,
+    default: 'theme'
+  },
+  activeColor: String,
+  borderColor: {
+    type: String,
+    default: 'theme-light'
+  },
   isCheckable: Boolean,
   isCollapsible: Boolean,
   isEditable: Boolean,
@@ -40,8 +51,6 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue", "update", "edit", "delete"]);
 
-
-const sortField = ref('');
 const rows = ref([]);
 const totalRows = ref(props.data.length);
 const isSsr = ref(props.isSsr);
@@ -56,6 +65,7 @@ const config = reactive({
   search: '',
   searchBy: '',
   sortBy: [],
+  sortField: '',
 });
 
 const activePageRows = computed(() => {
@@ -135,11 +145,6 @@ const paginate = async () => {
   return results;
 }
 
-const getSortableFieldOrder = (field) => {
-  let order = config.sortBy.find((arr) => arr[0] === field );
-  return order ? order[1] : '';
-}
-
 const initFilter = () => {
   sortableColumns.value = props.columns.filter((c) => c.sortable);
   searchableColumns.value = props.columns.filter((c) => c.searchable);
@@ -160,108 +165,31 @@ onMounted(() => {
 </script>
 
 <template>
-    <!-- Tools -->
-  <div class="flex flex-col md:flex-row md:justify-between items-center">
-    <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-3">
-      <Field
-        v-if="limitOptions.length > 0"
-        v-model="config.limit" 
-        type="select"
-        color="white"
-        outerStyle="w-1/6"
-        @input="updatePage"
-      >
-        <option v-for="value in limitOptions" :key="value" :value="value">{{ value }}</option>
-      </Field>
-      <FieldGroup multiFields>
-        <Field
-          v-model="config.search"
-          type="text" 
-          placeholder="Search"
-          :inputLeftIcon="mdiFolderSearch"
-          :left="searchableColumns.length > 0"
-          color="white"
-          @input="updatePage"
-        />
-        <Field 
-          v-if="searchableColumns.length > 0" 
-          v-model="config.searchBy" 
-          type="select" 
-          color="white"
-          right
-          outerStyle="w-1/2"
-          @input="updatePage"
-        >
-          <option value="">Select Column</option>
-          <option v-for="(col, index) in searchableColumns" :key="index" :value="col.key">{{ col.label }}</option>
-        </Field>
-      </FieldGroup>
-      <FieldGroup multiFields class="md:hidden">
-        <Field 
-          v-if="sortField" 
-          :left="sortField ? true : false" 
-          type="button" 
-          :buttonIcon="getSortableFieldOrder(sortField) === 'asc' ? mdiArrowDownBold : mdiArrowUpBold" 
-          @buttonClick="sort(sortField)"
-        />
-        <Field 
-          v-model="sortField" 
-          type="select"
-          color="white" 
-          :right="sortField ? true : false"
-        >
-          <option value="">Sort By</option>
-          <option v-for="(col, index) in sortableColumns" :key="index" :value="col.key">
-              {{ col.label }}
-              <template>
-                  {{ getSortableFieldOrder(col.key) === 'asc' ? ' - ↑ (desc)' : ' - ↓ (asc)'}} 
-              </template>
-          </option>
-        </Field>
-      </FieldGroup>
-      <slot name="toolsLeftSlot"></slot>
-    </div>
-    <div class="flex mt-3">
-      <slot name="toolsRightSlot"></slot>
-    </div>
-  </div>
-  <!-- End Tools -->
-  <table v-if="columns">
-    <thead>
-      <tr>
-        <th v-if="isCollapsible"></th>
-        <th v-if="isCheckable">
-          <span class="center">
-            <FieldOption
-              v-if="activePageRows.length > 0"
-              v-model="checkedAll"
-              @change="updateCheckedRows"
-            />
-          </span>
-        </th>
-        <template v-for="(col, index) in columns" :key="index">
-          <th 
-            v-if="col.sortable"
-            :class="[
-              'relative cursor-pointer sortable', 
-              getSortableFieldOrder(col.key) === 'asc' ? 'asc' : '',  
-              getSortableFieldOrder(col.key) === 'desc' ? 'desc' : ''
-            ]"
-            @click="sort(col.key)" 
-          >
-            {{ col.label }}
-          </th>
-          <th v-else>
-            {{ col.label }}
-          </th>
-        </template>
-        <th v-if="isEditable"></th>
-      </tr>
-    </thead>
-    <tbody :class="{'relative': isLoading}">
-      <div v-if="isLoading" class="absolute inset-0 flex bg-theme-300 z-10 opacity-50">
-        <img class="w-8 h-8 m-auto" src="/loader.gif">
-      </div>
+  <!-- Tools -->
+  <DataTableTools
+    :config="config"
+    :limitOptions="limitOptions"
+    :searchableColumns="searchableColumns"
+    :sortableColumns="sortableColumns"
+    @update="updatePage"
+    @sort="sort" 
+  />
+  <Table
+    :bgColor="bgColor"
+    :borderColor="borderColor"
+  >
+    <DataTableHeader
+      v-model="checkedAll"
+      :columns="columns"
+      :sortBy="config.sortBy"
+      :isCheckable="isCheckable"
+      :isCollapsible="isCollapsible"
+      :isEditable="isEditable"
+      @sort="sort"
+      @updateCheckedRows="updateCheckedRows"
+    />
+    <TableBody>
+      <Loader :bgColor="bgColor" v-if="isLoading" />
       <DataTableRows
         v-model="modelValue"
         :rows="activePageRows"
@@ -277,20 +205,19 @@ onMounted(() => {
           <slot name="columns" :row="row" :columns="columns"></slot>
         </template>
       </DataTableRows>
-      <template v-if="activePageRows.length === 0">
-        <slot name="empty">
-          <tr>
-            <td :colspan="colspan" class="justify-center">
-              <p class="text-center">No records found</p> 
-            </td>
-          </tr>
-        </slot>
-      </template>
-    </tbody>
-  </table>
+      <TableEmptyRow
+        v-if="activePageRows.length === 0"
+        :colspan="colspan" 
+      >
+        <slot name="empty"></slot>
+      </TableEmptyRow>
+    </TableBody>
+  </Table>
   <Pagination 
     v-if="activePageRows.length > 0"
     v-model="config.page"
+    :color="bgColor"
+    :activeColor="activeColor"
     :limit="config.limit"
     :recordsTotal="totalRecords"
     @update:modelValue="update"

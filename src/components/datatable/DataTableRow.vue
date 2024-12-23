@@ -1,6 +1,8 @@
 <script setup>
 import { shallowRef, computed } from 'vue';
 import { mdiTrashCan, mdiPencil, mdiChevronRight } from '@mdi/js';
+import TableRow from '../table/TableRow.vue';
+import TableCell from '../table/TableCell.vue';
 import DataTableRows from './DataTableRows.vue';
 import FieldOption from "../form/FieldOption.vue";
 import Avatar from "../Avatar.vue";
@@ -44,10 +46,10 @@ const toggleRow = () => {
 
 </script>
 <template>
-  <tr>    
+  <TableRow>    
     <slot :row="row">
-      <td v-if="isCollapsible" class="justify-center md:w-9">
-        <div v-if="row[recursiveKey]" class="center">
+      <TableCell v-if="isCollapsible" class="md:w-9" noLabel>
+        <div v-if="row[recursiveKey]" class="flex justify-center items-center space-x-2">
           <Button
             :class="[
               'transition-transform',
@@ -58,21 +60,22 @@ const toggleRow = () => {
             @click="toggleRow" 
           />
         </div>
-      </td>
-      <td v-if="isCheckable" class="justify-center md:w-16">
-        <span class="center">
+      </TableCell>
+      <TableCell v-if="isCheckable" class="md:w-16" noLabel>
+        <span class="flex justify-center items-center space-x-2">
           <FieldOption
             v-model="modelValue"
             :value="row"
           />
         </span>
-      </td>
-      <td
+      </TableCell>
+      <TableCell
         v-for="(col, index) in columns" 
         :key="index"
         :data-label="col.label"
+        :noLabel="col.imageable"
       >
-        <div v-if="col.imageable" class="center">
+        <div v-if="col.imageable" class="flex justify-center items-center space-x-2">
           <Avatar
             class="w-12 h-12"
             username="Not Available"
@@ -80,15 +83,15 @@ const toggleRow = () => {
           />
         </div>
         <span v-else>{{ row[col.key] }}</span>
-      </td>
-      <td v-if="isEditable" class="justify-center">
-        <div class="center">
+      </TableCell>
+      <TableCell v-if="isEditable" noLabel>
+        <div class="flex justify-center items-center space-x-2">
           <Button :iconPath="mdiPencil" color="info" @click="$emit('edit', row)"></Button>
           <Button :iconPath="mdiTrashCan" color="danger" @click="$emit('delete', row)"></Button>
         </div>
-      </td>
+      </TableCell>
     </slot>
-  </tr>
+  </TableRow>
   <slot name="afterRow" :row="row">
     <DataTableRows 
       v-if="row[recursiveKey] && showChildRows"
