@@ -1,6 +1,7 @@
 <script setup>
 import { ref, shallowRef, computed, onMounted, reactive } from "vue";
 import { useDebounce } from "../../composables/useDebounce.js";
+import { useThrottle } from "../../composables/useThrottle.js";
 import Loader from "../Loader.vue";
 import Table from "../table/Table.vue";
 import TableBody from "../table/TableBody.vue";
@@ -90,7 +91,7 @@ const totalRecords = computed({
   },
 });
 
-const sort = (field = '') => {
+const sort = useThrottle((field = '') => {
 
   sortableColumns.value = sortableColumns.value.map((obj) => {
     if( field === obj.key ) {
@@ -115,7 +116,7 @@ const sort = (field = '') => {
   config.sortBy = sortArr.filter((val) => val);
 
   update();
-}
+});
 
 const getRowsWithSeparateChild = (rows, selectedRows = []) => {
   for(let row of rows){

@@ -1,14 +1,23 @@
+import { getCurrentScope, onScopeDispose } from "vue";
 export function useThrottle(callback, delay = 500) {
-  let recentArgs, isWaiting = false;
+  let hasTimeout, recentArgs, isWaiting = false;
 
   let timeoutFn = () => {
-    if( recentArgs === null ) {
+    if( !recentArgs ) {
       isWaiting = false;
     } else {
       callback(...recentArgs);
       recentArgs = null;
-      setTimeout(timeoutFn, delay);
+      hasTimeout = setTimeout(timeoutFn, delay);
     }
+  }
+
+  if (getCurrentScope()) {
+    onScopeDispose(() => {
+      if(hasTimeout){
+        clearTimeout(hasTimeout);
+      }
+    });
   }
 
   return (...args) => {
@@ -18,6 +27,6 @@ export function useThrottle(callback, delay = 500) {
     };
     isWaiting = true;
     callback(...args);
-    setTimeout(timeoutFn, delay)
+    hasTimeout = setTimeout(timeoutFn, delay)
   } 
 }
