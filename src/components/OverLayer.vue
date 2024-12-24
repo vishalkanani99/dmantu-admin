@@ -21,7 +21,7 @@ const showOverLayer = computed({
 
 const defaultStyle = computed(() => {
   const style = [
-    'absolute inset-0 z-[100] transition-opacity duration-300 overflow-hidden',
+    'fixed inset-0 z-[100] transition-opacity duration-300 overflow-hidden',
     !showOverLayer.value ? 'pointer-events-none opacity-0' : '',
   ];
   return style;
@@ -44,7 +44,7 @@ watchEffect(() => {
 <template>
   <Teleport to="body">
     <div v-bind="$attrs" :class="defaultStyle">
-      <div class="absolute inset-0 bg-theme-900 bg-opacity-60" @click="close"></div>
+      <div class="fixed inset-0 bg-theme-900 bg-opacity-60" @click="close"></div>
       <slot></slot>
     </div>
   </Teleport>

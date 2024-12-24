@@ -134,7 +134,9 @@ const dropdownContainerRef = (el) => {
 }
 
 onMounted(() => {
-  useDocumentClick(containerRef, close);
+  if(!props.hasModalView){
+    useDocumentClick(containerRef, close);
+  }
 })
 </script>
 <template>

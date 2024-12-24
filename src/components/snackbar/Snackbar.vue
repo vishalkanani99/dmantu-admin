@@ -68,7 +68,7 @@ const snackbarItems = computed({
 const defaultClass = computed(() => {
     let flexDirection = { top:'flex-col', bottom:'flex-col-reverse'};
     const defaultClass = [
-      "absolute inset-0 flex p-9 overflow-hidden z-[100] pointer-events-none",
+      "fixed inset-0 flex p-9 overflow-hidden z-[100] pointer-events-none",
       flexDirection[props.direction]
     ]
     return defaultClass;
