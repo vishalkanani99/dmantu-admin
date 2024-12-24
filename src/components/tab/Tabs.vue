@@ -19,6 +19,8 @@ export default defineComponent({
   setup(props, context) {
     
     const modelValue = shallowRef(props.modelValue);
+    const TabPanelTransitionName = shallowRef(props.vertical ? 'slide-down' : 'slide-right');
+
     const activeTab = computed({
       get: () => modelValue.value,
       set: (value) => {
@@ -67,13 +69,18 @@ export default defineComponent({
         }
         return h(
             TabPanel,
-            {isActive: activeTab.value === (index + 1) ? true : false},
+            {isActive: activeTab.value === (index + 1) ? true : false, transitionName: TabPanelTransitionName.value},
             () => tabsSlots, // Attached tabs default slot to the TabPanel Component slot
           );
       });
     })
 
     const changeTab = (tab) => {
+      if(props.vertical) {
+        TabPanelTransitionName.value = activeTab.value > tab ? 'slide-up' : 'slide-down';
+      } else {
+        TabPanelTransitionName.value = activeTab.value > tab ? 'slide-left' : 'slide-right';
+      }
       activeTab.value = tab;
     }
 

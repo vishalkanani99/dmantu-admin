@@ -1,12 +1,18 @@
 <script setup>
 const props = defineProps({
-  isActive: Boolean
+  isActive: Boolean,
+  transitionName: {
+    type: String,
+    default: 'slide-right',
+  }
 });
 
 </script>
 
 <template>
-  <div :class="['p-6', {'hidden':!isActive}]">
-    <slot></slot>
-  </div>
+  <Transition :name="transitionName">
+    <div v-if="isActive" class="p-6">
+      <slot></slot>
+    </div>
+  </Transition>
 </template>
