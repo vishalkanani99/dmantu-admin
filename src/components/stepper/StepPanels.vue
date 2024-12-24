@@ -9,7 +9,8 @@ const props = defineProps({
 });
 
 const defaultClass = computed(() => {
-  const base = [ 
+  const base = [
+    'relative', 
     props.vertical ? 'col-span-12 sm:col-span-9' : 'col-span-12'
   ]
   return base
@@ -19,6 +20,7 @@ const defaultClass = computed(() => {
 
 <template>
   <div :class="defaultClass" >
+    <slot name="buttons"></slot>
     <slot></slot>
   </div>
 </template>

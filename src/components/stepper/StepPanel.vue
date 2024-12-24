@@ -1,18 +1,18 @@
 <script setup>
-import Card from '../card/Card.vue';
-
 const props = defineProps({
   isActive: Boolean,
-  color: String,
+  transitionName: {
+    type: String,
+    default: 'slide-right',
+  }
 });
 
 </script>
 
 <template>
-  <Card :class="{'hidden':!isActive}" :color="color" noHeader>
-    <slot></slot>
-    <template #buttons>
-      <slot name="buttons"></slot>
-    </template>
-  </Card>
+  <Transition :name="transitionName">
+    <div v-if="isActive" class="p-6">
+      <slot></slot>
+    </div>
+  </Transition>
 </template>

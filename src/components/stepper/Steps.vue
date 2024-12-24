@@ -16,12 +16,13 @@ export default defineComponent({
     vertical: Boolean,
     outline: Boolean,
     color: String,
-    panelColor: String,
   },
   emits: ['update:modelValue'],
   setup(props, context) {
     
     const modelValue = shallowRef(props.modelValue);
+    const TabPanelTransitionName = shallowRef(props.vertical ? 'slide-down' : 'slide-right');
+
     const activeStep = computed({
       get: () => modelValue.value,
       set: (value) => {
@@ -73,37 +74,19 @@ export default defineComponent({
           StepPanel,
             {
               isActive: activeStep.value === (index + 1) ? true : false,
-              color: props.panelColor,
-              btnColor: props.color,
+              transitionName: TabPanelTransitionName.value,
             },
-            {
-              default: () => stepsSlots, // Attached steps default slot to the stepPanel Component slot
-              buttons: () => [
-                h(
-                  Button,
-                  {
-                    color: props.color,
-                    iconPath: mdiArrowLeft,
-                    disabled: index < 1,
-                    onClick: () => changeStep(index),
-                  }
-                ),
-                h(
-                  Button,
-                  {
-                    color: props.color,
-                    iconPath: mdiArrowRight,
-                    disabled: index > ( slotSteps.value.length - 2 ),
-                    onClick: () => changeStep(index + 2),
-                  }
-                )
-              ]
-            }
+            () => stepsSlots, // Attached steps default slot to the stepPanel Component slot
           );
       });
     })
 
     const changeStep = (step) => {
+      if(props.vertical) {
+        TabPanelTransitionName.value = activeStep.value > step ? 'slide-up' : 'slide-down';
+      } else {
+        TabPanelTransitionName.value = activeStep.value > step ? 'slide-left' : 'slide-right';
+      }
       activeStep.value = step;
     }
 
@@ -120,8 +103,34 @@ export default defineComponent({
 
         //Rendring Step Panels
         h(StepPanels,
-          { vertical: props.vertical },
-          () => renderStepsSlots.value
+          { class: 'group', vertical: props.vertical },
+          {
+            default: () => renderStepsSlots.value,
+            buttons: () => [
+              h(
+                Button,
+                {
+                  class: "invisible group-hover:visible absolute left-0 top-[50%] translate-y-[-50%] z-10",
+                  size: 'small',
+                  color: props.color,
+                  iconPath: mdiArrowLeft,
+                  disabled: activeStep.value < 2,
+                  onClick: () => changeStep(activeStep.value - 1),
+                }
+              ),
+              h(
+                Button,
+                {
+                  class: "invisible group-hover:visible absolute right-0 top-[50%] translate-y-[-50%] z-10",
+                  size: 'small',
+                  color: props.color,
+                  iconPath: mdiArrowRight,
+                  disabled: activeStep.value > ( slotSteps.value.length - 1 ),
+                  onClick: () => changeStep(activeStep.value + 1),
+                }
+              )
+            ],
+          }
         ),
       ],
     );
