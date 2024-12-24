@@ -155,7 +155,7 @@ onMounted(() => {
         :isTwelveHrsView="isTwelveHrsView"
         :btnColor="btnColor"
         :isHoursView="currentView === 'hours'"
-        
+        @update:modelValue="toggleView(currentView)"
       />
     </TransitionGroup>
     <Timer

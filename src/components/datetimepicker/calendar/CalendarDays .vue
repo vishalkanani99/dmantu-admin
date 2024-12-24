@@ -55,7 +55,8 @@ const isActiveDate = (day) => {
 }
 
 const setDate = (day) => {
-  selectedDate.value = new Date(props.year, props.month, day);
+  selectedDate.value.setFullYear(props.year, props.month, day);
+  selectedDate.value = new Date(selectedDate.value);
 }
 
 const firstOfMonth = computed(() => {
