@@ -111,7 +111,6 @@
 
   const overlayerStyle = computed(() => {
     return [ 
-      '!m-0 !z-50',
       props.centered ? 'flex items-center' : '',
     ];
   });

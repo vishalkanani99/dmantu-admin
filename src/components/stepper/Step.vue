@@ -44,7 +44,7 @@ const defaultStyle = computed(() => {
   let style = [
     'relative grow basis-4 mt-0',
     'before:[&:not(:first-child)]:absolute before:[&:not(:first-child)]:content-[""] before:[&:not(:first-child)]:block',
-    'before:[&:not(:first-child)]:bottom-0 before:z-10',
+    'before:[&:not(:first-child)]:bottom-0',
     props.isActive || props.isCompleted ? background.before[props.color] : 'before:bg-gray-200',
     'before:transition-[background] before:duration-300 before:delay-0',
   ];
@@ -68,7 +68,7 @@ const stepStyle = computed(() => {
   const textStyle = getDefaultTextStyle(props.color);
 
   let style = [
-    'flex justify-center items-center w-10 h-10 rounded-full z-20 overflow-hidden',
+    'flex justify-center items-center w-10 h-10 rounded-full overflow-hidden',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
   ];
 
@@ -101,7 +101,7 @@ const stepStyle = computed(() => {
 <template>
   <div :class="defaultStyle">
     <div class="flex items-center justify-center flex-col">
-      <div class="border-4 border-white z-20 rounded-full">
+      <div class="border-4 border-white z-10 rounded-full">
         <div :class="stepStyle">
           <Icon v-if="iconPath" :path="iconPath" />
           <span v-else>{{ number }}</span>
@@ -109,7 +109,7 @@ const stepStyle = computed(() => {
       </div>
       <span 
         v-if="label"
-        class="bg-white z-20 p-2"
+        class="bg-white z-10 p-2"
       >
         {{ label }}
       </span>

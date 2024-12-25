@@ -320,7 +320,7 @@ onMounted(() => {
             'inline-flex flex-col items-center',
             background[handlerColor],
             'rounded-md shadow-md',
-            {'z-50': isDragging === index},
+            {'z-10': isDragging === index},
           ]" 
           :style="{
             left: `${position}%`,

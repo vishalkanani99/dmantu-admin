@@ -40,7 +40,7 @@ onMounted(() => {
     <NavBar 
       :class="[
         isCompactSidebar ? 'md:ml-24' : 'md:ml-64',
-        'transition-[margin] z-10',
+        'transition-[margin] z-20',
       ]"
       :hasMenuBtn="isClosableSidebar" 
       @toggleMenu="toggleMenu" 

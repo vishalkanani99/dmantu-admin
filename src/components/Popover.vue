@@ -58,8 +58,8 @@
       ],
     }
     let style = [
-      'absolute rounded-md shadow-md z-50 whitespace-nowrap p-2',
-      'before:absolute before:content-[""] before:pointer-events-none before:z-[50] before:border-4',
+      'absolute rounded-md shadow-md z-10 whitespace-nowrap p-2',
+      'before:absolute before:content-[""] before:pointer-events-none before:z-10 before:border-4',
       ...positionStyle[props.position],
       background[props.color],
       textStyle.color,
