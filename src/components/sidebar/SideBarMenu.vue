@@ -14,6 +14,10 @@ const props = defineProps({
   modelValue: Boolean,
   isClosable: Boolean,
   isCompact: Boolean,
+  color: {
+    type: String,
+    default: 'black',
+  },
 });
 
 const emit = defineEmits(['update:modelValue', 'update:isCompact', 'close', 'dropdownClick']);
@@ -51,34 +55,37 @@ function close() {
     v-model="showSideBar" 
     :class="defaultStyle"
     :isClosable="isClosable"
+    :color="color"
     @close="close">
       <template #header>
         <slot name="header">
           <img class="h-12" src="/logo.png" />
         </slot>
       </template>
-      <template v-if="!isClosable" #footer>
+      <template v-if="!isClosable" #footer="{color: btnColor}">
         <Button 
-          color="theme-light" 
+          :color="btnColor" 
           :iconPath="mdiArrowCollapseHorizontal"
           rounded  
-          @click="isCompact = !isCompact" />
+          @click="isCompact = !isCompact" 
+        />
       </template>
       <Menu 
-        :items="items" 
+        :items="items"
+        :color="color" 
         :isCompact="isCompact"
         isRouterMenu
       >
         <template #default="{ item }">
           <CollapsibleMenu 
             v-if="!isCompact && item.items"
-            color="theme-dark" 
+            :color="color" 
             :item="item"
             isRouterMenu
           />
           <MenuListItem
             v-if="isCompact && item.items"
-            color="theme-dark" 
+            :color="color" 
             :label="item.label" 
             :iconPath="item.iconPath"
             isCompact

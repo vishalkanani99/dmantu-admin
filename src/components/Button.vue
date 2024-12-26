@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router'
 import Icon from './Icon.vue';
-import { getButtonStyle } from '../color.js';
+import { getButtonStyle, background, text as textColor, getDefaultTextStyle } from '../color.js';
 
   const props = defineProps({
     label: String,
@@ -18,6 +18,9 @@ import { getButtonStyle } from '../color.js';
     rounded: Boolean,
     isPlain: Boolean,
     disabled: Boolean,
+    hasBadge: Boolean,
+    badgeColor: String,
+    badgeLabel: String,
     size: {
       type: String,
       default: 'medium',
@@ -27,6 +30,8 @@ import { getButtonStyle } from '../color.js';
       },
     },
   })
+
+  const textStyle = computed(() => getDefaultTextStyle(props.badgeColor ?? props.color))
 
   const typeOfComponent = computed(() => {
     if( props.to ) {
@@ -47,6 +52,7 @@ import { getButtonStyle } from '../color.js';
     }
 
     let style = [
+      {'relative': props.hasBadge},
       'flex justify-center items-center text-center leading-normal',
       'focus:outline-none',
       'select-none',
@@ -110,6 +116,32 @@ const iconSize = computed(() => {
     <slot>
       <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
       <span v-if="label" :class="{ 'ml-1': iconPath }">{{ label }}</span>
+      <span
+        v-if="hasBadge" 
+        :class="[
+          'flex items-center absolute top-0 right-0',
+          badgeLabel ? 'h-6 w-6 -mt-3 -mr-3' : 'h-3 w-3 -mt-1 -mr-1',
+        ]"
+      >
+        <span 
+          :class="[
+            'animate-ping absolute inline-flex h-full w-full rounded-full opacity-75',
+            background[badgeColor ?? textStyle.type],
+            badgeColor ? textStyle.color : textColor[color],
+          ]"
+        >
+        </span>
+        <span 
+          :class="[
+            'relative inline-flex rounded-full justify-center items-center text-[10px] overflow-hidden',
+            badgeLabel ? 'p-1 h-6 w-6' : 'h-3 w-3',
+            background[badgeColor ?? textStyle.type],
+            badgeColor ? textStyle.color : textColor[color],
+          ]"
+        >
+          {{ badgeLabel }}
+        </span>
+      </span>
     </slot>
   </component>
 </template>

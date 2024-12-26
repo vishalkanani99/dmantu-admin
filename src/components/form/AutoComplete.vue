@@ -9,13 +9,23 @@ const props = defineProps({
   modelValue: String,
   color: {
     type: String,
-    default: 'theme-light',
+    default: 'theme',
   },
   options: {
     type: Array,
-    default: () => [],
+    default(rawProps) {
+      return [];
+    },
   },
   displayKey: String,
+  fieldProps: {
+    type: Object,
+    default(rawProps) {
+      return {
+        color: rawProps.color,
+      }
+    },
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'select']);
@@ -72,7 +82,7 @@ onMounted(() => {
     <template #selector>
       <Field
         v-model="modelValue"
-        :color="color"
+        v-bind="fieldProps"
         @input="getOptions" 
         @focus="open" 
       />
