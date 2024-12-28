@@ -39,15 +39,15 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger"></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount"></Chip>
-          <Chip color="theme" label="Theme" :iconPath="mdiEmail"></Chip>
-          <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh"></Chip>
-          <Chip color="black" label="Black" :iconPath="mdiAlertCircle"></Chip>
-          <Chip color="gray" label="Gray" :iconPath="mdiCheckCircle"></Chip>
-          <Chip color="info" label="Info" :iconPath="mdiEye"></Chip>
-          <Chip color="success" label="Success" :iconPath="mdiEyeOff"></Chip>
-          <Chip color="warning" label="Warning" :iconPath="mdiFormSelect"></Chip>
-          <Chip color="danger" label="Danger" :iconPath="mdiCog"></Chip>
+          <Chip color="theme-dark" label="Theme Dark" size="small" :iconPath="mdiAccount"></Chip>
+          <Chip color="theme" label="Theme" size="small" :iconPath="mdiEmail"></Chip>
+          <Chip color="theme-light" label="Theme Light" size="small" :iconPath="mdiRefresh"></Chip>
+          <Chip color="black" label="Black" size="small" :iconPath="mdiAlertCircle"></Chip>
+          <Chip color="gray" label="Gray" size="small" :iconPath="mdiCheckCircle"></Chip>
+          <Chip color="info" label="Info" size="small" :iconPath="mdiEye"></Chip>
+          <Chip color="success" label="Success" size="small" :iconPath="mdiEyeOff"></Chip>
+          <Chip color="warning" label="Warning" size="small" :iconPath="mdiFormSelect"></Chip>
+          <Chip color="danger" label="Danger" size="small" :iconPath="mdiCog"></Chip>
         </div>
       </Card>
       <Card title="Outline" noFooter>
@@ -74,15 +74,15 @@ import Chip from '../components/Chip.vue';
       </Card>
       <Card title="Rounded" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" rounded></Chip>
-          <Chip color="theme" label="Theme" rounded></Chip>
-          <Chip color="theme-light" label="Theme Light" rounded></Chip>
-          <Chip color="black" label="Black" rounded></Chip>
-          <Chip color="gray" label="Gray" rounded></Chip>
-          <Chip color="info" label="Info" rounded></Chip>
-          <Chip color="success" label="Success" rounded></Chip>
-          <Chip color="warning" label="Warning" rounded></Chip>
-          <Chip color="danger" label="Danger" rounded></Chip>
+          <Chip color="theme-dark" label="Theme Dark" size="large" rounded></Chip>
+          <Chip color="theme" label="Theme" size="large" rounded></Chip>
+          <Chip color="theme-light" label="Theme Light" size="large" rounded></Chip>
+          <Chip color="black" label="Black" size="large" rounded></Chip>
+          <Chip color="gray" label="Gray" size="large" rounded></Chip>
+          <Chip color="info" label="Info" size="large" rounded></Chip>
+          <Chip color="success" label="Success" size="large" rounded></Chip>
+          <Chip color="warning" label="Warning" size="large" rounded></Chip>
+          <Chip color="danger" label="Danger" size="large" rounded></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
           <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded></Chip>
@@ -110,25 +110,25 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" closable></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" outline closable></Chip>
-          <Chip color="theme" label="Theme" outline closable></Chip>
-          <Chip color="black" label="Black" outline closable></Chip>
-          <Chip color="gray" label="Gray" outline closable></Chip>
-          <Chip color="info" label="Info" outline closable></Chip>
-          <Chip color="success" label="Success" outline closable></Chip>
-          <Chip color="warning" label="Warning" outline closable></Chip>
-          <Chip color="danger" label="Danger" outline closable></Chip>
+          <Chip color="theme-dark" label="Theme Dark" size="small" outline closable></Chip>
+          <Chip color="theme" label="Theme" size="small" outline closable></Chip>
+          <Chip color="black" label="Black" size="small" outline closable></Chip>
+          <Chip color="gray" label="Gray" size="small" outline closable></Chip>
+          <Chip color="info" label="Info" size="small" outline closable></Chip>
+          <Chip color="success" label="Success" size="small" outline closable></Chip>
+          <Chip color="warning" label="Warning" size="small" outline closable></Chip>
+          <Chip color="danger" label="Danger" size="small" outline closable></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded closable></Chip>
-          <Chip color="theme" label="Theme" :iconPath="mdiEmail" rounded closable></Chip>
-          <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh" rounded closable></Chip>
-          <Chip color="black" label="Black" :iconPath="mdiAlertCircle" rounded closable></Chip>
-          <Chip color="gray" label="Gray" :iconPath="mdiCheckCircle" rounded closable></Chip>
-          <Chip color="info" label="Info" :iconPath="mdiEye" rounded closable></Chip>
-          <Chip color="success" label="Success" :iconPath="mdiEyeOff" rounded closable></Chip>
-          <Chip color="warning" label="Warning" :iconPath="mdiFormSelect" rounded closable></Chip>
-          <Chip color="danger" label="Danger" :iconPath="mdiCog" rounded closable></Chip>
+          <Chip color="theme-dark" label="Theme Dark" size="large" :iconPath="mdiAccount" rounded closable></Chip>
+          <Chip color="theme" label="Theme" size="large" :iconPath="mdiEmail" rounded closable></Chip>
+          <Chip color="theme-light" label="Theme Light" size="large" :iconPath="mdiRefresh" rounded closable></Chip>
+          <Chip color="black" label="Black" size="large" :iconPath="mdiAlertCircle" rounded closable></Chip>
+          <Chip color="gray" label="Gray" size="large" :iconPath="mdiCheckCircle" rounded closable></Chip>
+          <Chip color="info" label="Info" size="large" :iconPath="mdiEye" rounded closable></Chip>
+          <Chip color="success" label="Success" size="large" :iconPath="mdiEyeOff" rounded closable></Chip>
+          <Chip color="warning" label="Warning" size="large" :iconPath="mdiFormSelect" rounded closable></Chip>
+          <Chip color="danger" label="Danger" size="large" :iconPath="mdiCog" rounded closable></Chip>
         </div>
       </Card>
     </Section>
