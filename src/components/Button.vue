@@ -2,7 +2,8 @@
 import { computed } from 'vue';
 import { RouterLink } from 'vue-router'
 import Icon from './Icon.vue';
-import { getButtonStyle, background, text as textColor, getDefaultTextStyle } from '../color.js';
+import Chip from './Chip.vue';
+import { getButtonStyle, getDefaultTextStyle } from '../color.js';
 
   const props = defineProps({
     label: String,
@@ -19,6 +20,7 @@ import { getButtonStyle, background, text as textColor, getDefaultTextStyle } fr
     isPlain: Boolean,
     disabled: Boolean,
     hasBadge: Boolean,
+    hasAnimatedBadge: Boolean,
     badgeColor: String,
     badgeLabel: String,
     size: {
@@ -116,32 +118,31 @@ const iconSize = computed(() => {
     <slot>
       <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
       <span v-if="label" :class="{ 'ml-1': iconPath }">{{ label }}</span>
-      <span
-        v-if="hasBadge" 
+      <Chip
+        v-if="hasBadge"
         :class="[
-          'flex items-center absolute top-0 right-0',
+          'absolute top-0 right-0 !p-0.5',
           badgeLabel ? 'h-6 w-6 -mt-3 -mr-3' : 'h-3 w-3 -mt-1 -mr-1',
         ]"
+        :color="badgeColor ?? textStyle.type"
+        size="small"
+        rounded
       >
-        <span 
-          :class="[
-            'animate-ping absolute inline-flex h-full w-full rounded-full opacity-75',
-            background[badgeColor ?? textStyle.type],
-            badgeColor ? textStyle.color : textColor[color],
-          ]"
+        <span
+          v-if="hasAnimatedBadge" 
+          class="animate-ping absolute top-0 right-0 inline-flex h-full w-full rounded-full opacity-75 bg-inherit"
         >
         </span>
         <span 
           :class="[
-            'relative inline-flex rounded-full justify-center items-center text-[10px] overflow-hidden',
-            badgeLabel ? 'p-1 h-6 w-6' : 'h-3 w-3',
-            background[badgeColor ?? textStyle.type],
-            badgeColor ? textStyle.color : textColor[color],
+            'relative inline-flex rounded-full justify-center items-center overflow-hidden',
+            'bg-inherit text-inherit text-[length:inherit]',
+            badgeLabel ? 'h-6 w-6' : 'h-3 w-3',
           ]"
         >
           {{ badgeLabel }}
         </span>
-      </span>
+      </Chip>
     </slot>
   </component>
 </template>
