@@ -4,6 +4,7 @@
   import Button from '../Button.vue';
   import { background, getDefaultTextStyle } from '../../color';
   import Icon from '../Icon.vue';
+  import Chip from '../Chip.vue';
 
   const props = defineProps({
     type: String,
@@ -13,6 +14,8 @@
     isCompact: Boolean,
     isOpen: Boolean,
     hasMenu: Boolean,
+    badgeColor: String,
+    badgeLabel: String,
     color: {
       type: String,
       default: 'theme-light',
@@ -27,12 +30,13 @@
     return Button;
   });
 
+  const textStyle = computed(() => getDefaultTextStyle(props.color));
+
   const defaultStyle = computed(() => {
-    const textStyle = getDefaultTextStyle(props.color);
     const backgroundStyle = [
       props.isActive
-        ? [ background.active[props.color], textStyle.color, 'font-bold' ]
-        : [ background[props.color], background.hover(props.color, true), textStyle.color ]
+        ? [ background.active[props.color], textStyle.value.color, 'font-bold' ]
+        : [ background[props.color], background.hover(props.color, true), textStyle.value.color ]
     ]; 
     
     const style = [
@@ -65,11 +69,22 @@
     <slot>
       <Icon v-if="iconPath" :path="iconPath" />
       <span v-if="label" :class="{'px-2': iconPath, 'hidden': isCompact}">{{ label }}</span>
-      <Icon 
-        v-if="hasMenu" 
-        :class="['absolute right-0 mr-2 rotate-0 transition-[transform]', {'!-rotate-180':isOpen}]" 
-        :path="mdiChevronDown" 
-      />
+      <div 
+        v-if="badgeLabel || hasMenu" 
+        class="absolute right-0 mr-2 inline-flex justify-center items-center gap-1"
+      >
+        <Chip
+          v-if="badgeLabel"
+          :color="badgeColor ?? textStyle.type"
+          :label="badgeLabel"
+          rounded
+        />
+        <Icon 
+          v-if="hasMenu" 
+          :class="['rotate-0 transition-[transform]', {'!-rotate-180':isOpen}]" 
+          :path="mdiChevronDown" 
+        />
+      </div>
     </slot>
   </component>
 </template>
