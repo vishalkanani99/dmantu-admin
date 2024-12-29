@@ -9,6 +9,7 @@
   const props = defineProps({
     type: String,
     iconPath: String,
+    iconSize: Number,
     label: String,
     to: String,
     isCompact: Boolean,
@@ -40,7 +41,7 @@
     ]; 
     
     const style = [
-      {'relative' : props.hasMenu},
+      {'relative' : props.badgeLabel || props.hasMenu},
       'flex items-center px-3 py-2 select-none cursor-pointer rounded-md',
       ...backgroundStyle,
       {'justify-center' : props.isCompact},
@@ -67,7 +68,7 @@
     v-bind="bindProps"
   >
     <slot>
-      <Icon v-if="iconPath" :path="iconPath" />
+      <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
       <span v-if="label" :class="{'px-2': iconPath, 'hidden': isCompact}">{{ label }}</span>
       <div 
         v-if="badgeLabel || hasMenu" 

@@ -17,6 +17,8 @@ import Dropdown from './dropdown/Dropdown.vue';
 import Avatar from './Avatar.vue';
 import Icon from './Icon.vue';
 import SideBarMenu from './sidebar/SideBarMenu.vue';
+import MenuListItem from './menu/MenuListItem.vue';
+import OverLayer from './OverLayer.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,
@@ -92,12 +94,12 @@ const optionsArrObjs = [
     <div class="hidden md:flex order-last items-center gap-2">
       <Dropdown :bgColor="textStyle.type" :items="items">
         <template #selector>
-          <Button :color="textStyle.type" :iconPath="mdiBellOutline" size="small" hasBadge />
+          <Button :color="textStyle.type" :iconPath="mdiBellOutline" size="small" hasAnimatedBadge />
         </template>
       </Dropdown>
       <Dropdown :bgColor="textStyle.type" :items="items">
         <template #selector>
-          <Button :color="textStyle.type" :iconPath="mdiEmailOutline" size="small" hasBadge badgeLabel="+9" />
+          <Button :color="textStyle.type" :iconPath="mdiEmailOutline" size="small" badgeLabel="+9" />
         </template>
       </Dropdown>
       <Dropdown :bgColor="textStyle.type" :items="items">
@@ -120,7 +122,29 @@ const optionsArrObjs = [
     <Teleport to="body">
       <SideBarMenu 
         v-model="showMobileMenu"
-        :items="items"
+        :items="[
+          {
+            label: 'Edit Profile',
+            to: '/',
+            iconPath: mdiPencil,
+          },
+          {
+            label: 'Settings',
+            to: '/',
+            iconPath: mdiCog,
+          },
+          {
+            label: 'Notification',
+            to: '/',
+            iconPath: mdiBellOutline,
+          },
+          {
+            label: 'Email',
+            to: '/',
+            iconPath: mdiEmailOutline,
+            badgeLabel: '+9',
+          },
+        ]"
         :color="textStyle.type"
         position="right" 
         isClosable 
@@ -131,7 +155,21 @@ const optionsArrObjs = [
             <span>John Doe</span>
           </div>
         </template>
+        <template #menuItem="{item}">
+          <MenuListItem
+            :color="textStyle.type" 
+            :label="item?.label ?? ''" 
+            :iconPath="item?.iconPath ?? ''"
+            :iconSize="14"
+            :to="item?.to ?? ''"
+            :badgeLabel="item?.badgeLabel"
+          />
+        </template>
+        <template #footer>
+          <Button :color="color" :iconPath="mdiLogout" rounded />
+        </template>
       </SideBarMenu>
     </Teleport>
+    <OverLayer v-model="showMobileMenu" />
   </div>
 </template>

@@ -19,7 +19,6 @@ import { getButtonStyle, getDefaultTextStyle } from '../color.js';
     rounded: Boolean,
     isPlain: Boolean,
     disabled: Boolean,
-    hasBadge: Boolean,
     hasAnimatedBadge: Boolean,
     badgeColor: String,
     badgeLabel: String,
@@ -47,6 +46,7 @@ import { getButtonStyle, getDefaultTextStyle } from '../color.js';
     return 'button';
   });
 
+  const hasBadge = computed(() => props.hasAnimatedBadge || props.badgeLabel);
   const defaultClass = computed(() => {
     
     if(props.isPlain) {
@@ -54,7 +54,7 @@ import { getButtonStyle, getDefaultTextStyle } from '../color.js';
     }
 
     let style = [
-      {'relative': props.hasBadge},
+      {'relative': hasBadge.value},
       'flex justify-center items-center text-center leading-normal',
       'focus:outline-none',
       'select-none',

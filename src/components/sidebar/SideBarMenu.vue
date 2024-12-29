@@ -16,7 +16,7 @@ const props = defineProps({
   isCompact: Boolean,
   color: {
     type: String,
-    default: 'black',
+    default: 'theme-dark',
   },
 });
 
@@ -77,21 +77,26 @@ function close() {
         isRouterMenu
       >
         <template #default="{ item }">
-          <CollapsibleMenu 
-            v-if="!isCompact && item.items"
-            :color="color" 
-            :item="item"
-            isRouterMenu
-          />
-          <MenuListItem
-            v-if="isCompact && item.items"
-            :color="color" 
-            :label="item.label" 
-            :iconPath="item.iconPath"
-            isCompact
-            @click="$emit('dropdownClick', item)"
-          />
+          <slot name="menuItem" :item="item">
+            <CollapsibleMenu 
+              v-if="!isCompact && item.items"
+              :color="color" 
+              :item="item"
+              isRouterMenu
+            />
+            <MenuListItem
+              v-if="isCompact && item.items"
+              :color="color" 
+              :label="item.label" 
+              :iconPath="item.iconPath"
+              isCompact
+              @click="$emit('dropdownClick', item)"
+            />
+          </slot>
         </template>
       </Menu>
+      <template #footer="{color}">
+        <slot name="footer" :color="color"></slot>
+      </template>
   </SideBar>
 </template>
