@@ -61,6 +61,7 @@ const icon = computed(() => {
 </script>
 <template>
   <ListCard
+    class="!p-3"
     :color="color"
     :outline="outline"
   >

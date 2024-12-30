@@ -3,6 +3,9 @@ import { computed } from 'vue';
 import { mdiClose } from '@mdi/js';
 import { background, getDefaultTextStyle, border } from '../../color';
 import Button from '../Button.vue';
+import CardHeader from './CardHeader.vue';
+import CardFooter from './CardFooter.vue';
+import CardBody from './CardBody.vue';
 
 const props = defineProps({
   title: String,
@@ -24,7 +27,6 @@ const props = defineProps({
   closable: Boolean,
   noHeader: Boolean,
   noFooter: Boolean,
-  noPadding: Boolean,
   scrollable: Boolean,
 });
 
@@ -42,8 +44,6 @@ const defaultStyle = computed(() => {
   return style;
 });
 
-const separatorColor = computed(() => border[textStyle.value.type]);
-
 </script>
 <template>
   <div :class="defaultStyle">
@@ -58,48 +58,30 @@ const separatorColor = computed(() => border[textStyle.value.type]);
     />
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <div :class="[
-          'flex justify-between items-center border-b rounded-t-md',
-          { 'p-3 md:p-6': !noPadding }, 
-          separatorColor
-        ]"
-      >
-        <span>
-          <h2 v-if="title">{{ title }}</h2>
-          <h4 v-if="subTitle">{{ subTitle }}</h4>
-        </span>
-      </div>
+      <CardHeader :separatorColor="textStyle.type" :title="title" :subTitle="subTitle" />
     </slot>
     <!-- card header end -->
 
     <!-- card body -->
     <slot name="content">
-        <div 
-          :class="[ 
-            'flex-auto',
-            { 'p-3 md:p-6': !noPadding },
-            scrollable ? 'overflow-y-auto' : 'overflow-hidden',
-          ]"
-        >
+      <CardBody :scrollable="scrollable">
         <slot></slot>
-      </div>
+      </CardBody>
     </slot>
     <!-- card body end -->
 
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
-      <div 
-        :class="[
-          'flex items-center space-x-2 border-t rounded-b-md p-3 md:p-6',
-          { 'p-3 md:p-6': !noPadding }, 
-          separatorColor
-        ]"
-      >
-        <slot name="buttons">
-          <Button :label="saveBtnLabel" :iconPath="saveBtnIconPath" :color="textStyle.type"  @click="$emit('save')" />
-          <Button :label="cancelBtnLabel" :iconPath="cancelBtnIconPath" :color="textStyle.type" outline  @click="$emit('cancel')" />
-        </slot>
-      </div>
+      <CardFooter
+        :btnColor="textStyle.type"
+        :separatorColor="textStyle.type"
+        :saveBtnLabel="saveBtnLabel"
+        :cancelBtnLabel="cancelBtnLabel"
+        :saveBtnIconPath="saveBtnIconPath"
+        :cancelBtnIconPath="cancelBtnIconPath"
+        @save="$emit('save')"
+        @cancel="$emit('cancel')"
+      />
     </slot>
     <!-- card footer end -->
   </div>

@@ -19,6 +19,12 @@ import Icon from './Icon.vue';
 import SideBarMenu from './sidebar/SideBarMenu.vue';
 import MenuListItem from './menu/MenuListItem.vue';
 import OverLayer from './OverLayer.vue';
+import Card from './card/Card.vue';
+import ListCard from './card/ListCard.vue';
+import CardHeader from './card/CardHeader.vue';
+import CardFooter from './card/CardFooter.vue';
+import CardBody from './card/CardBody.vue';
+import Chip from './Chip.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,
@@ -92,15 +98,113 @@ const optionsArrObjs = [
       }"
     />
     <div class="hidden md:flex order-last items-center gap-2">
-      <Dropdown :bgColor="textStyle.type" :items="items">
+      <Dropdown :bgColor="textStyle.type" :items="items" maxHeight>
         <template #selector>
           <Button :color="textStyle.type" :iconPath="mdiBellOutline" size="small" hasAnimatedBadge />
         </template>
+        <Card class="w-96 h-96" :color="textStyle.type">
+          <template #header>
+            <CardHeader class="!px-3 !py-2" :separatorColor="color">
+              <template #title>
+                <strong>Notifications</strong>
+              </template>
+              <Chip label="9 new" :color="color" />
+            </CardHeader>
+          </template>
+          <template #content>
+            <CardBody class="!p-0" scrollable>
+              <div class="flex items-center flex-wrap gap-px">
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="John Doe">
+                  <template #title>
+                    <strong>John Doe</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="30 minutes ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
+                  <template #title>
+                    <strong>Gian Leon</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="50 minutes ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
+                  <template #title>
+                    <strong>Ariadna Meireles</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="1 hour ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
+                  <template #title>
+                    <strong>Guilherme Matias</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="2 hours ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+              </div>
+            </CardBody>
+          </template>
+          <template #footer>
+            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="color">
+              <Button :color="color" label="Read more" isPlain />
+            </CardFooter>
+          </template>
+        </Card>
       </Dropdown>
-      <Dropdown :bgColor="textStyle.type" :items="items">
+      <Dropdown :bgColor="textStyle.type" :items="items" maxHeight>
         <template #selector>
-          <Button :color="textStyle.type" :iconPath="mdiEmailOutline" size="small" badgeLabel="+9" />
+          <Button :color="textStyle.type" :iconPath="mdiEmailOutline" size="small" badgeLabel="+4" />
         </template>
+        <Card class="w-96 h-96" :color="textStyle.type">
+          <template #header>
+            <CardHeader class="!px-3 !py-2" :separatorColor="color">
+              <template #title>
+                <strong>Messages</strong>
+              </template>
+              <Chip label="4 new" :color="color" />
+            </CardHeader>
+          </template>
+          <template #content>
+            <CardBody class="!p-0" scrollable>
+              <div class="flex items-center flex-wrap gap-px">
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="John Doe">
+                  <template #title>
+                    <strong>John Doe</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="30 minutes ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
+                  <template #title>
+                    <strong>Gian Leon</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="50 minutes ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
+                  <template #title>
+                    <strong>Ariadna Meireles</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="1 hour ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
+                  <template #title>
+                    <strong>Guilherme Matias</strong>
+                    <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <Chip label="2 hours ago" :color="textStyle.type" size="small" />
+                  </template>
+                </ListCard>
+              </div>
+            </CardBody>
+          </template>
+          <template #footer>
+            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="color">
+              <Button :color="color" label="Read more" isPlain />
+            </CardFooter>
+          </template>
+        </Card>
       </Dropdown>
       <Dropdown :bgColor="textStyle.type" :items="items">
         <template #selector="{ btnIcon }">

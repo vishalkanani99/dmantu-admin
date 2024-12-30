@@ -93,6 +93,7 @@ const bindProps = computed(() => {
   let componentProps = {
     bgColor: props.calendarColor,
     maxHeight: true,
+    scrollable: true,
   };
 
   if(props.hasModalView) {

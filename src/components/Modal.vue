@@ -170,7 +170,7 @@
       </template>
 
       <template v-if="!$slots.footer" #buttons>
-        <slot name="buttons" />
+        <slot />
       </template>
     </component>
   </OverLayer>

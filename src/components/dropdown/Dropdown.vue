@@ -30,6 +30,7 @@ const props = defineProps({
   },
   controllable: Boolean,
   maxHeight: Boolean,
+  scrollable: Boolean,
 });
 
 const emit = defineEmits(['update:modelValue', 'menuClick']);
@@ -89,6 +90,7 @@ onMounted(() => {
       :bgColor="bgColor"
       :maxHeight="maxHeight"
       :position="visibleAtBottom ? 'bottom' : 'top'"
+      :scrollable="scrollable"
       @enter="dropdownContainerRef"
       @after-leave="dropdownContainerRef" 
     >
