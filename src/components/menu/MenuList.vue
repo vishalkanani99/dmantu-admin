@@ -11,6 +11,7 @@
       type: String,
       default: 'theme-dark',
     },
+    itemSize: String,
     isCompact: Boolean,
     isRouterMenu: Boolean,
   });
@@ -22,7 +23,8 @@
     <slot name="item" :item="item">
       <MenuListRouterItem
         v-if="isRouterMenu"
-        :color="color" 
+        :color="color"
+        :size="itemSize" 
         :label="item?.label ?? ''" 
         :iconPath="item?.iconPath ?? ''"
         :to="item?.to ?? ''"
@@ -31,7 +33,8 @@
       />
       <MenuListItem
         v-else
-        :color="color" 
+        :color="color"
+        :size="itemSize" 
         :label="item?.label ?? ''" 
         :iconPath="item?.iconPath ?? ''"
         :to="item?.to ?? ''"

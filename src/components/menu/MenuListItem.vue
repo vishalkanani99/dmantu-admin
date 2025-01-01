@@ -9,7 +9,6 @@
   const props = defineProps({
     type: String,
     iconPath: String,
-    iconSize: Number,
     label: String,
     to: String,
     isCompact: Boolean,
@@ -20,6 +19,14 @@
     color: {
       type: String,
       default: 'theme-light',
+    },
+    size: {
+      type: String,
+      default: 'medium',
+      validator(value, props) {
+        // The value must match one of these strings
+        return ['large', 'medium', 'small'].includes(value)
+      },
     },
     isActive: Boolean,
   });
@@ -40,12 +47,27 @@
         : [ background[props.color], background.hover(props.color, true), textStyle.value.color ]
     ]; 
     
+    let fontSize = 'text-base';
+    let padding = props.iconPath && !props.label ? 'p-2' : 'px-3 py-2';
+
+    if(props.size === 'small'){
+      fontSize = 'text-sm';
+      padding = props.iconPath && !props.label ? 'p-1' : 'px-2 py-1';
+    }
+
+    if(props.size === 'large'){
+      fontSize = 'text-lg';
+      padding = props.iconPath && !props.label ? 'p-3' : 'px-4 py-3';
+    }
+
     const style = [
       {'relative' : props.badgeLabel || props.hasMenu},
-      'flex items-center px-3 py-2 select-none cursor-pointer rounded-md',
+      'flex items-center select-none cursor-pointer rounded-md gap-2',
       ...backgroundStyle,
       {'justify-center' : props.isCompact},
-      { 'w-full' : !props.to }
+      { 'w-full' : !props.to },
+      fontSize,
+      padding,
     ];
     return style;
   })
@@ -60,6 +82,17 @@
     }
     return componentProps;
   })
+
+  const iconSize = computed(() => {
+    let size = 18;
+    if( props.size === 'small' ) {
+      size = 14;
+    }
+    if( props.size === 'large' ) {
+      size = 22;
+    }
+    return size;
+  })
 </script>
 <template>
   <component
@@ -69,7 +102,7 @@
   >
     <slot>
       <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
-      <span v-if="label" :class="{'px-2': iconPath, 'hidden': isCompact}">{{ label }}</span>
+      <span v-if="label" :class="[{'hidden': isCompact}, 'text-inherit text-[length:inherit]']">{{ label }}</span>
       <div 
         v-if="badgeLabel || hasMenu" 
         class="absolute right-0 mr-2 inline-flex justify-center items-center gap-1"
@@ -77,13 +110,15 @@
         <Chip
           v-if="badgeLabel"
           :color="badgeColor ?? textStyle.type"
+          :size="size"
           :label="badgeLabel"
           rounded
         />
         <Icon 
           v-if="hasMenu" 
           :class="['rotate-0 transition-[transform]', {'!-rotate-180':isOpen}]" 
-          :path="mdiChevronDown" 
+          :path="mdiChevronDown"
+          :size="iconSize" 
         />
       </div>
     </slot>

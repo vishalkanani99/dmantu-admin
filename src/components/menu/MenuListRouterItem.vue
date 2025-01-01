@@ -14,6 +14,7 @@
       type: String,
       default: 'theme-light',
     },
+    size: String,
   });
 
   const { isExactActive } = useLink(props);
@@ -27,6 +28,7 @@
     :isOpen="isOpen"
     :hasMenu="hasMenu"
     :color="color"
+    :size="size"
     :isActive="isExactActive"
   />
 </template>

@@ -14,6 +14,7 @@
       type: String,
       default: 'theme-dark',
     },
+    itemSize: String,
     isCompact: Boolean,
     isRouterMenu: Boolean,
   });
@@ -27,6 +28,7 @@
       :key="key"
       :item="item" 
       :color="color"
+      :itemSize="itemSize"
       :isCompact="isCompact"
       :isRouterMenu="isRouterMenu"
       @menuClick="(value) => $emit('menuClick', value)"
