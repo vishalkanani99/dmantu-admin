@@ -104,16 +104,18 @@
       <Icon v-if="iconPath" :path="iconPath" :size="iconSize" />
       <span v-if="label" :class="[{'hidden': isCompact}, 'text-inherit text-[length:inherit]']">{{ label }}</span>
       <div 
-        v-if="badgeLabel || hasMenu" 
+        v-if="$slots.badge || badgeLabel || hasMenu" 
         class="absolute right-0 mr-2 inline-flex justify-center items-center gap-1"
       >
-        <Chip
-          v-if="badgeLabel"
-          :color="badgeColor ?? textStyle.type"
-          :size="size"
-          :label="badgeLabel"
-          rounded
-        />
+        <slot name="badge">
+          <Chip
+            v-if="badgeLabel"
+            :color="badgeColor ?? textStyle.type"
+            :size="size"
+            :label="badgeLabel"
+            rounded
+          />
+        </slot>
         <Icon 
           v-if="hasMenu" 
           :class="['rotate-0 transition-[transform]', {'!-rotate-180':isOpen}]" 

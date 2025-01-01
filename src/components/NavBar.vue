@@ -225,7 +225,8 @@ const optionsArrObjs = [
       @click="showMobileMenu = true" 
     />
     <Teleport to="body">
-      <SideBarMenu 
+      <SideBarMenu
+        class="md:hidden" 
         v-model="showMobileMenu"
         :items="[
           {
@@ -273,8 +274,16 @@ const optionsArrObjs = [
             :label="item?.label ?? ''" 
             :iconPath="item?.iconPath ?? ''"
             :to="item?.to ?? ''"
-            :badgeLabel="item?.badgeLabel"
-          />
+          >
+            <template #badge>
+              <Chip
+                v-if="item.badgeLabel"
+                class="justify-center w-7 h-7"
+                :label="item.badgeLabel"
+                rounded 
+              />
+            </template>
+          </MenuListItem>
         </template>
         <template #footer>
           <Button :color="color" :iconPath="mdiLogout" rounded />
