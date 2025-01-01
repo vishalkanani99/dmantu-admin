@@ -98,6 +98,7 @@ onMounted(() => {
         <Menu 
           :items="items" 
           :color="ItemColor"
+          itemSize="small"
           @menuClick="(value) => $emit('menuClick', value)"
         >
           <template #default="{ item, key }">

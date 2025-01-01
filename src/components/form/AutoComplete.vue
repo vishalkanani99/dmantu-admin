@@ -91,6 +91,7 @@ onMounted(() => {
       <MenuListItem 
         :label="getLabel(item)"
         :color="color"
+        size="small"
         :isActive="selectedValue === getLabel(item)"
         @click="selectValue(item, key)" 
       />

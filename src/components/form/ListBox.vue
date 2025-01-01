@@ -51,6 +51,7 @@ const getLabel = (option) => {
         :label="modelValue"
         :isOpen="showDropdown"
         :color="color"
+        size="small"
         hasMenu 
         @click="toggle" 
       />
@@ -59,6 +60,7 @@ const getLabel = (option) => {
       <MenuListItem 
         :label="getLabel(item)"
         :color="color"
+        size="small"
         :isActive="modelValue === getLabel(item)"
         @click="selectValue(item, key)" 
       />
