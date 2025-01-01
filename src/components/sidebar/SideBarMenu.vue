@@ -57,19 +57,17 @@ function close() {
     :isClosable="isClosable"
     :color="color"
     @close="close">
-      <template #header>
+
+      <template v-if="$slots.headerBody" #headerBody>
+        <slot name="headerBody"></slot>
+      </template>
+
+      <template v-if="!$slots.headerBody" #header>
         <slot name="header">
           <img class="h-12" src="/logo.png" />
         </slot>
       </template>
-      <template v-if="!isClosable" #footer="{color: btnColor}">
-        <Button 
-          :color="btnColor" 
-          :iconPath="mdiArrowCollapseHorizontal"
-          rounded  
-          @click="isCompact = !isCompact" 
-        />
-      </template>
+
       <Menu 
         :items="items"
         :color="color" 
@@ -95,8 +93,23 @@ function close() {
           </slot>
         </template>
       </Menu>
-      <template #footer="{color}">
-        <slot name="footer" :color="color"></slot>
+
+      <template v-if="$slots.footerBody" #footerBody>
+        <slot name="footerBody"></slot>
+      </template>
+      
+      <template 
+        v-if="(!isClosable || $slots.footer) && !$slots.footerBody" 
+        #footer="{color: btnColor}"
+      >
+        <slot name="footer" :color="btnColor">
+          <Button 
+            :color="btnColor" 
+            :iconPath="mdiArrowCollapseHorizontal"
+            rounded  
+            @click="isCompact = !isCompact" 
+          />
+        </slot>
       </template>
   </SideBar>
 </template>

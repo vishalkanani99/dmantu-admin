@@ -17,6 +17,7 @@ import Dropdown from './dropdown/Dropdown.vue';
 import Avatar from './Avatar.vue';
 import Icon from './Icon.vue';
 import SideBarMenu from './sidebar/SideBarMenu.vue';
+import SideBarHeader from './sidebar/SideBarHeader.vue';
 import MenuListItem from './menu/MenuListItem.vue';
 import OverLayer from './OverLayer.vue';
 import Card from './card/Card.vue';
@@ -253,18 +254,24 @@ const optionsArrObjs = [
         position="right" 
         isClosable 
       >
-        <template #header>
-          <div class="flex w-full items-center gap-2">
-            <Avatar username="John Doe" class="w-8 h-8" />
-            <span>John Doe</span>
-          </div>
+        <template #headerBody>
+          <SideBarHeader
+            class="!px-5" 
+            :btnColor="color" 
+            isClosable
+            @close="showMobileMenu = false"
+          >
+            <div class="flex w-full items-center gap-2">
+              <Avatar username="John Doe" class="w-8 h-8" />
+              <span class="text-base">John Doe</span>
+            </div>
+          </SideBarHeader>
         </template>
         <template #menuItem="{item}">
           <MenuListItem
             :color="textStyle.type" 
             :label="item?.label ?? ''" 
             :iconPath="item?.iconPath ?? ''"
-            :iconSize="14"
             :to="item?.to ?? ''"
             :badgeLabel="item?.badgeLabel"
           />

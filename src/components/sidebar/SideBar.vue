@@ -1,7 +1,8 @@
 <script setup>
   import { computed } from 'vue';
-  import { mdiClose, } from '@mdi/js';
-  import Button from '../Button.vue';
+  import SideBarHeader from './SideBarHeader.vue';
+  import SideBarFooter from './SideBarFooter.vue';
+  import SideBarBody from './SideBarBody.vue';
   import { background, border, getDefaultTextStyle } from '../../color';
 
   const props = defineProps({
@@ -58,26 +59,25 @@
 </script>
 <template>
   <div :class="defaultStyle">
-    <div 
-      class="relative top-0 flex items-center w-full border-b border-inherit px-6 py-4">
-      <slot name="header"></slot>
-      <Button 
-        v-if="isClosable" 
-        class="absolute right-0 mr-2" 
-        :color="textStyle.type" 
-        :iconPath="mdiClose"
-        size="small"
-        rounded 
-        @click="close" 
-      />
-    </div>
-    <div class="flex-1 w-full h-full overflow-y-auto">
-      <slot></slot>
-    </div>
-    <div 
-      v-if="$slots.footer" 
-      class="bottom-0 flex justify-center items-center w-full border-t border-inherit px-6 py-4">
-      <slot name="footer" :color="textStyle.type"></slot>
-    </div>
+    <slot name="headerBody">
+      <SideBarHeader 
+        v-if="$slots.header" 
+        :isClosable="isClosable" 
+        :btnColor="textStyle.type" 
+        @close="close"
+      >
+        <slot name="header"></slot>
+      </SideBarHeader>
+    </slot>
+    <slot name="body">
+      <SideBarBody>
+        <slot></slot>
+      </SideBarBody>
+    </slot>
+    <slot name="footerBody">
+      <SideBarFooter v-if="$slots.footer">
+        <slot name="footer" :color="textStyle.type"></slot>
+      </SideBarFooter>
+    </slot>
   </div>
 </template>
