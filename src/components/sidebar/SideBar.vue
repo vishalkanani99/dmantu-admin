@@ -3,15 +3,12 @@
   import SideBarHeader from './SideBarHeader.vue';
   import SideBarFooter from './SideBarFooter.vue';
   import SideBarBody from './SideBarBody.vue';
-  import { background, border, getDefaultTextStyle } from '../../color';
+  import { useTheme } from '../../composables/useTheme';
 
   const props = defineProps({
     modelValue: Boolean,
     isClosable: Boolean,
-    color: {
-      type: String,
-      default: 'theme',
-    },
+    color: String,
     position: {
       type: String,
       default: 'left',
@@ -24,7 +21,7 @@
 
   const emit = defineEmits(['update:modelValue', 'close']);
 
-  const textStyle = computed(() => getDefaultTextStyle(props.color));
+  const { getColorInverse } = useTheme();
 
   const showSideBar = computed({
     get: () => props.modelValue,
@@ -39,11 +36,10 @@
       right: ['translate-x-0', 'translate-x-full', 'right-0'],
     };
     const style = [
+      props.color,
       'fixed flex flex-col items-center inset-y-0 min-h-dvh overflow-hidden',
       'w-dvw xs:w-64',
-      background[props.color],
-      textStyle.value.color,
-      border[textStyle.value.type],
+      'bg-[--color] border-[--color-inverse] text-[--color-inverse]',
       transitionTranslate[props.position][2],
       showSideBar.value ? transitionTranslate[props.position][0] : transitionTranslate[props.position][1],
       'transition-transform transition-[width]',
@@ -63,7 +59,7 @@
       <SideBarHeader 
         v-if="$slots.header" 
         :isClosable="isClosable" 
-        :btnColor="textStyle.type" 
+        :btnColor="getColorInverse(color)" 
         @close="close"
       >
         <slot name="header"></slot>
@@ -76,7 +72,7 @@
     </slot>
     <slot name="footerBody">
       <SideBarFooter v-if="$slots.footer">
-        <slot name="footer" :color="textStyle.type"></slot>
+        <slot name="footer" :color="getColorInverse(color)"></slot>
       </SideBarFooter>
     </slot>
   </div>

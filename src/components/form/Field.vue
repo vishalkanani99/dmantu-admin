@@ -1,15 +1,6 @@
 <script setup>
   import { computed, ref } from 'vue';
   import { mdiUpload } from '@mdi/js';
-
-  import { 
-    border, 
-    ring, 
-    text, 
-    background as backgroundColor,
-    getDefaultTextStyle,
-    getButtonStyle, 
-  } from '../../color';
   import Button from '../Button.vue';
   import Icon from '../Icon.vue';
 
@@ -32,22 +23,13 @@
     right: Boolean,
     left: Boolean,
     rounded: Boolean,
-    color: {
-      type: String,
-      default: 'theme',
-    },
-    ringColor: String,
-    borderColor: String,
-    textColor: String,
-    placeholderColor: String,
+    color: String,
     label: String,
     buttonIcon: String,
     inputLeftIcon: String,
     inputRightIcon: String,
     outline: Boolean,
     expanded: Boolean,
-    hasError: Boolean,
-    hasSuccess: Boolean,
   });
 
   const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick']);
@@ -78,40 +60,12 @@
       { 'border' : !props.middle && !props.left && !props.right },
     ];
   });
-
-  const colors = computed(() => {
-    const colors = {
-      text: '',
-      inner: [],
-      outer: '',
-    };
-
-    if(props.hasError || props.hasSuccess) {
-      let color = props.hasError ? 'danger' : 'success';
-      let background = props.hasError ? 'bg-red-50' : 'bg-green-50';
-
-      colors.text = text[color];
-      colors.inner = [
-        ring.focus[color], 
-        background,
-        text.placeholder[color],
-      ];
-      colors.outer = border[color];
-      return colors;
-    }
-
-    colors.text = text[props.textColor] ?? getDefaultTextStyle(props.color).color;
-    colors.inner = [
-      ring.focus[props.ringColor ?? 'theme'],
-      backgroundColor[props.color],
-      text.placeholder[props.placeholderColor],
-    ];
-    colors.outer = border[props.borderColor ?? 'theme'];
-    return colors;
-  });
   
   const outerStyle = computed(() => {
-    let style = [ 'relative flex items-center' ];
+    let style = [
+      props.color, 
+      'relative flex items-center border-[--color]' 
+    ];
 
     if( props.type === 'file' ) {
       return style;
@@ -121,7 +75,6 @@
       ...style,
       { 'grow' : props.expanded },
       borderPosition.value,
-      colors.value.outer,
       borderRadius.value,
       props.outerStyle,
     ];
@@ -129,43 +82,22 @@
   });
 
   const defaultStyle = computed(() => {
-    const btnStyle = getButtonStyle(props.color, props.outline);
-    let padding = ['pl-3 pr-3 py-2'];
-
-    let style = [
-      'flex items-center text-xs focus:outline-none focus:z-[1]',
-      props.type === 'textarea' ? 'h-24' : 'h-10',
-      borderRadius.value,
-    ];
-
+    
     if(props.type === 'button' || props.type === 'file') {
-      return [
-        style, 
-        padding, 
-        ...btnStyle, 
-        { 'cursor-pointer' : props.type === 'file' }
-      ];
-    }
-
-    if(props.inputLeftIcon) {
-      padding.push('!pl-10');
-    }
-    if(props.inputRightIcon) {
-      padding.push('!pr-10');
+      return [ 'focus:z-[1] h-10', borderRadius.value ];
     }
     
     return [
-      'w-full border-0 focus:ring',
-      style,
-      padding,
-      ...colors.value.inner,
-      colors.value.text,
+      props.color,
+      'flex items-center w-full py-2',
+      'text-xs focus:outline-none focus:z-[1] border-0 focus:ring',
+      props.type === 'textarea' ? 'h-24' : 'h-10',
+      props.inputLeftIcon ? 'pl-10' : 'pl-3',
+      props.inputRightIcon ? 'pr-10' : 'pr-3',
+      'bg-[--color-xl] text-[--color] placeholder-[--color-l] focus:ring-[--color-l]',
+      borderRadius.value,
     ];
   });
-
-  const getInputIconStyle = (position) => {
-    return ['absolute inline-flex justify-center items-center w-10 h-10 z-[2] cursor-pointer', position, colors.value.text];
-  };
 
   const fileInput = (event) => {
     modelValue.value = event.target.files;
@@ -199,8 +131,7 @@
       :label="label"
       :class="defaultStyle"
       :iconPath="buttonIcon"
-      :color="color"
-      isPlain 
+      :color="color" 
     >
       <slot></slot>
     </Button>
@@ -227,7 +158,12 @@
     <template v-else>
       <Icon 
         v-if="inputLeftIcon"
-        :class="getInputIconStyle('left-0')"
+        :class="[
+          'absolute left-0',
+          'inline-flex justify-center items-center',
+          'w-10 h-10 z-[2]',
+          'text-[--color] cursor-pointer',
+        ]"
         :path="inputLeftIcon"
         @click="$emit('leftIconClick')" />
       <textarea 
@@ -244,7 +180,12 @@
         :class="defaultStyle" />
       <Icon  
         v-if="inputRightIcon"
-        :class="getInputIconStyle('right-0')"
+        :class="[
+          'absolute right-0',
+          'inline-flex justify-center items-center',
+          'w-10 h-10 z-[2]',
+          'text-[--color] cursor-pointer',
+        ]"
         :path="inputRightIcon"
         @click="$emit('rightIconClick')" />
     </template>

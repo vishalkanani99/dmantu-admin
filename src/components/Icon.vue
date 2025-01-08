@@ -1,6 +1,5 @@
 <script setup>
   import { computed } from 'vue';
-  import { background, text, getDefaultTextStyle, border } from '../color';
 
   const props = defineProps({
     path: {
@@ -20,42 +19,27 @@
     outline: Boolean,
   });
 
-  const textStyle = getDefaultTextStyle(props.color);
-
   const defaultStyle = computed(() => {
     let style = [
+      props.color,
       'inline-flex justify-center items-center',
     ];
 
     if( props.color ) {
-
       if( props.hasRoundedBg ) {
         style = [
           ...style,
           'w-12 h-12 rounded-full',
-        ];
-
-        if( props.outline ) {
-          style = [
-            ...style,
-            'border bg-transparent',
-            border[props.color],
-            text[props.color],
-          ];
-          return style;
-        }
-
-        style = [
-          ...style,
-          background[props.color],
-          textStyle.color,
+          props.outline 
+            ? 'bg-transparent border border-[--color] text-[--color]' 
+            : 'bg-[--color] text-[--color-inverse]',
         ];
         return style;
       }
 
       style = [
         ...style,
-        text[props.color],
+        'text-[--color]',
       ];
     }
 

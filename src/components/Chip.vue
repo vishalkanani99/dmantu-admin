@@ -1,7 +1,6 @@
 <script setup>
   import { computed, watchEffect, reactive } from 'vue';
   import { mdiClose } from '@mdi/js';
-  import { background, text as textColor, getDefaultTextStyle, border } from '../color';
   import Icon from './Icon.vue';
 
   const props = defineProps({
@@ -26,7 +25,6 @@
 
   const emit = defineEmits(['close']);
 
-  const textStyle = computed(() => getDefaultTextStyle(props.color));
   const hasOnlyIcon = computed(() => props.iconPath && (!props.label && !props.closable));
   
   const sizeAttributes = reactive({
@@ -36,44 +34,22 @@
   });
 
   const defaultStyle = computed(() => {
-    let style = [
-      'inline-flex items-center gap-1',
+    return [
+      props.color,
+      'inline-flex items-center gap-1 border border-[--color]',
+      props.outline ? 'bg-transparent text-[--color]' : 'bg-[--color] text-[--color-inverse]',
       props.rounded ? 'rounded-full' : 'rounded-md',
       'leading-4 whitespace-nowrap',
       sizeAttributes.textSize,
       sizeAttributes.padding,
     ];
-
-    if( props.outline ) {
-      style = [
-        ...style,
-        'border bg-transparent',
-        border[props.color],
-        textColor[props.color],
-      ];
-      return style;
-    }
-
-    style = [
-      ...style,
-      background[props.color],
-      textStyle.value.color,
-    ];
-
-    return style;
   });
 
   const closeIconStyle = computed(() => {
-    let style = [
+    return [
       'w-4 h-4 cursor-pointer rounded-full hover:p-[3px] -mr-1',
-      background.hover(props.color, true),
+      props.outline ? 'hover:bg-[--color] hover:text-[--color-inverse]' : 'hover:bg-[--color-inverse] hover:text-[--color]',
     ];
-
-    if( props.outline ) {
-      style.push(textStyle.value.colorOnHover);
-    }
-
-    return style;
   });
 
   watchEffect(() => {

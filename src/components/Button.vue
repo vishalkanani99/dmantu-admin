@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router'
 import Icon from './Icon.vue';
 import Chip from './Chip.vue';
-import { getButtonStyle, getDefaultTextStyle } from '../color.js';
+import { useTheme } from '../composables/useTheme.js';
 
   const props = defineProps({
     label: String,
@@ -32,8 +32,8 @@ import { getButtonStyle, getDefaultTextStyle } from '../color.js';
     },
   })
 
-  const textStyle = computed(() => getDefaultTextStyle(props.badgeColor ?? props.color))
-
+  const { getColorInverse } = useTheme();
+  
   const typeOfComponent = computed(() => {
     if( props.to ) {
       return RouterLink;
@@ -55,11 +55,13 @@ import { getButtonStyle, getDefaultTextStyle } from '../color.js';
 
     let style = [
       {'relative': hasBadge.value},
-      'flex justify-center items-center text-center leading-normal',
-      'focus:outline-none',
-      'select-none',
+      props.color,
+      'flex justify-center items-center text-center leading-normal focus:outline-none select-none',
+      'border focus:ring border-[--color] focus:ring-[--color-l]',
+      props.outline 
+        ? 'bg-transparent hover:bg-[--color] text-[--color] hover:text-[--color-inverse]' 
+        : 'bg-[--color] hover:bg-[--color-m] text-[--color-inverse]',
       props.rounded ? 'rounded-full' : 'rounded-md',
-      getButtonStyle(props.color, props.outline),
       { 'focus:ring-0 opacity-30 cursor-not-allowed' : props.disabled },
     ];
     
@@ -124,7 +126,7 @@ const iconSize = computed(() => {
           'absolute top-0 right-0 !p-0.5',
           badgeLabel ? 'h-6 w-6 -mt-3 -mr-3' : 'h-3 w-3 -mt-1 -mr-1',
         ]"
-        :color="badgeColor ?? textStyle.type"
+        :color="badgeColor ?? getColorInverse(color)"
         size="small"
         rounded
       >

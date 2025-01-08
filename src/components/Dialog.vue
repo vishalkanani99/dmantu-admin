@@ -1,6 +1,5 @@
 <script setup>
   import { computed } from 'vue';
-  import { mdiClose } from '@mdi/js';
   import Modal from './Modal.vue';
   import Button from './Button.vue';
   import Icon from './Icon.vue';
@@ -10,10 +9,7 @@
     color: String,
     title: String,
     iconPath: String,
-    iconBgColor: {
-      type: String,
-      default: 'theme',
-    },
+    iconBgColor: String,
     confirmBtnLabel: {
       type: String,
       default: 'Confirm',
@@ -22,14 +18,8 @@
       type: String,
       default: 'Cancel',
     },
-    confirmBtnColor: {
-      type: String,
-      default: 'theme',
-    },
-    cancelBtnColor: {
-      type: String,
-      default: 'danger',
-    },
+    confirmBtnColor: String,
+    cancelBtnColor: String,
   });
 
   const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);

@@ -1,6 +1,5 @@
 <script setup>
   import { computed } from 'vue';
-  import { background, text } from '../../color';
   import Progress from './Progress.vue';
 
   const props = defineProps({
@@ -13,18 +12,8 @@
         return props.modelValue <= value;
       }
     },
-    trackColor: {
-      type: String,
-      default: 'theme-light',
-    },
-    activeTrackColor: {
-      type: String,
-      default: 'theme',
-    },
-    textColor: {
-      type: String,
-      default: 'theme-light',
-    },
+    trackColor: String,
+    activeTrackColor: String,
   });
 
   const emit = defineEmits(['update:modelValue']);
@@ -34,9 +23,9 @@
 
   const barStyle = computed(() => {
     return [
+      props.trackColor,
       'relative flex h-3.5 w-full rounded-md',
-      background[props.trackColor],
-      text[props.textColor],
+      'bg-[--color] text-[--color-inverse]',
     ];
   });
 
@@ -48,8 +37,7 @@
     <slot name="progress" :progress="progress">
       <Progress 
         :value="progress"  
-        :color="activeTrackColor" 
-        :textColor="textColor"
+        :color="activeTrackColor"
         :roundedL="progress > 0" 
         :roundedR="progress === 100"
         :hasInfo="false" 

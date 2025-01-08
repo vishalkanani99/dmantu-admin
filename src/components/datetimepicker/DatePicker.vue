@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, shallowRef } from 'vue';
-import { getDefaultTextStyle } from '../../color';
+import { useTheme } from '../../composables/useTheme';
 import { formatDate } from './utils';
 import { useScreen } from '../../composables/useScreen';
 import { useScrollOver } from '../../composables/useScrollOver';
@@ -49,14 +49,8 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
-  inputColor: {
-    type: String,
-    default: 'theme-light',
-  },
-  calendarColor: {
-    type: String,
-    default: 'theme',
-  },
+  inputColor: String,
+  calendarColor: String,
   hasTimer: {
     type: Boolean,
     default: true,
@@ -86,7 +80,8 @@ const dateObj = computed({
 const formattedDate = ref(formatDate(props.modelValue, props.format));
 
 const showCalendar = shallowRef(false);
-const btnColor = computed(() => getDefaultTextStyle(props.calendarColor).type);
+const { getColorInverse } = useTheme();
+const btnColor = computed(() => getColorInverse(props.calendarColor));
 
 const typeOfComponent = computed(() => props.hasModalView ? Modal : DropdownContainer );
 const bindProps = computed(() => {

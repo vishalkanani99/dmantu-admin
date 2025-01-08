@@ -1,7 +1,6 @@
 <script setup>
-import { ref, shallowRef, computed, onMounted, onUnmounted } from 'vue';
+import { ref, shallowRef, computed, onMounted } from 'vue';
 import { useSwiper } from '../../composables/useSwiper';
-import { background, text, border } from '../../color';
 import Popover from '../Popover.vue';
 
 const props = defineProps({
@@ -26,34 +25,11 @@ const props = defineProps({
       return value > 0;
     }
   },
-  color: {
-    type: String,
-    default: 'theme-dark',
-  },
-  tickColor: {
-    type: String,
-    default: 'theme',
-  },
-  textColor: {
-    type: String,
-    default: 'theme-dark',
-  },
-  trackColor: {
-    type: String,
-    default: 'theme-light',
-  },
-  handlerColor: {
-    type: String,
-    default: 'theme-light',
-  },
-  handlerBorderColor: {
-    type: String,
-    default: 'theme-dark',
-  },
-  popoverColor: {
-    type: String,
-    default: 'theme-dark',
-  },
+  color: String,
+  tickColor: String,
+  trackColor: String,
+  handlerColor: String,
+  popoverColor: String,
   disabled: Boolean,
 });
 
@@ -257,8 +233,8 @@ onMounted(() => {
     <div 
       ref="containerRef"
       :class="[
-        'relative flex items-center',
-        background[color],
+        props.color,
+        'relative flex items-center bg-[--color]',
         'h-3 rounded-md cursor-pointer'
       ]"
       @click="changeHandlerPostion"
@@ -267,8 +243,8 @@ onMounted(() => {
       <div
         ref="filledTrackRef"
         :class="[
-          'absolute top-[50%] -translate-y-[55%]',
-          background[trackColor],
+          props.trackColor,
+          'absolute top-[50%] -translate-y-[55%] bg-[--color]',
           'h-full rounded-md shadow-md'
         ]"
         :style="{
@@ -286,8 +262,8 @@ onMounted(() => {
           v-for="tick in totalTicks"
           :key="tick"
           :class="[
-            'absolute top-[50%] -translate-x-[50%] -translate-y-[50%]',
-            background[tickColor],
+            props.tickColor,
+            'absolute top-[50%] -translate-x-[50%] -translate-y-[50%] bg-[--color]',
             'w-2 h-2 rounded-full shadow-md',
             { 'bg-transparent': tick === 1 || tick === totalTicks }
           ]"
@@ -299,8 +275,7 @@ onMounted(() => {
           <!-- Ticks Label -->
           <span
             :class="[
-              'absolute top-[calc(.75rem+2px)] left-[50%] -translate-x-[50%]',
-              text[textColor],
+              'absolute top-[calc(.75rem+2px)] left-[50%] -translate-x-[50%] text-[--color-inverse]',
             ]"
           >
             <slot name="label" :tick="tick">
@@ -316,9 +291,9 @@ onMounted(() => {
           v-if="index === 0 || (index === 1 && isRangeSlider)"
           ref="handlerRef" 
           :class="[
+            props.handlerColor,
             'absolute top-[50%] -translate-x-[50%] -translate-y-[50%]',
-            'inline-flex flex-col items-center',
-            background[handlerColor],
+            'inline-flex flex-col items-center bg-[--color]',
             'rounded-md shadow-md',
             {'z-10': isDragging === index},
           ]" 
@@ -332,9 +307,8 @@ onMounted(() => {
           >
             <div 
               :class="[
-                'h-5 w-5 border rounded-md shadow-md',
-                border[handlerBorderColor],
-                background[handlerColor],
+                props.handlerColor,
+                'h-5 w-5 bg-[--color] border border-[--color-m] rounded-md shadow-md',
               ]"
               :style="{
                 scale: isDragging === index ? '1.5' : '1',

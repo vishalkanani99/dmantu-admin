@@ -2,7 +2,6 @@
 import { ref, shallowRef, computed, watch, onMounted, onUnmounted } from 'vue';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import { useSwiper } from '../../composables/useSwiper';
-import { background, text, getDefaultTextStyle } from '../../color';
 import Button from '../Button.vue';
 
 const props = defineProps({
@@ -26,18 +25,12 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  btnColor: {
-    type: String,
-    default: 'theme-light',
-  },
+  btnColor: String,
   hasIndicator: {
     type: Boolean,
     default: true,
   },
-  indicatiorColor: {
-    type: String,
-    default: 'theme-light',
-  },
+  indicatiorColor: String,
   noSwiper: Boolean,
 });
 
@@ -45,7 +38,6 @@ const emit = defineEmits(['change']);
 
 let slideInterval;
 const { initSwiper } = useSwiper();
-const textStyle = getDefaultTextStyle(props.indicatiorColor);
 
 const containerRef = ref();
 const position = shallowRef(0);
@@ -193,8 +185,7 @@ onUnmounted(() =>{
           <slot 
             :item="item" 
             :index="index" 
-            :bgColor="background[indicatiorColor]" 
-            :textColor="text[indicatiorColor]">
+          >
           </slot>
       </div>
     </div>
@@ -204,8 +195,9 @@ onUnmounted(() =>{
       <div
         v-for="(slide, index) in indicators"
         :class="[
+          props.indicatiorColor,
           'w-3 h-3 rounded-full mr-1 last:mr-0 cursor-pointer',
-          activeSlide === index ? background[textStyle.type] :  background[indicatiorColor],
+          activeSlide === index ? 'bg-[--color-inverse]' :  'bg-[--color]',
         ]"
         @click="setSlide(index)" 
       >

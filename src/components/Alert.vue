@@ -7,16 +7,13 @@ import {
   mdiInformation, 
   mdiClose, 
 } from '@mdi/js';
-import { getDefaultTextStyle } from '../color';
 import Icon from './Icon.vue';
 import Button from './Button.vue';
 import ListCard from './card/ListCard.vue';
+import { useTheme } from '../composables/useTheme.js';
 
 const props = defineProps({
-  color: {
-    type: String,
-    default: 'theme',
-  },
+  color: String,
   iconPath: String,
   type: String,
   boldText: String,
@@ -24,7 +21,7 @@ const props = defineProps({
   outline: Boolean,
 })
 
-const textStyle = getDefaultTextStyle(props.color);
+const { getColorInverse } = useTheme();
 
 const color = computed(() => {
   switch( props.type ) {
@@ -78,7 +75,7 @@ const icon = computed(() => {
       <Button 
         class="text-xs w-8 h-8" 
         :iconPath="mdiClose" 
-        :color="outline ? color : textStyle.type" 
+        :color="outline ? color : getColorInverse(color)" 
         :outline="outline" 
         rounded 
       />

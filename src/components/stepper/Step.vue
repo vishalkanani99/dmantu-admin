@@ -1,7 +1,5 @@
 <script setup>
-import { ref, computed, useSlots, onMounted, watch } from "vue";
-import { background, text, border, getDefaultTextStyle } from '../../color';
-import Button from "../Button.vue";
+import { computed } from "vue";
 import Icon from "../Icon.vue";
 
 const props = defineProps({
@@ -14,10 +12,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  color: {
-    type: String,
-    default: 'theme',
-  },
+  color: String,
   vertical: Boolean,
   isActive: Boolean,
   isCompleted: Boolean,
@@ -45,7 +40,7 @@ const defaultStyle = computed(() => {
     'relative grow basis-4 mt-0',
     'before:[&:not(:first-child)]:absolute before:[&:not(:first-child)]:content-[""] before:[&:not(:first-child)]:block',
     'before:[&:not(:first-child)]:bottom-0',
-    props.isActive || props.isCompleted ? background.before[props.color] : 'before:bg-gray-200',
+    props.isActive || props.isCompleted ? 'before:bg-[--color]' : 'before:bg-gray-200',
     'before:transition-[background] before:duration-300 before:delay-0',
   ];
 
@@ -65,9 +60,8 @@ const defaultStyle = computed(() => {
   ];
 })
 const stepStyle = computed(() => {
-  const textStyle = getDefaultTextStyle(props.color);
-
   let style = [
+    props.color,
     'flex justify-center items-center w-10 h-10 rounded-full overflow-hidden',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
   ];
@@ -76,9 +70,9 @@ const stepStyle = computed(() => {
     style = [
       ...style,
       props.disabled ? 'border' : 'border-2 font-bold',
-      props.disabled ? 'bg-gray-200' : background['white'],
-      props.isActive ? border[props.color] : 'border-gray-400',
-      props.isActive ? text[props.color] : text['gray'],
+      props.disabled ? 'bg-gray-200' : 'bg-white',
+      props.isActive ? 'border-[--color]' : 'border-gray-400',
+      props.isActive ? 'text-[--color]' : 'text-gray-400',
     ];
     return style;
   }
@@ -86,8 +80,7 @@ const stepStyle = computed(() => {
   if( props.isCompleted ) {
     style = [
       ...style,
-      background[props.color],
-      textStyle.color,
+      'bg-[--color] text-[--color-inverse]',
     ];
     return style;
   }

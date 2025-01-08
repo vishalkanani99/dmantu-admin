@@ -1,0 +1,71 @@
+:root {
+  --color: theme(colors.theme-600);
+  --color-ml: theme(colors.theme-500);
+  --color-m: theme(colors.theme-400);
+  --color-l: theme(colors.theme-300);
+  --color-xl: theme(colors.theme-50);
+  --color-inverse: theme(colors.theme-100);
+}
+
+.white {
+  --color: theme(colors.white);
+  --color-m: theme(colors.slate.100);
+  --color-ml: theme(colors.slate.200);
+  --color-l: theme(colors.gray.300);
+  --color-xl: theme(colors.gray.50);
+  --color-inverse: theme(colors.black);
+}
+
+.black {
+  --color: theme(colors.black);
+  --color-m: theme(colors.slate.700);
+  --color-ml: theme(colors.slate.600);
+  --color-l: theme(colors.slate.400);
+  --color-xl: theme(colors.slate.50);
+  --color-inverse: theme(colors.white);
+}
+
+.gray {
+  --color: theme(colors.gray.600);
+  --color-m: theme(colors.gray.500);
+  --color-ml: theme(colors.gray.400);
+  --color-l: theme(colors.gray.300);
+  --color-xl: theme(colors.gray.50);
+  --color-inverse: theme(colors.white);
+}
+
+.info {
+  --color: theme(colors.blue.600);
+  --color-m: theme(colors.blue.500);
+  --color-ml: theme(colors.blue.400);
+  --color-l: theme(colors.blue.300);
+  --color-xl: theme(colors.blue.50);
+  --color-inverse: theme(colors.white);
+}
+
+.success {
+  --color: theme(colors.green.600);
+  --color-m: theme(colors.green.500);
+  --color-ml: theme(colors.green.400);
+  --color-l: theme(colors.green.300);
+  --color-xl: theme(colors.green.50);
+  --color-inverse: theme(colors.white);
+}
+
+.warning {
+  --color: theme(colors.yellow.600);
+  --color-m: theme(colors.yellow.500);
+  --color-ml: theme(colors.yellow.400);
+  --color-l: theme(colors.yellow.300);
+  --color-xl: theme(colors.yellow.50);
+  --color-inverse: theme(colors.white);
+}
+
+.danger {
+  --color: theme(colors.red.600);
+  --color-m: theme(colors.red.500);
+  --color-ml: theme(colors.red.400);
+  --color-l: theme(colors.red.300);
+  --color-xl: theme(colors.red.50);
+  --color-inverse: theme(colors.white);
+}

@@ -1,19 +1,12 @@
 <script setup>
-import { ref, shallowRef, computed } from "vue";
-import { border, background, isLightColor, getDefaultTextStyle } from "../../color";
+import { computed } from "vue";
+import { useTheme } from "../../composables/useTheme";
 
 const props = defineProps({
-  bgColor: {
-    type: String,
-    default: 'theme'
-  },
-  borderColor: {
-    type: String,
-    default: 'theme-light'
-  },
+  color: String,
 });
 
-const testStyle = computed(() => getDefaultTextStyle(props.bgColor));
+const { lightColors } = useTheme();
 
 const stripedRowLight = computed(() => [
   '[&_tbody_tr:nth-child(even)]:bg-transparent/20 [&_tbody_tr:nth-child(odd)]:bg-transparent/30',
@@ -26,11 +19,9 @@ const stripedRowDark = computed(() => [
 ]);
 
 const tableStyle = computed(() => [
-  'w-full',
-  border[props.borderColor],
-  background[props.bgColor],
-  testStyle.value.color,
-  isLightColor(props.bgColor) ? stripedRowLight.value : stripedRowDark.value,
+  props.color,
+  'w-full bg-[--color] border-[--color-l] text-[--color-inverse]',
+  lightColors.includes(props.color) ? stripedRowLight.value : stripedRowDark.value,
 ]);
 
 </script>

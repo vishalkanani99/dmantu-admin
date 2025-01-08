@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { background, getDefaultTextStyle, border } from '../../color';
+import { useTheme } from '../../composables/useTheme.js';
 import { mdiClose } from "@mdi/js";
 import Icon from "../Icon.vue";
 import Button from "../Button.vue";
@@ -33,10 +33,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  color: {
-    type: String,
-    default: 'theme-light',
-  },
+  color: String,
   position: {
     type: String,
     default: 'left',
@@ -52,16 +49,16 @@ const props = defineProps({
 
 const emit = defineEmits(["cancel"]);
 
-const textStyle = computed(() => getDefaultTextStyle(props.color));
+const { getColorInverse } = useTheme();
 const showSnackbarItem = ref(true);
 
 const defaultClass = computed(() => {
   let position = { left: 'self-start', center: 'self-center', right: 'self-end' };
   const defaultClass = [
+    props.color,
     'relative shadow-lg min-w-96 max-w-full text-sm pointer-events-auto rounded-lg mb-3',
+    'bg-[--color] text-[--color-inverse]',
     position[props.position],
-    background[props.color],
-    textStyle.value.color,
   ];
   return defaultClass;
 })
@@ -85,7 +82,7 @@ const cancel = () => {
     <div 
       :class="[
         'flex justify-between items-center', 
-        text ? [ 'border-b rounded-t-lg py-2 px-3', border[textStyle.type] ]: 'p-3',
+        text ? 'border-b rounded-t-lg py-2 px-3 border-[--color-inverse]' : 'p-3',
       ]"
     >
       <div class="flex items-center space-x-2">
@@ -98,7 +95,7 @@ const cancel = () => {
         <Button
           v-if="closable"
           class="w-6 h-6 focus:!ring-2" 
-          :color="textStyle.type"
+          :color="getColorInverse(color)"
           size="small"
           rounded
           @click="cancel" 

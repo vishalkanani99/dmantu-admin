@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { mdiClose } from '@mdi/js';
-import { background, getDefaultTextStyle, border } from '../../color';
+import { useTheme } from '../../composables/useTheme.js';
 import Button from '../Button.vue';
 import CardHeader from './CardHeader.vue';
 import CardFooter from './CardFooter.vue';
@@ -32,14 +32,13 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'save', 'cancel']);
 
-const textStyle = computed(() => getDefaultTextStyle(props.color));
+const { getColorInverse } = useTheme();
 
 const defaultStyle = computed(() => {
   let style = [
+    props.color,
     'relative flex flex-col border min-w-0 rounded-md shadow-md',
-    background[props.color],
-    border[props.color],
-    textStyle.value.color,
+    'bg-[--color] border-[--color] text-[--color-inverse]',
   ];
   return style;
 });
@@ -50,7 +49,7 @@ const defaultStyle = computed(() => {
     <Button
       v-if="closable" 
       class="absolute top-0 right-0 m-2" 
-      :color="textStyle.type"
+      :color="getColorInverse(color)"
       size="small"
       :iconPath="mdiClose"
       rounded
@@ -58,7 +57,7 @@ const defaultStyle = computed(() => {
     />
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <CardHeader :separatorColor="textStyle.type" :title="title" :subTitle="subTitle" />
+      <CardHeader :separatorColor="getColorInverse(color)" :title="title" :subTitle="subTitle" />
     </slot>
     <!-- card header end -->
 
@@ -73,8 +72,8 @@ const defaultStyle = computed(() => {
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
       <CardFooter
-        :btnColor="textStyle.type"
-        :separatorColor="textStyle.type"
+        :btnColor="getColorInverse(color)"
+        :separatorColor="getColorInverse(color)"
         :saveBtnLabel="saveBtnLabel"
         :cancelBtnLabel="cancelBtnLabel"
         :saveBtnIconPath="saveBtnIconPath"

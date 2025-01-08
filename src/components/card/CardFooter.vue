@@ -1,6 +1,5 @@
 <script setup>
 import Button from '../Button.vue';
-import { border } from '../../color';
 
 const props = defineProps({
   btnColor: String,
@@ -16,8 +15,8 @@ const emit = defineEmits(["save", "cancel"]);
 <template>
   <div 
     :class="[
-      'flex items-center space-x-2 border-t rounded-b-md p-3 md:p-4',
-      border[separatorColor],
+      props.separatorColor,
+      'flex items-center space-x-2 border-t border-[--color] rounded-b-md p-3 md:p-4',
     ]"
   >
     <slot>

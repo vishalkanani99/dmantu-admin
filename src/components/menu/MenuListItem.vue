@@ -1,8 +1,8 @@
 <script setup>
   import { mdiChevronDown } from '@mdi/js';
   import { computed } from 'vue';
+  import { useTheme } from '../../composables/useTheme';
   import Button from '../Button.vue';
-  import { background, getDefaultTextStyle } from '../../color';
   import Icon from '../Icon.vue';
   import Chip from '../Chip.vue';
 
@@ -16,10 +16,7 @@
     hasMenu: Boolean,
     badgeColor: String,
     badgeLabel: String,
-    color: {
-      type: String,
-      default: 'theme-light',
-    },
+    color: String,
     size: {
       type: String,
       default: 'medium',
@@ -31,6 +28,8 @@
     isActive: Boolean,
   });
 
+  const { getColorInverse } = useTheme();
+  
   const rootEl = computed(() => {
     if( props.type ) {
       return props.type;
@@ -38,13 +37,13 @@
     return Button;
   });
 
-  const textStyle = computed(() => getDefaultTextStyle(props.color));
-
   const defaultStyle = computed(() => {
     const backgroundStyle = [
+      props.color,
       props.isActive
-        ? [ background.active[props.color], textStyle.value.color, 'font-bold' ]
-        : [ background[props.color], background.hover(props.color, true), textStyle.value.color ]
+        ? 'font-bold bg-[--color-ml]'
+        : 'bg-[--color] hover:bg-[--color-m]',
+      'text-[--color-inverse]',
     ]; 
     
     let fontSize = 'text-base';
@@ -110,7 +109,7 @@
         <slot name="badge">
           <Chip
             v-if="badgeLabel"
-            :color="badgeColor ?? textStyle.type"
+            :color="badgeColor ?? getColorInverse(color)"
             :size="size"
             :label="badgeLabel"
             rounded

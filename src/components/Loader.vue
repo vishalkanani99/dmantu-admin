@@ -1,12 +1,8 @@
 <script setup>
 import { ref, watchEffect } from "vue";
-import { background } from "../color";
 
 const props = defineProps({
-  bgColor: {
-    type: String,
-    default: 'theme'
-  },
+  bgColor: String,
 });
 
 const loaderRef = ref();
@@ -20,8 +16,8 @@ watchEffect(() => {
   <div
     ref="loaderRef" 
     :class="[
-      'absolute inset-0 flex z-10 opacity-50',
-      background[bgColor]
+      props.bgColor,
+      'absolute inset-0 flex z-10 opacity-50 bg-[--color]',
     ]"
   >
     <img class="w-8 h-8 m-auto" src="/loader.gif">

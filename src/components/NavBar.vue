@@ -10,7 +10,7 @@ import {
   mdiLogout, 
   mdiDotsVertical 
 } from '@mdi/js';
-import { background, getDefaultTextStyle } from '../color';
+import { useTheme } from '../composables/useTheme';
 import AutoComplete from './form/AutoComplete.vue';
 import Button from './Button.vue';
 import Dropdown from './dropdown/Dropdown.vue';
@@ -29,17 +29,14 @@ import Chip from './Chip.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,
-  color: {
-    type: String,
-    default: 'theme',
-  }
+  color: String,
 });
 
 const emit = defineEmits(['toggleMenu']);
 const showMobileMenu = shallowRef(false);
 const search = ref();
 
-const textStyle = computed(() => getDefaultTextStyle(props.color));
+const { getColorInverse } = useTheme();
 
 const items = computed(() => {
   const menu = [
@@ -73,37 +70,37 @@ const optionsArrObjs = [
 <template>
   <div 
     :class="[
-      'fixed top-0 inset-x-0 flex justify-between items-center h-20 px-6 py-4 gap-2', 
-      background[color], 
-      textStyle.color,
+      props.color,
+      'fixed top-0 inset-x-0 flex justify-between items-center h-20 px-6 py-4 gap-2',
+      'bg-[--color] text-[--color-inverse]',
     ]"
   >
     <Button 
       v-if="hasMenuBtn" 
       class="order-first" 
-      :color="textStyle.type" 
+      :color="getColorInverse(color)" 
       :iconPath="mdiMenu" 
       @click="$emit('toggleMenu')" 
     />
     <AutoComplete
       v-model="search"
       class="w-full md:w-1/4"
-      :color="textStyle.type"
+      :color="getColorInverse(color)"
       :options="optionsArrObjs"
       displayKey="value"
       :fieldProps="{
-        color: textStyle.type,
+        color: getColorInverse(color),
         placeholder: 'Search',
         inputLeftIcon: mdiMagnify,
         rounded: true,
       }"
     />
     <div class="hidden md:flex order-last items-center gap-2">
-      <Dropdown :bgColor="textStyle.type" :items="items" maxHeight>
+      <Dropdown :bgColor="getColorInverse(color)" :items="items" maxHeight>
         <template #selector>
-          <Button :color="textStyle.type" :iconPath="mdiBellOutline" size="small" hasAnimatedBadge />
+          <Button :color="getColorInverse(color)" :iconPath="mdiBellOutline" size="small" hasAnimatedBadge />
         </template>
-        <Card class="w-96 h-96" :color="textStyle.type">
+        <Card class="w-96 h-96" :color="getColorInverse(color)">
           <template #header>
             <CardHeader class="!px-3 !py-2" :separatorColor="color">
               <template #title>
@@ -119,28 +116,28 @@ const optionsArrObjs = [
                   <template #title>
                     <strong>John Doe</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="30 minutes ago" :color="textStyle.type" size="small" />
+                    <Chip label="30 minutes ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
                   <template #title>
                     <strong>Gian Leon</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="50 minutes ago" :color="textStyle.type" size="small" />
+                    <Chip label="50 minutes ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
                   <template #title>
                     <strong>Ariadna Meireles</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="1 hour ago" :color="textStyle.type" size="small" />
+                    <Chip label="1 hour ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
                   <template #title>
                     <strong>Guilherme Matias</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="2 hours ago" :color="textStyle.type" size="small" />
+                    <Chip label="2 hours ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
               </div>
@@ -153,11 +150,11 @@ const optionsArrObjs = [
           </template>
         </Card>
       </Dropdown>
-      <Dropdown :bgColor="textStyle.type" :items="items" maxHeight>
+      <Dropdown :bgColor="getColorInverse(color)" :items="items" maxHeight>
         <template #selector>
-          <Button :color="textStyle.type" :iconPath="mdiEmailOutline" size="small" badgeLabel="+4" />
+          <Button :color="getColorInverse(color)" :iconPath="mdiEmailOutline" size="small" badgeLabel="+4" />
         </template>
-        <Card class="w-96 h-96" :color="textStyle.type">
+        <Card class="w-96 h-96" :color="getColorInverse(color)">
           <template #header>
             <CardHeader class="!px-3 !py-2" :separatorColor="color">
               <template #title>
@@ -173,28 +170,28 @@ const optionsArrObjs = [
                   <template #title>
                     <strong>John Doe</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="30 minutes ago" :color="textStyle.type" size="small" />
+                    <Chip label="30 minutes ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
                   <template #title>
                     <strong>Gian Leon</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="50 minutes ago" :color="textStyle.type" size="small" />
+                    <Chip label="50 minutes ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
                   <template #title>
                     <strong>Ariadna Meireles</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="1 hour ago" :color="textStyle.type" size="small" />
+                    <Chip label="1 hour ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
                 <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
                   <template #title>
                     <strong>Guilherme Matias</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="2 hours ago" :color="textStyle.type" size="small" />
+                    <Chip label="2 hours ago" :color="getColorInverse(color)" size="small" />
                   </template>
                 </ListCard>
               </div>
@@ -207,7 +204,7 @@ const optionsArrObjs = [
           </template>
         </Card>
       </Dropdown>
-      <Dropdown :bgColor="textStyle.type" :items="items">
+      <Dropdown :bgColor="getColorInverse(color)" :items="items">
         <template #selector="{ btnIcon }">
           <div class="flex items-center gap-2 cursor-pointer">
             <Avatar username="John Doe" class="w-8 h-8" />
@@ -219,7 +216,7 @@ const optionsArrObjs = [
     </div>
     <Button  
       class="md:hidden order-last" 
-      :color="textStyle.type" 
+      :color="getColorInverse(color)" 
       :iconPath="mdiDotsVertical"
       rounded 
       @click="showMobileMenu = true" 
@@ -251,7 +248,7 @@ const optionsArrObjs = [
             badgeLabel: '+9',
           },
         ]"
-        :color="textStyle.type"
+        :color="getColorInverse(color)"
         position="right" 
         isClosable 
       >
@@ -270,7 +267,7 @@ const optionsArrObjs = [
         </template>
         <template #menuItem="{item}">
           <MenuListItem
-            :color="textStyle.type" 
+            :color="getColorInverse(color)" 
             :label="item?.label ?? ''" 
             :iconPath="item?.iconPath ?? ''"
             :to="item?.to ?? ''"

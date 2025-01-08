@@ -1,15 +1,11 @@
 <script setup>
   import { computed, shallowRef } from 'vue';
-  import { background, getDefaultTextStyle, border } from '../color';
 
   const props = defineProps({
     modelValue: Boolean,
     controllable: Boolean,
     text: String,
-    color: {
-      type: String,
-      default: 'theme-dark',
-    },
+    color: String,
     position: {
       type: String,
       default: 'top',
@@ -33,8 +29,6 @@
   });
 
   const popoverStyle = computed(() => {
-    const textStyle = getDefaultTextStyle(props.color);
-
     let positionStyle = {
       'top': [
         'top-auto right-auto bottom-[calc(100%+7px)] left-[50%] translate-x-[-50%]',
@@ -58,12 +52,11 @@
       ],
     }
     let style = [
+      props.color,
       'absolute rounded-md shadow-md z-10 whitespace-nowrap p-2',
       'before:absolute before:content-[""] before:pointer-events-none before:z-10 before:border-4',
       ...positionStyle[props.position],
-      background[props.color],
-      textStyle.color,
-      border.before[props.color],
+      'bg-[--color] before:border-[--color] text-[--color-inverse] ',
     ];
 
     return style;

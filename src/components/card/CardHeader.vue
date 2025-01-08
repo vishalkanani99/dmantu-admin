@@ -1,6 +1,4 @@
 <script setup>
-import { border } from '../../color';
-
 const props = defineProps({
   title: String,
   subTitle: String,
@@ -10,8 +8,8 @@ const props = defineProps({
 </script>
 <template>
   <div :class="[
-      'flex justify-between items-center border-b rounded-t-md p-3 md:p-4',
-      border[separatorColor], 
+      props.separatorColor,
+      'flex justify-between items-center border-b border-[--color] rounded-t-md p-3 md:p-4',
     ]"
   >
     <slot name="title">

@@ -1,13 +1,9 @@
 <script setup>
 import { computed } from 'vue';
-import { background, getDefaultTextStyle, border, text } from '../../color';
 import Avatar from '../Avatar.vue';
 
 const props = defineProps({
-  color: {
-    type: String,
-    default: 'theme',
-  },
+  color: String,
   imgSrc: String,
   imgAlt: String,
   title: String,
@@ -17,17 +13,14 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['menuClick']);
-const textStyle = getDefaultTextStyle(props.color);
 
 const defaultStyle = computed(() => {
-  let style = [
-    'border p-4 w-full rounded-md',
-    border[props.color],
-    !props.outline ? background[props.color] : '',
-    props.outline ? text[props.color] : textStyle.color,
+  return [
+    props.color,
+    'border border-[--color] p-4 w-full rounded-md',
+    props.outline ? 'bg-transparent text-[--color]' : 'bg-[--color] text-[--color-inverse]',
     { 'hover:shadow-lg transition-shadow duration-500' : props.hoverShadow }
   ];
-  return style;
 });
 
 </script>

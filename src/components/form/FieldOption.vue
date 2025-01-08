@@ -1,11 +1,5 @@
 <script setup>
-import { computed } from 'vue';
-import {
-  background,
-  border,
-  ring,
-  text,
-} from '../../color' 
+import { computed } from 'vue'; 
 import Icon from '../Icon.vue';
 
 defineOptions({
@@ -18,16 +12,8 @@ const props = defineProps({
     default: "checkbox",
     validator: (value) => ["checkbox", "radio", "switch", "icon"].includes(value),
   },
-  bgOnUncheck: {
-    type: String,
-    default: "white",
-  },
-  color: {
-    type: String,
-    default: "theme",
-  },
+  color: String,
   iconPath: String,
-  borderColor: String,
   label: String,
   rootEl: String,
   modelValue: {
@@ -46,38 +32,26 @@ const modelValue = computed({
 
 const borderStyle = computed(() => {
   const switchBtnStyle = [
-    'before:border',
-    border.before[props.borderColor ?? props.color],
-    border['peer-checked:before'][props.borderColor ?? props.color],
+    'before:border before:border-[--color] peer-checked:before:border-[--color]',
     'before:rounded-full',
   ];
 
   const ringStyle = [
-    'peer-focus:ring-2',
-    ring['peer-focus'][props.color],
+    'peer-focus:ring-2 peer-focus:ring-[--color]',
   ];
 
   const radius = [
     props.type === 'checkbox' ? 'rounded' : 'rounded-full'
   ];
 
-  let style = [
-    'border',
-    border[props.borderColor ?? props.color],
-    border['peer-checked'][props.borderColor ?? props.color],
+  return [
+    props.color,
+    'border border-[--color] peer-checked:border-[--color]',
     { 'peer-checked:border-4': props.type !== 'switch' },
+    props.type === 'switch' ? switchBtnStyle : '',
     ...ringStyle,
     ...radius,
   ];
-
-  if( props.type === 'switch' ) {
-    style = [
-      ...style,
-      switchBtnStyle
-    ];
-  }
-
-  return style;
 });
 
 const mixedStyle = computed(() => {
@@ -107,24 +81,23 @@ const mixedStyle = computed(() => {
 });
 
 const backgroundStyle = computed(() => {
-  const style = [
-    background[props.bgOnUncheck],
-    background['peer-checked'][props.color],
-    props.type === 'switch' ? background['before'][props.bgOnUncheck] : '',
+  
+  if( props.type === 'icon' ) {
+    return [
+      props.color,
+      'bg-transparent text-[--color-inverse] peer-checked:text-[--color]',
+    ];
+  }
+
+  return [
+    props.color,
+    'bg-[--color-inverse] peer-checked:bg-[--color]',
+    { 'before:bg-[--color-inverse]': props.type === 'switch' },
     { 'peer-checked:bg-[url("/done.svg")]' : props.type === 'checkbox' },
     { 'peer-checked:bg-[url("/dot.svg")]' : props.type === 'radio' },
     { 'peer-checked:bg-cover peer-checked:bg-no-repeat peer-checked:bg-center' : props.type !== 'switch' },
   ];
-
-  if( props.type === 'icon' ) {
-    return [
-      'bg-transparent',
-      text[props.bgOnUncheck], 
-      text['peer-checked'][props.color],
-    ];
-  }
-
-  return style;
+  
 });
 
 const disabledStyle = computed(() => [

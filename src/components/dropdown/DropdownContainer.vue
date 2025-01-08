@@ -1,13 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { background, getDefaultTextStyle } from '../../color';
+import { computed } from 'vue';
 
 const props = defineProps({
   modelValue: Boolean,
-  bgColor: {
-    type: String,
-    default: 'theme-light',
-  },
+  color: String,
   position: {
     type: String,
     default: 'bottom',
@@ -30,8 +26,8 @@ const showList = computed({
 })
 
 const dropdownContainerStyle = computed(() => {
-  let textStyle = getDefaultTextStyle(props.bgColor);
-  let style = [
+  return [
+    props.color,
     'absolute', 
     'right-0',
     'w-full min-w-max',
@@ -41,10 +37,8 @@ const dropdownContainerStyle = computed(() => {
     props.maxHeight ? 'max-h-screen' : 'max-h-64',
     props.scrollable ? 'overflow-y-auto' : 'overflow-hidden',
     props.position === 'bottom' ? 'mt-2 top-[100%]' :  'mb-2 bottom-[100%]',
-    background[props.bgColor],
-    textStyle.color,
+    'bg-[--color] text-[--color-inverse]',
   ];
-  return style;
 });
 
 </script>

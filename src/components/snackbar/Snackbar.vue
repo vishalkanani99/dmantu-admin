@@ -41,10 +41,7 @@ const props = defineProps({
       return value >= 0
     }
   },
-  color: {
-    type: String,
-    default: 'theme-light',
-  },
+  color: String,
   icon: {
     type: String,
     default: null

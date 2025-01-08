@@ -1,17 +1,9 @@
 <script setup>
   import { computed } from 'vue';
-  import { background, text } from '../../color';
 
   const props = defineProps({
     value: Number,
-    color: {
-      type: String,
-      default: 'theme',
-    },
-    textColor: {
-      type: String,
-      default: 'theme-light',
-    },
+    color: String,
     roundedL: Boolean,
     roundedR: Boolean,
     hasInfo: {
@@ -24,11 +16,11 @@
 
   const barStyle = computed(() => {
     return [
+      props.color,
       'relative flex flex-col h-3.5',
       {'rounded-l-md': props.roundedL },
       {'rounded-r-md': props.roundedR },
-      background[props.color],
-      text[props.textColor],
+      'bg-[--color] text-[--color-inverse]',
     ];
   });
 

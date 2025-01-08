@@ -8,10 +8,7 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
-  color: {
-    type: String,
-    default: 'theme-light',
-  },
+  color: String,
   isRouterMenu: Boolean,
 });
 </script>

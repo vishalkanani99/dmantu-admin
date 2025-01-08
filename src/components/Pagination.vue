@@ -24,14 +24,8 @@ const props = defineProps({
     type: Number,
     default: 1
   },
-  color: {
-    type: String,
-    default: "theme",
-  },
-  activeColor: {
-    type: String,
-    default: "theme-dark",
-  },
+  color: String,
+  activeColor: String,
 });
 
 const emit = defineEmits(['update:modelValue']);

@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue';
-import { text } from '../../color';
 import FieldHelp from './FieldHelp.vue';
 
 const props = defineProps({
@@ -17,14 +16,11 @@ const props = defineProps({
 });
 
 const labelStyle = computed(() => {
-  const style = ['inline-block font-bold mb-2'];
-
+  let color = 'text-[--color-inverse]';
   if(props.error || props.errors || props.success) {
-    let color = props.error || props.errors ? 'danger' : 'success';
-    style.push(text[color]);
+    color = props.error || props.errors ? 'danger text-[--color]' : 'success text-[--color]';
   }
-
-  return style;
+  return ['inline-block font-bold mb-2', color];
 });
 </script>
 <template>
