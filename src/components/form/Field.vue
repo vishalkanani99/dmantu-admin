@@ -94,7 +94,7 @@
       props.type === 'textarea' ? 'h-24' : 'h-10',
       props.inputLeftIcon ? 'pl-10' : 'pl-3',
       props.inputRightIcon ? 'pr-10' : 'pr-3',
-      'bg-[--color-xl] text-[--color] placeholder-[--color-l] focus:ring-[--color-l]',
+      'bg-[--color] text-[--color-inverse] placeholder-[--color-l] focus:ring-[--color-l]',
       borderRadius.value,
     ];
   });
@@ -162,7 +162,7 @@
           'absolute left-0',
           'inline-flex justify-center items-center',
           'w-10 h-10 z-[2]',
-          'text-[--color] cursor-pointer',
+          'text-[--color-inverse] cursor-pointer',
         ]"
         :path="inputLeftIcon"
         @click="$emit('leftIconClick')" />
@@ -184,7 +184,7 @@
           'absolute right-0',
           'inline-flex justify-center items-center',
           'w-10 h-10 z-[2]',
-          'text-[--color] cursor-pointer',
+          'text-[--color-inverse] cursor-pointer',
         ]"
         :path="inputRightIcon"
         @click="$emit('rightIconClick')" />
