@@ -47,16 +47,16 @@
 
   /* Track */
   ::-webkit-scrollbar-track {
-    @apply bg-theme-100; 
+    @apply bg-[--color-inverse]; 
   }
   
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    @apply bg-theme-600 rounded-md; 
+    @apply bg-[--color-m] rounded-md; 
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-theme-300; 
+    @apply bg-[--color-ml]; 
   }
 }

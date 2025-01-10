@@ -14,10 +14,7 @@ const props = defineProps({
   modelValue: Boolean,
   isClosable: Boolean,
   isCompact: Boolean,
-  color: {
-    type: String,
-    default: 'theme-dark',
-  },
+  color: String,
 });
 
 const emit = defineEmits(['update:modelValue', 'update:isCompact', 'close', 'dropdownClick']);

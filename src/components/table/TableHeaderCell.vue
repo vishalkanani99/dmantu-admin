@@ -9,8 +9,7 @@ const cellStyle = computed(() => {
   let style = [
     props.color,
     'md:text-left md:p-3',
-    'bg-[--color] border-[--color-l]',
-    { 'text-[--color-inverse]': props.color },
+    props.color ? 'bg-[--color] border-[--color-l] text-[--color-inverse]' : '',
   ];
   return style;
 })

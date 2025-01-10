@@ -9,16 +9,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'theme-900': '#27374D',
-        'theme-800': '#334866',
-        'theme-700': '#455c6e',
-        'theme-600': '#526D82',
-        'theme-500': '#62839d',
-        'theme-400': '#829cb0',
-        'theme-300': '#a1b5c4',
-        'theme-200': '#bccedc',
-        'theme-100': '#DDE6ED',
-        'theme-50' : '#eef3f6',
+        'theme' : {
+          '900': '#27374D',
+          '800': '#334866',
+          '700': '#455c6e',
+          '600': '#526D82',
+          '500': '#62839d',
+          '400': '#829cb0',
+          '300': '#a1b5c4',
+          '200': '#bccedc',
+          '100': '#DDE6ED',
+          '50' : '#eef3f6',
+        }
       },
       screens: {
         'xs': '360px',

@@ -4,10 +4,7 @@
 
   const props = defineProps({
     isClosable: Boolean,
-    btnColor: {
-      type: String,
-      default: 'theme',
-    },
+    btnColor: String,
   });
 
   const emit = defineEmits(['close']);

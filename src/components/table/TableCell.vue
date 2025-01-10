@@ -3,7 +3,6 @@ import { computed } from "vue";
 
 const props = defineProps({
   color: String,
-  borderColor: String,
   noLabel:Boolean,
 });
 
@@ -15,8 +14,7 @@ const defaultStyle = computed(() => {
     'py-3 px-4 md:p-3',
     'text-right md:text-left align-top md:align-middle',
     'border-b [&:not(:first-child)]:md:border-l md:border-b-0 last:border-b-0',
-    'bg-[--color] border-[--color-l]',
-    { 'text-[--color-inverse]': props.color },
+    props.color ? 'bg-[--color] border-[--color-l] text-[--color-inverse]' : '',
   ];
 
   if( !props.noLabel ){

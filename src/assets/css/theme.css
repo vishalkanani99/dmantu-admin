@@ -1,28 +1,100 @@
 :root {
-  --color: theme(colors.theme-600);
-  --color-ml: theme(colors.theme-500);
-  --color-m: theme(colors.theme-400);
-  --color-l: theme(colors.theme-300);
-  --color-xl: theme(colors.theme-50);
-  --color-inverse: theme(colors.theme-100);
+  --color: theme(colors.theme.600);
+  --color-m: theme(colors.theme.500);
+  --color-ml: theme(colors.theme.400);
+  --color-l: theme(colors.theme.300);
+  --color-xl: theme(colors.theme.100);
+  --color-inverse: theme(colors.theme.50);
+}
+
+.theme-primary {
+  --color: theme(colors.theme.900);
+  --color-m: theme(colors.theme.800);
+  --color-ml: theme(colors.theme.700);
+  --color-l: theme(colors.theme.600);
+  --color-xl: theme(colors.theme.400);
+  --color-inverse: theme(colors.theme.200);
+}
+
+.theme {
+  --color: theme(colors.theme.600);
+  --color-m: theme(colors.theme.500);
+  --color-ml: theme(colors.theme.400);
+  --color-l: theme(colors.theme.300);
+  --color-xl: theme(colors.theme.100);
+  --color-inverse: theme(colors.theme.50);
+}
+
+.theme-inverse {
+  --color: theme(colors.theme.50);
+  --color-m: theme(colors.theme.100);
+  --color-ml: theme(colors.theme.300);
+  --color-l: theme(colors.theme.400);
+  --color-xl: theme(colors.theme.500);
+  --color-inverse: theme(colors.theme.600);
+}
+
+.white-primary {
+  --color: theme(colors.slate.200);
+  --color-m: theme(colors.slate.300);
+  --color-ml: theme(colors.slate.400);
+  --color-l: theme(colors.slate.500);
+  --color-xl: theme(colors.slate.600);
+  --color-inverse: theme(colors.slate.800);
 }
 
 .white {
   --color: theme(colors.white);
   --color-m: theme(colors.slate.100);
   --color-ml: theme(colors.slate.200);
-  --color-l: theme(colors.gray.300);
-  --color-xl: theme(colors.gray.50);
-  --color-inverse: theme(colors.black);
+  --color-l: theme(colors.slate.300);
+  --color-xl: theme(colors.slate.400);
+  --color-inverse: theme(colors.slate.600);
+}
+
+.white-inverse {
+  --color: theme(colors.slate.600);
+  --color-m: theme(colors.slate.400);
+  --color-ml: theme(colors.slate.300);
+  --color-l: theme(colors.slate.200);
+  --color-xl: theme(colors.slate.100);
+  --color-inverse: theme(colors.white);
+}
+
+.black-primary {
+  --color: theme(colors.black);
+  --color-m: theme(colors.slate.800);
+  --color-ml: theme(colors.slate.700);
+  --color-l: theme(colors.slate.600);
+  --color-xl: theme(colors.slate.400);
+  --color-inverse: theme(colors.slate.200);
 }
 
 .black {
-  --color: theme(colors.black);
-  --color-m: theme(colors.slate.700);
-  --color-ml: theme(colors.slate.600);
-  --color-l: theme(colors.slate.400);
-  --color-xl: theme(colors.slate.50);
+  --color: theme(colors.slate.700);
+  --color-m: theme(colors.slate.600);
+  --color-ml: theme(colors.slate.400);
+  --color-l: theme(colors.slate.300);
+  --color-xl: theme(colors.slate.100);
   --color-inverse: theme(colors.white);
+}
+
+.black-inverse {
+  --color: theme(colors.white);
+  --color-m: theme(colors.slate.100);
+  --color-ml: theme(colors.slate.300);
+  --color-l: theme(colors.slate.400);
+  --color-xl: theme(colors.slate.600);
+  --color-inverse: theme(colors.slate.700);
+}
+
+.gray-primary {
+  --color: theme(colors.gray.900);
+  --color-m: theme(colors.gray.800);
+  --color-ml: theme(colors.gray.700);
+  --color-l: theme(colors.gray.600);
+  --color-xl: theme(colors.gray.400);
+  --color-inverse: theme(colors.gray.200);
 }
 
 .gray {
@@ -30,8 +102,26 @@
   --color-m: theme(colors.gray.500);
   --color-ml: theme(colors.gray.400);
   --color-l: theme(colors.gray.300);
-  --color-xl: theme(colors.gray.50);
-  --color-inverse: theme(colors.white);
+  --color-xl: theme(colors.gray.100);
+  --color-inverse: theme(colors.gray.50);
+}
+
+.gray-inverse {
+  --color: theme(colors.gray.50);
+  --color-m: theme(colors.gray.100);
+  --color-ml: theme(colors.gray.300);
+  --color-l: theme(colors.gray.400);
+  --color-xl: theme(colors.gray.500);
+  --color-inverse: theme(colors.gray.600);
+}
+
+.info-primary {
+  --color: theme(colors.blue.900);
+  --color-m: theme(colors.blue.800);
+  --color-ml: theme(colors.blue.700);
+  --color-l: theme(colors.blue.600);
+  --color-xl: theme(colors.blue.400);
+  --color-inverse: theme(colors.blue.200);
 }
 
 .info {
@@ -39,8 +129,26 @@
   --color-m: theme(colors.blue.500);
   --color-ml: theme(colors.blue.400);
   --color-l: theme(colors.blue.300);
-  --color-xl: theme(colors.blue.50);
-  --color-inverse: theme(colors.white);
+  --color-xl: theme(colors.blue.100);
+  --color-inverse: theme(colors.blue.50);
+}
+
+.info-inverse {
+  --color: theme(colors.blue.50);
+  --color-m: theme(colors.blue.100);
+  --color-ml: theme(colors.blue.300);
+  --color-l: theme(colors.blue.400);
+  --color-xl: theme(colors.blue.500);
+  --color-inverse: theme(colors.blue.600);
+}
+
+.success-primary {
+  --color: theme(colors.green.900);
+  --color-m: theme(colors.green.800);
+  --color-ml: theme(colors.green.700);
+  --color-l: theme(colors.green.600);
+  --color-xl: theme(colors.green.400);
+  --color-inverse: theme(colors.green.200);
 }
 
 .success {
@@ -48,8 +156,26 @@
   --color-m: theme(colors.green.500);
   --color-ml: theme(colors.green.400);
   --color-l: theme(colors.green.300);
-  --color-xl: theme(colors.green.50);
-  --color-inverse: theme(colors.white);
+  --color-xl: theme(colors.green.100);
+  --color-inverse: theme(colors.green.50);
+}
+
+.success-inverse {
+  --color: theme(colors.green.50);
+  --color-m: theme(colors.green.100);
+  --color-ml: theme(colors.green.300);
+  --color-l: theme(colors.green.400);
+  --color-xl: theme(colors.green.500);
+  --color-inverse: theme(colors.green.600);
+}
+
+.warning-primary {
+  --color: theme(colors.yellow.900);
+  --color-m: theme(colors.yellow.800);
+  --color-ml: theme(colors.yellow.700);
+  --color-l: theme(colors.yellow.600);
+  --color-xl: theme(colors.yellow.400);
+  --color-inverse: theme(colors.yellow.200);
 }
 
 .warning {
@@ -57,8 +183,26 @@
   --color-m: theme(colors.yellow.500);
   --color-ml: theme(colors.yellow.400);
   --color-l: theme(colors.yellow.300);
-  --color-xl: theme(colors.yellow.50);
-  --color-inverse: theme(colors.white);
+  --color-xl: theme(colors.yellow.100);
+  --color-inverse: theme(colors.yellow.50);
+}
+
+.warning-inverse {
+  --color: theme(colors.yellow.50);
+  --color-m: theme(colors.yellow.100);
+  --color-ml: theme(colors.yellow.300);
+  --color-l: theme(colors.yellow.400);
+  --color-xl: theme(colors.yellow.500);
+  --color-inverse: theme(colors.yellow.600);
+}
+
+.danger-primary {
+  --color: theme(colors.red.900);
+  --color-m: theme(colors.red.800);
+  --color-ml: theme(colors.red.700);
+  --color-l: theme(colors.red.600);
+  --color-xl: theme(colors.red.400);
+  --color-inverse: theme(colors.red.200);
 }
 
 .danger {
@@ -66,6 +210,15 @@
   --color-m: theme(colors.red.500);
   --color-ml: theme(colors.red.400);
   --color-l: theme(colors.red.300);
-  --color-xl: theme(colors.red.50);
-  --color-inverse: theme(colors.white);
+  --color-xl: theme(colors.red.100);
+  --color-inverse: theme(colors.red.50);
+}
+
+.danger-inverse {
+  --color: theme(colors.red.50);
+  --color-m: theme(colors.red.100);
+  --color-ml: theme(colors.red.300);
+  --color-l: theme(colors.red.400);
+  --color-xl: theme(colors.red.500);
+  --color-inverse: theme(colors.red.600);
 }
