@@ -16,8 +16,7 @@ import ListCard from '../components/card/ListCard.vue';
     <Section
       title="Alerts" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Default" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">

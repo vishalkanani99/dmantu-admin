@@ -20,8 +20,7 @@ const showPopover = shallowRef(true);
     <Section
       title="Popovers" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Popovers" noFooter>
         <template #content>

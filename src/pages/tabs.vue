@@ -17,8 +17,7 @@ const activeTab = shallowRef(3);
     <Section
       title="Tabs" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Tabs" noFooter>
         <Tabs>

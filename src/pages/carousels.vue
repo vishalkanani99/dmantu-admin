@@ -138,8 +138,7 @@ const testimonials = [
     <Section
       title="Carousels" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Carousel" noFooter>
         <Carousel :slides="slides" />

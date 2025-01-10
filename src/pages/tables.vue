@@ -179,8 +179,7 @@ const getData = (config) => {
     <Section
       title="Basic Table" 
       :iconPath="mdiTable" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Table>
         <TableHeader>

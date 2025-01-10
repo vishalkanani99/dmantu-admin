@@ -23,8 +23,7 @@ import Alert from '../components/Alert.vue';
     <Section
       title="Alerts" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Available Types" noFooter>
         <div class="flex items-center flex-wrap space-y-4">

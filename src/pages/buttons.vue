@@ -22,8 +22,7 @@ import Button from '../components/Button.vue';
     <Section
       title="Buttons" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Default" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">

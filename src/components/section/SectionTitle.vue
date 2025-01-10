@@ -30,7 +30,7 @@ const emit = defineEmits(['btnClick']);
       :label="btnLabel" 
       :iconPath="btnIconPath" 
       :color="btnColor"
-      @click="emit('btnClick')"
+      @click="$emit('btnClick')"
     />
   </div>
 </template>

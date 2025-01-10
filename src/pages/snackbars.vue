@@ -35,8 +35,7 @@ function create(title, subTitle = '', text = '') {
     <Section
       title="Snackbars" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Snackbars" noFooter>
         <div class="flex justify-center md:justify-start items-center space-x-2 md:space-x-16 mb-6">

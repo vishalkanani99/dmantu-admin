@@ -61,8 +61,7 @@ function toggleDialog(prop = null) {
     <Section
       title="Modals" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Modals" noFooter>
         <FieldGroup class="mb-6 hidden md:block" label="Modal Origins" optionsGroup >

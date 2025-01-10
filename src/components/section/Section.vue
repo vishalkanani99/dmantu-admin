@@ -6,6 +6,7 @@ const props = defineProps({
   title: String,
   btnLabel: String,
   btnIconPath: String,
+  color: String,
   btnColor: String,
 });
 
@@ -19,7 +20,9 @@ const emit = defineEmits(['btnClick']);
         :iconPath="iconPath"
         :btnLabel="btnLabel" 
         :btnIconPath="btnIconPath" 
-        :btnColor="btnColor" 
+        :color="color ?? activeColors.default" 
+        :btnColor="btnColor ?? activeColors.default"
+        @btnClick="$emit('btnClick')" 
       />
     </slot>
     <slot></slot>

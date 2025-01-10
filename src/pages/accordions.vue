@@ -34,8 +34,7 @@ const content = [
     <Section
       title="Accordions" 
       :iconPath="mdiArrowCollapseVertical" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Default" noFooter>
         <Collapse title="Default Accordion">

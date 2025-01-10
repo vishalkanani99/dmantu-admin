@@ -92,8 +92,7 @@ const hello = (e) => {
     <Section
       title="Forms" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Form
         title="Form"

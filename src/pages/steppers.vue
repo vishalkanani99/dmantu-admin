@@ -17,8 +17,7 @@ const activeStep = shallowRef(3);
     <Section
       title="Steppers" 
       :iconPath="mdiFormSelect" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <Card title="Stepper" noFooter>
         <Steps>

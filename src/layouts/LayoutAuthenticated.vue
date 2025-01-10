@@ -1,7 +1,6 @@
 <script setup>
 import { shallowRef, ref, computed, onMounted } from 'vue';
 import { useScreen } from '../composables/useScreen';
-import { useTheme } from '../composables/useTheme';
 import SectionMain from '../components/section/SectionMain.vue';
 import NavBar from '../components/NavBar.vue';
 import SideBarMenu from '../components/sidebar/SideBarMenu.vue';
@@ -9,7 +8,6 @@ import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 
 const { isSm, isXs } = useScreen();
-const { activeColors } = useTheme();
 
 const showSideBar = shallowRef(false);
 const isCompactSidebar = shallowRef(false);
