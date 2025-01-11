@@ -1,5 +1,6 @@
 <script setup>
 import Card from '../card/Card.vue';
+import { getColorInverse } from '../../composables/useTheme';
 
 const props = defineProps({
   color: String,
@@ -50,6 +51,7 @@ const emit = defineEmits(['close', 'save', 'cancel']);
           <div 
             :class="[
               'p-4',
+              getColorInverse(color),
               { 'space-y-4' : !twoColumns && !threeColumns },
               { 'grid grid-cols-1 md:grid-cols-2 gap-4' : twoColumns },
               { 'grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4' : threeColumns },

@@ -63,7 +63,7 @@ const defaultStyle = computed(() => {
 
     <!-- card body -->
     <slot name="content">
-      <CardBody :scrollable="scrollable">
+      <CardBody :class="getColorInverse(color)" :scrollable="scrollable">
         <slot></slot>
       </CardBody>
     </slot>
