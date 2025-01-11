@@ -87,7 +87,7 @@ onMounted(() => {
     </div>
     <DropdownContainer
       v-model="showList"
-      :bgColor="bgColor"
+      :color="bgColor"
       :maxHeight="maxHeight"
       :position="visibleAtBottom ? 'bottom' : 'top'"
       :scrollable="scrollable"

@@ -86,7 +86,7 @@ const btnColor = computed(() => getColorInverse(props.calendarColor));
 const typeOfComponent = computed(() => props.hasModalView ? Modal : DropdownContainer );
 const bindProps = computed(() => {
   let componentProps = {
-    bgColor: props.calendarColor,
+    color: props.calendarColor,
     maxHeight: true,
     scrollable: true,
   };
