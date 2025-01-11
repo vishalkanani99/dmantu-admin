@@ -7,14 +7,14 @@ const props = defineProps({
     type: String,
     default: "No records found",
   },
-  bgColor: String, 
+  color: String, 
   colspan: Number,
 });
 
 </script>
 
 <template>
-  <TableRow :bgColor="bgColor">
+  <TableRow :color="color">
     <TableCell :colspan="colspan" class="justify-center">
       <slot>
         <p class="text-center">{{ text }}</p>

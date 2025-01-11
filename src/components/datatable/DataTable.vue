@@ -34,15 +34,8 @@ const props = defineProps({
     type: String,
     default: 'children'
   },
-  bgColor: {
-    type: String,
-    default: 'theme'
-  },
+  color: String,
   activeColor: String,
-  borderColor: {
-    type: String,
-    default: 'theme-light'
-  },
   isCheckable: Boolean,
   isNestedSort: Boolean,
   isCollapsible: Boolean,
@@ -186,8 +179,7 @@ onMounted(() => {
     @sort="sort" 
   />
   <Table
-    :bgColor="bgColor"
-    :borderColor="borderColor"
+    :color="color"
   >
     <DataTableHeader
       v-model="checkedAll"
@@ -227,7 +219,7 @@ onMounted(() => {
   <Pagination 
     v-if="activePageRows.length > 0"
     v-model="config.page"
-    :color="bgColor"
+    :color="color"
     :activeColor="activeColor"
     :limit="config.limit"
     :recordsTotal="totalRecords"
