@@ -16,18 +16,9 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
-  btnColor: {
-    type: String,
-    default: 'theme-light',
-  },
-  bgColor: {
-    type: String,
-    default: 'theme-light',
-  },
-  ItemColor: {
-    type: String,
-    default: 'theme-light',
-  },
+  btnColor: String,
+  bgColor: String,
+  ItemColor: String,
   controllable: Boolean,
   maxHeight: Boolean,
   scrollable: Boolean,

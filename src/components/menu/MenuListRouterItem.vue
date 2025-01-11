@@ -10,10 +10,7 @@
     isCompact: Boolean,
     isOpen: Boolean,
     hasMenu: Boolean,
-    color: {
-      type: String,
-      default: 'theme-light',
-    },
+    color: String,
     size: String,
   });
 

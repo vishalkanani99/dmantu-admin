@@ -10,10 +10,7 @@
       type: Array,
       default: () => [],
     },
-    color: {
-      type: String,
-      default: 'theme-dark',
-    },
+    color: String,
     itemSize: String,
     isCompact: Boolean,
     isRouterMenu: Boolean,

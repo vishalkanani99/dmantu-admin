@@ -5,10 +5,7 @@
 
   const props = defineProps({
     label: String,
-    color: {
-      type: String,
-      default: 'theme',
-    },
+    color: String,
     size: {
       type: String,
       default: 'medium',

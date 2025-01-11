@@ -33,7 +33,7 @@ const username = computed(() => props.username)
     <img
       :src="avatar"
       :alt="username"
-      class="rounded-full block h-auto w-full max-w-full bg-theme-100"
+      :class="['rounded-full block h-auto w-full max-w-full', activeColors.inverse]"
     />
     <slot />
   </div>

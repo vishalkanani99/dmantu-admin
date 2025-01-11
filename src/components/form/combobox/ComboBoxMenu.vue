@@ -8,10 +8,7 @@ import MenuListItem from '../../menu/MenuListItem.vue';
 
 const props = defineProps({
   modelValue: [String, Object, Array],
-  color: {
-    type: String,
-    default: 'theme-light',
-  },
+  color: String,
   options: {
     type: Array,
     default: () => [],

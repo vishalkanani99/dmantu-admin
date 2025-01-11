@@ -20,10 +20,7 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  indicatiorColor: {
-    type: String,
-    default: 'theme-light',
-  },
+  indicatiorColor: String,
   thumbnailPerView: {
     type: Number,
     default: 4,
