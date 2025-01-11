@@ -1,6 +1,6 @@
 <script setup>
 import Card from '../card/Card.vue';
-import { getColorInverse } from '../../composables/useTheme';
+import { useTheme } from '../../composables/useTheme';
 
 const props = defineProps({
   color: String,
@@ -25,6 +25,7 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close', 'save', 'cancel']);
+const { getColorInverse } = useTheme();
 </script>
 <template>
   <form>
