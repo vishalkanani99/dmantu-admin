@@ -37,7 +37,7 @@
     };
     const style = [
       props.color,
-      'fixed flex flex-col items-center inset-y-0 min-h-dvh overflow-hidden',
+      'fixed flex flex-col items-center inset-y-0 min-h-dvh overflow-hidden shadow-2xl',
       'w-dvw xs:w-64',
       'bg-[--color] border-[--color-inverse] text-[--color-inverse]',
       transitionTranslate[props.position][2],

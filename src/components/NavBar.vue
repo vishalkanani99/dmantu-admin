@@ -72,7 +72,7 @@ const optionsArrObjs = [
     :class="[
       props.color,
       'fixed top-0 inset-x-0 flex justify-between items-center h-20 px-6 py-4 gap-2',
-      'bg-[--color] text-[--color-inverse]',
+      'bg-[--color] text-[--color-inverse] shadow-xl',
     ]"
   >
     <Button 
