@@ -17,7 +17,10 @@ export function useTheme(){
 
   const getColorInverse = (color) => {
     color = color ? color.split('-') : [];
-    if(themeColors[color[0]] && themeColors[color[0]]['inverse']) {
+    if(themeColors[color[0]]) {
+      if(color[1] && color[1] === 'inverse') {
+        return themeColors[color[0]]['default'];
+      }
       return themeColors[color[0]]['inverse'];
     }
     return;
@@ -33,7 +36,7 @@ export function useTheme(){
   }
   
   watchEffect(() => {
-    setActiveColor('info');
+    setActiveColor('warning');
   });
 
   return {

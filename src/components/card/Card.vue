@@ -37,7 +37,7 @@ const { getColorInverse } = useTheme();
 const defaultStyle = computed(() => {
   let style = [
     props.color,
-    'relative flex flex-col border min-w-0 rounded-md shadow-md',
+    'relative flex flex-col border min-w-0 rounded-md shadow-md drop-shadow',
     'bg-[--color] border-[--color] text-[--color-inverse]',
   ];
   return style;

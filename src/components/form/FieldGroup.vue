@@ -4,6 +4,7 @@ import FieldHelp from './FieldHelp.vue';
 
 const props = defineProps({
   label: String,
+  color: String,
   labelFor: String,
   help: String,
   error: String,
@@ -16,11 +17,11 @@ const props = defineProps({
 });
 
 const labelStyle = computed(() => {
-  let color = 'text-[--color-inverse]';
+  let color = props.color;
   if(props.error || props.errors || props.success) {
-    color = props.error || props.errors ? 'danger text-[--color]' : 'success text-[--color]';
+    color = props.error || props.errors ? 'danger' : 'success';
   }
-  return ['inline-block font-bold mb-2', color];
+  return [color, 'inline-block font-bold text-[--color] mb-2'];
 });
 </script>
 <template>
