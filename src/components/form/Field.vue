@@ -64,7 +64,8 @@
   const outerStyle = computed(() => {
     let style = [
       props.color, 
-      'relative flex items-center border-[--color-inverse]' 
+      'relative flex items-center',
+      props.type === 'file' || props.type === 'button' ? 'border-[--color]' : 'border-[--color-inverse]',
     ];
 
     if( props.type === 'file' ) {
