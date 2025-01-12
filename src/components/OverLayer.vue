@@ -3,6 +3,7 @@ import { computed, watchEffect } from 'vue';
 
 const props = defineProps({
   modelValue: Boolean,
+  color: String,
   imortal: Boolean,
 });
 
@@ -44,7 +45,7 @@ watchEffect(() => {
 <template>
   <Teleport to="body">
     <div v-bind="$attrs" :class="defaultStyle">
-      <div :class="['fixed inset-0 bg-opacity-60', activeColors.dark]" @click="close"></div>
+      <div :class="[color, 'fixed inset-0 bg-[--color] opacity-50']" @click="close"></div>
       <slot></slot>
     </div>
   </Teleport>

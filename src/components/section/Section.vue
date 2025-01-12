@@ -20,8 +20,8 @@ const emit = defineEmits(['btnClick']);
         :iconPath="iconPath"
         :btnLabel="btnLabel" 
         :btnIconPath="btnIconPath" 
-        :color="color ?? activeColors.default" 
-        :btnColor="btnColor ?? activeColors.default"
+        :color="color" 
+        :btnColor="btnColor"
         @btnClick="$emit('btnClick')" 
       />
     </slot>

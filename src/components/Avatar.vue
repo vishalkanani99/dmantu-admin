@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 
 const props = defineProps({
+  color: String,
   username: {
     type: String,
     required: true
@@ -33,7 +34,7 @@ const username = computed(() => props.username)
     <img
       :src="avatar"
       :alt="username"
-      :class="['rounded-full block h-auto w-full max-w-full', activeColors.inverse]"
+      :class="[color, 'bg-[--color] rounded-full block h-auto w-full max-w-full']"
     />
     <slot />
   </div>
