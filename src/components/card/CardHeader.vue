@@ -9,7 +9,7 @@ const props = defineProps({
 <template>
   <div :class="[
       props.separatorColor,
-      'flex justify-between items-center border-b border-[--color] rounded-t-md p-3 md:p-4',
+      'flex justify-between items-center border-b border-[--color] text-[--color] rounded-t-md p-3 md:p-4',
     ]"
   >
     <slot name="title">

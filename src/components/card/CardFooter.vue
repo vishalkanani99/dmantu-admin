@@ -16,7 +16,7 @@ const emit = defineEmits(["save", "cancel"]);
   <div 
     :class="[
       props.separatorColor,
-      'flex items-center space-x-2 border-t border-[--color] rounded-b-md p-3 md:p-4',
+      'flex items-center space-x-2 border-t border-[--color] text-[--color] rounded-b-md p-3 md:p-4',
     ]"
   >
     <slot>

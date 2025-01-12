@@ -6,7 +6,7 @@ const props = defineProps({
 <template>
   <div 
       :class="[ 
-        'flex-auto p-3 md:p-4',
+        'flex-auto p-3 md:p-4 text-[--color]',
         scrollable ? 'overflow-y-auto' : 'overflow-hidden',
       ]"
     >
