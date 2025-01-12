@@ -1,9 +1,9 @@
 <script setup>
+import { computed } from 'vue';
 import Card from '../card/Card.vue';
 import { useTheme } from '../../composables/useTheme';
 
 const props = defineProps({
-  color: String,
   title: String,
   subTitle: String,
   saveBtnLabel: {
@@ -14,6 +14,11 @@ const props = defineProps({
     type: String,
     default: 'Cancel',
   },
+  color: String,
+  headerColor: String,
+  bodyColor: String,
+  footerColor: String,
+  btnColor: String,
   saveBtnIconPath: String,
   cancelBtnIconPath: String,
   closable: Boolean,
@@ -26,11 +31,20 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'save', 'cancel']);
 const { getColorInverse } = useTheme();
+
+const btnColor = computed(() => props.btnColor ?? getColorInverse(props.color));
+const headerColor = computed(() => props.headerColor ?? getColorInverse(props.color));
+const bodyColor = computed(() => props.bodyColor ?? getColorInverse(props.color));
+const footerColor = computed(() => props.footerColor ?? getColorInverse(props.color));
 </script>
 <template>
   <form>
     <Card
       :color="color"
+      :headerColor="headerColor"
+      :bodyColor="bodyColor"
+      :footerColor="footerColor"
+      :btnColor="btnColor"
       :title="title"
       :subTitle="subTitle"
       :saveBtnLabel="saveBtnLabel"
@@ -52,7 +66,7 @@ const { getColorInverse } = useTheme();
           <div 
             :class="[
               'p-4',
-              getColorInverse(color),
+              bodyColor,
               { 'space-y-4' : !twoColumns && !threeColumns },
               { 'grid grid-cols-1 md:grid-cols-2 gap-4' : twoColumns },
               { 'grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-4' : threeColumns },

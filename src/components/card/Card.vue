@@ -22,6 +22,10 @@ const props = defineProps({
     type: String,
     default: 'white',
   },
+  headerColor: String,
+  bodyColor: String,
+  footerColor: String,
+  btnColor: String,
   saveBtnIconPath: String,
   cancelBtnIconPath: String,
   closable: Boolean,
@@ -33,6 +37,11 @@ const props = defineProps({
 const emit = defineEmits(['close', 'save', 'cancel']);
 
 const { getColorInverse } = useTheme();
+
+const btnColor = computed(() => props.btnColor ?? getColorInverse(props.color));
+const headerColor = computed(() => props.headerColor ?? getColorInverse(props.color));
+const bodyColor = computed(() => props.bodyColor ?? getColorInverse(props.color));
+const footerColor = computed(() => props.footerColor ?? getColorInverse(props.color));
 
 const defaultStyle = computed(() => {
   let style = [
@@ -49,7 +58,7 @@ const defaultStyle = computed(() => {
     <Button
       v-if="closable" 
       class="absolute top-0 right-0 m-2" 
-      :color="getColorInverse(color)"
+      :color="btnColor"
       size="small"
       :iconPath="mdiClose"
       rounded
@@ -57,13 +66,13 @@ const defaultStyle = computed(() => {
     />
     <!-- card header -->
     <slot v-if="!noHeader" name="header">
-      <CardHeader :separatorColor="getColorInverse(color)" :title="title" :subTitle="subTitle" />
+      <CardHeader :separatorColor="headerColor" :title="title" :subTitle="subTitle" />
     </slot>
     <!-- card header end -->
 
     <!-- card body -->
     <slot name="content">
-      <CardBody :class="getColorInverse(color)" :scrollable="scrollable">
+      <CardBody :class="bodyColor" :scrollable="scrollable">
         <slot></slot>
       </CardBody>
     </slot>
@@ -72,8 +81,8 @@ const defaultStyle = computed(() => {
     <!-- card footer -->
     <slot v-if="!noFooter" name="footer">
       <CardFooter
-        :btnColor="getColorInverse(color)"
-        :separatorColor="getColorInverse(color)"
+        :btnColor="btnColor"
+        :separatorColor="footerColor"
         :saveBtnLabel="saveBtnLabel"
         :cancelBtnLabel="cancelBtnLabel"
         :saveBtnIconPath="saveBtnIconPath"
