@@ -23,13 +23,12 @@ import Button from '../components/Button.vue';
       title="Buttons" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Default" noFooter>
+      <Card title="Default" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark"></Button>
           <Button color="theme" label="Theme"></Button>
-          <Button color="theme-light" label="Theme Light"></Button>
-          <Button color="white" label="white"></Button>
+          <Button color="white" label="White"></Button>
           <Button color="black" label="Black"></Button>
           <Button color="gray" label="Gray"></Button>
           <Button color="info" label="Info"></Button>
@@ -38,9 +37,8 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger"></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount"></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail"></Button>
-          <Button color="theme-light" label="Theme Light" :iconPath="mdiRefresh"></Button>
+          <Button color="white" label="White" :iconPath="mdiRefresh"></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle"></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle"></Button>
           <Button color="info" label="Info" :iconPath="mdiEye"></Button>
@@ -49,9 +47,8 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog"></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="small"></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="small"></Button>
-          <Button color="theme-light" label="Theme Light" :iconPath="mdiRefresh" size="small"></Button>
+          <Button color="white" label="White" :iconPath="mdiRefresh" size="small"></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="small"></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="small"></Button>
           <Button color="info" label="Info" :iconPath="mdiEye" size="small"></Button>
@@ -60,9 +57,8 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="small"></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="large"></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="large"></Button>
-          <Button color="theme-light" label="Theme Light" :iconPath="mdiRefresh" size="large"></Button>
+          <Button color="white" label="White" :iconPath="mdiRefresh" size="large"></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="large"></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="large"></Button>
           <Button color="info" label="Info" :iconPath="mdiEye" size="large"></Button>
@@ -71,9 +67,8 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large"></Button>
         </div>
       </Card>
-      <Card title="Outline" noFooter>
+      <Card title="Outline" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" outline></Button>
           <Button color="theme" label="Theme" outline></Button>
           <Button color="black" label="Black" outline></Button>
           <Button color="gray" label="Gray" outline></Button>
@@ -83,7 +78,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" outline></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" outline></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" outline></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" outline></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" outline></Button>
@@ -93,7 +87,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" outline></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="small" outline></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="small" outline></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="small" outline></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="small" outline></Button>
@@ -103,7 +96,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="small" outline></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="large" outline></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="large" outline></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="large" outline></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="large" outline></Button>
@@ -113,11 +105,9 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large" outline></Button>
         </div>
       </Card>
-      <Card title="Rounded" noFooter>
+      <Card title="Rounded" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" rounded></Button>
           <Button color="theme" label="Theme" rounded></Button>
-          <Button color="theme-light" label="Theme Light" rounded></Button>
           <Button color="black" label="Black" rounded></Button>
           <Button color="gray" label="Gray" rounded></Button>
           <Button color="info" label="Info" rounded></Button>
@@ -126,9 +116,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" rounded></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" rounded></Button>
-          <Button color="theme-light" label="Theme Light" :iconPath="mdiRefresh" rounded></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" rounded></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" rounded></Button>
           <Button color="info" label="Info" :iconPath="mdiEye" rounded></Button>
@@ -137,7 +125,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" rounded></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="small" rounded></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="small" rounded></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="small" rounded></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="small" rounded></Button>
@@ -147,7 +134,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="small" rounded></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Button color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" size="large" rounded></Button>
           <Button color="theme" label="Theme" :iconPath="mdiEmail" size="large" rounded></Button>
           <Button color="black" label="Black" :iconPath="mdiAlertCircle" size="large" rounded></Button>
           <Button color="gray" label="Gray" :iconPath="mdiCheckCircle" size="large" rounded></Button>
@@ -157,11 +143,9 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large" rounded></Button>
         </div>
       </Card>
-      <Card title="Icon" noFooter>
+      <Card title="Icon" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" :iconPath="mdiAccount"></Button>
           <Button color="theme" :iconPath="mdiEmail"></Button>
-          <Button color="theme-light" :iconPath="mdiRefresh"></Button>
           <Button color="black" :iconPath="mdiAlertCircle"></Button>
           <Button color="gray" :iconPath="mdiCheckCircle"></Button>
           <Button color="info" :iconPath="mdiEye"></Button>
@@ -170,9 +154,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" :iconPath="mdiCog"></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" :iconPath="mdiAccount" rounded></Button>
           <Button color="theme" :iconPath="mdiEmail" rounded></Button>
-          <Button color="theme-light" :iconPath="mdiRefresh" rounded></Button>
           <Button color="black" :iconPath="mdiAlertCircle" rounded></Button>
           <Button color="gray" :iconPath="mdiCheckCircle" rounded></Button>
           <Button color="info" :iconPath="mdiEye" rounded></Button>
@@ -181,9 +163,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" :iconPath="mdiCog" rounded></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" :iconPath="mdiAccount" size="small"></Button>
           <Button color="theme" :iconPath="mdiEmail" size="small"></Button>
-          <Button color="theme-light" :iconPath="mdiRefresh" size="small"></Button>
           <Button color="black" :iconPath="mdiAlertCircle" size="small"></Button>
           <Button color="gray" :iconPath="mdiCheckCircle" size="small"></Button>
           <Button color="info" :iconPath="mdiEye" size="small"></Button>
@@ -192,9 +172,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" :iconPath="mdiCog" size="small"></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" :iconPath="mdiAccount" size="small" rounded></Button>
           <Button color="theme" :iconPath="mdiEmail" size="small" rounded></Button>
-          <Button color="theme-light" :iconPath="mdiRefresh" size="small" rounded></Button>
           <Button color="black" :iconPath="mdiAlertCircle" size="small" rounded></Button>
           <Button color="gray" :iconPath="mdiCheckCircle" size="small" rounded></Button>
           <Button color="info" :iconPath="mdiEye" size="small" rounded></Button>
@@ -203,7 +181,6 @@ import Button from '../components/Button.vue';
           <Button color="danger" :iconPath="mdiCog" size="small" rounded></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Button color="theme-dark" :iconPath="mdiAccount" rounded outline></Button>
           <Button color="theme" :iconPath="mdiEmail" rounded outline></Button>
           <Button color="black" :iconPath="mdiAlertCircle" rounded outline></Button>
           <Button color="gray" :iconPath="mdiCheckCircle" rounded outline></Button>
@@ -213,9 +190,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" :iconPath="mdiCog" rounded outline></Button>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Button color="theme-dark" :iconPath="mdiAccount" size="large" rounded></Button>
           <Button color="theme" :iconPath="mdiEmail" size="large" rounded></Button>
-          <Button color="theme-light" :iconPath="mdiRefresh" size="large" rounded></Button>
           <Button color="black" :iconPath="mdiAlertCircle" size="large" rounded></Button>
           <Button color="gray" :iconPath="mdiCheckCircle" size="large" rounded></Button>
           <Button color="info" :iconPath="mdiEye" size="large" rounded></Button>
