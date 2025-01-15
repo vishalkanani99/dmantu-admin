@@ -1,6 +1,7 @@
 <script setup>
   import { computed, ref } from 'vue';
   import { mdiUpload } from '@mdi/js';
+  import { useTheme } from '../../composables/useTheme';
   import Button from '../Button.vue';
   import Icon from '../Icon.vue';
 
@@ -24,6 +25,7 @@
     left: Boolean,
     rounded: Boolean,
     color: String,
+    borderColor: String,
     label: String,
     buttonIcon: String,
     inputLeftIcon: String,
@@ -34,7 +36,11 @@
 
   const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick']);
 
+  const { getColorInverse } = useTheme();
+  
   const selectedFiles = ref();
+
+  const inverseColor = computed(() => getColorInverse(props.color));
 
   const modelValue = computed({
     get: () => props.modelValue,
@@ -63,9 +69,10 @@
   
   const outerStyle = computed(() => {
     let style = [
-      props.color, 
+      props.borderColor ?? props.color, 
       'relative flex items-center',
-      props.type === 'file' || props.type === 'button' ? 'border-[--color]' : 'border-[--color-inverse]',
+      props.borderColor || props.type === 'file' || props.type === 'button' || props.type === 'link'
+        ? 'border-[--color]' : 'border-[--color-inverse]',
     ];
 
     if( props.type === 'file' ) {
@@ -91,7 +98,7 @@
     return [
       props.color,
       'flex items-center w-full py-2',
-      'text-xs focus:outline-none focus:z-[1] border-0 focus:ring',
+      'text-xs focus:outline-none focus:z-[1] border-0 focus:ring-2',
       props.type === 'textarea' ? 'h-24' : 'h-10',
       props.inputLeftIcon ? 'pl-10' : 'pl-3',
       props.inputRightIcon ? 'pr-10' : 'pr-3',
@@ -152,7 +159,7 @@
           @change="fileInput" 
         />
       </label>
-      <Field v-if="selectedFiles" type="static" right>
+      <Field v-if="selectedFiles" type="static" :color="inverseColor" right>
         <span class="text-etext-ellipsis">{{ selectedFiles }}</span>
       </Field>
     </template>

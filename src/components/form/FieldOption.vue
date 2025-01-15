@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'; 
+import { computed, ref, shallowRef } from 'vue'; 
 import Icon from '../Icon.vue';
 
 defineOptions({
@@ -13,6 +13,7 @@ const props = defineProps({
     validator: (value) => ["checkbox", "radio", "switch", "icon"].includes(value),
   },
   color: String,
+  colorOnUncheck: String,
   iconPath: String,
   label: String,
   rootEl: String,
@@ -22,6 +23,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["update:modelValue"]);
+
+const inputRef = ref();
+const color = shallowRef(props.colorOnUncheck && inputRef.value?.checked ? props.colorOnUncheck : props.color);
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -45,7 +49,6 @@ const borderStyle = computed(() => {
   ];
 
   return [
-    props.color,
     'border border-[--color] peer-checked:border-[--color]',
     { 'peer-checked:border-4': props.type !== 'switch' },
     props.type === 'switch' ? switchBtnStyle : '',
@@ -84,14 +87,16 @@ const backgroundStyle = computed(() => {
   
   if( props.type === 'icon' ) {
     return [
-      props.color,
-      'bg-transparent text-[--color-inverse] peer-checked:text-[--color]',
+      color.value,
+      'bg-transparent peer-checked:text-[--color]',
+      props.colorOnUncheck ? 'text-[--color]' : 'text-[--color-inverse]',
     ];
   }
 
   return [
-    props.color,
-    'bg-[--color-inverse] peer-checked:bg-[--color]',
+    color.value,
+    props.colorOnUncheck ? 'bg-[--color]' : 'bg-[--color-inverse]',
+    'peer-checked:bg-[--color]',
     { 'before:bg-[--color-inverse]': props.type === 'switch' },
     { 'peer-checked:bg-[url("/done.svg")]' : props.type === 'checkbox' },
     { 'peer-checked:bg-[url("/dot.svg")]' : props.type === 'radio' },
@@ -109,6 +114,10 @@ const inputType = computed(() =>
 );
 
 const rootEl = computed(() => props.rootEl ?? 'label' );
+
+const updateColor = (e) => {
+  color.value = props.colorOnUncheck && !e.target.checked ? props.colorOnUncheck : props.color;
+}
 </script>
 
 <template>
@@ -121,33 +130,35 @@ const rootEl = computed(() => props.rootEl ?? 'label' );
     }"
   >
     <input
+      ref="inputRef"
       v-model="modelValue"
       v-bind="{
         value: $attrs.value,
+        disabled: $attrs.disabled,
         onClick: $attrs.onClick, 
         onChange: $attrs.onChange, 
         onInput: $attrs.onInput, 
       }"
       :type="inputType"
       class="hidden opacity-0 peer"
+      @change="updateColor"
     />
     <Icon 
       v-if="type === 'icon'" 
       :class="[
-        mixedStyle,
-        backgroundStyle, 
+        backgroundStyle,
+        mixedStyle, 
         disabledStyle
       ]" 
       :path="iconPath" 
-      size="24" 
-      isPlain
+      size="24"
     />
     <span 
       v-else 
       :class="[
+        backgroundStyle,
         borderStyle, 
-        mixedStyle, 
-        backgroundStyle, 
+        mixedStyle,  
         disabledStyle
       ]" 
     />
