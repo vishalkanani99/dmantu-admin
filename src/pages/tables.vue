@@ -177,11 +177,12 @@ const getData = (config) => {
 <template>
   <LayoutAuthenticated>
     <Section
-      title="Basic Table" 
+      title="Basic Table"
+      :color="activeColors.default" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog"
     >
-      <Table>
+      <Table :color="activeColors.default">
         <TableHeader>
           <TableRow>
             <TableHeaderCell>
@@ -316,18 +317,21 @@ const getData = (config) => {
           </TableRow>
         </TableBody>
       </Table>
-      <Pagination v-model="activePage" :recordsTotal="50"/>
+      <Pagination v-model="activePage" :recordsTotal="50" :color="activeColors.default" :activeColor="activeColors.dark"/>
     </Section>
     <Section
       title="Data Table" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :color="activeColors.default"
     >
       <DataTable
         v-model="checkedRows" 
         :columns="columns" 
         :data="tableRows"
+        :color="activeColors.default"
+        :activeColor="activeColors.dark"
+        :toolsBtnColor="activeColors.dark"
         isCheckable
         isCollapsible
         isEditable
@@ -338,12 +342,15 @@ const getData = (config) => {
       title="Data Table (Nested Sort By Sort Order)" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :color="activeColors.default"
     >
       <DataTable
         v-model="checkedRows" 
         :columns="columns" 
         :data="tableRows"
+        :color="activeColors.default"
+        :activeColor="activeColors.dark"
+        :toolsBtnColor="activeColors.dark"
         isCheckable
         isCollapsible
         isEditable
@@ -353,14 +360,17 @@ const getData = (config) => {
     </Section>
     <Section
       title="Data Table (SSR)" 
+      :color="activeColors.default"
       :iconPath="mdiTable" 
-      :btnIconPath="mdiCog" 
-      btnColor="theme"
+      :btnIconPath="mdiCog"
     >
       <DataTable
         v-model="checkedRows" 
         :columns="columns" 
         :data="ssrTableRows"
+        :color="activeColors.default"
+        :activeColor="activeColors.dark"
+        :toolsBtnColor="activeColors.dark"
         isSsr
         isCheckable
         isCollapsible

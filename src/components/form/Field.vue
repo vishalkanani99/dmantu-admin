@@ -139,7 +139,8 @@
       :label="label"
       :class="defaultStyle"
       :iconPath="buttonIcon"
-      :color="color" 
+      :color="color"
+      :outline="outline" 
     >
       <slot></slot>
     </Button>
@@ -150,6 +151,7 @@
           :label="label ?? 'Upload'"
           :buttonIcon="buttonIcon ?? mdiUpload"
           :color="color"
+          :outline="outline"
           :left="Boolean(selectedFiles)"
         />
         <input 

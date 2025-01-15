@@ -5,6 +5,8 @@ import FieldGroup from "../form/FieldGroup.vue";
 import Field from "../form/Field.vue";
 
 const props = defineProps({
+  color: String,
+  btnColor: String,
   config: {
     type: Object,
     required: true,
@@ -37,7 +39,7 @@ const getSortableFieldOrder = (colKey) => {
       <Field
         v-model="config.limit" 
         type="select"
-        color="white"
+        :color="color"
         outerStyle="w-1/6"
         @input="$emit('update')"
       >
@@ -56,13 +58,13 @@ const getSortableFieldOrder = (colKey) => {
           placeholder="Search"
           :inputLeftIcon="mdiFolderSearch"
           :left="searchableColumns.length > 0"
-          color="white"
+          :color="color"
           @input="$emit('update')"
         />
         <Field 
           v-model="config.searchBy" 
           type="select" 
-          color="white"
+          :color="color"
           right
           outerStyle="w-1/2"
           @input="$emit('update')"
@@ -82,13 +84,14 @@ const getSortableFieldOrder = (colKey) => {
           v-if="config.sortField" 
           :left="config.sortField ? true : false" 
           type="button" 
-          :buttonIcon="getSortableFieldOrder(config.sortField) === 'asc' ? mdiArrowDownBold : mdiArrowUpBold" 
+          :buttonIcon="getSortableFieldOrder(config.sortField) === 'asc' ? mdiArrowDownBold : mdiArrowUpBold"
+          :color="btnColor" 
           @click="$emit('sort', config.sortField)"
         />
         <Field 
           v-model="config.sortField" 
           type="select"
-          color="white" 
+          :color="color" 
           :right="config.sortField ? true : false"
         >
           <option value="">Sort By</option>

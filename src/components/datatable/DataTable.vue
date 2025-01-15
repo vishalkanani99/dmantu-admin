@@ -35,6 +35,8 @@ const props = defineProps({
     default: 'children'
   },
   color: String,
+  toolsColor: String,
+  toolsBtnColor: String,
   activeColor: String,
   isCheckable: Boolean,
   isNestedSort: Boolean,
@@ -171,6 +173,8 @@ onMounted(() => {
 <template>
   <!-- Tools -->
   <DataTableTools
+    :color="toolsColor"
+    :btnColor="toolsBtnColor"
     :config="config"
     :limitOptions="limitOptions"
     :searchableColumns="searchableColumns"
@@ -192,7 +196,7 @@ onMounted(() => {
       @updateCheckedRows="updateCheckedRows"
     />
     <TableBody>
-      <Loader :bgColor="bgColor" v-if="isLoading" />
+      <Loader :bgColor="color" v-if="isLoading" />
       <DataTableRows
         v-model="modelValue"
         :rows="activePageRows"
