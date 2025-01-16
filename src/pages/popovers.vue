@@ -21,35 +21,36 @@ const showPopover = shallowRef(true);
       title="Popovers" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Popovers" noFooter>
+      <Card title="Popovers" :color="activeColors.inverse" noFooter>
         <template #content>
           <div class="p-6">
             <div class="flex items-center flex-wrap space-x-4 mb-6">
-              <Popover text="Top">
-                <Button label="Top"></Button>
+              <Popover text="Top" :color="activeColors.dark">
+                <Button label="Top" :color="activeColors.default"></Button>
               </Popover>
-              <Popover text="Bottom" position="bottom">
-                <Button label="Bottom"></Button>
+              <Popover text="Bottom" position="bottom" :color="activeColors.dark">
+                <Button label="Bottom" :color="activeColors.default"></Button>
               </Popover>
-              <Popover text="Left" position="left">
-                <Button label="Left"></Button>
+              <Popover text="Left" position="left" :color="activeColors.dark">
+                <Button label="Left" :color="activeColors.default"></Button>
               </Popover>
-              <Popover text="Right" position="right">
-                <Button label="Right"></Button>
+              <Popover text="Right" position="right" :color="activeColors.dark">
+                <Button label="Right" :color="activeColors.default"></Button>
               </Popover>
-              <Popover v-model="showPopover" text="Right" controllable @click="showPopover = !showPopover">
-                <Button label="Controllable"></Button>
+              <Popover v-model="showPopover" text="Right" :color="activeColors.dark" controllable @click="showPopover = !showPopover">
+                <Button label="Controllable" :color="activeColors.default"></Button>
               </Popover>
-              <Popover>
+              <Popover :color="activeColors.dark">
                 <template #popover>
                   <div class="flex items-center space-x-2">
-                    <Button class="!p-1" :iconPath="mdiTwitter" color="theme-light" rounded></Button>
-                    <Button class="!p-1" :iconPath="mdiFacebook" color="theme-light" rounded></Button>
-                    <Button class="!p-1" :iconPath="mdiInstagram" color="theme-light" rounded></Button>
+                    <Button class="!p-1" :iconPath="mdiTwitter" :color="activeColors.inverse" rounded></Button>
+                    <Button class="!p-1" :iconPath="mdiFacebook" :color="activeColors.inverse" rounded></Button>
+                    <Button class="!p-1" :iconPath="mdiInstagram" :color="activeColors.inverse" rounded></Button>
                   </div>
                 </template>
-                <Button label="Popover slot"></Button>
+                <Button label="Popover slot" :color="activeColors.default"></Button>
               </Popover>
             </div>
           </div>

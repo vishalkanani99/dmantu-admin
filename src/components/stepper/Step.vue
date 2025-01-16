@@ -94,7 +94,7 @@ const stepStyle = computed(() => {
 <template>
   <div :class="defaultStyle">
     <div class="flex items-center justify-center flex-col">
-      <div class="border-4 border-white z-10 rounded-full">
+      <div class="z-10 rounded-full">
         <div :class="stepStyle">
           <Icon v-if="iconPath" :path="iconPath" />
           <span v-else>{{ number }}</span>
@@ -102,7 +102,7 @@ const stepStyle = computed(() => {
       </div>
       <span 
         v-if="label"
-        class="bg-white z-10 p-2"
+        class="z-10 p-2"
       >
         {{ label }}
       </span>
