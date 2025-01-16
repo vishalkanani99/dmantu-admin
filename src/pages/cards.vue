@@ -24,6 +24,7 @@ import Chip from '../components/Chip.vue';
       title="Cards" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card title="Default Card" subTitle="Sub Title">
@@ -34,7 +35,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card title="Card with close button" closable>
+        <Card title="Card with close button" :color="activeColors.inverse" closable>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -42,7 +43,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card title="Card without footer" noFooter>
+        <Card title="Card without footer" :color="activeColors.inverse" noFooter>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -50,7 +51,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card>
+        <Card :color="activeColors.inverse">
           <template #header>
             <h2 class="p-2 md:p-4 text-center">Card with header and footer slots</h2>
           </template>
@@ -67,7 +68,7 @@ import Chip from '../components/Chip.vue';
             </div>
           </template>
         </Card>
-        <Card class="md:col-span-2" title="Icon" noHeader noFooter>
+        <Card class="md:col-span-2" title="Icon" :color="activeColors.inverse" noHeader noFooter>
           <p class="text-center">Card without header and footer</p>
         </Card>
       </div>
@@ -75,6 +76,9 @@ import Chip from '../components/Chip.vue';
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"
+          :color="activeColors.inverse"
+          :checkboxColor="activeColors.default"
+          :menuBtnColor="activeColors.inverse"
           selectable
         >
           <p>
@@ -87,6 +91,9 @@ import Chip from '../components/Chip.vue';
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"
+          :color="activeColors.inverse"
+          :checkboxColor="activeColors.default"
+          :menuBtnColor="activeColors.inverse"
           :menuItems="[
             {label: 'Edit', iconPath: mdiPencil}, 
             {label: 'Delete', iconPath: mdiTrashCan},
@@ -104,6 +111,7 @@ import Chip from '../components/Chip.vue';
           title="Picture Card"
           subTitle="$500"
           imageSrc="/images/cart.jpg"
+          :color="activeColors.inverse"
           saveBtnLabel="Buy now"
           cancelBtnLabel="Add to cart"
           :cancelBtnIconPath="mdiPlus"
@@ -120,31 +128,31 @@ import Chip from '../components/Chip.vue';
               <FieldOption 
                 type="icon"
                 color="warning"
-                bgOnUncheck="gray"
+                colorOnUncheck="gray"
                 :iconPath="mdiStar" 
               />
               <FieldOption 
                 type="icon"
                 color="warning"
-                bgOnUncheck="gray"
+                colorOnUncheck="gray"
                 :iconPath="mdiStar" 
               />
               <FieldOption 
                 type="icon"
                 color="warning"
-                bgOnUncheck="gray"
+                colorOnUncheck="gray"
                 :iconPath="mdiStar" 
               />
               <FieldOption 
                 type="icon"
                 color="warning"
-                bgOnUncheck="gray"
+                colorOnUncheck="gray"
                 :iconPath="mdiStar" 
               />
               <FieldOption 
                 type="icon"
                 color="warning"
-                bgOnUncheck="gray"
+                colorOnUncheck="gray"
                 :iconPath="mdiStar" 
               />
               <Chip class="ml-2" label="5.0" />

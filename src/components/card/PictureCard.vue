@@ -12,6 +12,10 @@ const props = defineProps({
   color: String,
   title: String,
   subTitle: String,
+  checkboxColor: {
+    type: String,
+    default: 'black',
+  },
   menuBtnColor: {
     type: String,
     default: 'white',
@@ -61,7 +65,8 @@ const modelValue = computed({
           <slot name="topLeft">
             <FieldOption
               v-if="selectable" 
-              v-model="modelValue" 
+              v-model="modelValue"
+              :color="checkboxColor" 
             />
           </slot>
         </div>
