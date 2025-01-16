@@ -23,13 +23,11 @@ import Chip from '../components/Chip.vue';
       title="Chips" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Default" noFooter>
+      <Card title="Default" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark"></Chip>
           <Chip color="theme" label="Theme"></Chip>
-          <Chip color="theme-light" label="Theme Light"></Chip>
-          <Chip color="white" label="white"></Chip>
           <Chip color="black" label="Black"></Chip>
           <Chip color="gray" label="Gray"></Chip>
           <Chip color="info" label="Info"></Chip>
@@ -38,9 +36,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger"></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" size="small" :iconPath="mdiAccount"></Chip>
           <Chip color="theme" label="Theme" size="small" :iconPath="mdiEmail"></Chip>
-          <Chip color="theme-light" label="Theme Light" size="small" :iconPath="mdiRefresh"></Chip>
           <Chip color="black" label="Black" size="small" :iconPath="mdiAlertCircle"></Chip>
           <Chip color="gray" label="Gray" size="small" :iconPath="mdiCheckCircle"></Chip>
           <Chip color="info" label="Info" size="small" :iconPath="mdiEye"></Chip>
@@ -49,9 +45,8 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" size="small" :iconPath="mdiCog"></Chip>
         </div>
       </Card>
-      <Card title="Outline" noFooter>
+      <Card title="Outline" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" outline></Chip>
           <Chip color="theme" label="Theme" outline></Chip>
           <Chip color="black" label="Black" outline></Chip>
           <Chip color="gray" label="Gray" outline></Chip>
@@ -61,7 +56,6 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" outline></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" outline></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail" outline></Chip>
           <Chip color="black" label="Black" :iconPath="mdiAlertCircle" outline></Chip>
           <Chip color="gray" label="Gray" :iconPath="mdiCheckCircle" outline></Chip>
@@ -71,11 +65,9 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" :iconPath="mdiCog" outline></Chip>
         </div>
       </Card>
-      <Card title="Rounded" noFooter>
+      <Card title="Rounded" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" size="large" rounded></Chip>
           <Chip color="theme" label="Theme" size="large" rounded></Chip>
-          <Chip color="theme-light" label="Theme Light" size="large" rounded></Chip>
           <Chip color="black" label="Black" size="large" rounded></Chip>
           <Chip color="gray" label="Gray" size="large" rounded></Chip>
           <Chip color="info" label="Info" size="large" rounded></Chip>
@@ -84,9 +76,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" size="large" rounded></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" :iconPath="mdiAccount" rounded></Chip>
           <Chip color="theme" label="Theme" :iconPath="mdiEmail" rounded></Chip>
-          <Chip color="theme-light" label="Theme Light" :iconPath="mdiRefresh" rounded></Chip>
           <Chip color="black" label="Black" :iconPath="mdiAlertCircle" rounded></Chip>
           <Chip color="gray" label="Gray" :iconPath="mdiCheckCircle" rounded></Chip>
           <Chip color="info" label="Info" :iconPath="mdiEye" rounded></Chip>
@@ -95,11 +85,9 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" :iconPath="mdiCog" rounded></Chip>
         </div>
       </Card>
-      <Card title="Closable" noFooter>
+      <Card title="Closable" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" closable></Chip>
           <Chip color="theme" label="Theme" closable></Chip>
-          <Chip color="theme-light" label="Theme Light" closable></Chip>
           <Chip color="white" label="white" closable></Chip>
           <Chip color="black" label="Black" closable></Chip>
           <Chip color="gray" label="Gray" closable></Chip>
@@ -109,7 +97,6 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" closable></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2 mb-2">
-          <Chip color="theme-dark" label="Theme Dark" size="small" outline closable></Chip>
           <Chip color="theme" label="Theme" size="small" outline closable></Chip>
           <Chip color="black" label="Black" size="small" outline closable></Chip>
           <Chip color="gray" label="Gray" size="small" outline closable></Chip>
@@ -119,9 +106,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" size="small" outline closable></Chip>
         </div>
         <div class="flex items-center flex-wrap gap-2">
-          <Chip color="theme-dark" label="Theme Dark" size="large" :iconPath="mdiAccount" rounded closable></Chip>
           <Chip color="theme" label="Theme" size="large" :iconPath="mdiEmail" rounded closable></Chip>
-          <Chip color="theme-light" label="Theme Light" size="large" :iconPath="mdiRefresh" rounded closable></Chip>
           <Chip color="black" label="Black" size="large" :iconPath="mdiAlertCircle" rounded closable></Chip>
           <Chip color="gray" label="Gray" size="large" :iconPath="mdiCheckCircle" rounded closable></Chip>
           <Chip color="info" label="Info" size="large" :iconPath="mdiEye" rounded closable></Chip>
