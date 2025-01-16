@@ -10,7 +10,6 @@ import {
   mdiLogout, 
   mdiDotsVertical 
 } from '@mdi/js';
-import { useTheme } from '../composables/useTheme';
 import AutoComplete from './form/AutoComplete.vue';
 import Button from './Button.vue';
 import Dropdown from './dropdown/Dropdown.vue';
@@ -29,14 +28,11 @@ import Chip from './Chip.vue';
 
 const props = defineProps({
   hasMenuBtn: Boolean,
-  color: String,
 });
 
 const emit = defineEmits(['toggleMenu']);
 const showMobileMenu = shallowRef(false);
 const search = ref();
-
-const { getColorInverse } = useTheme();
 
 const items = computed(() => {
   const menu = [
@@ -70,7 +66,7 @@ const optionsArrObjs = [
 <template>
   <div 
     :class="[
-      props.color,
+      activeColors.default,
       'fixed top-0 inset-x-0 flex justify-between items-center h-20 px-6 py-4 gap-2',
       'bg-[--color] text-[--color-inverse] shadow-xl',
     ]"
@@ -78,136 +74,136 @@ const optionsArrObjs = [
     <Button 
       v-if="hasMenuBtn" 
       class="order-first" 
-      :color="getColorInverse(color)" 
+      :color="activeColors.inverse" 
       :iconPath="mdiMenu" 
       @click="$emit('toggleMenu')" 
     />
     <AutoComplete
       v-model="search"
       class="w-full md:w-1/4"
-      :color="getColorInverse(color)"
+      :color="activeColors.inverse"
       :options="optionsArrObjs"
       displayKey="value"
       :fieldProps="{
-        color: getColorInverse(color),
+        color: activeColors.inverse,
         placeholder: 'Search',
         inputLeftIcon: mdiMagnify,
         rounded: true,
       }"
     />
     <div class="hidden md:flex order-last items-center gap-2">
-      <Dropdown :bgColor="getColorInverse(color)" :items="items" maxHeight>
+      <Dropdown :bgColor="activeColors.inverse" :items="items" maxHeight>
         <template #selector>
-          <Button :color="getColorInverse(color)" :iconPath="mdiBellOutline" size="small" hasAnimatedBadge />
+          <Button :color="activeColors.inverse" :iconPath="mdiBellOutline" size="small" :badgeColor="activeColors.dark" hasAnimatedBadge />
         </template>
-        <Card class="w-96 h-96" :color="getColorInverse(color)">
+        <Card class="w-96 h-96" :color="activeColors.inverse">
           <template #header>
-            <CardHeader class="!px-3 !py-2" :separatorColor="color">
+            <CardHeader class="!px-3 !py-2" :separatorColor="activeColors.default">
               <template #title>
                 <strong>Notifications</strong>
               </template>
-              <Chip label="9 new" :color="color" />
+              <Chip label="9 new" :color="activeColors.default" />
             </CardHeader>
           </template>
           <template #content>
             <CardBody class="!p-0" scrollable>
               <div class="flex items-center flex-wrap gap-px">
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="John Doe">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="John Doe">
                   <template #title>
                     <strong>John Doe</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="30 minutes ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="30 minutes ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Gian Leon">
                   <template #title>
                     <strong>Gian Leon</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="50 minutes ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="50 minutes ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Ariadna Meireles">
                   <template #title>
                     <strong>Ariadna Meireles</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="1 hour ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="1 hour ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Guilherme Matias">
                   <template #title>
                     <strong>Guilherme Matias</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="2 hours ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="2 hours ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
               </div>
             </CardBody>
           </template>
           <template #footer>
-            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="color">
-              <Button :color="color" label="Read more" isPlain />
+            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="activeColors.default">
+              <Button :color="activeColors.default" label="Read more" isPlain />
             </CardFooter>
           </template>
         </Card>
       </Dropdown>
-      <Dropdown :bgColor="getColorInverse(color)" :items="items" maxHeight>
+      <Dropdown :bgColor="activeColors.inverse" :items="items" maxHeight>
         <template #selector>
-          <Button :color="getColorInverse(color)" :iconPath="mdiEmailOutline" size="small" badgeLabel="+4" />
+          <Button :color="activeColors.inverse" :iconPath="mdiEmailOutline" size="small" :badgeColor="activeColors.dark" badgeLabel="+4" />
         </template>
-        <Card class="w-96 h-96" :color="getColorInverse(color)">
+        <Card class="w-96 h-96" :color="activeColors.inverse">
           <template #header>
-            <CardHeader class="!px-3 !py-2" :separatorColor="color">
+            <CardHeader class="!px-3 !py-2" :separatorColor="activeColors.default">
               <template #title>
                 <strong>Messages</strong>
               </template>
-              <Chip label="4 new" :color="color" />
+              <Chip label="4 new" :color="activeColors.default" />
             </CardHeader>
           </template>
           <template #content>
             <CardBody class="!p-0" scrollable>
               <div class="flex items-center flex-wrap gap-px">
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="John Doe">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="John Doe">
                   <template #title>
                     <strong>John Doe</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="30 minutes ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="30 minutes ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Gian Leon">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Gian Leon">
                   <template #title>
                     <strong>Gian Leon</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="50 minutes ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="50 minutes ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Ariadna Meireles">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Ariadna Meireles">
                   <template #title>
                     <strong>Ariadna Meireles</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="1 hour ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="1 hour ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
-                <ListCard class="!p-2 !rounded-none" :color="color" imgAlt="Guilherme Matias">
+                <ListCard class="!p-2 !rounded-none" :color="activeColors.default" imgAlt="Guilherme Matias">
                   <template #title>
                     <strong>Guilherme Matias</strong>
                     <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                    <Chip label="2 hours ago" :color="getColorInverse(color)" size="small" />
+                    <Chip label="2 hours ago" :color="activeColors.inverse" size="small" />
                   </template>
                 </ListCard>
               </div>
             </CardBody>
           </template>
           <template #footer>
-            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="color">
-              <Button :color="color" label="Read more" isPlain />
+            <CardFooter class="!px-3 !py-2 justify-center" :separatorColor="activeColors.default">
+              <Button :color="activeColors.default" label="Read more" isPlain />
             </CardFooter>
           </template>
         </Card>
       </Dropdown>
-      <Dropdown :bgColor="getColorInverse(color)" :items="items">
+      <Dropdown :bgColor="activeColors.inverse" :items="items">
         <template #selector="{ btnIcon }">
           <div class="flex items-center gap-2 cursor-pointer">
-            <Avatar username="John Doe" class="w-8 h-8" />
+            <Avatar :color="activeColors.inverse" username="John Doe" class="w-8 h-8" />
             <span>John Doe</span>
             <Icon :path="btnIcon" />
           </div>
@@ -216,7 +212,7 @@ const optionsArrObjs = [
     </div>
     <Button  
       class="md:hidden order-last" 
-      :color="getColorInverse(color)" 
+      :color="activeColors.inverse" 
       :iconPath="mdiDotsVertical"
       rounded 
       @click="showMobileMenu = true" 
@@ -248,26 +244,26 @@ const optionsArrObjs = [
             badgeLabel: '+9',
           },
         ]"
-        :color="getColorInverse(color)"
+        :color="activeColors.inverse"
         position="right" 
         isClosable 
       >
         <template #headerBody>
           <SideBarHeader
             class="!px-5" 
-            :btnColor="color" 
+            :btnColor="activeColors.default" 
             isClosable
             @close="showMobileMenu = false"
           >
             <div class="flex w-full items-center gap-2">
-              <Avatar username="John Doe" class="w-8 h-8" />
+              <Avatar :color="activeColors.default" username="John Doe" class="w-8 h-8" />
               <span class="text-base">John Doe</span>
             </div>
           </SideBarHeader>
         </template>
         <template #menuItem="{item}">
           <MenuListItem
-            :color="getColorInverse(color)" 
+            :color="activeColors.inverse" 
             :label="item?.label ?? ''" 
             :iconPath="item?.iconPath ?? ''"
             :to="item?.to ?? ''"
@@ -276,6 +272,7 @@ const optionsArrObjs = [
               <Chip
                 v-if="item.badgeLabel"
                 class="justify-center w-7 h-7"
+                :color="activeColors.default"
                 :label="item.badgeLabel"
                 rounded 
               />
@@ -283,7 +280,7 @@ const optionsArrObjs = [
           </MenuListItem>
         </template>
         <template #footer>
-          <Button :color="color" :iconPath="mdiLogout" rounded />
+          <Button :color="activeColors.default" :iconPath="mdiLogout" rounded />
         </template>
       </SideBarMenu>
     </Teleport>

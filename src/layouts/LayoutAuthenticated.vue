@@ -43,7 +43,6 @@ onMounted(() => {
         isCompactSidebar ? 'md:ml-24' : 'md:ml-64',
         'transition-[margin] z-20',
       ]"
-      :color="activeColors.default"
       :hasMenuBtn="isClosableSidebar" 
       @toggleMenu="toggleMenu" 
     />
