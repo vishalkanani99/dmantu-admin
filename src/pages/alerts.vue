@@ -24,8 +24,9 @@ import Alert from '../components/Alert.vue';
       title="Alerts" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Available Types" noFooter>
+      <Card title="Available Types" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4">
           <Alert type="success" boldText="Success" text="text"></Alert>
           <Alert type="warning" boldText="Warning" text="text"></Alert>
@@ -33,11 +34,9 @@ import Alert from '../components/Alert.vue';
           <Alert type="info" boldText="Info" text="text"></Alert>
         </div>
       </Card>
-      <Card title="Available Colors" noFooter>
+      <Card title="Available Colors" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4">
-          <Alert color="theme-dark" text="Theme Dark" :iconPath="mdiAccount"></Alert>
           <Alert color="theme" text="Theme" :iconPath="mdiEmail"></Alert>
-          <Alert color="theme-light" text="Theme Light" :iconPath="mdiRefresh"></Alert>
           <Alert color="black" text="Black" :iconPath="mdiAlertCircle"></Alert>
           <Alert color="gray" text="Gray" :iconPath="mdiCheckCircle"></Alert>
           <Alert color="info" text="Info" :iconPath="mdiEye"></Alert>
@@ -46,9 +45,8 @@ import Alert from '../components/Alert.vue';
           <Alert color="danger" text="Danger" :iconPath="mdiCog"></Alert>
         </div>
       </Card>
-      <Card title="Outline" noFooter>
+      <Card title="Outline" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4">
-          <Alert color="theme-dark" text="Theme Dark" :iconPath="mdiAccount" outline></Alert>
           <Alert color="theme" text="Theme" :iconPath="mdiEmail" outline></Alert>
           <Alert color="black" text="Black" :iconPath="mdiAlertCircle" outline></Alert>
           <Alert color="gray" text="Gray" :iconPath="mdiCheckCircle" outline></Alert>

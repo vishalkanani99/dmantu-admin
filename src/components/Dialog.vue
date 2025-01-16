@@ -1,5 +1,6 @@
 <script setup>
   import { computed } from 'vue';
+  import { useTheme } from '../composables/useTheme';
   import Modal from './Modal.vue';
   import Button from './Button.vue';
   import Icon from './Icon.vue';
@@ -24,6 +25,9 @@
 
   const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);
 
+  const { getColorInverse } = useTheme();
+
+  const inverseColor = computed(() => getColorInverse(props.color));
   const showDialog = computed({
     get: () => props.modelValue,
     set: (value) => {
@@ -71,8 +75,8 @@
     </template>
     <template #footer>
       <div class="flex justify-center items-center p-6 space-x-2">
-        <Button :color="confirmBtnColor" :label="confirmBtnLabel" @click="action('confirm')" />
-        <Button :color="cancelBtnColor" :label="cancelBtnLabel" outline @click="action()" />
+        <Button :color="confirmBtnColor ?? inverseColor" :label="confirmBtnLabel" @click="action('confirm')" />
+        <Button :color="cancelBtnColor ?? inverseColor" :label="cancelBtnLabel" outline @click="action()" />
       </div>
     </template>
   </Modal>

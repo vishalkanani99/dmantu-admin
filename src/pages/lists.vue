@@ -17,13 +17,11 @@ import ListCard from '../components/card/ListCard.vue';
       title="Alerts" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Default" noFooter>
+      <Card title="Default" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
-
-          <ListCard color="theme-dark" imgAlt="List 1" title="Theme Dark" subTitle="Sub Title" ></ListCard>
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title"></ListCard>
-          <ListCard color="theme-light" imgAlt="List 3" title="Theme Light" subTitle="Sub Title" ></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title"></ListCard>
           <ListCard color="gray" imgAlt="List 5" title="Gray" subTitle="Sub Title"></ListCard>
           <ListCard color="info" imgAlt="List 6" title="Info" subTitle="Sub Title"></ListCard>
@@ -32,9 +30,8 @@ import ListCard from '../components/card/ListCard.vue';
           <ListCard color="danger" imgAlt="List 9" title="Danger" subTitle="Sub Title"></ListCard>
         </div>
       </Card>
-      <Card title="Outline" noFooter>
+      <Card title="Outline" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
-          <ListCard color="theme-dark" imgAlt="List 1" title="Theme Dark" subTitle="Sub Title" outline></ListCard>
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title" outline></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title" outline></ListCard>
           <ListCard color="gray" imgAlt="List 5" title="Gray" subTitle="Sub Title" outline></ListCard>
@@ -44,7 +41,7 @@ import ListCard from '../components/card/ListCard.vue';
           <ListCard color="danger" imgAlt="List 9" title="Danger" subTitle="Sub Title" outline></ListCard>
         </div>
       </Card>
-      <Card title="Custom" noFooter>
+      <Card title="Custom" :color="activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
           <ListCard color="info" imgAlt="labels" title="List with labels" subTitle="Sub Title" hoverShadow>
             <template #rightSection>

@@ -35,8 +35,9 @@ const content = [
       title="Accordions" 
       :iconPath="mdiArrowCollapseVertical" 
       :btnIconPath="mdiCog"
+      :color="activeColors.default"
     >
-      <Card title="Default" noFooter>
+      <Card title="Default" :color="activeColors.inverse" noFooter>
         <Collapse title="Default Accordion">
           <div class="py-3 px-6">
             <p>
@@ -45,27 +46,17 @@ const content = [
           </div>
         </Collapse>
       </Card>
-      <Card title="Group" noFooter>
+      <Card title="Group" :color="activeColors.inverse" noFooter>
         <CollapseGroup :content="content">
           <template #default="{ data }">
             {{ data.content }}
           </template>
         </CollapseGroup>
       </Card>
-      <Card title="Colors" noFooter>
+      <Card title="Colors" :color="activeColors.inverse" noFooter>
         <Collapse
-          title="Accordion Theme Dark"
-          color="theme-dark"
-        >
-          <div class="py-3 px-6">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
-            </p>
-          </div>
-        </Collapse>
-        <Collapse
-          title="Accordion Theme Light"
-          color="theme-light"
+          title="Accordion Theme"
+          color="theme"
         >
           <div class="py-3 px-6">
             <p>
