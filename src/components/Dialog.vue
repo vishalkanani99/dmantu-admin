@@ -1,6 +1,6 @@
 <script setup>
   import { computed } from 'vue';
-  import { useTheme } from '../composables/useTheme';
+  import { theme } from '../color';
   import Modal from './Modal.vue';
   import Button from './Button.vue';
   import Icon from './Icon.vue';
@@ -25,9 +25,7 @@
 
   const emit = defineEmits(['update:modelValue', 'confirm', 'cancel']);
 
-  const { getColorInverse } = useTheme();
-
-  const inverseColor = computed(() => getColorInverse(props.color));
+  const inverseColor = computed(() => theme.getInverse(props.color));
   const showDialog = computed({
     get: () => props.modelValue,
     set: (value) => {

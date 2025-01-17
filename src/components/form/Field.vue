@@ -1,7 +1,7 @@
 <script setup>
   import { computed, ref } from 'vue';
   import { mdiUpload } from '@mdi/js';
-  import { useTheme } from '../../composables/useTheme';
+  import { theme } from '../../color';
   import Button from '../Button.vue';
   import Icon from '../Icon.vue';
 
@@ -35,12 +35,10 @@
   });
 
   const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick']);
-
-  const { getColorInverse } = useTheme();
   
   const selectedFiles = ref();
 
-  const inverseColor = computed(() => getColorInverse(props.color));
+  const inverseColor = computed(() => theme.getInverse(props.color));
 
   const modelValue = computed({
     get: () => props.modelValue,

@@ -11,6 +11,7 @@ import {
   mdiEye,
   mdiEyeOff,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -23,9 +24,9 @@ import Chip from '../components/Chip.vue';
       title="Chips" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Default" :color="activeColors.inverse" noFooter>
+      <Card title="Default" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme" label="Theme"></Chip>
           <Chip color="black" label="Black"></Chip>
@@ -45,7 +46,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" size="small" :iconPath="mdiCog"></Chip>
         </div>
       </Card>
-      <Card title="Outline" :color="activeColors.inverse" noFooter>
+      <Card title="Outline" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme" label="Theme" outline></Chip>
           <Chip color="black" label="Black" outline></Chip>
@@ -65,7 +66,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" :iconPath="mdiCog" outline></Chip>
         </div>
       </Card>
-      <Card title="Rounded" :color="activeColors.inverse" noFooter>
+      <Card title="Rounded" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme" label="Theme" size="large" rounded></Chip>
           <Chip color="black" label="Black" size="large" rounded></Chip>
@@ -85,7 +86,7 @@ import Chip from '../components/Chip.vue';
           <Chip color="danger" label="Danger" :iconPath="mdiCog" rounded></Chip>
         </div>
       </Card>
-      <Card title="Closable" :color="activeColors.inverse" noFooter>
+      <Card title="Closable" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Chip color="theme" label="Theme" closable></Chip>
           <Chip color="white" label="white" closable></Chip>

@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import { mdiClose } from '@mdi/js';
-import { useTheme } from '../../composables/useTheme.js';
+import { theme } from '../../color';
 import Button from '../Button.vue';
 import CardHeader from './CardHeader.vue';
 import CardFooter from './CardFooter.vue';
@@ -36,12 +36,10 @@ const props = defineProps({
 
 const emit = defineEmits(['close', 'save', 'cancel']);
 
-const { getColorInverse } = useTheme();
-
-const btnColor = computed(() => props.btnColor ?? getColorInverse(props.color));
-const headerColor = computed(() => props.headerColor ?? getColorInverse(props.color));
-const bodyColor = computed(() => props.bodyColor ?? getColorInverse(props.color));
-const footerColor = computed(() => props.footerColor ?? getColorInverse(props.color));
+const btnColor = computed(() => props.btnColor ?? theme.getInverse(props.color));
+const headerColor = computed(() => props.headerColor ?? theme.getInverse(props.color));
+const bodyColor = computed(() => props.bodyColor ?? theme.getInverse(props.color));
+const footerColor = computed(() => props.footerColor ?? theme.getInverse(props.color));
 
 const defaultStyle = computed(() => {
   let style = [

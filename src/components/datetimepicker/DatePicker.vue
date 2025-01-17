@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, shallowRef } from 'vue';
-import { useTheme } from '../../composables/useTheme';
+import { theme } from '../../color';
 import { formatDate } from './utils';
 import { useScreen } from '../../composables/useScreen';
 import { useScrollOver } from '../../composables/useScrollOver';
@@ -80,8 +80,7 @@ const dateObj = computed({
 const formattedDate = ref(formatDate(props.modelValue, props.format));
 
 const showCalendar = shallowRef(false);
-const { getColorInverse } = useTheme();
-const btnColor = computed(() => getColorInverse(props.calendarColor));
+const btnColor = computed(() => theme.getInverse(props.calendarColor));
 
 const typeOfComponent = computed(() => props.hasModalView ? Modal : DropdownContainer );
 const bindProps = computed(() => {

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, shallowRef } from 'vue';
 import { mdiTable, mdiCog, mdiTrashCan, mdiPencil } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Button from '../components/Button.vue';
@@ -178,11 +179,11 @@ const getData = (config) => {
   <LayoutAuthenticated>
     <Section
       title="Basic Table"
-      :color="activeColors.default" 
+      :color="theme.activeColors.default" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog"
     >
-      <Table :color="activeColors.default">
+      <Table :color="theme.activeColors.default">
         <TableHeader>
           <TableRow>
             <TableHeaderCell>
@@ -317,21 +318,21 @@ const getData = (config) => {
           </TableRow>
         </TableBody>
       </Table>
-      <Pagination v-model="activePage" :recordsTotal="50" :color="activeColors.default" :activeColor="activeColors.dark"/>
+      <Pagination v-model="activePage" :recordsTotal="50" :color="theme.activeColors.default" :activeColor="theme.activeColors.dark"/>
     </Section>
     <Section
       title="Data Table" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
       <DataTable
         v-model="checkedRows" 
         :columns="columns" 
         :data="tableRows"
-        :color="activeColors.default"
-        :activeColor="activeColors.dark"
-        :toolsBtnColor="activeColors.dark"
+        :color="theme.activeColors.default"
+        :activeColor="theme.activeColors.dark"
+        :toolsBtnColor="theme.activeColors.dark"
         isCheckable
         isCollapsible
         isEditable
@@ -342,15 +343,15 @@ const getData = (config) => {
       title="Data Table (Nested Sort By Sort Order)" 
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog" 
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
       <DataTable
         v-model="checkedRows" 
         :columns="columns" 
         :data="tableRows"
-        :color="activeColors.default"
-        :activeColor="activeColors.dark"
-        :toolsBtnColor="activeColors.dark"
+        :color="theme.activeColors.default"
+        :activeColor="theme.activeColors.dark"
+        :toolsBtnColor="theme.activeColors.dark"
         isCheckable
         isCollapsible
         isEditable
@@ -360,7 +361,7 @@ const getData = (config) => {
     </Section>
     <Section
       title="Data Table (SSR)" 
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
       :iconPath="mdiTable" 
       :btnIconPath="mdiCog"
     >
@@ -368,9 +369,9 @@ const getData = (config) => {
         v-model="checkedRows" 
         :columns="columns" 
         :data="ssrTableRows"
-        :color="activeColors.default"
-        :activeColor="activeColors.dark"
-        :toolsBtnColor="activeColors.dark"
+        :color="theme.activeColors.default"
+        :activeColor="theme.activeColors.dark"
+        :toolsBtnColor="theme.activeColors.dark"
         isSsr
         isCheckable
         isCollapsible

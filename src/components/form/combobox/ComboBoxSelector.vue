@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import { useTheme } from '../../../composables/useTheme';
+import { theme } from '../../../color';
 import Chip from '../../Chip.vue'; 
 import Button from '../../Button.vue';
 import { mdiClose } from '@mdi/js';
@@ -14,8 +14,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'input', 'clear', 'remove']);
-
-const { getColorInverse } = useTheme();
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -41,7 +39,7 @@ const defaultStyle = computed(() => {
       <Chip 
         v-for=" (value, key) in selectedValue" 
         :key="key" 
-        :color="getColorInverse(color)" 
+        :color="theme.getInverse(color)" 
         :label="value"
         @close="$emit('remove', key)" 
         closable 
@@ -56,7 +54,7 @@ const defaultStyle = computed(() => {
     </div>
     <Button 
       class="!p-1 w-6 h-6" 
-      :color="getColorInverse(color)"
+      :color="theme.getInverse(color)"
       rounded 
       @click="$emit('clear')"
     >

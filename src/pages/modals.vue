@@ -9,6 +9,7 @@ import {
   mdiAlertCircle,
   mdiHeart,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -62,9 +63,9 @@ function toggleDialog(prop = null) {
       title="Modals" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Modals" :color="activeColors.inverse" noFooter>
+      <Card title="Modals" :color="theme.activeColors.inverse" noFooter>
         <FieldGroup class="mb-6 hidden md:block" label="Modal Origins" optionsGroup >
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Top" value="top" />
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Bottom" value="bottom" />
@@ -91,7 +92,7 @@ function toggleDialog(prop = null) {
           <Button label="Form Modal" @click="toggleModal('large', 'form')"></Button>
         </div> 
       </Card>
-      <Card title="Dialogs" :color="activeColors.inverse" noFooter>
+      <Card title="Dialogs" :color="theme.activeColors.inverse" noFooter>
         <div class="flex flex-col md:flex-row items-center flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0">
           <Button label="Dialog" @click="toggleDialog()"></Button>
           <Button label="Dialog with Icon" @click="toggleDialog('icon')"></Button>
@@ -106,11 +107,11 @@ function toggleDialog(prop = null) {
         :origin="modalOrigin"
         :hasForm="modalProp === 'form'"
         :twoColumns="modalProp === 'form'"
-        :color="activeColors.inverse"
+        :color="theme.activeColors.inverse"
       >
         <template v-if="modalProp === 'form'">
           <FieldGroup label="Simple text field" help="Simple text field">
-            <Field v-model="form.field1" placeholder="Simple text field" :color="activeColors.inverse" />
+            <Field v-model="form.field1" placeholder="Simple text field" :color="theme.activeColors.inverse" />
           </FieldGroup>
           <FieldGroup label="Simple text field with left icon" error="This field is required." >
             <Field
@@ -129,25 +130,25 @@ function toggleDialog(prop = null) {
             />
           </FieldGroup>
           <FieldGroup label="Simple text field with right button" multiFields >
-            <Field v-model="form.field4" placeholder="Simple text field with right button" :color="activeColors.inverse" left expanded />
-            <Field type="button" :color="activeColors.default" label="Button" right />
+            <Field v-model="form.field4" placeholder="Simple text field with right button" :color="theme.activeColors.inverse" left expanded />
+            <Field type="button" :color="theme.activeColors.default" label="Button" right />
           </FieldGroup>
           <FieldGroup label="Simple text field with left button icon" multiFields >
-            <Field type="button" :buttonIcon="mdiRefresh" :color="activeColors.default" left />
-            <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="activeColors.inverse" right expanded horizontal />
+            <Field type="button" :buttonIcon="mdiRefresh" :color="theme.activeColors.default" left />
+            <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="theme.activeColors.inverse" right expanded horizontal />
           </FieldGroup>
           <FieldGroup label="Select field" >
-            <Field v-model="form.field6" type="select" :color="activeColors.inverse">
+            <Field v-model="form.field6" type="select" :color="theme.activeColors.inverse">
               <option value="">Select Field</option>
               <option value="1">Option 1</option>
               <option value="2">Option 2</option>
             </Field>
           </FieldGroup>
           <FieldGroup class="md:col-span-2" label="Simple textarea" help="Simple textarea" >
-            <Field v-model="form.field7" type="textarea" placeholder="Simple textarea" :color="activeColors.inverse" />
+            <Field v-model="form.field7" type="textarea" placeholder="Simple textarea" :color="theme.activeColors.inverse" />
           </FieldGroup>
           <FieldGroup label="File Upload" help="Maximum file size must be 2mb" >
-            <Field v-model="form.file" type="file" :color="activeColors.default" />
+            <Field v-model="form.file" type="file" :color="theme.activeColors.default" />
           </FieldGroup>
           <FieldGroup label="Checkbox inputs" optionsGroup >
             <FieldOption v-model="form.checkbox" label="Option 1" value="1" />
@@ -213,7 +214,7 @@ function toggleDialog(prop = null) {
         v-model="showDialog" 
         :iconPath="dialogProp === 'icon' ? mdiAlertCircle : null" 
         :iconBgColor="dialogProp === 'icon' ? 'danger' : null"
-        :color="activeColors.inverse" 
+        :color="theme.activeColors.inverse" 
         title="Please confirm">
         Are you sure want to delete ? If you confirm, It will be deleted permanantly. 
       </Dialog>

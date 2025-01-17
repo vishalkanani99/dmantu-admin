@@ -4,6 +4,7 @@ import {
   mdiFormSelect, 
   mdiCog,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -139,21 +140,21 @@ const testimonials = [
       title="Carousels" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Carousel" :color="activeColors.inverse" noFooter>
+      <Card title="Carousel" :color="theme.activeColors.inverse" noFooter>
         <Carousel :slides="slides" />
       </Card>
-      <Card title="Carousel with thumbnail selector" :color="activeColors.inverse" noFooter>
+      <Card title="Carousel with thumbnail selector" :color="theme.activeColors.inverse" noFooter>
         <Carousel :defaultSlide="4" :slides="slides" hasThumbnailSelector />
       </Card>
-      <Card title="Cards Carousel" :color="activeColors.inverse" noFooter>
+      <Card title="Cards Carousel" :color="theme.activeColors.inverse" noFooter>
         <Slider :content="content" :slidesPerView="4" :spaceBetween="10" hasIndicator>
           <template v-slot="{ item, index }">
             <PictureCard
               :title="item.title"
               :imageSrc="item.image"
-              :color="activeColors.inverse"
+              :color="theme.activeColors.inverse"
               selectable
             >
               <p>
@@ -166,7 +167,7 @@ const testimonials = [
           </template>
         </Slider>
       </Card>
-      <Card title="Testimonials Carousel" :color="activeColors.inverse" noFooter>
+      <Card title="Testimonials Carousel" :color="theme.activeColors.inverse" noFooter>
         <Slider :content="testimonials" :spaceBetween="5" hasIndicator>
           <template v-slot="{ item, index }">
             <ListCard 

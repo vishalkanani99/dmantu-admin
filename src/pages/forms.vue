@@ -12,6 +12,7 @@ import {
   mdiEyeOff,
   mdiHeart,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import FieldGroup from '../components/form/FieldGroup.vue';
@@ -91,7 +92,7 @@ const hello = (e) => {
   <LayoutAuthenticated>
     <Section
       title="Forms" 
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
     >
@@ -99,45 +100,45 @@ const hello = (e) => {
         title="Form"
         subTitle="( Two columns )"
         color="white"
-        :headerColor="activeColors.default"
-        :footerColor="activeColors.default"
-        :btnColor="activeColors.default"
-        :bodyColor="activeColors.default"
+        :headerColor="theme.activeColors.default"
+        :footerColor="theme.activeColors.default"
+        :btnColor="theme.activeColors.default"
+        :bodyColor="theme.activeColors.default"
         twoColumns
       >
         <FieldGroup label="Simple text field" >
-          <Field v-model="form.field1" placeholder="Simple text field" :color="activeColors.inverse" />
+          <Field v-model="form.field1" placeholder="Simple text field" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple text field with left icon" >
-          <Field v-model="form.field2" placeholder="Simple text field with left icon" :inputLeftIcon="mdiAccount" :color="activeColors.inverse" />
+          <Field v-model="form.field2" placeholder="Simple text field with left icon" :inputLeftIcon="mdiAccount" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple text field with right icon" >
-          <Field v-model="form.field3" placeholder="Simple text field with right icon" :inputLeftIcon="mdiEmail" :color="activeColors.inverse" />
+          <Field v-model="form.field3" placeholder="Simple text field with right icon" :inputLeftIcon="mdiEmail" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple text field with right button" multiFields>
-          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="activeColors.inverse" left expanded />
-          <Field type="button" :color="activeColors.default" label="Button" right />
+          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="theme.activeColors.inverse" left expanded />
+          <Field type="button" :color="theme.activeColors.default" label="Button" right />
         </FieldGroup>
         <FieldGroup label="Simple text field with left button icon" multiFields>
-          <Field type="button" :buttonIcon="mdiRefresh" :color="activeColors.default" left />
-          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="activeColors.inverse" right expanded />
+          <Field type="button" :buttonIcon="mdiRefresh" :color="theme.activeColors.default" left />
+          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="theme.activeColors.inverse" right expanded />
         </FieldGroup>
         <FieldGroup label="Select field" >
-          <Field v-model="form.field6" type="select" :color="activeColors.inverse">
+          <Field v-model="form.field6" type="select" :color="theme.activeColors.inverse">
             <option value="">Select Field</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </Field>
         </FieldGroup>
         <FieldGroup label="Simple text field with static addons" multiFields>
-          <Field type="static" :color="activeColors.inverse" left > +1 </Field>
-          <Field v-model="form.field7" placeholder="Simple text field with static addons" :color="activeColors.inverse" middle expanded />
-          <Field type="static" :color="activeColors.inverse" right > US </Field>
+          <Field type="static" :color="theme.activeColors.inverse" left > +1 </Field>
+          <Field v-model="form.field7" placeholder="Simple text field with static addons" :color="theme.activeColors.inverse" middle expanded />
+          <Field type="static" :color="theme.activeColors.inverse" right > US </Field>
         </FieldGroup>
         <FieldGroup label="Simple text field with select field and static addon at left" multiFields>
-          <Field type="static" :color="activeColors.inverse" left > $ </Field>
-          <Field v-model="form.field8" placeholder="Simple text field with select field and static addon at left" :color="activeColors.inverse" middle expanded />
-          <Field v-model="form.field9"  type="select" :color="activeColors.inverse" right outerStyle="w-1/5" >
+          <Field type="static" :color="theme.activeColors.inverse" left > $ </Field>
+          <Field v-model="form.field8" placeholder="Simple text field with select field and static addon at left" :color="theme.activeColors.inverse" middle expanded />
+          <Field v-model="form.field9"  type="select" :color="theme.activeColors.inverse" right outerStyle="w-1/5" >
             <option value="">Select Field</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -148,14 +149,14 @@ const hello = (e) => {
         title="Form"
         subTitle="( Three columns )"
         color="white"
-        :headerColor="activeColors.default"
-        :footerColor="activeColors.default"
-        :btnColor="activeColors.default"
-        :bodyColor="activeColors.default"
+        :headerColor="theme.activeColors.default"
+        :footerColor="theme.activeColors.default"
+        :btnColor="theme.activeColors.default"
+        :bodyColor="theme.activeColors.default"
         threeColumns
       >
         <FieldGroup label="Simple text field" help="Simple text field" >
-          <Field v-model="form.field1" placeholder="Simple text field" :color="activeColors.inverse" />
+          <Field v-model="form.field1" placeholder="Simple text field" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple text field with left icon" error="This field is required." >
           <Field
@@ -175,15 +176,15 @@ const hello = (e) => {
           />
         </FieldGroup>
         <FieldGroup label="Simple text field with right button" multiFields>
-          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="activeColors.inverse" left expanded />
-          <Field type="button" :color="activeColors.default" label="Button" right />
+          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="theme.activeColors.inverse" left expanded />
+          <Field type="button" :color="theme.activeColors.default" label="Button" right />
         </FieldGroup>
         <FieldGroup label="Simple text field with left button icon" multiFields>
-          <Field type="button" :buttonIcon="mdiRefresh" :color="activeColors.default" left />
-          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="activeColors.inverse" right expanded />
+          <Field type="button" :buttonIcon="mdiRefresh" :color="theme.activeColors.default" left />
+          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="theme.activeColors.inverse" right expanded />
         </FieldGroup>
         <FieldGroup label="Select field">
-          <Field v-model="form.field6" type="select" :color="activeColors.inverse">
+          <Field v-model="form.field6" type="select" :color="theme.activeColors.inverse">
             <option value="">Select Field</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
@@ -194,13 +195,13 @@ const hello = (e) => {
         title="Form"
         subTitle="( Horizontal )"
         color="white"
-        :headerColor="activeColors.default"
-        :footerColor="activeColors.default"
-        :btnColor="activeColors.default"
-        :bodyColor="activeColors.default"
+        :headerColor="theme.activeColors.default"
+        :footerColor="theme.activeColors.default"
+        :btnColor="theme.activeColors.default"
+        :bodyColor="theme.activeColors.default"
       >
         <FieldGroup label="Simple text field" help="Simple text field" horizontal >
-          <Field v-model="form.field1" placeholder="Simple text field" :color="activeColors.inverse" />
+          <Field v-model="form.field1" placeholder="Simple text field" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple text field with left icon" error="This field is required." horizontal >
           <Field
@@ -219,22 +220,22 @@ const hello = (e) => {
           />
         </FieldGroup>
         <FieldGroup label="Simple text field with right button" multiFields horizontal >
-          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="activeColors.inverse" left expanded />
-          <Field type="button" :color="activeColors.default" label="Button" right />
+          <Field v-model="form.field4" placeholder="Simple text field with right button" :color="theme.activeColors.inverse" left expanded />
+          <Field type="button" :color="theme.activeColors.default" label="Button" right />
         </FieldGroup>
         <FieldGroup label="Simple text field with left button icon" multiFields horizontal >
-          <Field type="button" :buttonIcon="mdiRefresh" :color="activeColors.default" left />
-          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="activeColors.inverse" right expanded horizontal />
+          <Field type="button" :buttonIcon="mdiRefresh" :color="theme.activeColors.default" left />
+          <Field v-model="form.field5" placeholder="Simple text field with left button icon" :color="theme.activeColors.inverse" right expanded horizontal />
         </FieldGroup>
         <FieldGroup label="Select field" horizontal >
-          <Field v-model="form.field6" type="select" :color="activeColors.inverse">
+          <Field v-model="form.field6" type="select" :color="theme.activeColors.inverse">
             <option value="">Select Field</option>
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </Field>
         </FieldGroup>
         <FieldGroup label="Simple textarea" help="Simple textarea" horizontal >
-          <Field v-model="form.field7" type="textarea" placeholder="Simple textarea" :color="activeColors.inverse" />
+          <Field v-model="form.field7" type="textarea" placeholder="Simple textarea" :color="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Simple textarea with error and icons" error="Simple textarea with error and icons" horizontal >
           <Field 
@@ -247,7 +248,7 @@ const hello = (e) => {
           />
         </FieldGroup>
         <FieldGroup label="File Upload" help="Maximum file size must be 2mb" horizontal >
-          <Field v-model="form.file" type="file" :color="activeColors.default" />
+          <Field v-model="form.file" type="file" :color="theme.activeColors.default" />
         </FieldGroup>
         <FieldGroup label="Checkbox inputs" optionsGroup horizontal >
           <FieldOption v-model="form.checkbox" label="Option 1" value="1" />
@@ -310,10 +311,10 @@ const hello = (e) => {
         saveBtnLabel="Validate"
         cancelBtnLabel="Reset"
         color="white"
-        :headerColor="activeColors.default"
-        :footerColor="activeColors.default"
-        :btnColor="isFormValid ? 'danger' : activeColors.default"
-        :bodyColor="activeColors.default"
+        :headerColor="theme.activeColors.default"
+        :footerColor="theme.activeColors.default"
+        :btnColor="isFormValid ? 'danger' : theme.activeColors.default"
+        :bodyColor="theme.activeColors.default"
         @save="isFormValid = true"
         @cancel="isFormValid = false"
       >
@@ -322,13 +323,13 @@ const hello = (e) => {
             v-model="form.name" 
             placeholder="Name" 
             :inputLeftIcon="mdiAccount" 
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
           />
         </FieldGroup>
         <FieldGroup label="Mask Input" :error="isFormValid ? 'Invalid Field' : ''" multiFields>
           <Field 
             type="static"
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
             left
           >
             (+1)
@@ -337,7 +338,7 @@ const hello = (e) => {
             v-model="form.mask"
             v-mask="'(###) ###-###'" 
             placeholder="Mask Input" 
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
             right
             expanded
           />
@@ -345,7 +346,7 @@ const hello = (e) => {
         <FieldGroup label="Money Input" :error="isFormValid ? 'Invalid Field' : ''" multiFields>
           <Field 
             type="static"
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
             left
           >
             $
@@ -354,7 +355,7 @@ const hello = (e) => {
             v-model="form.money"
             v-money 
             placeholder="Money Input" 
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
             right
             expanded
             @input="hello"
@@ -366,14 +367,14 @@ const hello = (e) => {
             :type="showPassword ? 'text' : 'password'" 
             placeholder="Password" 
             :inputRightIcon="showPassword ? mdiEye : mdiEyeOff" 
-            :color="isFormValid ? 'danger-inverse' : activeColors.inverse"
+            :color="isFormValid ? 'danger-inverse' : theme.activeColors.inverse"
             @rightIconClick="showPassword = !showPassword" 
           />
         </FieldGroup>
         <FieldGroup label="List Box">
           <ListBox 
             v-model="form.listbox"
-            :color="activeColors.inverse"
+            :color="theme.activeColors.inverse"
             :options="optionsArrStr"
           />
         </FieldGroup>
@@ -381,7 +382,7 @@ const hello = (e) => {
           <AutoComplete
             v-model="form.autocomplete"
             :options="optionsArrObjs"
-            :color="activeColors.inverse"
+            :color="theme.activeColors.inverse"
             displayKey="name"
           />
         </FieldGroup>
@@ -389,7 +390,7 @@ const hello = (e) => {
           <ComboBox
             v-model="form.combobox"
             :options="optionsArrRecursiveObjs"
-            :color="activeColors.inverse"
+            :color="theme.activeColors.inverse"
             displayKey="name"
             taggable 
           />
@@ -401,10 +402,10 @@ const hello = (e) => {
           <Calendar />
         </FieldGroup>
         <FieldGroup label="Date Picker">
-          <DatePicker v-model="form.date" :calendarColor="activeColors.inverse" />
+          <DatePicker v-model="form.date" :calendarColor="theme.activeColors.inverse" />
         </FieldGroup>
         <FieldGroup label="Date Picker Modal">
-          <DatePicker v-model="form.date" hasModalView :calendarColor="activeColors.inverse" />
+          <DatePicker v-model="form.date" hasModalView :calendarColor="theme.activeColors.inverse" />
         </FieldGroup>
         <ProgressBar v-model="form.progress" :max="1000" />
         <ProgressBar v-model="form.progress" :max="10000" >

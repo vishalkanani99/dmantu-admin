@@ -3,6 +3,7 @@ import {
   mdiArrowCollapseVertical,
   mdiCog,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -35,9 +36,9 @@ const content = [
       title="Accordions" 
       :iconPath="mdiArrowCollapseVertical" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Default" :color="activeColors.inverse" noFooter>
+      <Card title="Default" :color="theme.activeColors.inverse" noFooter>
         <Collapse title="Default Accordion">
           <div class="py-3 px-6">
             <p>
@@ -46,14 +47,14 @@ const content = [
           </div>
         </Collapse>
       </Card>
-      <Card title="Group" :color="activeColors.inverse" noFooter>
+      <Card title="Group" :color="theme.activeColors.inverse" noFooter>
         <CollapseGroup :content="content">
           <template #default="{ data }">
             {{ data.content }}
           </template>
         </CollapseGroup>
       </Card>
-      <Card title="Colors" :color="activeColors.inverse" noFooter>
+      <Card title="Colors" :color="theme.activeColors.inverse" noFooter>
         <Collapse
           title="Accordion Theme"
           color="theme"

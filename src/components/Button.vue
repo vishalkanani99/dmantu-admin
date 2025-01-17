@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { RouterLink } from 'vue-router'
 import Icon from './Icon.vue';
 import Chip from './Chip.vue';
-import { useTheme } from '../composables/useTheme.js';
+import { theme } from '../color';
 
   const props = defineProps({
     label: String,
@@ -31,8 +31,6 @@ import { useTheme } from '../composables/useTheme.js';
       },
     },
   })
-
-  const { getColorInverse } = useTheme();
   
   const typeOfComponent = computed(() => {
     if( props.to ) {
@@ -126,7 +124,7 @@ const iconSize = computed(() => {
           'absolute top-0 right-0 !p-0.5',
           badgeLabel ? 'h-6 w-6 -mt-3 -mr-3' : 'h-3 w-3 -mt-1 -mr-1',
         ]"
-        :color="badgeColor ?? getColorInverse(color)"
+        :color="badgeColor ?? theme.getInverse(color)"
         size="small"
         rounded
       >

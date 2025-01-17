@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
-import { useTheme } from '../../composables/useTheme.js';
+import { theme } from "../../color";
 import { mdiClose } from "@mdi/js";
 import Icon from "../Icon.vue";
 import Button from "../Button.vue";
@@ -49,7 +49,6 @@ const props = defineProps({
 
 const emit = defineEmits(["cancel"]);
 
-const { getColorInverse } = useTheme();
 const showSnackbarItem = ref(true);
 
 const defaultClass = computed(() => {
@@ -95,7 +94,7 @@ const cancel = () => {
         <Button
           v-if="closable"
           class="w-6 h-6 focus:!ring-2" 
-          :color="getColorInverse(color)"
+          :color="theme.getInverse(color)"
           size="small"
           rounded
           @click="cancel" 

@@ -11,6 +11,7 @@ import {
   mdiEye,
   mdiEyeOff,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -23,9 +24,9 @@ import Button from '../components/Button.vue';
       title="Buttons" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Default" :color="activeColors.inverse" noFooter>
+      <Card title="Default" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Button color="theme" label="Theme"></Button>
           <Button color="white" label="White"></Button>
@@ -67,7 +68,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large"></Button>
         </div>
       </Card>
-      <Card title="Outline" :color="activeColors.inverse" noFooter>
+      <Card title="Outline" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Button color="theme" label="Theme" outline></Button>
           <Button color="black" label="Black" outline></Button>
@@ -105,7 +106,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large" outline></Button>
         </div>
       </Card>
-      <Card title="Rounded" :color="activeColors.inverse" noFooter>
+      <Card title="Rounded" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Button color="theme" label="Theme" rounded></Button>
           <Button color="black" label="Black" rounded></Button>
@@ -143,7 +144,7 @@ import Button from '../components/Button.vue';
           <Button color="danger" label="Danger" :iconPath="mdiCog" size="large" rounded></Button>
         </div>
       </Card>
-      <Card title="Icon" :color="activeColors.inverse" noFooter>
+      <Card title="Icon" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap gap-2 mb-2">
           <Button color="theme" :iconPath="mdiEmail"></Button>
           <Button color="black" :iconPath="mdiAlertCircle"></Button>

@@ -9,6 +9,7 @@ import {
   mdiStar,
   mdiPlus,  
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -24,7 +25,7 @@ import Chip from '../components/Chip.vue';
       title="Cards" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card title="Default Card" subTitle="Sub Title">
@@ -35,7 +36,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card title="Card with close button" :color="activeColors.inverse" closable>
+        <Card title="Card with close button" :color="theme.activeColors.inverse" closable>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -43,7 +44,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card title="Card without footer" :color="activeColors.inverse" noFooter>
+        <Card title="Card without footer" :color="theme.activeColors.inverse" noFooter>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
@@ -51,7 +52,7 @@ import Chip from '../components/Chip.vue';
             specimen book.
           </p>
         </Card>
-        <Card :color="activeColors.inverse">
+        <Card :color="theme.activeColors.inverse">
           <template #header>
             <h2 class="p-2 md:p-4 text-center">Card with header and footer slots</h2>
           </template>
@@ -68,7 +69,7 @@ import Chip from '../components/Chip.vue';
             </div>
           </template>
         </Card>
-        <Card class="md:col-span-2" title="Icon" :color="activeColors.inverse" noHeader noFooter>
+        <Card class="md:col-span-2" title="Icon" :color="theme.activeColors.inverse" noHeader noFooter>
           <p class="text-center">Card without header and footer</p>
         </Card>
       </div>
@@ -76,9 +77,9 @@ import Chip from '../components/Chip.vue';
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"
-          :color="activeColors.inverse"
-          :checkboxColor="activeColors.default"
-          :menuBtnColor="activeColors.inverse"
+          :color="theme.activeColors.inverse"
+          :checkboxColor="theme.activeColors.default"
+          :menuBtnColor="theme.activeColors.inverse"
           selectable
         >
           <p>
@@ -91,9 +92,9 @@ import Chip from '../components/Chip.vue';
         <PictureCard
           title="Picture Card"
           imageSrc="/images/cart.jpg"
-          :color="activeColors.inverse"
-          :checkboxColor="activeColors.default"
-          :menuBtnColor="activeColors.inverse"
+          :color="theme.activeColors.inverse"
+          :checkboxColor="theme.activeColors.default"
+          :menuBtnColor="theme.activeColors.inverse"
           :menuItems="[
             {label: 'Edit', iconPath: mdiPencil}, 
             {label: 'Delete', iconPath: mdiTrashCan},
@@ -111,7 +112,7 @@ import Chip from '../components/Chip.vue';
           title="Picture Card"
           subTitle="$500"
           imageSrc="/images/cart.jpg"
-          :color="activeColors.inverse"
+          :color="theme.activeColors.inverse"
           saveBtnLabel="Buy now"
           cancelBtnLabel="Add to cart"
           :cancelBtnIconPath="mdiPlus"

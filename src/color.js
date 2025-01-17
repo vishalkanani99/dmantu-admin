@@ -1,4 +1,4 @@
-import { ref, watchEffect } from "vue";
+import { reactive } from "vue";
 
 const themeColors = {
   'theme': { default: 'theme', dark: 'theme-primary', inverse: 'theme-inverse' },
@@ -11,11 +11,10 @@ const themeColors = {
   'warning': { default: 'warning', dark: 'warning-primary', inverse: 'warning-inverse' }
 };
 
-const activeColors = ref();
-
-export function useTheme(){
-
-  const getColorInverse = (color) => {
+const theme = reactive({
+  activeColor: '',
+  activeColors: {},
+  getInverse: (color) => {
     color = color ? color.split('-') : [];
     if(themeColors[color[0]]) {
       if(color[1] && color[1] === 'inverse') {
@@ -24,25 +23,21 @@ export function useTheme(){
       return themeColors[color[0]]['inverse'];
     }
     return;
-  }
-
-  const setActiveColor = (color) => {
-    activeColors.value = themeColors[color];
+  },
+  setActive: (color) => {
+    theme.activeColor = color;
+    theme.activeColors = themeColors[color];
 
     for (const key in themeColors) {
       document.body.classList.remove(key);
     }
     document.body.classList.add(color);
   }
-  
-  watchEffect(() => {
-    setActiveColor('warning');
-  });
+});
 
-  return {
-    themeColors,
-    activeColors,
-    setActiveColor,
-    getColorInverse, 
-  };
-}
+theme.setActive('theme');
+
+export {
+  themeColors,
+  theme,
+};

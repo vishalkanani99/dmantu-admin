@@ -4,6 +4,7 @@ import {
   mdiFormSelect, 
   mdiCog,
 } from '@mdi/js';
+import { theme } from '../color';
 import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import Section from '../components/section/Section.vue';
 import Card from '../components/card/Card.vue';
@@ -17,9 +18,9 @@ import ListCard from '../components/card/ListCard.vue';
       title="Alerts" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
-      :color="activeColors.default"
+      :color="theme.activeColors.default"
     >
-      <Card title="Default" :color="activeColors.inverse" noFooter>
+      <Card title="Default" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title"></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title"></ListCard>
@@ -30,7 +31,7 @@ import ListCard from '../components/card/ListCard.vue';
           <ListCard color="danger" imgAlt="List 9" title="Danger" subTitle="Sub Title"></ListCard>
         </div>
       </Card>
-      <Card title="Outline" :color="activeColors.inverse" noFooter>
+      <Card title="Outline" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title" outline></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title" outline></ListCard>
@@ -41,7 +42,7 @@ import ListCard from '../components/card/ListCard.vue';
           <ListCard color="danger" imgAlt="List 9" title="Danger" subTitle="Sub Title" outline></ListCard>
         </div>
       </Card>
-      <Card title="Custom" :color="activeColors.inverse" noFooter>
+      <Card title="Custom" :color="theme.activeColors.inverse" noFooter>
         <div class="flex items-center flex-wrap space-y-4 mb-6">
           <ListCard color="info" imgAlt="labels" title="List with labels" subTitle="Sub Title" hoverShadow>
             <template #rightSection>

@@ -10,7 +10,7 @@ import {
 import Icon from './Icon.vue';
 import Button from './Button.vue';
 import ListCard from './card/ListCard.vue';
-import { useTheme } from '../composables/useTheme.js';
+import { theme } from '../color';
 
 const props = defineProps({
   color: String,
@@ -20,8 +20,6 @@ const props = defineProps({
   text: String,
   outline: Boolean,
 })
-
-const { getColorInverse } = useTheme();
 
 const color = computed(() => {
   switch( props.type ) {
@@ -75,7 +73,7 @@ const icon = computed(() => {
       <Button 
         class="text-xs w-8 h-8" 
         :iconPath="mdiClose" 
-        :color="outline ? color : getColorInverse(color)" 
+        :color="outline ? color : theme.getInverse(color)" 
         :outline="outline" 
         rounded 
       />

@@ -1,9 +1,9 @@
 <script setup>
   import { computed } from 'vue';
+  import { theme } from '../../color';
   import SideBarHeader from './SideBarHeader.vue';
   import SideBarFooter from './SideBarFooter.vue';
   import SideBarBody from './SideBarBody.vue';
-  import { useTheme } from '../../composables/useTheme';
 
   const props = defineProps({
     modelValue: Boolean,
@@ -20,8 +20,6 @@
   });
 
   const emit = defineEmits(['update:modelValue', 'close']);
-
-  const { getColorInverse } = useTheme();
 
   const showSideBar = computed({
     get: () => props.modelValue,
@@ -59,7 +57,7 @@
       <SideBarHeader 
         v-if="$slots.header" 
         :isClosable="isClosable" 
-        :btnColor="getColorInverse(color)" 
+        :btnColor="theme.getInverse(color)" 
         @close="close"
       >
         <slot name="header"></slot>
@@ -72,7 +70,7 @@
     </slot>
     <slot name="footerBody">
       <SideBarFooter v-if="$slots.footer">
-        <slot name="footer" :color="getColorInverse(color)"></slot>
+        <slot name="footer" :color="theme.getInverse(color)"></slot>
       </SideBarFooter>
     </slot>
   </div>

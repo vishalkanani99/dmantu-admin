@@ -1,7 +1,7 @@
 <script setup>
   import { mdiChevronDown } from '@mdi/js';
   import { computed } from 'vue';
-  import { useTheme } from '../../composables/useTheme';
+  import { theme } from '../../color';
   import Button from '../Button.vue';
   import Icon from '../Icon.vue';
   import Chip from '../Chip.vue';
@@ -27,8 +27,6 @@
     },
     isActive: Boolean,
   });
-
-  const { getColorInverse } = useTheme();
   
   const rootEl = computed(() => {
     if( props.type ) {
@@ -109,7 +107,7 @@
         <slot name="badge">
           <Chip
             v-if="badgeLabel"
-            :color="badgeColor ?? getColorInverse(color)"
+            :color="badgeColor ?? theme.getInverse(color)"
             :size="size"
             :label="badgeLabel"
             rounded
