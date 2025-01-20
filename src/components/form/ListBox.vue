@@ -47,7 +47,7 @@ const getLabel = (option) => {
   >
     <template #selector>
       <MenuListItem
-        class="h-10" 
+        class="h-10 border border-[--color-inverse]" 
         :label="modelValue"
         :isOpen="showDropdown"
         :color="color"
