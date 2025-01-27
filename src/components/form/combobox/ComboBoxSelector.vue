@@ -11,6 +11,7 @@ const props = defineProps({
   selectedValue: Array,
   color: String,
   outline: Boolean,
+  isMultiselect: Boolean,
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'input', 'clear', 'remove']);
@@ -42,7 +43,7 @@ const defaultStyle = computed(() => {
         :color="theme.getInverse(color)" 
         :label="value"
         @close="$emit('remove', key)" 
-        closable 
+        :closable="isMultiselect" 
       />
       <input 
         v-model="modelValue" 

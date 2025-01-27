@@ -92,6 +92,7 @@ const bindProps = computed(() => {
 
   if(props.hasModalView) {
     componentProps = {
+      class: '[&>div+div]:!w-auto',
       color: props.calendarColor,
       size: isSm.value || isXs.value ? 'large' : 'small',
       origin: isSm.value || isXs.value ? 'bottom' : 'center',
@@ -103,6 +104,7 @@ const bindProps = computed(() => {
       scrollable: true,
     }
   } else {
+    componentProps.class = '!w-auto !left-0 !right-auto !px-4';
     componentProps.onEnter = dropdownContainerRef;
     componentProps.onAfterLeave = dropdownContainerRef;
     componentProps.position = visibleAtBottom.value ? 'bottom' : 'top';

@@ -1,5 +1,11 @@
 import Dashboard from './pages/dashboard.vue'
-import Forms from './pages/forms.vue'
+import Fields from './pages/forms/fields.vue'
+import Checkboxes from './pages/forms/checkboxes.vue'
+import Maskfields from './pages/forms/maskfields.vue'
+import Listboxes from './pages/forms/listboxes.vue'
+import Datepickers from './pages/forms/datepickers.vue'
+import Ranges from './pages/forms/ranges.vue'
+import Forms from './pages/forms/layouts.vue'
 import Tables from './pages/tables.vue'
 import Buttons from './pages/buttons.vue'
 import Chips from './pages/chips.vue'
@@ -13,6 +19,7 @@ import Carousels from './pages/carousels.vue';
 import Tabs from './pages/tabs.vue';
 import Steppers from './pages/steppers.vue';
 import Popovers from './pages/popovers.vue';
+import Progress from './pages/progress.vue'
 
 export const routes = [
   {
@@ -23,7 +30,43 @@ export const routes = [
   {
     name: 'Forms',
     path: '/forms',
-    component: Forms,
+    children: [
+      { 
+        name: 'Fields', 
+        path: 'fields', 
+        component: Fields 
+      },
+      { 
+        name: 'Checkboxes', 
+        path: 'checkboxes', 
+        component: Checkboxes 
+      },
+      { 
+        name: 'Maskfields', 
+        path: 'maskfields', 
+        component: Maskfields 
+      },
+      { 
+        name: 'Listboxes', 
+        path: 'listboxes', 
+        component: Listboxes 
+      },
+      { 
+        name: 'Datepickers', 
+        path: 'datepickers', 
+        component: Datepickers 
+      },
+      { 
+        name: 'Ranges', 
+        path: 'ranges', 
+        component: Ranges 
+      },
+      { 
+        name: 'Layouts', 
+        path: '', 
+        component: Forms 
+      },
+    ],
   },
   {
     name: 'Tables',
@@ -89,5 +132,10 @@ export const routes = [
     name: 'Popovers',
     path: '/popovers',
     component: Popovers,
+  },
+  {
+    name: 'Progress',
+    path: '/progress',
+    component: Progress,
   },
 ];

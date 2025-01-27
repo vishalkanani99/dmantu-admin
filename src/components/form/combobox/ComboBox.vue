@@ -19,7 +19,7 @@ const props = defineProps({
     type: String,
     default: 'children', // Required if options are recursive objects
   },
-  taggable: Boolean,
+  taggable: Boolean, // modelValue must be an array
 })
 
 const emit = defineEmits(['update:modelValue', 'select']);
@@ -38,7 +38,7 @@ const modelValue = computed({
   }
 })
 
-const isMultiselect = computed(() => modelValue.value && modelValue.value.constructor === Array );
+const isMultiselect = computed(() => Boolean(modelValue.value && modelValue.value.constructor === Array) );
 
 const selectedValue = computed(() => {
 
@@ -109,6 +109,7 @@ const createTag = useDebounce((event) => {
 
 const removeTag = (index) => {
   modelValue.value.splice(index, 1);
+  modelValue.value = modelValue.value.filter((val) => val);
   getOptions();
 }
 
@@ -117,11 +118,11 @@ const bindEvents = computed(() => {
     onFocus: () => open(),
     onInput: () => getOptions(),
     onClear: () => clear(),
+    onRemove: (index) => removeTag(index),
   }
 
   if( props.taggable ) {
     events.onKeyup = (event) => createTag(event);
-    events.onRemove = (index) => removeTag(index);
   }
 
   return events;
@@ -136,6 +137,7 @@ onMounted(() => {
     v-model="showDropdown"
     :items="options"
     :bgColor="color"
+    scrollable
     controllable
   >
     <template #selector>
@@ -143,6 +145,7 @@ onMounted(() => {
         v-model="searchValue"
         :selectedValue="selectedValue"
         :color="color"
+        :isMultiselect="isMultiselect"
         v-bind="bindEvents"
       />
     </template>
@@ -153,6 +156,7 @@ onMounted(() => {
 				:color="color"
         :displayKey="displayKey" 
 				:recursiveKey="recursiveKey"
+        :isMultiselect="isMultiselect"
         @select="selectValue" 
 			/>
 			<p v-if="options.length === 0" class="my-2 text-center">No records found</p>

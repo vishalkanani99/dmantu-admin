@@ -1,6 +1,7 @@
 <script setup>
 import { ref, shallowRef, computed } from 'vue';
 import { mdiCircleMedium } from '@mdi/js';
+import { theme } from '../../../color';
 import Icon from '../../Icon.vue';
 import FieldOption from '../FieldOption.vue';
 import Menu from '../../menu/Menu.vue';
@@ -22,6 +23,7 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  isMultiselect: Boolean,
 })
 
 const emit = defineEmits(['update:modelValue', 'select']);
@@ -33,8 +35,7 @@ const modelValue = computed({
   }
 })
 
-const isMultiselect = computed(() => modelValue.value && modelValue.value.constructor === Array );
-const MenuListItemRootEl = computed(() => isMultiselect.value ? 'label' : null);
+const MenuListItemRootEl = computed(() => props.isMultiselect ? 'label' : null);
 
 const options = computed( () => props.options);
 
@@ -49,7 +50,7 @@ const getLabel = (option) => {
 }
 
 const isSelectedValue = (item) => {
-  if( isMultiselect.value ) return;
+  if( props.isMultiselect ) return;
   return getLabel(modelValue.value) === getLabel(item);
 }
 </script>
@@ -65,7 +66,13 @@ const isSelectedValue = (item) => {
         :isActive="isSelectedValue(item)"
         @click="selectValue(item, key)" 
       >
-        <FieldOption v-if="isMultiselect" v-model="modelValue" :value="item" rootEl="span" />
+        <FieldOption 
+          v-if="isMultiselect" 
+          v-model="modelValue" 
+          :color="theme.getInverse(color)" 
+          :value="item" 
+          rootEl="span" 
+        />
         <Icon v-for="(i, k) in optionTree" :key="k" :path="mdiCircleMedium" size="16" />
         <span :class="{'pl-1': optionTree > 0 || isMultiselect }">{{ getLabel(item) }}</span>
       </MenuListItem>
@@ -78,6 +85,7 @@ const isSelectedValue = (item) => {
         :displayKey="displayKey" 
 				:recursiveKey="recursiveKey"
         :optionTree="optionTree + 1"
+        :isMultiselect="isMultiselect"
         @select="selectValue"
       />
     </template>

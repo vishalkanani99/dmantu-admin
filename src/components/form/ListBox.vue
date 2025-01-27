@@ -43,6 +43,7 @@ const getLabel = (option) => {
     v-model="showDropdown"
     :items="options"
     :bgColor="color"
+    scrollable
     controllable
   >
     <template #selector>

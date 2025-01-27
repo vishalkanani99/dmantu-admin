@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, shallowRef } from 'vue'; 
+import { computed, ref, shallowRef, onMounted } from 'vue'; 
 import Icon from '../Icon.vue';
 
 defineOptions({
@@ -25,7 +25,7 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 
 const inputRef = ref();
-const color = shallowRef(props.colorOnUncheck && inputRef.value?.checked ? props.colorOnUncheck : props.color);
+const color = shallowRef(props.colorOnUncheck && !inputRef.value?.checked ? props.colorOnUncheck : props.color);
 
 const modelValue = computed({
   get: () => props.modelValue,
@@ -118,6 +118,10 @@ const rootEl = computed(() => props.rootEl ?? 'label' );
 const updateColor = (e) => {
   color.value = props.colorOnUncheck && !e.target.checked ? props.colorOnUncheck : props.color;
 }
+
+onMounted(() => {
+  color.value = props.colorOnUncheck && !inputRef.value?.checked ? props.colorOnUncheck : props.color;
+})
 </script>
 
 <template>
@@ -162,11 +166,13 @@ const updateColor = (e) => {
         disabledStyle
       ]" 
     />
-    <span 
-      v-if="label" 
-      :class="['pl-2', disabledStyle]"
-    >
-      {{ label }}
-    </span>
+    <slot name="label">
+      <span 
+        v-if="label" 
+        :class="['pl-2', disabledStyle]"
+      >
+        {{ label }}
+      </span>
+    </slot>
   </component>
 </template>

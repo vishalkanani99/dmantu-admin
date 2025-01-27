@@ -7,10 +7,7 @@ import Field from './Field.vue';
 
 const props = defineProps({
   modelValue: String,
-  color: {
-    type: String,
-    default: 'theme',
-  },
+  color: String,
   options: {
     type: Array,
     default(rawProps) {
@@ -76,8 +73,9 @@ onMounted(() => {
     v-model="showDropdown"
     :items="options"
     :bgColor="color"
-    @update:modelValue="close"
+    scrollable
     controllable
+    @update:modelValue="close"
   >
     <template #selector>
       <Field

@@ -14,7 +14,8 @@ import {
   mdiViewCarouselOutline,
   mdiTab,
   mdiStepForward2,
-  mdiTooltip, 
+  mdiTooltip,
+  mdiProgressHelper, 
 } from '@mdi/js';
 
 const menu = [
@@ -25,8 +26,38 @@ const menu = [
   },
   {
     label: 'Forms',
-    to: '/forms',
+    to: '',
     iconPath: mdiFormSelect,
+    items: [
+      { 
+        label: 'Fields', 
+        to: '/forms/fields',
+      },
+      { 
+        label: 'Checkboxes', 
+        to: '/forms/checkboxes', 
+      },
+      { 
+        label: 'Maskfields', 
+        to: '/forms/maskfields', 
+      },
+      { 
+        label: 'Listboxes', 
+        to: '/forms/listboxes', 
+      },
+      { 
+        label: 'Datepickers', 
+        to: '/forms/datepickers',
+      },
+      { 
+        label: 'Ranges', 
+        to: '/forms/ranges',
+      },
+      { 
+        label: 'Layouts', 
+        to: '/forms', 
+      },
+    ]
   },
   {
     label: 'Tables',
@@ -97,6 +128,11 @@ const menu = [
         label: 'Popovers',
         to: '/popovers',
         iconPath: mdiTooltip,
+      },
+      {
+        label: 'Progress',
+        to: '/progress',
+        iconPath: mdiProgressHelper,
       },
     ]
   }

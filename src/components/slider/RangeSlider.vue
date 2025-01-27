@@ -11,7 +11,7 @@ const props = defineProps({
   },
   max: {
     type: Number,
-    default: 0,
+    default: 100,
     validator(value, props) {
       // The value must be greater than min
       return props.min < value;
@@ -22,7 +22,7 @@ const props = defineProps({
     default: 0,
     validator(value, props) {
       // The value must be greater than 0
-      return value > 0;
+      return value >= 0;
     }
   },
   color: String,
@@ -37,11 +37,11 @@ const emit = defineEmits(['update:modelValue']);
 const { initMultipleSwiper } = useSwiper();
 
 const containerRef = ref();
-const offsetWidth = shallowRef(0);
+const offsetWidth = ref(0);
 
-const position = shallowRef([0, 0]); // Position after handler stopped
-const newPosition = shallowRef([0, 0]); // Position on dragging
-const handlerPosition = shallowRef([0, 0]);
+const position = ref([0, 0]); // Position after handler stopped
+const newPosition = ref([0, 0]); // Position on dragging
+const handlerPosition = ref([0, 0]);
 
 const handlerRef = ref();
 const filledTrackRef = ref();
@@ -85,15 +85,13 @@ const initSlider = () => {
 
   // convert modelvalue into define range value
   if(isRangeSlider.value) {
-    modelValue.value = [
-      (modelValue.value[0] / step.value) !== 1 ? step.value : modelValue.value[0],
-      (modelValue.value[1] / step.value) !== 1 ? step.value : modelValue.value[1],
-    ];
-    newPosition.value[0] = position.value[0] = (modelValue.value[0] * offsetWidth.value) / 100;
-    newPosition.value[1] = position.value[1] = (modelValue.value[1] * offsetWidth.value) / 100;
+    newPosition.value[0] = position.value[0] = (offsetWidth.value / (props.max - props.min)) * (modelValue.value[0] - props.min);
+    validatePosition(0);
+    newPosition.value[1] = position.value[1] = (offsetWidth.value / (props.max - props.min)) * (modelValue.value[1] - props.min);
+    validatePosition(1);
   } else {
-    modelValue.value = (modelValue.value / step.value) !== 1 ? step.value : modelValue.value;
-    newPosition.value[0] = position.value[0] = (modelValue.value * offsetWidth.value) / 100;
+    newPosition.value[0] = position.value[0] = (offsetWidth.value / (props.max - props.min)) * (modelValue.value - props.min);
+    validatePosition(0);
   }
   setHandlerPostion();
   initMultipleSwiper(registerSwiper);
@@ -111,11 +109,11 @@ const checkMinPosition = (index) => {
 
 const validatePosition = (index) => {
   if(checkMaxPosition(index)){
-    newPosition.value[index] = offsetWidth.value;
+    newPosition.value[index] = position.value[index] = offsetWidth.value;
   }
   
   if(checkMinPosition(index)) {
-    newPosition.value[index] = 0;
+    newPosition.value[index] = position.value[index] = 0;
   }
 }
 
@@ -180,7 +178,7 @@ const changeHandlerPostion = (e) => {
 
 const setHandlerPostion = () => {
   for(let key in newPosition.value) {
-    if(!isRangeSlider.value && key === 1) return;
+    if(!isRangeSlider.value && key === 1) break;
     let handlerPosInPercentage = Math.round((( newPosition.value[key] * 100 ) / offsetWidth.value));
     handlerPosition.value[key] = handlerPosInPercentage > 100 ? 100 : handlerPosInPercentage;
   }
@@ -189,7 +187,7 @@ const setHandlerPostion = () => {
 
 const setNearByTick = () => {
   for(let key in newPosition.value) {
-    if(!isRangeSlider.value && key === 1) return;
+    if(!isRangeSlider.value && key === 1) break;
     let nearByTick = Math.round(( props.divider * newPosition.value[key] ) / offsetWidth.value);
     position.value[key] = newPosition.value[key] =  Math.round(( offsetWidth.value * nearByTick ) / props.divider);
     validatePosition(key);
