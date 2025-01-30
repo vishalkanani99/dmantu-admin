@@ -15,13 +15,13 @@ import ListCard from '../components/card/ListCard.vue';
 <template>
   <LayoutAuthenticated>
     <Section
-      title="Alerts" 
+      title="Lists" 
       :iconPath="mdiFormSelect" 
       :btnIconPath="mdiCog"
       :color="theme.activeColors.default"
     >
       <Card title="Default" :color="theme.activeColors.inverse" noFooter>
-        <div class="flex items-center flex-wrap space-y-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title"></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title"></ListCard>
           <ListCard color="gray" imgAlt="List 5" title="Gray" subTitle="Sub Title"></ListCard>
@@ -32,7 +32,7 @@ import ListCard from '../components/card/ListCard.vue';
         </div>
       </Card>
       <Card title="Outline" :color="theme.activeColors.inverse" noFooter>
-        <div class="flex items-center flex-wrap space-y-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
           <ListCard color="theme" imgAlt="List 2" title="Theme" subTitle="Sub Title" outline></ListCard>
           <ListCard color="black" imgAlt="List 4" title="Black" subTitle="Sub Title" outline></ListCard>
           <ListCard color="gray" imgAlt="List 5" title="Gray" subTitle="Sub Title" outline></ListCard>
@@ -43,7 +43,7 @@ import ListCard from '../components/card/ListCard.vue';
         </div>
       </Card>
       <Card title="Custom" :color="theme.activeColors.inverse" noFooter>
-        <div class="flex items-center flex-wrap space-y-4 mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
           <ListCard color="info" imgAlt="labels" title="List with labels" subTitle="Sub Title" hoverShadow>
             <template #rightSection>
               <Chip color="success" label="Success"></Chip>

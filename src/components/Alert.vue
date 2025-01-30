@@ -9,7 +9,8 @@ import {
 } from '@mdi/js';
 import Icon from './Icon.vue';
 import Button from './Button.vue';
-import ListCard from './card/ListCard.vue';
+import Card from './card/Card.vue';
+import CardBody from './card/CardBody.vue';
 import { theme } from '../color';
 
 const props = defineProps({
@@ -53,30 +54,51 @@ const icon = computed(() => {
       return mdiInformation;
   }
 });
+
+const defaultStyle = computed(() => {
+  return [
+    'w-full rounded-md',
+    { '!bg-transparent' : props.outline },
+  ];
+});
 </script>
 <template>
-  <ListCard
-    class="!p-3"
-    :color="color"
-    :outline="outline"
-  >
-    <template #leftSection>
-      <Icon class="w-8 h-8 md:mr-4" :path="icon" size="32"></Icon>
-      <slot>
-        <span class="text-center md:text-left md:py-2">
-          <h4 class="inline">{{ boldText }}</h4>
-          <p :class="['inline', {'ml-2': boldText}]">{{ text }}</p>
-        </span>
-      </slot>
+  <Card :class="defaultStyle" :color="color" noFooter noHeader>
+    <template #content>
+      <CardBody 
+        :class="[
+          '!p-3',
+          outline ? color : theme.getInverse(color)
+        ]"
+      >
+        <div class="flex justify-between items-center">
+        
+          <div class="flex justify-center items-center">
+            <div class="flex flex-row items-center"> 
+              <Icon class="w-8 h-8 mr-4" :path="icon" size="32"></Icon>
+              <slot>
+                <span class="text-left py-2">
+                  <h4 class="inline">{{ boldText }}</h4>
+                  <p :class="['inline', {'ml-2': boldText}]">{{ text }}</p>
+                </span>
+              </slot>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center">
+            <div class="flex flex-row justify-end items-center gap-1">
+              <Button  
+                :iconPath="mdiClose" 
+                :color="outline ? color : theme.getInverse(color)" 
+                :outline="outline"
+                size="small" 
+                rounded 
+              />
+            </div>
+          </div>
+
+        </div>
+      </CardBody>
     </template>
-    <template #rightSection>
-      <Button 
-        class="text-xs w-8 h-8" 
-        :iconPath="mdiClose" 
-        :color="outline ? color : theme.getInverse(color)" 
-        :outline="outline" 
-        rounded 
-      />
-    </template>
-  </ListCard>
+  </Card>
 </template>
