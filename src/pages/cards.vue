@@ -6,7 +6,6 @@ import {
   mdiPencil,
   mdiTrashCan,
   mdiHeart,
-  mdiStar,
   mdiPlus,  
 } from '@mdi/js';
 import { theme } from '../color';
@@ -16,8 +15,9 @@ import Card from '../components/card/Card.vue';
 import PictureCard from '../components/card/PictureCard.vue';
 import Button from '../components/Button.vue';
 import FieldOption from '../components/form/FieldOption.vue';
-import Chip from '../components/Chip.vue';
+import Rating from '../components/form/Rating.vue';
 
+const rating = ref(2.6);
 </script>
 <template>
   <LayoutAuthenticated>
@@ -125,39 +125,7 @@ import Chip from '../components/Chip.vue';
             />
           </template>
           <template #titleBarSectionRight>
-            <div class="flex items-center">
-              <FieldOption 
-                type="icon"
-                color="warning"
-                colorOnUncheck="gray"
-                :iconPath="mdiStar" 
-              />
-              <FieldOption 
-                type="icon"
-                color="warning"
-                colorOnUncheck="gray"
-                :iconPath="mdiStar" 
-              />
-              <FieldOption 
-                type="icon"
-                color="warning"
-                colorOnUncheck="gray"
-                :iconPath="mdiStar" 
-              />
-              <FieldOption 
-                type="icon"
-                color="warning"
-                colorOnUncheck="gray"
-                :iconPath="mdiStar" 
-              />
-              <FieldOption 
-                type="icon"
-                color="warning"
-                colorOnUncheck="gray"
-                :iconPath="mdiStar" 
-              />
-              <Chip class="ml-2" label="5.0" />
-            </div>
+            <Rating v-model="rating" color="warning" />
           </template>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
