@@ -14,6 +14,11 @@
     },
     trackColor: String,
     activeTrackColor: String,
+    infoColor: String,
+    hasInfo: {
+      type: Boolean,
+      default: true,
+    },
   });
 
   const emit = defineEmits(['update:modelValue']);
@@ -25,10 +30,18 @@
     return [
       props.trackColor,
       'relative flex h-3.5 w-full rounded-md',
-      'bg-[--color] text-[--color-inverse]',
+      'bg-[--color]',
     ];
   });
 
+  const infoStyle = computed(() => {
+    return [
+      props.infoColor, 
+      'absolute top-0 left-[50%] -translate-x-[50%]',
+      props.infoColor ? 'text-[--color]' : 'text-[--color-inverse]',
+      'text-[10px] leading-4',
+    ];
+  })
 </script>
 <template>
   <div 
@@ -43,7 +56,7 @@
         :hasInfo="false" 
       />
     </slot>
-    <p class="absolute top-0 left-[50%] -translate-x-[50%] text-[10px] leading-4">
+    <p v-if="hasInfo" :class="infoStyle">
       <slot>{{ modelValue }}%</slot>
     </p>
   </div>

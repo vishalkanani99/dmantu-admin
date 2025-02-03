@@ -53,15 +53,16 @@ const defaultStyle = computed(() => {
             </div>
           </div>
 
-          <div
-            v-if="$slots.rightSection" 
-            class="flex items-center justify-center"
-          >
-            <div class="flex flex-col md:flex-row justify-end items-center gap-1">
-              <slot name="rightSection"></slot>
+          <slot name="rightSection">
+            <div
+              v-if="$slots.rightSectionItems" 
+              class="flex items-center justify-center"
+            >
+              <div class="flex flex-col md:flex-row justify-end items-center gap-1">
+                <slot name="rightSectionItems"></slot>
+              </div>
             </div>
-          </div>
-
+          </slot>
         </div>
       </CardBody>
     </template>

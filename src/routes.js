@@ -11,7 +11,6 @@ import Buttons from './pages/buttons.vue'
 import Chips from './pages/chips.vue'
 import Cards from './pages/cards.vue'
 import Accordions from './pages/accordions.vue';
-import Lists from './pages/lists.vue';
 import Alerts from './pages/alerts.vue';
 import Modals from './pages/modals.vue';
 import Snackbars from './pages/snackbars.vue';
@@ -92,11 +91,6 @@ export const routes = [
     name: 'Accordions',
     path: '/accordions',
     component: Accordions,
-  },
-  {
-    name: 'Lists',
-    path: '/lists',
-    component: Lists,
   },
   {
     name: 'Alerts',

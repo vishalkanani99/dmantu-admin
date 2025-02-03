@@ -7,7 +7,6 @@ import {
   mdiPageLayoutBody,
   mdiLabel,
   mdiArrowCollapseVertical,
-  mdiFormatListBulleted,
   mdiAlert,
   mdiForumOutline,
   mdiFrequentlyAskedQuestions,
@@ -88,11 +87,6 @@ const menu = [
         label: 'Accordions',
         to: '/accordions',
         iconPath: mdiArrowCollapseVertical,
-      },
-      {
-        label: 'Lists',
-        to: '/lists',
-        iconPath: mdiFormatListBulleted,
       },
       {
         label: 'Alerts',
