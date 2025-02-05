@@ -22,7 +22,7 @@ const defaultClass = computed(() => {
   <div :class="defaultClass">
     <div 
       :class="[
-        'flex flex-wrap items-center px-6',
+        'flex flex-wrap items-center',
         vertical ? 'flex-col' : 'flex-row',
         vertical ? '' : '',
       ]">

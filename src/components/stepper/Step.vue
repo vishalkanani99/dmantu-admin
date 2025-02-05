@@ -37,6 +37,7 @@ const defaultStyle = computed(() => {
   ];
 
   let style = [
+    props.color,
     'relative grow basis-4 mt-0',
     'before:[&:not(:first-child)]:absolute before:[&:not(:first-child)]:content-[""] before:[&:not(:first-child)]:block',
     'before:[&:not(:first-child)]:bottom-0',
@@ -61,7 +62,6 @@ const defaultStyle = computed(() => {
 })
 const stepStyle = computed(() => {
   let style = [
-    props.color,
     'flex justify-center items-center w-10 h-10 rounded-full overflow-hidden',
     props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
   ];

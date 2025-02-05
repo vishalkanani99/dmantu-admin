@@ -11,7 +11,7 @@ const props = defineProps({
 
 <template>
   <Transition :name="transitionName">
-    <div v-if="isActive" class="p-6">
+    <div v-if="isActive" class="p-3 md:p-4">
       <slot></slot>
     </div>
   </Transition>

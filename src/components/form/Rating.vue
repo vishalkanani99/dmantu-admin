@@ -21,6 +21,7 @@ const props = defineProps({
     default: 'gray',
   },
   iconPath: String,
+  size: Number,
   readOnly: Boolean,
 });
 
@@ -58,6 +59,7 @@ const update = (value) => {
           readOnly ? 'pointer-events-none' : 'cursor-pointer',
         ]"
         :key="star"
+        :size="size"
         :path="iconPath"
         :color="prevValue >= star ? color : colorOnUncheck"
         @mouseover="setPreviousValue(star)"
@@ -74,6 +76,7 @@ const update = (value) => {
             readOnly ? 'pointer-events-none' : 'cursor-pointer',
           ]"
           :key="star"
+          :size="size"
           :path="iconPath"
           :color="color"
           @mouseover="setPreviousValue(star)"

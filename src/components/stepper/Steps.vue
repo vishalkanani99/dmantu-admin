@@ -1,5 +1,5 @@
 <script>
-import { ref, computed, h, defineComponent, shallowRef} from 'vue';
+import { ref, computed, h, defineComponent, shallowRef, watch} from 'vue';
 import { mdiArrowLeft, mdiArrowRight } from '@mdi/js';
 import StepList from './StepList.vue';
 import StepPanel from './StepPanel.vue';
@@ -9,10 +9,7 @@ import Button from '../Button.vue';
 export default defineComponent({
   name: "Steps",
   props: {
-    modelValue: {
-      type: Number,
-      default: 1,
-    },
+    modelValue: Number,
     vertical: Boolean,
     outline: Boolean,
     color: String,
@@ -20,11 +17,11 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, context) {
     
-    const modelValue = shallowRef(props.modelValue);
+    const modelValue = shallowRef(props.modelValue ?? 1);
     const TabPanelTransitionName = shallowRef(props.vertical ? 'slide-down' : 'slide-right');
 
     const activeStep = computed({
-      get: () => modelValue.value,
+      get: () => props.modelValue ?? modelValue.value,
       set: (value) => {
         modelValue.value = value;
         context.emit('update:modelValue', value);
@@ -82,13 +79,19 @@ export default defineComponent({
     })
 
     const changeStep = (step) => {
-      if(props.vertical) {
-        TabPanelTransitionName.value = activeStep.value > step ? 'slide-up' : 'slide-down';
-      } else {
-        TabPanelTransitionName.value = activeStep.value > step ? 'slide-left' : 'slide-right';
-      }
       activeStep.value = step;
     }
+
+    watch(
+      activeStep,
+      (value, oldValue) => {
+        if(props.vertical) {
+          TabPanelTransitionName.value = value > oldValue ? 'slide-up' : 'slide-down';
+        } else {
+          TabPanelTransitionName.value = value > oldValue ? 'slide-left' : 'slide-right';
+        }
+      }
+    );
 
     // return the render function
     return () => h(

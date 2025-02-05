@@ -22,7 +22,7 @@ const defaultClass = computed(() => {
   <div :class="defaultClass">
     <div 
       :class="[
-        'flex justify-start flex-nowrap items-center border p-6 overflow-x-auto',
+        'flex flex-nowrap items-center',
         vertical ? 'flex-col' : 'flex-row',
         vertical ? '' : '',
       ]">
