@@ -61,7 +61,7 @@ function close() {
 
       <template v-if="!$slots.headerBody" #header>
         <slot name="header">
-          <img class="h-12" src="/logo.png" />
+          <h2 class="text-3xl font-bold">Dmantu</h2>
         </slot>
       </template>
 
