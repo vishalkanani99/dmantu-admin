@@ -61,7 +61,14 @@ function close() {
 
       <template v-if="!$slots.headerBody" #header>
         <slot name="header">
-          <h2 class="text-3xl font-bold">Dmantu</h2>
+          <span 
+            :class="[
+              isCompact ? 'text-base -mx-2 -my-1' : 'text-3xl', 
+              'font-bold'
+            ]"
+          >
+            Dmantu
+          </span>
         </slot>
       </template>
 
