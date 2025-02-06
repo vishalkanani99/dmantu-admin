@@ -1,5 +1,5 @@
 <script setup>
-import { shallowRef, ref, computed, onMounted } from 'vue';
+import { shallowRef, ref, computed, onMounted, watch } from 'vue';
 import { mdiCog } from '@mdi/js';
 import { useScreen } from '../composables/useScreen';
 import SectionMain from '../components/section/SectionMain.vue';
@@ -13,7 +13,7 @@ import FieldGroup from '../components/form/FieldGroup.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import { theme } from '../color';
 
-const { isSm, isXs } = useScreen();
+const { isMMMd } = useScreen();
 
 const themeColor = shallowRef(theme.activeColor);
 const showSettingsBar = shallowRef(false);
@@ -24,7 +24,7 @@ const showSideBarDropdown = shallowRef(false);
 const dropdownItem = ref({});
 const searchField = ref();
 
-const isClosableSidebar = computed(() => isSm.value || isXs.value);
+const isClosableSidebar = computed(() => !isMMMd.value);
 
 const toggleMenu = () => {
   showSideBar.value = !showSideBar.value;
@@ -35,6 +35,16 @@ const toggleDropdownSideBar = (item) => {
   showSideBarDropdown.value = typeof item === 'boolean' ? false : !showSideBarDropdown.value;
   dropdownItem.value = showSideBarDropdown.value ? item : {};
 }
+
+watch(
+  isClosableSidebar,
+  () => {
+    showSideBar.value = !isClosableSidebar.value;
+    showSettingsBar.value = isCompactSidebar.value = false;
+    showOverLayer.value = showSideBarDropdown.value = false;
+    dropdownItem.value = {};
+  }
+);
 
 onMounted(() => {
   showSideBar.value = !isClosableSidebar.value;
@@ -59,7 +69,7 @@ onMounted(() => {
     <Teleport to="body">
       <SideBar
         v-model="showSettingsBar"
-        class="z-30 !overflow-visible"
+        class="!w-1/2 md:!w-1/3 lg:!w-1/5 z-30 !overflow-visible"
         :color="theme.activeColors.inverse"
         position="right"
       >

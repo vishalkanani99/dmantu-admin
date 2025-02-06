@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, shallowRef } from 'vue';
+import { ref, computed, shallowRef, watch } from 'vue';
 import { 
   mdiMenu, 
   mdiMagnify, 
@@ -35,6 +35,7 @@ const emit = defineEmits(['toggleMenu']);
 const showMobileMenu = shallowRef(false);
 const search = ref();
 
+const hasMenuBtn = computed(() => props.hasMenuBtn);
 const items = computed(() => {
   const menu = [
     {
@@ -63,6 +64,15 @@ const optionsArrObjs = [
   { id: 4, value: 'Option 4'},
   { id: 5, value: 'Option 5'},
 ];
+
+watch(
+  hasMenuBtn,
+  (value) => {
+    if(!value) {
+      showMobileMenu.value = false;
+    }
+  }
+ );
 </script>
 <template>
   <div 
