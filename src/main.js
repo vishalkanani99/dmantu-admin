@@ -6,7 +6,7 @@ import { routes } from './routes';
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/dmantu-admin/'),
   routes,
 });
 
