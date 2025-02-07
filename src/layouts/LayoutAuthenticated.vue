@@ -47,7 +47,7 @@ watch(
 );
 
 onMounted(() => {
-  showSideBar.value = !isClosableSidebar.value;
+  showSideBar.value = !isMMMd.value;
 })
 </script>
 
