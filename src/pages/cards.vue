@@ -94,7 +94,7 @@ const progress = ref(50);
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <PictureCard
           title="Picture Card"
-          imageSrc="/images/cart.jpg"
+          imageSrc="/dmantu-admin/images/cart.jpg"
           :color="theme.activeColors.inverse"
           :checkboxColor="theme.activeColors.default"
           :menuBtnColor="theme.activeColors.inverse"
@@ -109,7 +109,7 @@ const progress = ref(50);
         </PictureCard>
         <PictureCard
           title="Picture Card"
-          imageSrc="/images/cart.jpg"
+          imageSrc="/dmantu-admin/images/cart.jpg"
           :color="theme.activeColors.inverse"
           :checkboxColor="theme.activeColors.default"
           :menuBtnColor="theme.activeColors.inverse"
@@ -129,7 +129,7 @@ const progress = ref(50);
         <PictureCard
           title="Picture Card"
           subTitle="$500"
-          imageSrc="/images/cart.jpg"
+          imageSrc="/dmantu-admin/images/cart.jpg"
           :color="theme.activeColors.inverse"
           saveBtnLabel="Buy now"
           cancelBtnLabel="Add to cart"
