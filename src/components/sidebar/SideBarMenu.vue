@@ -84,6 +84,7 @@ function close() {
               v-if="!isCompact && item.items"
               :color="color" 
               :item="item"
+              :expanded="item?.expanded"
               isRouterMenu
             />
             <MenuListItem

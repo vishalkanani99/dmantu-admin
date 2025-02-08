@@ -8,13 +8,17 @@ const props = defineProps({
     type: Object,
     default: () => {},
   },
+  expanded: {
+    type: Boolean,
+    default: false,
+  },
   color: String,
   isRouterMenu: Boolean,
 });
 </script>
 
 <template>
-  <Collapse plain>
+  <Collapse :expanded="expanded" plain>
     <template #handler="{ expand }">
       <MenuListItem
         :color="color" 

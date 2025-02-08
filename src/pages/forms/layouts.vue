@@ -63,7 +63,7 @@ const isFormValid = shallowRef(false);
             @rightIconClick="showPassword = !showPassword" 
           />
         </FieldGroup>
-        <FieldGroup class="col-span-2" label="Message">
+        <FieldGroup class="md:col-span-2" label="Message">
           <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
         </FieldGroup>
       </Form>
@@ -93,7 +93,7 @@ const isFormValid = shallowRef(false);
             @rightIconClick="showPassword = !showPassword" 
           />
         </FieldGroup>
-        <FieldGroup class="col-span-3" label="Message">
+        <FieldGroup class="md:col-span-3" label="Message">
           <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
         </FieldGroup>
       </Form>

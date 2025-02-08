@@ -376,7 +376,7 @@ const updateStep = (i) => {
                   @rightIconClick="showPassword = !showPassword" 
                 />
               </FieldGroup>
-              <FieldGroup class="col-span-2" label="Message">
+              <FieldGroup class="md:col-span-2" label="Message">
                 <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
               </FieldGroup>
             </div>
@@ -402,7 +402,7 @@ const updateStep = (i) => {
                   @rightIconClick="showPassword = !showPassword" 
                 />
               </FieldGroup>
-              <FieldGroup class="col-span-2" label="Message">
+              <FieldGroup class="md:col-span-2" label="Message">
                 <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
               </FieldGroup>
             </div>
@@ -428,7 +428,7 @@ const updateStep = (i) => {
                   @rightIconClick="showPassword = !showPassword" 
                 />
               </FieldGroup>
-              <FieldGroup class="col-span-2" label="Message">
+              <FieldGroup class="md:col-span-2" label="Message">
                 <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
               </FieldGroup>
             </div>
@@ -454,7 +454,7 @@ const updateStep = (i) => {
                   @rightIconClick="showPassword = !showPassword" 
                 />
               </FieldGroup>
-              <FieldGroup class="col-span-2" label="Message">
+              <FieldGroup class="md:col-span-2" label="Message">
                 <Field v-model="form.message" type="textarea" placeholder="Message" :color="theme.activeColors.inverse" />
               </FieldGroup>
             </div>

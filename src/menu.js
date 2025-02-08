@@ -67,6 +67,7 @@ const menu = [
     label: 'Components',
     to: '',
     iconPath: mdiRhombusSplit,
+    expanded: true,
     items: [
       {
         label: 'Buttons',

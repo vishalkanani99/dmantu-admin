@@ -1,7 +1,7 @@
 import { shallowRef, onMounted, ref } from 'vue';
+import { useEventListener } from './useEventListener';
 
 export function useScreen(){
-  const prevWidth = ref(0)
   const isXs = shallowRef(false);
   const isSm = shallowRef(false);
   const isMd = shallowRef(false);
@@ -34,23 +34,15 @@ export function useScreen(){
     } else if(w < 360){
       isXs.value = isMMXs.value = true;
     }
-    prevWidth.value = w;
   }
 
+  const initResize = () => {
+    resetScreen();
+    update(innerWidth);
+  }
   onMounted(() => {
-    const element = document.querySelector("body > div");
-    const resizeObserver = new ResizeObserver((entries) => {
-      requestAnimationFrame(() => {
-        for (const entry of entries) {
-          if(prevWidth.value === entry.contentRect.width) {
-            break;
-          }
-          resetScreen();
-          update(entry.contentRect.width);
-        }
-      });
-    });
-    resizeObserver.observe(element);
+    initResize();
+    useEventListener(window, 'resize', initResize);
   })
 
   return { 
