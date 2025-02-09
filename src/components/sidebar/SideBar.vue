@@ -40,7 +40,7 @@
       'bg-[--color] border-[--color-inverse] text-[--color-inverse]',
       transitionTranslate[props.position][2],
       showSideBar.value ? transitionTranslate[props.position][0] : transitionTranslate[props.position][1],
-      'transition-transform transition-[width]',
+      'transition-all',
     ];
     return style;
   });

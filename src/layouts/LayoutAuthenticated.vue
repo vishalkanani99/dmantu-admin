@@ -1,11 +1,10 @@
 <script setup>
-import { shallowRef, ref, computed, onMounted, watch } from 'vue';
+import { shallowRef, ref, computed, onMounted, watch, defineAsyncComponent } from 'vue';
 import { mdiCog } from '@mdi/js';
 import { useScreen } from '../composables/useScreen';
 import SectionMain from '../components/section/SectionMain.vue';
 import NavBar from '../components/NavBar.vue';
 import SideBar from '../components/sidebar/SideBar.vue';
-import SideBarMenu from '../components/sidebar/SideBarMenu.vue';
 import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 import Button from '../components/Button.vue';
@@ -13,6 +12,9 @@ import FieldGroup from '../components/form/FieldGroup.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import { theme } from '../color';
 
+const SideBarMenu = defineAsyncComponent(() =>
+  import('../components/sidebar/SideBarMenu.vue')
+)
 const { isMMMd } = useScreen();
 
 const themeColor = shallowRef(theme.activeColor);
