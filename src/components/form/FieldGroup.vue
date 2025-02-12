@@ -46,9 +46,8 @@ const labelStyle = computed(() => {
       <div :class="[ 
           { 'flex': multiFields || optionsGroup }, 
           { 'items-center': multiFields || ( optionsGroup && !verticalLayout ) }, 
-          { 'space-x-4' : optionsGroup && !verticalLayout },
-          { 'space-y-4' : optionsGroup && verticalLayout },
-          { 'flex-col' : verticalLayout },  
+          { 'flex-col' : verticalLayout },
+          'flex-wrap gap-3',  
         ]" 
       >
         <slot></slot>

@@ -4,12 +4,12 @@ import { mdiCog } from '@mdi/js';
 import { useScreen } from '../composables/useScreen';
 import SectionMain from '../components/section/SectionMain.vue';
 import NavBar from '../components/NavBar.vue';
-import SideBar from '../components/sidebar/SideBar.vue';
 import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 import Button from '../components/Button.vue';
 import FieldGroup from '../components/form/FieldGroup.vue';
 import FieldOption from '../components/form/FieldOption.vue';
+import Modal from '../components/Modal.vue';
 import { theme } from '../color';
 
 const SideBarMenu = defineAsyncComponent(() =>
@@ -66,25 +66,21 @@ onMounted(() => {
       :hasMenuBtn="isClosableSidebar" 
       @toggleMenu="toggleMenu" 
     />
+
     <slot :isMMMd="isMMMd"></slot>
 
     <Teleport to="body">
-      <SideBar
+      <Modal 
         v-model="showSettingsBar"
-        class="!w-1/2 md:!w-1/3 lg:!w-1/5 z-30 !overflow-visible"
-        :color="theme.activeColors.inverse"
-        position="right"
+        :color="theme.activeColors.inverse" 
+        class="top-3/4" 
+        title="Theme Settings" 
+        size="full" 
+        origin="bottom" 
+        scrollable 
+        noFooter
       >
-        <Button 
-          class="absolute rounded-r-none left-0 top-[50%] -translate-x-full translate-y-[50%]" 
-          :color="theme.activeColors.dark" 
-          :iconPath="mdiCog"
-          @click="showSettingsBar = !showSettingsBar" 
-        />
-        <template #header>
-          <strong>Theme Settings</strong>
-        </template>
-        <FieldGroup class="p-6" label="Theme colors" :color="theme.activeColors.default" optionsGroup verticalLayout >
+        <FieldGroup label="Theme colors" :color="theme.activeColors.default" optionsGroup >
           <FieldOption v-model="themeColor" type="radio" label="Theme" color="theme" value="theme" @input="theme.setActive('theme')"/>
           <FieldOption v-model="themeColor" type="radio" label="Black" color="black" value="black" @input="theme.setActive('black')" />
           <FieldOption v-model="themeColor" type="radio" label="Gray" color="gray" value="gray" @input="theme.setActive('gray')" />
@@ -93,7 +89,7 @@ onMounted(() => {
           <FieldOption v-model="themeColor" type="radio" label="Warning" color="warning" value="warning" @input="theme.setActive('warning')" />
           <FieldOption v-model="themeColor" type="radio" label="Danger" color="danger" value="danger" @input="theme.setActive('danger')" />
         </FieldGroup>
-      </SideBar>
+      </Modal>
       <SideBarMenu 
         v-model="showSideBar" 
         v-model:isCompact="isCompactSidebar"
@@ -116,6 +112,14 @@ onMounted(() => {
           <h2>{{ dropdownItem.label }}</h2>
         </template>
       </SideBarMenu>
+      <Button 
+        class="fixed right-0 bottom-0 m-6 md:m-9 z-50" 
+        :color="theme.activeColors.dark" 
+        :iconPath="mdiCog"
+        size="large"
+        rounded
+        @click="showSettingsBar = !showSettingsBar" 
+      />
     </Teleport>
     <OverLayer v-model="showOverLayer" @close="showSideBar = false" />
   </SectionMain>
