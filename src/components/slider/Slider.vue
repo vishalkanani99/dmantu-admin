@@ -2,6 +2,7 @@
 import { ref, shallowRef, computed, watch, onMounted, onUnmounted } from 'vue';
 import { mdiChevronLeft, mdiChevronRight } from '@mdi/js';
 import { useSwiper } from '../../composables/useSwiper';
+import { useEventListener } from '../../composables/useEventListener';
 import Button from '../Button.vue';
 
 const props = defineProps({
@@ -138,6 +139,7 @@ const stopWatch = watch(
 
 onMounted(() => {
   initSlider();
+  useEventListener(window, 'resize', initSlider);
 })
 
 onUnmounted(() =>{

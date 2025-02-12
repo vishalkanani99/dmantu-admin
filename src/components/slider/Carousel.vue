@@ -72,7 +72,7 @@ const changeThumbnail = (slide) => {
         <img 
           :class="[
             'block object-cover align-middle cursor-pointer',
-            'w-full h-[150px]',
+            'w-full h-[100px] md:h-[150px]',
             'select-none drag-none',
             {'opacity-30': defaultThumbnail !== index}
           ]" 

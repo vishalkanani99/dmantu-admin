@@ -66,7 +66,7 @@ onMounted(() => {
       :hasMenuBtn="isClosableSidebar" 
       @toggleMenu="toggleMenu" 
     />
-    <slot></slot>
+    <slot :isMMMd="isMMMd"></slot>
 
     <Teleport to="body">
       <SideBar

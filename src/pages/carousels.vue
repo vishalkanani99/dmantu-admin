@@ -135,7 +135,7 @@ const testimonials = [
 ]
 </script>
 <template>
-  <LayoutAuthenticated>
+  <LayoutAuthenticated v-slot="{ isMMMd }">
     <Section
       title="Carousels" 
       :iconPath="mdiFormSelect" 
@@ -146,10 +146,10 @@ const testimonials = [
         <Carousel :slides="slides" />
       </Card>
       <Card title="Carousel with thumbnail selector" :color="theme.activeColors.inverse" noFooter>
-        <Carousel :defaultSlide="4" :slides="slides" hasThumbnailSelector />
+        <Carousel :defaultSlide="2" :slides="slides" :thumbnailPerView="isMMMd ? 5 : 3" hasThumbnailSelector />
       </Card>
       <Card title="Cards Carousel" :color="theme.activeColors.inverse" noFooter>
-        <Slider :content="content" :slidesPerView="4" :spaceBetween="10" hasIndicator>
+        <Slider :content="content" :slidesPerView="isMMMd ? 4 : 2" :spaceBetween="10" hasIndicator>
           <template v-slot="{ item, index }">
             <PictureCard
               :title="item.title"
