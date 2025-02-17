@@ -161,7 +161,7 @@ const progress = ref(50);
       :color="theme.activeColors.default"
     >
       <Card title="Default" :color="theme.activeColors.inverse" noFooter>
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           <ProgressCard 
             :progress="40" 
             color="info" 
@@ -205,7 +205,7 @@ const progress = ref(50);
         </div>
       </Card>
       <Card title="Outline" :color="theme.activeColors.inverse" noFooter>
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           <ProgressCard 
             :progress="40" 
             color="info" 

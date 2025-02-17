@@ -27,7 +27,7 @@ const showPopover = shallowRef(true);
       <Card title="Popovers" :color="theme.activeColors.inverse" noFooter>
         <template #content>
           <div class="p-6">
-            <div class="flex items-center flex-wrap space-x-4 mb-6">
+            <div class="flex items-center flex-wrap gap-4 mb-6">
               <Popover text="Top" :color="theme.activeColors.dark">
                 <Button label="Top" :color="theme.activeColors.default"></Button>
               </Popover>
@@ -45,7 +45,7 @@ const showPopover = shallowRef(true);
               </Popover>
               <Popover :color="theme.activeColors.dark">
                 <template #popover>
-                  <div class="flex items-center space-x-2">
+                  <div class="flex items-center gap-2">
                     <Button class="!p-1" :iconPath="mdiTwitter" :color="theme.activeColors.inverse" rounded></Button>
                     <Button class="!p-1" :iconPath="mdiFacebook" :color="theme.activeColors.inverse" rounded></Button>
                     <Button class="!p-1" :iconPath="mdiInstagram" :color="theme.activeColors.inverse" rounded></Button>

@@ -66,23 +66,14 @@ function toggleDialog(prop = null) {
       :color="theme.activeColors.default"
     >
       <Card title="Modals" :color="theme.activeColors.inverse" noFooter>
-        <FieldGroup class="mb-6 hidden md:block" label="Modal Origins" optionsGroup >
+        <FieldGroup class="flex flex-col md:items-start items-center mb-6" label="Modal Origins" optionsGroup >
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Top" value="top" />
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Bottom" value="bottom" />
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Left" value="left" />
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Right" value="right" />
           <FieldOption v-model="modalOrigin" type="radio" name="origin" label="Center" value="center" />
         </FieldGroup>
-        <FieldGroup class="mb-6 block md:hidden" label="Modal Origins">
-          <Field v-model="modalOrigin" type="select" color="theme-light">
-            <option value="top">Top</option>
-            <option value="bottom">Bottom</option>
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-            <option value="center">Center</option>
-          </Field>
-        </FieldGroup>
-        <div class="flex flex-col md:flex-row items-center flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0">
+        <div class="flex flex-col md:flex-row items-center flex-wrap gap-4">
           <Button label="Modal" @click="toggleModal('medium')"></Button>
           <Button label="Modal Small" @click="toggleModal('small')"></Button>
           <Button label="Modal Large" @click="toggleModal('large')"></Button>
@@ -93,7 +84,7 @@ function toggleDialog(prop = null) {
         </div> 
       </Card>
       <Card title="Dialogs" :color="theme.activeColors.inverse" noFooter>
-        <div class="flex flex-col md:flex-row items-center flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0">
+        <div class="flex flex-col md:flex-row items-center flex-wrap gap-4">
           <Button label="Dialog" @click="toggleDialog()"></Button>
           <Button label="Dialog with Icon" @click="toggleDialog('icon')"></Button>
         </div>
