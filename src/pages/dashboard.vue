@@ -141,7 +141,9 @@ const updateStep = (i) => {
       :btnIconPath="mdiCog"
       :color="theme.activeColors.default"
     >
-      <Carousel :slides="slides" />
+      <Card :color="theme.activeColors.inverse" noHeader noFooter>
+        <Carousel :slides="slides" />
+      </Card>
     </Section>
     <Section
       title="Lists" 

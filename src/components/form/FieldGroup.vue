@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 import FieldHelp from './FieldHelp.vue';
+import FieldGroupBody from './FieldGroupBody.vue';
 
 const props = defineProps({
   label: String,
@@ -42,17 +43,16 @@ const labelStyle = computed(() => {
         {'md:col-span-4': horizontal},
         {'md:col-start-2': horizontal && label},
       ]"
-    >  
-      <div :class="[ 
-          { 'flex': multiFields || optionsGroup }, 
-          { 'items-center': multiFields || ( optionsGroup && !verticalLayout ) }, 
-          { 'flex-col' : verticalLayout },
-          'flex-wrap',
-          { 'gap-3' : optionsGroup },  
-        ]" 
-      >
-        <slot></slot>
-      </div>
+    > 
+      <slot name="body">
+        <FieldGroupBody
+          :multiFields="multiFields"
+          :optionsGroup="optionsGroup"
+          :verticalLayout="verticalLayout"
+        >
+          <slot></slot>
+        </FieldGroupBody>
+      </slot> 
       <FieldHelp :text="error" type="error" class="has-error"/>
       <FieldHelp v-for="(err, i) in errors" :key="i" :text="err" type="error" class="has-error"/>
       <FieldHelp :text="success" type="success" class="has-success"/>
