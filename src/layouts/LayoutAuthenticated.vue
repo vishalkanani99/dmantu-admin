@@ -8,7 +8,6 @@ import OverLayer from '../components/OverLayer.vue';
 import { menu } from '../menu';
 import Button from '../components/Button.vue';
 import FieldGroup from '../components/form/FieldGroup.vue';
-import FieldGroupBody from '../components/form/FieldGroupBody.vue';
 import FieldOption from '../components/form/FieldOption.vue';
 import Modal from '../components/Modal.vue';
 import { theme } from '../color';
@@ -82,17 +81,13 @@ onMounted(() => {
         noFooter
       >
         <FieldGroup label="Theme colors" :color="theme.activeColors.default" optionsGroup >
-          <template #body>
-            <FieldGroupBody class="flex-wrap" optionsGroup>
-              <FieldOption v-model="themeColor" type="radio" label="Theme" color="theme" value="theme" @input="theme.setActive('theme')"/>
-              <FieldOption v-model="themeColor" type="radio" label="Black" color="black" value="black" @input="theme.setActive('black')" />
-              <FieldOption v-model="themeColor" type="radio" label="Gray" color="gray" value="gray" @input="theme.setActive('gray')" />
-              <FieldOption v-model="themeColor" type="radio" label="Info" color="info" value="info" @input="theme.setActive('info')" />
-              <FieldOption v-model="themeColor" type="radio" label="Success" color="success" value="success" @input="theme.setActive('success')" />
-              <FieldOption v-model="themeColor" type="radio" label="Warning" color="warning" value="warning" @input="theme.setActive('warning')" />
-              <FieldOption v-model="themeColor" type="radio" label="Danger" color="danger" value="danger" @input="theme.setActive('danger')" />
-            </FieldGroupBody>
-          </template>
+          <FieldOption v-model="themeColor" type="radio" label="Theme" color="theme" value="theme" @input="theme.setActive('theme')"/>
+          <FieldOption v-model="themeColor" type="radio" label="Black" color="black" value="black" @input="theme.setActive('black')" />
+          <FieldOption v-model="themeColor" type="radio" label="Gray" color="gray" value="gray" @input="theme.setActive('gray')" />
+          <FieldOption v-model="themeColor" type="radio" label="Info" color="info" value="info" @input="theme.setActive('info')" />
+          <FieldOption v-model="themeColor" type="radio" label="Success" color="success" value="success" @input="theme.setActive('success')" />
+          <FieldOption v-model="themeColor" type="radio" label="Warning" color="warning" value="warning" @input="theme.setActive('warning')" />
+          <FieldOption v-model="themeColor" type="radio" label="Danger" color="danger" value="danger" @input="theme.setActive('danger')" />
         </FieldGroup>
       </Modal>
       <SideBarMenu 

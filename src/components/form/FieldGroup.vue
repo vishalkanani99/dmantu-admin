@@ -46,6 +46,7 @@ const labelStyle = computed(() => {
     > 
       <slot name="body">
         <FieldGroupBody
+          :class="{'flex-wrap': optionsGroup}"
           :multiFields="multiFields"
           :optionsGroup="optionsGroup"
           :verticalLayout="verticalLayout"
